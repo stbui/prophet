@@ -1,0 +1,16 @@
+{
+  "name": "react-admin-kit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build":"lerna run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "lerna": "^3.4.3",
+    "typescript": "^3.1.5"
+  }
+}

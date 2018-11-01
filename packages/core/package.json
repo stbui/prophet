@@ -1,0 +1,20 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index",
+  "module": "esm/index.js",
+  "scripts": {
+    "build": "npm run build:cjs",
+    "build:cjs": "tsc",
+    "build:esm": "tsc --outDir esm --module es2015",
+    "watch": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}
