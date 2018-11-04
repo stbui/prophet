@@ -1,1 +1,4 @@
-export * from './Core';
+import { Core } from './Core';
+
+export default Core
+

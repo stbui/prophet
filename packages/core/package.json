@@ -1,11 +1,11 @@
 {
-  "name": "core",
+  "name": "@admin/core",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
   "scripts": {
-    "build": "npm run build:esm",
+    "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc",
     "build:esm": "tsc --outDir esm --module es2015",
     "watch": "tsc --watch",
@@ -15,12 +15,14 @@
   "license": "ISC",
   "devDependencies": {
     "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "typescript": "^3.1.6"
   },
   "dependencies": {
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
   }

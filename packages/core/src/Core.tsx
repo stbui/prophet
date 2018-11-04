@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, createElement } from 'react';
 import { Provider } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import Store from './Store';
 
-class Core extends Component {
+export class Core extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <Provider store={Store}>index</Provider>;
+    return (
+      <Provider store={Store}>
+        <div>core</div>
+      </Provider>
+    );
   }
 }
+
+export default Core;

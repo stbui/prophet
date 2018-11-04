@@ -123,3 +123,5 @@ _book
 ############################
 
 packages/*/yarn.lock
+esm
+lib
