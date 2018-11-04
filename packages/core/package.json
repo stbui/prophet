@@ -5,7 +5,7 @@
   "main": "lib/index",
   "module": "esm/index.js",
   "scripts": {
-    "build": "npm run build:cjs",
+    "build": "npm run build:esm",
     "build:cjs": "tsc",
     "build:esm": "tsc --outDir esm --module es2015",
     "watch": "tsc --watch",
@@ -16,5 +16,12 @@
   "devDependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
+  },
+  "dependencies": {
+    "react-redux": "^5.1.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2"
   }
 }
