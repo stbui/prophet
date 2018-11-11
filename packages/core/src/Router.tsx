@@ -20,14 +20,14 @@ export class CoreRouter extends Component<any, any> {
 
     return (
       <Layout routes={routes} brand="stbui">
-        {Children.map(children, (child: any) =>
-          cloneElement(child, {
-            key: child.props.name
-          })
-        )}
         <Switch>
-          <Route path="/materials/pagination" component={Login} />
-          <Route path="/materials/date-picker" component={Logout} />
+          {Children.map(children, (child: any) => (
+            <Route
+              key={child.props.name}
+              path={`/${child.props.name}`}
+              render={props => cloneElement(child, { ...props })}
+            />
+          ))}
           <Route path="/forms/elements" component={Logout} />
           <Route exact path="/" component={dashboard} />
         </Switch>
