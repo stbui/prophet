@@ -1,18 +1,16 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import { all, fork } from 'redux-saga/effects';
 import reducer from './reducers';
+import { rootSaga } from './sideEffect';
 
-function r(state = 0, action) {
-  return state;
+export default function configureStore(intialState = {}, history) {
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [routerMiddleware(history), sagaMiddleware];
+  const enhancers = [applyMiddleware(...middlewares)];
+  const store = createStore(reducer, compose(...enhancers));
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
 }
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(r, applyMiddleware(sagaMiddleware));
-const saga = function* rootSaga() {
-  yield all([].map(fork));
-};
-
-sagaMiddleware.run(saga);
-
-export default store;

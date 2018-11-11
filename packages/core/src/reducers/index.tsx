@@ -1,3 +1,4 @@
-export default function test(state, action) {
-  console.log('hello saga!');
-}
+import { combineReducers } from 'redux';
+import resources from './resources';
+
+export default combineReducers({ resources });

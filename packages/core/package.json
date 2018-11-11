@@ -21,10 +21,12 @@
   },
   "dependencies": {
     "@admin/antd": "*",
+    "antd": "^3.10.5",
+    "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-router-redux": "^4.0.8",
+    "react-router-redux": "~5.0.0-alpha.9",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
   }

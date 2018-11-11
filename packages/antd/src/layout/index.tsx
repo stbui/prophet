@@ -7,8 +7,7 @@ import 'antd/lib/menu/style/index.css';
 
 export class Layout extends Component<any, any> {
   render() {
-    console.log(this.props);
-    const { routes } = this.props;
+    const { routes, brand } = this.props;
 
     return (
       <DefaultLayout style={{ minHeight: '100vh' }}>
@@ -17,10 +16,15 @@ export class Layout extends Component<any, any> {
             className="logo"
             style={{
               height: 32,
-              background: 'rgba(255,255,255,.2)',
-              margin: 16
+              margin: 16,
+              fontSize: 24,
+              color: '#fff',
+              textAlign: 'center',
+              fontWeight: 500
             }}
-          />
+          >
+            {brand}
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}>
             {routes.map(route => {
               if (route.children) {

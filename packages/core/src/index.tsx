@@ -1,4 +1,4 @@
-import { Core } from './Core';
+import Admin from './Core';
+import Resource from './Resource';
 
-export default Core
-
+export { Admin, Resource };

@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import Admin from '@admin/core';
+import { Admin, Resource } from '@admin/core';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   render() {
-    return <Admin />;
+    return (
+      <Admin dashboard={Dashboard}>
+        <Resource
+          name="materials"
+          list="list"
+          edit="edit"
+          create="create"
+          show="show"
+        />
+      </Admin>
+    );
   }
 }
 
