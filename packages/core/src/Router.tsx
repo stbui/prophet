@@ -19,7 +19,7 @@ export class CoreRouter extends Component<any, any> {
     }
 
     return (
-      <Layout routes={routes} brand="stbui">
+      <Layout routes={routes}>
         <Switch>
           {Children.map(children, (child: any) => (
             <Route

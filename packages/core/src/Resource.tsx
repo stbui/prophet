@@ -16,28 +16,46 @@ export class Resource extends Component<any, any> {
     console.log('resource render', this.props);
     return (
       <Switch>
-        <Route
-          exact
-          path={`${match.url}/list`}
-          render={props =>
-            createElement(list, { basePath: match.url, ...props })
-          }
-        />
-        <Route
-          exact
-          path={`${match.url}/create`}
-          render={props => <div>create</div>}
-        />
-        <Route
-          exact
-          path={`${match.url}/edit`}
-          render={props => <div>edit</div>}
-        />
-        <Route
-          exact
-          path={`${match.url}/show`}
-          render={props => <div>show</div>}
-        />
+        {list && (
+          <Route
+            exact
+            path={`${match.url}/list`}
+            render={props =>
+              createElement(list, { basePath: match.url, ...props })
+            }
+          />
+        )}
+        {create && (
+          <Route
+            exact
+            path={`${match.url}/create`}
+            render={props =>
+              createElement(create, { basePath: match.url, ...props })
+            }
+          />
+        )}
+        {edit && (
+          <Route
+            exact
+            path={`${match.url}/edit`}
+            render={props =>
+              createElement(edit, { basePath: match.url, ...props })
+            }
+          />
+        )}
+        {show && (
+          <Route
+            exact
+            path={`${match.url}/show`}
+            render={props =>
+              createElement(show, {
+                basePath: match.url,
+                id: decodeURIComponent(props.match.params.id),
+                ...props
+              })
+            }
+          />
+        )}
       </Switch>
     );
   }

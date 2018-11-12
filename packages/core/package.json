@@ -22,6 +22,7 @@
   "dependencies": {
     "@admin/antd": "*",
     "antd": "^3.10.5",
+    "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
