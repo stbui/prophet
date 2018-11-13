@@ -10,13 +10,14 @@ import Login from './Login';
 
 const history = createHistory();
 
-export class Core extends Component<any, any> {
-  constructor(props) {
-    super(props);
-  }
+export interface PropsType {
+  dashboard?: React.ReactNode;
+  customRoutes?: any;
+}
 
+export class Core extends Component<PropsType, any> {
   render() {
-    const { children, dashboard } = this.props;
+    const { children, dashboard, customRoutes = [] } = this.props;
 
     return (
       <Provider store={configureStore({}, history)}>
@@ -26,7 +27,11 @@ export class Core extends Component<any, any> {
             <Route
               path="/"
               render={props => (
-                <Router dashboard={dashboard} {...props}>
+                <Router
+                  dashboard={dashboard}
+                  customRoutes={customRoutes}
+                  {...props}
+                >
                   {children}
                 </Router>
               )}

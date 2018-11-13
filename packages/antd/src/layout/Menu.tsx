@@ -19,7 +19,9 @@ export class M extends Component<any, any> {
         {resources.map(resource => {
           return (
             <Menu.Item key={resource.name}>
-              <Link to={`/${resource.name}`}>{resource.name}</Link>
+              <Link to={`/${resource.name}`}>
+                {resource.label ? resource.label : resource.name}
+              </Link>
             </Menu.Item>
           );
         })}
