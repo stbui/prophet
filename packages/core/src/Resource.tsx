@@ -6,20 +6,44 @@ import { registerResource } from './actions';
 
 export class Resource extends Component<any, any> {
   componentWillMount() {
-    const { registerResource, name, list, edit, create, show } = this.props;
-    const resource = { name };
-    registerResource(resource);
+    const {
+      registerResource,
+      name,
+      label,
+      list,
+      edit,
+      create,
+      show,
+      context
+    } = this.props;
+
+    if (context === 'registration') {
+      const resource = {
+        name,
+        label,
+        hasList: !!list,
+        hasEdit: !!edit,
+        hasCreate: !!create,
+        hasShow: !!show
+      };
+
+      registerResource(resource);
+    }
   }
 
   render() {
-    const { name, list, edit, create, show, match } = this.props;
-    console.log('resource render', this.props);
+    const { list, edit, create, show, match, context } = this.props;
+
+    if (context === 'registration') {
+      return null;
+    }
+
     return (
       <Switch>
         {list && (
           <Route
             exact
-            path={`${match.url}/list`}
+            path={match.url}
             render={props =>
               createElement(list, { basePath: match.url, ...props })
             }

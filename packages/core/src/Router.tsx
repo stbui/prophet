@@ -1,10 +1,6 @@
 import React, { Component, Children, cloneElement } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Layout } from '@admin/antd';
-import { routes } from './routes';
-
-import Login from './Login';
-import Logout from './Logout';
 
 export class CoreRouter extends Component<any, any> {
   constructor(props) {
@@ -18,8 +14,17 @@ export class CoreRouter extends Component<any, any> {
       return <div>添加组件 &lt;Resource&gt;</div>;
     }
 
+    const childrenArray = Children.toArray(children);
+    const firstChild: any = childrenArray.length > 0 ? childrenArray[0] : null;
+
     return (
-      <Layout routes={routes}>
+      <Layout {...this.props}>
+        {Children.map(children, (child: any) =>
+          cloneElement(child, {
+            key: child.props.name,
+            context: 'registration'
+          })
+        )}
         <Switch>
           {Children.map(children, (child: any) => (
             <Route
@@ -28,8 +33,11 @@ export class CoreRouter extends Component<any, any> {
               render={props => cloneElement(child, { ...props })}
             />
           ))}
-          <Route path="/forms/elements" component={Logout} />
-          <Route exact path="/" component={dashboard} />
+          {dashboard ? (
+            <Route exact path="/" component={dashboard} />
+          ) : firstChild ? (
+            <Redirect to={`/${firstChild.props.name}`} />
+          ) : null}
         </Switch>
       </Layout>
     );

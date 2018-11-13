@@ -8,6 +8,9 @@ export default (previousState = {}, { type, payload }) => {
     case UNREGISTER_RESOURCE:
       return { resources: 'UNREGISTER_RESOURCE' };
     default:
-      return { ...previousState, payload };
+      return previousState;
   }
 };
+
+export const getResources = state =>
+  Object.keys(state).map(key => state[key].props);

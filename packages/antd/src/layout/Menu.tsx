@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
+import { getResources } from '@admin/core';
 import { Menu, Icon } from 'antd';
 import 'antd/lib/menu/style/index.css';
 
 export class M extends Component<any, any> {
   render() {
-    const { menus } = this.props;
+    const { resources, hasDashboard } = this.props;
 
     return (
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}>
-        {menus.map(route => {
+        {hasDashboard && (
+          <Menu.Item>
+            <Link to="/">dashboard</Link>
+          </Menu.Item>
+        )}
+        {resources.map(resource => {
+          return (
+            <Menu.Item key={resource.name}>
+              <Link to={`/${resource.name}`}>{resource.name}</Link>
+            </Menu.Item>
+          );
+        })}
+
+        {/* {menus.map(route => {
           if (route.children) {
             return (
               <Menu.SubMenu
@@ -40,15 +53,12 @@ export class M extends Component<any, any> {
               </Menu.Item>
             );
           }
-        })}
+        })} */}
       </Menu>
     );
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return state;
-};
+const mapStateToProps = state => ({ resources: getResources(state) });
 
 export default connect(mapStateToProps)(M);
