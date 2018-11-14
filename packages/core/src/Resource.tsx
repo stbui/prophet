@@ -32,7 +32,7 @@ export class Resource extends Component<any, any> {
   }
 
   render() {
-    const { list, edit, create, show, match, context } = this.props;
+    const { list, edit, create, show, match, context, catchAll } = this.props;
 
     if (context === 'registration') {
       return null;
@@ -61,7 +61,7 @@ export class Resource extends Component<any, any> {
         {edit && (
           <Route
             exact
-            path={`${match.url}/edit`}
+            path={`${match.url}/:id`}
             render={props =>
               createElement(edit, { basePath: match.url, ...props })
             }
@@ -70,7 +70,7 @@ export class Resource extends Component<any, any> {
         {show && (
           <Route
             exact
-            path={`${match.url}/show`}
+            path={`${match.url}/:id/show`}
             render={props =>
               createElement(show, {
                 basePath: match.url,
@@ -80,6 +80,7 @@ export class Resource extends Component<any, any> {
             }
           />
         )}
+        <Route render={() => createElement(catchAll)} />
       </Switch>
     );
   }

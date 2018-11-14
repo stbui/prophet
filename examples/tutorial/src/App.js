@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Admin, Resource } from '@admin/core';
 import Dashboard from './Dashboard';
+import Menu from './Menu';
 
 import {
   MaterialCreate,
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <Admin
         dashboard={Dashboard}
+        menu={Menu}
         customRoutes={[<Route exact path="/custom" component={Show} />]}
       >
         <Resource

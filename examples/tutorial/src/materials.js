@@ -5,13 +5,13 @@ export const MaterialList = props => (
   <div>
     Material list
     <p>
-      <Link to={`${props.basePath}/edit`}>edit</Link>
+      <Link to={`${props.basePath}/1`}>edit</Link>
     </p>
     <p>
       <Link to={`${props.basePath}/create`}>create</Link>
     </p>
     <p>
-      <Link to={`${props.basePath}/show`}>show</Link>
+      <Link to={`${props.basePath}/2/show`}>show</Link>
     </p>
   </div>
 );

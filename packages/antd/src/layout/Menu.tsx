@@ -25,37 +25,6 @@ export class M extends Component<any, any> {
             </Menu.Item>
           );
         })}
-
-        {/* {menus.map(route => {
-          if (route.children) {
-            return (
-              <Menu.SubMenu
-                key={route.id}
-                title={
-                  <span>
-                    <Icon type={route.icon} />
-                    {route.title}
-                  </span>
-                }
-              >
-                {route.children.map(r => {
-                  return (
-                    <Menu.Item key={r.id}>
-                      <Link to={r.url}>{r.title}</Link>
-                    </Menu.Item>
-                  );
-                })}
-              </Menu.SubMenu>
-            );
-          } else {
-            return (
-              <Menu.Item key={route.id}>
-                <Icon type={route.icon} />
-                <span>{route.title}</span>
-              </Menu.Item>
-            );
-          }
-        })} */}
       </Menu>
     );
   }
