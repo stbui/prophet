@@ -25,22 +25,6 @@ class App extends Component {
         customRoutes={[<Route exact path="/custom" component={Show} />]}
       >
         <Resource
-          name="materials/button"
-          label="按钮"
-          list={List}
-          edit={Edit}
-          create={Create}
-          show={Show}
-        />
-        <Resource
-          name="materials/card"
-          label="卡片"
-          edit={MaterialEdit}
-          list={MaterialList}
-          show={MaterialShow}
-          create={Create}
-        />
-        <Resource
           name="materials"
           create={MaterialCreate}
           edit={MaterialEdit}

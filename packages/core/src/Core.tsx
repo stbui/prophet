@@ -3,10 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createHashHistory';
+import { Login } from '@admin/antd';
 
 import configureStore from './Store';
 import Router from './Router';
-import Login from './Login';
 
 const history = createHistory();
 

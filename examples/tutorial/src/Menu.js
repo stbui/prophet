@@ -8,10 +8,14 @@ import 'antd/lib/menu/style/index.css';
 
 export class M extends Component {
   render() {
-    const { resources, hasDashboard } = this.props;
-    console.log(resources);
+    const { resources, hasDashboard, location } = this.props;
+
     return (
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
         {hasDashboard && (
           <Menu.Item>
             <Link to="/">customeMenu</Link>
@@ -19,7 +23,7 @@ export class M extends Component {
         )}
         {resources.map(resource => {
           return (
-            <Menu.Item key={resource.name}>
+            <Menu.Item key={`/${resource.name}`}>
               <Link to={`/${resource.name}`}>
                 {resource.label ? resource.label : resource.name}
               </Link>

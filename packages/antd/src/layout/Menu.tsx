@@ -5,12 +5,17 @@ import { getResources } from '@admin/core';
 import { Menu, Icon } from 'antd';
 import 'antd/lib/menu/style/index.css';
 
-export class M extends Component<any, any> {
+@connect(state => ({ resources: getResources(state) }))
+export default class M extends Component<any, any> {
   render() {
-    const { resources, hasDashboard } = this.props;
+    const { resources, hasDashboard, location } = this.props;
 
     return (
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
         {hasDashboard && (
           <Menu.Item>
             <Link to="/">dashboard</Link>
@@ -18,8 +23,9 @@ export class M extends Component<any, any> {
         )}
         {resources.map(resource => {
           return (
-            <Menu.Item key={resource.name}>
+            <Menu.Item key={`/${resource.name}`}>
               <Link to={`/${resource.name}`}>
+                {resource.icon && <Icon type={resource.icon} />}
                 {resource.label ? resource.label : resource.name}
               </Link>
             </Menu.Item>
@@ -30,6 +36,6 @@ export class M extends Component<any, any> {
   }
 }
 
-const mapStateToProps = state => ({ resources: getResources(state) });
+// const mapStateToProps = state => ({ resources: getResources(state) });
 
-export default connect(mapStateToProps)(M);
+// export default connect(mapStateToProps)(M);

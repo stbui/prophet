@@ -4,20 +4,12 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "experimentalDecorators": true,
     "allowJs": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["es6", "dom"],
-    // "lib": [
-    //   "es5",
-    //   "es2015.iterable",
-    //   "es2015.collection",
-    //   "es2015.promise",
-    //   "es2015.symbol",
-    //   "es2015.symbol.wellknown",
-    //   "dom"
-    // ]
+    "lib": ["es7", "dom"]
   }
 }

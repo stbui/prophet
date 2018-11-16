@@ -16,13 +16,27 @@ export class Layout extends Component<any, any> {
   };
 
   render() {
-    const { header, sider, menu, brand, dashboard } = this.props;
+    const {
+      header,
+      sider,
+      menu,
+      brand,
+      dashboard,
+      history,
+      location,
+      match
+    } = this.props;
 
     return (
       <DefaultLayout style={{ minHeight: '100vh' }}>
         {createElement(sider, {
           brand: createElement(brand),
-          children: createElement(menu, { hasDashboard: !!dashboard })
+          children: createElement(menu, {
+            hasDashboard: !!dashboard,
+            history,
+            location,
+            match
+          })
         })}
         <DefaultLayout>
           {createElement(header)}
