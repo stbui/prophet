@@ -1,13 +1,14 @@
 import React, { Component, cloneElement, Children } from 'react';
+import { ListController } from '@admin/core';
 
 export interface PropsType {
   children?: any;
 }
 
-export class List extends Component<PropsType> {
+export class ListView extends Component<PropsType> {
   render() {
     const { children, ...other } = this.props;
-
+    
     return Children.map(children, (child: any) => {
       if (child.type instanceof Function) {
         return cloneElement(child, { ...other });
@@ -19,5 +20,11 @@ export class List extends Component<PropsType> {
     });
   }
 }
+
+export const List = props => (
+  <ListController {...props}>
+    {controllerProps => <ListView {...props} {...controllerProps} />}
+  </ListController>
+);
 
 export default List;

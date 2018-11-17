@@ -4,7 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 
 import { registerResource } from './actions';
 
-export class Resource extends Component<any, any> {
+@connect(
+  null,
+  { registerResource }
+)
+export default class Resource extends Component<any, any> {
   componentWillMount() {
     const {
       registerResource,
@@ -32,11 +36,30 @@ export class Resource extends Component<any, any> {
   }
 
   render() {
-    const { list, edit, create, show, match, context, catchAll } = this.props;
+    const {
+      name,
+      label,
+      list,
+      edit,
+      create,
+      show,
+      match,
+      context,
+      catchAll
+    } = this.props;
 
     if (context === 'registration') {
       return null;
     }
+
+    const resource = {
+      resource: name,
+      label,
+      hasList: !!list,
+      hasEdit: !!edit,
+      hasCreate: !!create,
+      hasShow: !!show
+    };
 
     return (
       <Switch>
@@ -45,7 +68,11 @@ export class Resource extends Component<any, any> {
             exact
             path={match.url}
             render={props =>
-              createElement(list, { basePath: match.url, ...props })
+              createElement(list, {
+                basePath: match.url,
+                ...resource,
+                ...props
+              })
             }
           />
         )}
@@ -54,7 +81,11 @@ export class Resource extends Component<any, any> {
             exact
             path={`${match.url}/create`}
             render={props =>
-              createElement(create, { basePath: match.url, ...props })
+              createElement(create, {
+                basePath: match.url,
+                ...resource,
+                ...props
+              })
             }
           />
         )}
@@ -63,7 +94,11 @@ export class Resource extends Component<any, any> {
             exact
             path={`${match.url}/:id`}
             render={props =>
-              createElement(edit, { basePath: match.url, ...props })
+              createElement(edit, {
+                basePath: match.url,
+                ...resource,
+                ...props
+              })
             }
           />
         )}
@@ -75,6 +110,7 @@ export class Resource extends Component<any, any> {
               createElement(show, {
                 basePath: match.url,
                 id: decodeURIComponent(props.match.params.id),
+                ...resource,
                 ...props
               })
             }
@@ -85,8 +121,3 @@ export class Resource extends Component<any, any> {
     );
   }
 }
-
-export default connect(
-  null,
-  { registerResource }
-)(Resource);

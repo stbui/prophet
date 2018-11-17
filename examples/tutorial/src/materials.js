@@ -19,7 +19,7 @@ const dataSource = [
 ];
 
 export const MaterialList = props => (
-  <List dataSource={dataSource}>
+  <List dataSource={dataSource} {...props}>
     list
     <Datagrid>
       <Text dataIndex="name">姓名</Text>
