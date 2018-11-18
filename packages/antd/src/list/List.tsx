@@ -1,14 +1,14 @@
 import React, { Component, cloneElement, Children } from 'react';
 import { ListController } from '@admin/core';
 
-export interface PropsType {
-  children?: any;
+export interface IProps {
+  children?: React.ReactNode;
 }
 
-export class ListView extends Component<PropsType> {
+export class ListView extends Component<IProps> {
   render() {
     const { children, ...other } = this.props;
-    
+
     return Children.map(children, (child: any) => {
       if (child.type instanceof Function) {
         return cloneElement(child, { ...other });
@@ -21,7 +21,7 @@ export class ListView extends Component<PropsType> {
   }
 }
 
-export const List = props => (
+export const List: React.SFC<IProps> = (props: IProps) => (
   <ListController {...props}>
     {controllerProps => <ListView {...props} {...controllerProps} />}
   </ListController>

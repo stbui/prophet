@@ -9,9 +9,14 @@ import 'antd/lib/pagination/style/index.css';
  *  <Text dataIndex="age">年龄</Text>
  * </Datagrid>
  */
-export class Datagrid extends Component {
+
+export interface IProps {
+  data?: any;
+}
+
+export class Datagrid extends Component<IProps> {
   render() {
-    const { children } = this.props;
+    const { children = [], data } = this.props;
     const columns: any = [];
 
     Children.map(children, (child: any) => {
@@ -24,7 +29,7 @@ export class Datagrid extends Component {
       });
     });
 
-    return <Table columns={columns} {...this.props} />;
+    return <Table columns={columns} dataSource={data} {...this.props} />;
   }
 }
 

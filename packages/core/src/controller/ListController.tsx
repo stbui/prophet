@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 
 import { crudGetList } from '../actions';
 
-export interface PropsType {
-  children?: any;
-  data?: any;
-  basePath?: string;
+export interface InjectedProps {
+  resource: string;
+  basePath: string;
+  data: any;
+  hasCreate: boolean;
+}
+
+export interface IProps {
+  children(props: InjectedProps): JSX.Element;
+  resource: string;
+  basePath: string;
+  data: any;
   hasCreate?: boolean;
-  resource?: string;
   crudGetList?: any;
 }
 
@@ -21,7 +28,7 @@ const mapStateToProps = (state, props) => {
   mapStateToProps,
   { crudGetList }
 )
-export default class ListController extends Component<PropsType> {
+export default class ListController extends Component<IProps> {
   componentDidMount() {
     this.getListData();
   }

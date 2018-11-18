@@ -1,29 +1,14 @@
 import React from 'react';
 import { Datagrid, Link, List, Create, Edit, Show } from '@admin/antd';
 
-const Text = ({ title }) => title;
-
-const dataSource = [
-  {
-    key: '1',
-    name: '胡彦斌',
-    age: 32,
-    address: '西湖区湖底公园1号'
-  },
-  {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号'
-  }
-];
+const Label = ({ title }) => title;
 
 export const MaterialList = props => (
-  <List dataSource={dataSource} {...props}>
+  <List {...props}>
     list
     <Datagrid>
-      <Text dataIndex="name">姓名</Text>
-      <Text dataIndex="age">年龄</Text>
+      <Label dataIndex="name">姓名</Label>
+      <Label dataIndex="age">年龄</Label>
     </Datagrid>
     <p>
       <Link to={`${props.basePath}/1`}>edit</Link>

@@ -2,6 +2,8 @@
 
 # start
 
+```
 npm i
 npx lerna bootstrap
 npm run build
+```
