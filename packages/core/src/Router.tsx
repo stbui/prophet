@@ -1,6 +1,6 @@
 import React, { Component, Children, cloneElement, createElement } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Layout } from '@prophet/antd';
+import { Layout } from '@coat/antd';
 
 export class CoreRouter extends Component<any, any> {
   constructor(props) {

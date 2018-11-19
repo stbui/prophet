@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@prophet/core": "1.0.0",
-    "@prophet/antd": "1.0.0",
+    "@coat/core": "*",
+    "@coat/antd": "*",
     "antd": "^3.10.5",
     "react": "^16.6.0",
     "react-dom": "^16.6.1",
