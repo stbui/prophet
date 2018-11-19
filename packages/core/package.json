@@ -1,6 +1,6 @@
 {
   "name": "coat-core",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.4-alpha.0",
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
@@ -17,7 +17,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "coat-antd": "^0.0.3-alpha.0",
+    "coat-antd": "^0.0.4-alpha.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",
