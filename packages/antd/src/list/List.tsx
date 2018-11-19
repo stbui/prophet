@@ -1,5 +1,5 @@
 import React, { Component, cloneElement, Children } from 'react';
-import { ListController } from '@admin/core';
+import { ListController } from '@prophet/core';
 
 export interface IProps {
   children?: React.ReactNode;

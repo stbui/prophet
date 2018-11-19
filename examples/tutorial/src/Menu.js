@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getResources } from '@admin/core';
+import { getResources } from '@prophet/core';
 import { Menu, Icon } from 'antd';
 import { routes } from './routes';
 import 'antd/lib/menu/style/index.css';

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@admin/core": "*",
-    "@admin/antd": "*",
+    "@prophet/core": "*",
+    "@prophet/antd": "*",
     "@types/react": "^16.4.18",
     "antd": "^3.10.5",
     "react": "^16.6.0",

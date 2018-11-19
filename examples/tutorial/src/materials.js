@@ -1,5 +1,5 @@
 import React from 'react';
-import { Datagrid, Link, List, Create, Edit, Show } from '@admin/antd';
+import { Datagrid, Link, List, Create, Edit, Show } from '@prophet/antd';
 
 const Label = ({ title }) => title;
 

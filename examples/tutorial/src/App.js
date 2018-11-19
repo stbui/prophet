@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { Admin, Resource } from '@admin/core';
+import { Admin, Resource } from '@prophet/core';
 import Dashboard from './Dashboard';
 import Menu from './Menu';
 

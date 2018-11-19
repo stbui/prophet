@@ -1,5 +1,5 @@
 {
-  "name": "@admin/antd",
+  "name": "@prophet/antd",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index",
@@ -11,7 +11,7 @@
     "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "stbui",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^16.4.18",
@@ -20,7 +20,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@admin/core": "*",
+    "@prophet/core": "*",
     "antd": "^3.10.4",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
