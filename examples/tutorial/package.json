@@ -1,11 +1,11 @@
 {
   "name": "tutorial",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5-alpha.0",
   "private": true,
   "dependencies": {
     "antd": "^3.10.5",
-    "prophet-antd": "^0.0.4-alpha.0",
-    "prophet-core": "^0.0.4-alpha.0",
+    "prophet-antd": "^0.0.5-alpha.0",
+    "prophet-core": "^0.0.5-alpha.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",
