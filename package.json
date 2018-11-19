@@ -4,12 +4,15 @@
   "main": "index.js",
   "scripts": {
     "build": "lerna run build",
+    "demo": "cd examples/tutorial && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "stbui",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/react": "^16.4.18",
+    "@types/react-redux": "^6.0.9",
     "lerna": "^3.4.3",
     "typescript": "^3.1.5"
   }
