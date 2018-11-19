@@ -1,5 +1,5 @@
 import React from 'react';
-import { Datagrid, Link, List, Create, Edit, Show } from '@coat/antd';
+import { Datagrid, Link, List, Create, Edit, Show } from 'coat-antd';
 
 const Label = ({ title }) => title;
 

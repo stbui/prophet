@@ -1,5 +1,5 @@
 {
-  "name": "@coat/core",
+  "name": "coat-core",
   "version": "0.0.3-alpha.0",
   "description": "",
   "main": "lib/index",
@@ -17,7 +17,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@coat/antd": "^0.0.3-alpha.0",
+    "coat-antd": "^0.0.3-alpha.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",
@@ -29,5 +29,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "bcbad14b2cc9453e4aff41230ff20f437052e3cf"
 }
