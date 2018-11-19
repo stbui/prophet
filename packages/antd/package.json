@@ -1,6 +1,6 @@
 {
   "name": "@coat/antd",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
@@ -17,7 +17,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@coat/core": "0.0.0",
+    "@coat/core": "^0.0.1-alpha.0",
     "antd": "^3.10.4",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
