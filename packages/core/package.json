@@ -26,5 +26,8 @@
     "react-router-redux": "~5.0.0-alpha.9",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
