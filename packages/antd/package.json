@@ -1,5 +1,5 @@
 {
-  "name": "coat-antd",
+  "name": "prophet-antd",
   "version": "0.0.4-alpha.0",
   "description": "",
   "main": "lib/index",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "antd": "^3.10.4",
-    "coat-core": "^0.0.4-alpha.0",
+    "prophet-core": "^0.0.4-alpha.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.1",
@@ -29,5 +29,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "bcbad14b2cc9453e4aff41230ff20f437052e3cf"
+  "gitHead": "d8a1a10ae6aee4e055bcd36846e71cdf654cc4d6"
 }

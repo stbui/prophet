@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "antd": "^3.10.5",
-    "coat-antd": "^0.0.4-alpha.0",
-    "coat-core": "^0.0.4-alpha.0",
+    "prophet-antd": "^0.0.4-alpha.0",
+    "prophet-core": "^0.0.4-alpha.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.0",

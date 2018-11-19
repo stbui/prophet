@@ -1,5 +1,5 @@
 import React, { Component, cloneElement, Children } from 'react';
-import { ListController } from 'coat-core';
+import { ListController } from 'prophet-core';
 
 export interface IProps {
   children?: React.ReactNode;
