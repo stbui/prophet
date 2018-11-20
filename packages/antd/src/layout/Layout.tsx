@@ -5,7 +5,6 @@ import Sider from './Sider';
 import Menu from './Menu';
 import Brand from './Brand';
 import 'antd/lib/layout/style/index.css';
-import 'antd/lib/icon/style/index.css';
 
 export class Layout extends Component<any, any> {
   static defaultProps = {

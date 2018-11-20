@@ -6,3 +6,4 @@ export { Admin, Resource, Reducers };
 export { getResources } from './reducers';
 
 export * from './controller';
+export * from './actions';

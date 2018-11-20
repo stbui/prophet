@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 
 export function* handleFetch(dataProvider, action) {
   const {
@@ -8,27 +8,26 @@ export function* handleFetch(dataProvider, action) {
   } = action;
   const restType = fetchMeta;
 
-  yield put({
-    type: `${type}_SUCCESS`,
-    payload: {
-      data: [
-        {
-          key: '1',
-          name: '胡彦斌',
-          age: 32,
-          address: '西湖区湖底公园1号'
-        },
-        {
-          key: '2',
-          name: '胡彦祖',
-          age: 42,
-          address: '西湖区湖底公园1号'
-        }
-      ]
-    },
-    requestPayload: payload,
-    meta: { ...meta, ...onSuccess, fetchResponse: restType }
-  });
+  try {
+    const response = yield call(dataProvider, restType, meta.resource, payload);
+    console.log('dataProvider:', response, restType, meta.resource, payload);
+
+    yield put({
+      type: `${type}_SUCCESS`,
+      payload: response,
+      requestPayload: payload,
+      meta: { ...meta, ...onSuccess, fetchResponse: restType }
+    });
+  } catch (error) {
+    console.log(error);
+    // yield put({
+    //   type: `${type}_FAILURE`,
+    //   error: error.message ? error.message : error,
+    //   payload: error.body ? error.body : null,
+    //   requestPayload: payload,
+    //   meta: { ...meta, ...onFailure, fetchResponse: restType }
+    // });
+  }
 }
 
 export const takeFetchAction = action => action.meta && action.meta.fetch;

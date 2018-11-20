@@ -4,11 +4,24 @@ import { Switch, Route } from 'react-router-dom';
 
 import { registerResource } from './actions';
 
+export interface IProps {
+  list: React.ComponentType;
+  edit: React.ComponentType;
+  create: React.ComponentType;
+  show: React.ComponentType;
+  catchAll: React.ComponentType;
+  name: any;
+  label: any;
+  context: any;
+  match: any;
+  registerResource: any;
+}
+
 @connect(
   null,
   { registerResource }
 )
-export default class Resource extends Component<any, any> {
+export default class Resource extends Component<IProps, any> {
   componentWillMount() {
     const {
       registerResource,

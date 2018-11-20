@@ -27,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/stbui/react-admin-kit/issues"
+  },
+  "dependencies": {
+    "prophet-core": "^0.0.5-alpha.0"
   }
 }

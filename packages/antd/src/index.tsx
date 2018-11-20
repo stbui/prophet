@@ -8,3 +8,5 @@ export * from './show';
 export * from './auth';
 
 import 'antd/lib/style/index.css';
+import 'antd/lib/icon/style/index.css';
+import 'antd/dist/antd.css';

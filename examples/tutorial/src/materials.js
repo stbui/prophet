@@ -1,24 +1,28 @@
 import React from 'react';
 import { Datagrid, Link, List, Create, Edit, Show } from 'prophet-antd';
+import { Divider } from 'antd';
 
 const Label = ({ title }) => title;
 
 export const MaterialList = props => (
   <List {...props}>
-    list
     <Datagrid>
       <Label dataIndex="name">姓名</Label>
       <Label dataIndex="age">年龄</Label>
+      <Label
+        render={(text, row) => (
+          <span>
+            <Link to={`${props.basePath}/create`}>create</Link>
+            <Divider type="vertical" />
+            <Link to={`${props.basePath}/${row.age}`}>edit</Link>
+            <Divider type="vertical" />
+            <Link to={`${props.basePath}/${row.age}/show`}>show</Link>
+          </span>
+        )}
+      >
+        操作
+      </Label>
     </Datagrid>
-    <p>
-      <Link to={`${props.basePath}/1`}>edit</Link>
-    </p>
-    <p>
-      <Link to={`${props.basePath}/create`}>create</Link>
-    </p>
-    <p>
-      <Link to={`${props.basePath}/2/show`}>show</Link>
-    </p>
   </List>
 );
 export const MaterialEdit = props => <Edit>Material edit</Edit>;

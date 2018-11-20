@@ -20,12 +20,12 @@ export class Datagrid extends Component<IProps> {
     const columns: any = [];
 
     Children.map(children, (child: any) => {
+      const { children, dataIndex, ...other } = child.props;
       columns.push({
-        title: child.props.children
-          ? child.props.children
-          : child.props.dataIndex,
-        dataIndex: child.props.dataIndex,
-        key: child.props.dataIndex
+        title: children ? children : dataIndex,
+        dataIndex: dataIndex,
+        key: dataIndex,
+        ...other
       });
     });
 

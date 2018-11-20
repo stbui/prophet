@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { Admin, Resource } from 'prophet-core';
 import Dashboard from './Dashboard';
 import Menu from './Menu';
+import jsonServerProvider from 'prophet-data-json-server';
 
 import {
   MaterialCreate,
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <Admin
+        dataProvider={jsonServerProvider('http://localhost:3000/materials.json')}
         dashboard={Dashboard}
         menu={Menu}
         customRoutes={[<Route exact path="/custom" component={Show} />]}

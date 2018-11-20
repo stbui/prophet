@@ -11,10 +11,11 @@ import Router from './Router';
 const history = createHistory();
 
 export interface PropsType {
-  dashboard?: React.ReactNode;
-  customRoutes?: any;
-  catchAll?: React.ReactNode;
-  menu?: React.ReactNode;
+  dashboard?: React.ComponentType;
+  catchAll?: React.ComponentType;
+  menu?: React.ComponentType;
+  dataProvider?: (action: any) => Promise<any>;
+  customRoutes?: any[];
 }
 
 export class Core extends Component<PropsType, any> {
@@ -24,11 +25,12 @@ export class Core extends Component<PropsType, any> {
       dashboard,
       customRoutes = [],
       catchAll,
-      menu
+      menu,
+      dataProvider
     } = this.props;
 
     return (
-      <Provider store={configureStore({}, history)}>
+      <Provider store={configureStore({ history, dataProvider })}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/login" component={Login} />
