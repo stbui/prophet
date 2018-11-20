@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.10.5",
+    "node-sass": "^4.10.0",
     "prophet-antd": "^0.0.5-alpha.0",
     "prophet-core": "^0.0.5-alpha.0",
     "prophet-data-json-server": "^0.0.5-alpha.0",

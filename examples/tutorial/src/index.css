@@ -16,3 +16,7 @@ code {
 a {
   text-decoration: none;
 }
+
+.ant-layout-content {
+  padding: 0 !important;
+}
