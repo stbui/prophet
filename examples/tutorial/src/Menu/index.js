@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getResources } from 'prophet-core';
 import { Menu, Icon } from 'antd';
-import { routes } from './routes';
 
 export class M extends Component {
   constructor(props) {
@@ -94,7 +93,7 @@ export class M extends Component {
   };
 
   render() {
-    const { resources, hasDashboard, location } = this.props;
+    const { hasDashboard, location } = this.props;
     const { menuList } = this.state;
 
     const list = menuList.map(item => {

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Admin, Resource } from 'prophet-core';
-import jsonServerProvider from 'prophet-data-json-server';
+import dataProvider from './dataProvider';
 import Dashboard from './Dashboard';
 import Menu from './Menu';
 import Brand from './Menu/Brand';
-import { appList, appDetail } from './container/application';
-
-import {
-  MaterialCreate,
-  MaterialEdit,
-  MaterialList,
-  MaterialShow
-} from './materials';
+import { appList, appDetail } from './container/applications';
+import { resourceList } from './container/resources';
+import { InterfaceList } from './container/interfaces';
 
 const List = props => <div>list</div>;
 const Edit = props => <div>edit</div>;
@@ -23,9 +18,7 @@ class App extends Component {
   render() {
     return (
       <Admin
-        dataProvider={jsonServerProvider(
-          'http://localhost:3000/materials.json'
-        )}
+        dataProvider={dataProvider}
         dashboard={Dashboard}
         menu={Menu}
         brand={Brand}
@@ -37,20 +30,8 @@ class App extends Component {
           list={appList}
           show={appDetail}
         />
-        <Resource
-          name="container/resource"
-          create={MaterialCreate}
-          edit={MaterialEdit}
-          list={MaterialList}
-          show={MaterialShow}
-        />
-        <Resource
-          name="container/interface"
-          create={MaterialCreate}
-          edit={MaterialEdit}
-          list={MaterialList}
-          show={MaterialShow}
-        />
+        <Resource name="container/resource" list={resourceList} />
+        <Resource name="container/interface" list={InterfaceList} />
         <Resource
           name="forms"
           list={List}

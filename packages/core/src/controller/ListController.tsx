@@ -7,21 +7,25 @@ export interface InjectedProps {
   resource: string;
   basePath: string;
   data: any;
+  total: number;
   hasCreate: boolean;
+  changeParams?: any;
 }
 
 export interface IProps {
   children(props: InjectedProps): JSX.Element;
+  crudGetList?: any;
   resource: string;
   basePath: string;
   data: any;
+  total: number;
   hasCreate?: boolean;
-  crudGetList?: any;
+  changeParams?: any;
 }
 
 const mapStateToProps = (state, props) => {
   const resourceState = state.resources[props.resource];
-  return { data: resourceState.data };
+  return { data: resourceState.data, total: resourceState.list.total };
 };
 
 @connect(
@@ -33,20 +37,33 @@ export default class ListController extends Component<IProps> {
     this.getListData();
   }
 
-  getListData() {
-    this.props.crudGetList(this.props.resource);
+  getListData(query?: object) {
+    this.props.crudGetList(this.props.resource, { ...query });
   }
+
+  changeParams = (query: object) => {
+    console.log('listConstroller', query);
+    this.getListData(query);
+  };
 
   render() {
     const {
       children,
       basePath,
       data,
+      total,
       hasCreate,
       resource,
-      ...other
+      changeParams
     } = this.props;
-    // isFunction
-    return children({ basePath, data, hasCreate, resource });
+
+    return children({
+      basePath,
+      data,
+      total,
+      hasCreate,
+      resource,
+      changeParams: this.changeParams
+    });
   }
 }

@@ -6,6 +6,7 @@ import { Button } from 'antd';
 export interface IProps {
   children?: React.ComponentType;
   actions?: React.ComponentType;
+  changeParams?: any;
 }
 
 export const ListView = ({ children, actions = <ListActions />, ...other }) => {
@@ -19,13 +20,7 @@ export const ListView = ({ children, actions = <ListActions />, ...other }) => {
   //   }
   // });
 
-  return (
-    <div>
-      {cloneElement(actions, { ...other })}
-      <Button icon="plus" type="primary">新建</Button>
-      {children && cloneElement(children, { ...other })}
-    </div>
-  );
+  return <div>{children && cloneElement(children, { ...other })}</div>;
 };
 
 export const List: React.SFC<IProps> = (props: IProps) => (

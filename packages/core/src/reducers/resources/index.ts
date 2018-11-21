@@ -1,10 +1,11 @@
 import { REGISTER_RESOURCE, UNREGISTER_RESOURCE } from '../../actions';
 import data from './data';
+import list from './list';
 
 export default (previousState = {}, { type, payload, meta }) => {
   switch (type) {
     case REGISTER_RESOURCE:
-      const resuorceState = { props: payload, data: [], list: [] };
+      const resuorceState = { props: payload, data: [], list: {} };
       return { ...previousState, [payload.name]: resuorceState };
     case UNREGISTER_RESOURCE:
       return { resources: 'UNREGISTER_RESOURCE' };
@@ -24,7 +25,7 @@ export default (previousState = {}, { type, payload, meta }) => {
           ? {
               props: previousState[resource].props,
               data: data(previousState[resource].data, { type, payload, meta }),
-              list: []
+              list: list(previousState[resource].list, { type, payload })
             }
           : previousState[resource]
     }),

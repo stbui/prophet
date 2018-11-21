@@ -14,6 +14,7 @@ export interface PropsType {
   dashboard?: React.ComponentType;
   catchAll?: React.ComponentType;
   menu?: React.ComponentType;
+  brand?: React.ComponentType;
   dataProvider?: (action: any) => Promise<any>;
   customRoutes?: any[];
 }
@@ -26,7 +27,8 @@ export class Core extends Component<PropsType, any> {
       customRoutes = [],
       catchAll,
       menu,
-      dataProvider
+      dataProvider,
+      brand
     } = this.props;
 
     return (
@@ -42,6 +44,7 @@ export class Core extends Component<PropsType, any> {
                   customRoutes={customRoutes}
                   catchAll={catchAll}
                   menu={menu}
+                  brand={brand}
                   {...props}
                 >
                   {children}

@@ -16,9 +16,9 @@ export interface DataAction {
   readonly meta: object;
 }
 
-export const crudGetList = (resource: string): DataAction => ({
+export const crudGetList = (resource: string, query): DataAction => ({
   type: CRUD_GET_LIST,
-  payload: {},
+  payload: { ...query },
   meta: {
     resource,
     fetch: GET_LIST

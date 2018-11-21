@@ -41,7 +41,7 @@ export class Layout extends Component<any, any> {
           {createElement(header)}
           <DefaultLayout.Content
             style={{
-              margin: '24px 16px',
+              margin: 16,
               padding: 24,
               background: '#fff',
               minHeight: 280
