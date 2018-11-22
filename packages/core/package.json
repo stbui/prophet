@@ -6,8 +6,8 @@
   "module": "esm/index.js",
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc --outDir esm --module es2015",
+    "build:cjs": "rm -rf ./lib && tsc",
+    "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
     "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,14 +16,19 @@
   "dependencies": {
     "prophet-antd": "^0.0.5-alpha.0",
     "query-string": "^6.2.0",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "~5.0.0-alpha.9",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.7",
+    "@types/react-redux": "^6.0.10",
+    "typescript": "^3.1.6"
   },
   "publishConfig": {
     "access": "public"
