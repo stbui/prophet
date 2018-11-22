@@ -3,9 +3,12 @@ import { ListController } from 'prophet-core';
 import { Tabs } from 'antd';
 
 export interface IProps {
-  children?: React.ComponentType;
-  actions?: React.ComponentType;
-  changeParams?: any;
+  children: any;
+  changeParams: any;
+  className: any;
+  type: any;
+  addContent: any;
+  panes: any;
 }
 
 const { TabPane } = Tabs;
@@ -18,7 +21,7 @@ export const ListView = ({
   className,
   changeParams,
   ...other
-}) => (
+}: IProps) => (
   <Tabs
     className={className}
     type={type}
@@ -28,8 +31,8 @@ export const ListView = ({
     {panes.map(pane => (
       <TabPane tab={pane.title} key={pane.key}>
         {pane.content
-          ? cloneElement(pane.content, { ...other })
-          : children({ ...pane, ...other })}
+          ? cloneElement(pane.content, { changeParams, ...other })
+          : children({ ...pane, changeParams, ...other })}
       </TabPane>
     ))}
 

@@ -6,7 +6,6 @@ export * from './create';
 export * from './edit';
 export * from './show';
 export * from './auth';
+export * from './field';
 
-import 'antd/lib/style/index.css';
-import 'antd/lib/icon/style/index.css';
 import 'antd/dist/antd.css';

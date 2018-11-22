@@ -2,7 +2,13 @@ import React, { Component, Children, cloneElement, createElement } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Layout } from 'prophet-antd';
 
-export class CoreRouter extends Component<any, any> {
+export interface IProps {
+  children: any;
+  customRoutes: any;
+  dashboard: React.ComponentType;
+  catchAll: React.ComponentType;
+}
+export class CoreRouter extends Component<IProps, any> {
   constructor(props) {
     super(props);
   }
@@ -18,7 +24,7 @@ export class CoreRouter extends Component<any, any> {
   };
 
   render() {
-    const { children, dashboard, customRoutes } = this.props;
+    const { children, dashboard, customRoutes, catchAll } = this.props;
 
     if (!children) {
       return <div>添加组件 &lt;Resource&gt;</div>;
@@ -58,6 +64,7 @@ export class CoreRouter extends Component<any, any> {
           ) : firstChild ? (
             <Redirect to={`/${firstChild.props.name}`} />
           ) : null}
+          <Route render={() => createElement(catchAll)} />
         </Switch>
       </Layout>
     );

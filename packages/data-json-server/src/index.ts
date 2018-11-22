@@ -3,12 +3,12 @@ import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
   return (type, resource, params) => {
-    console.log('===', 'data-json-server', '===');
-    console.log('apiUrl', apiUrl);
-    console.log('type', type);
-    console.log('resource', resource);
-    console.log('params', params);
-    console.log('===', 'data-json-server', '===');
+    // console.log('===', 'data-json-server', '===');
+    // console.log('apiUrl', apiUrl);
+    // console.log('type', type);
+    // console.log('resource', resource);
+    // console.log('params', params);
+    // console.log('===', 'data-json-server', '===');
 
     let url = '';
 

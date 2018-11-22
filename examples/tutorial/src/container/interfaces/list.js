@@ -13,8 +13,6 @@ export default class InterfaceList extends Component {
   render() {
     return (
       <ListTabbed
-        className="dynamic-tabs"
-        type="card"
         panes={panes}
         {...this.props}
       >

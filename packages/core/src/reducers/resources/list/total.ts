@@ -1,6 +1,6 @@
 import { CRUD_GET_LIST_SUCCESS } from '../../../actions/dataActions';
 
-export default (previousState = {}, { type, payload }) => {
+export default (previousState = 0, { type, payload }) => {
   switch (type) {
     case CRUD_GET_LIST_SUCCESS:
       return payload.total;

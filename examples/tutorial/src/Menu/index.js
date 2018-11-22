@@ -8,9 +8,7 @@ export class M extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logo: 'https://static.zhongan.com/website/tech/images/logo.png',
-      sysName: '智能监控系统',
-      menuList: [
+      menus: [
         {
           name: '容器云系统监控',
           icon: 'windows',
@@ -80,6 +78,15 @@ export class M extends Component {
     };
   }
 
+  findOpenKey = () => {
+    const { location } = this.props;
+    const { menus } = this.state;
+
+    const menu = menus.find(item => location.pathname.indexOf(item.key) > -1);
+
+    return [menu ? menu.key : menus[0].key];
+  };
+
   renderSubMenuItem = (item, path = '') => {
     const uri = `/${path}${item.uri}`;
     return (
@@ -93,10 +100,10 @@ export class M extends Component {
   };
 
   render() {
-    const { hasDashboard, location } = this.props;
-    const { menuList } = this.state;
+    const { location } = this.props;
+    const { menus } = this.state;
 
-    const list = menuList.map(item => {
+    const list = menus.map(item => {
       if (item.children) {
         return (
           <Menu.SubMenu
@@ -120,14 +127,9 @@ export class M extends Component {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[location.pathname]}
+        defaultOpenKeys={this.findOpenKey()}
+        selectedKeys={[location.pathname]}
       >
-        {hasDashboard && (
-          <Menu.Item>
-            <Link to="/">主页</Link>
-          </Menu.Item>
-        )}
-
         {list}
       </Menu>
     );

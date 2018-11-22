@@ -1,7 +1,6 @@
-import React, { Component, cloneElement, Children } from 'react';
+import React, { cloneElement } from 'react';
 import { ListController } from 'prophet-core';
 import ListActions from './ListActions';
-import { Button } from 'antd';
 
 export interface IProps {
   children?: React.ComponentType;
@@ -10,17 +9,7 @@ export interface IProps {
 }
 
 export const ListView = ({ children, actions = <ListActions />, ...other }) => {
-  // Children.map(children, (child: any) => {
-  //   if (child.type instanceof Function) {
-  //     return cloneElement(child, { ...other });
-  //   } else if (child.type instanceof Object) {
-  //     return cloneElement(child);
-  //   } else {
-  //     return child;
-  //   }
-  // });
-
-  return <div>{children && cloneElement(children, { ...other })}</div>;
+  return children && cloneElement(children, { ...other });
 };
 
 export const List: React.SFC<IProps> = (props: IProps) => (

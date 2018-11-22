@@ -13,6 +13,7 @@ const List = props => <div>list</div>;
 const Edit = props => <div>edit</div>;
 const Create = props => <div>create</div>;
 const Show = props => <div>custom</div>;
+const CatchAll = props => <div>CatchAll</div>;
 
 class App extends Component {
   render() {
@@ -22,7 +23,7 @@ class App extends Component {
         dashboard={Dashboard}
         menu={Menu}
         brand={Brand}
-        catchAll={Brand}
+        catchAll={CatchAll}
         customRoutes={[<Route exact path="/custom" component={Show} />]}
       >
         <Resource
@@ -32,6 +33,7 @@ class App extends Component {
         />
         <Resource name="container/resource" list={resourceList} />
         <Resource name="container/interface" list={InterfaceList} />
+        <Resource name="container/application.pod" />
         <Resource
           name="forms"
           list={List}
