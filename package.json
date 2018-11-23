@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "lerna run build",
-    "demo": "cd examples/tutorial && npm run start",
+    "demo": "cd examples/demo && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "stbui",
