@@ -14,7 +14,7 @@ export interface InjectedProps {
   basePath: string;
   data: any;
   total: number;
-  hasCreate: boolean;
+  hasCreate?: boolean;
   changeParams?: any;
   setFilters?: any;
 }

@@ -10,6 +10,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["es7", "dom"]
+    "lib": ["esnext", "dom"]
   }
 }
