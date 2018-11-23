@@ -17,11 +17,11 @@ export interface IProps {
   registerResource: any;
 }
 
-@connect(
-  null,
-  { registerResource }
-)
-export default class Resource extends Component<IProps, any> {
+// @connect(
+//   null,
+//   { registerResource }
+// )
+export class Resource extends Component<IProps, any> {
   componentWillMount() {
     const {
       registerResource,
@@ -134,3 +134,8 @@ export default class Resource extends Component<IProps, any> {
     );
   }
 }
+
+export default connect(
+  null,
+  { registerResource }
+)(Resource);

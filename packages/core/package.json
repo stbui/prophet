@@ -14,7 +14,6 @@
   "author": "stbui",
   "license": "ISC",
   "dependencies": {
-    "prophet-antd": "^0.0.5-alpha.0",
     "query-string": "^6.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

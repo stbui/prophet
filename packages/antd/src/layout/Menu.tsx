@@ -5,8 +5,8 @@ import { getResources } from 'prophet-core';
 import { Menu, Icon } from 'antd';
 import 'antd/lib/menu/style/index.css';
 
-@connect(state => ({ resources: getResources(state) }))
-export default class M extends Component<any, any> {
+// @connect(state => ({ resources: getResources(state) }))
+export class M extends Component<any, any> {
   render() {
     const { resources, hasDashboard, location } = this.props;
 
@@ -36,6 +36,6 @@ export default class M extends Component<any, any> {
   }
 }
 
-// const mapStateToProps = state => ({ resources: getResources(state) });
+const mapStateToProps = state => ({ resources: getResources(state) });
 
-// export default connect(mapStateToProps)(M);
+export default connect(mapStateToProps)(M);

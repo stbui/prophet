@@ -44,11 +44,11 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-@connect(
-  mapStateToProps,
-  { crudGetList, changeListParams, setPageParams, setFiltersParams }
-)
-export default class ListController extends Component<IProps> {
+// @connect(
+//   mapStateToProps,
+//   { crudGetList, changeListParams, setPageParams, setFiltersParams }
+// )
+export class ListController extends Component<IProps> {
   componentDidMount() {
     this.updateData();
   }
@@ -89,3 +89,8 @@ export default class ListController extends Component<IProps> {
     });
   }
 }
+
+export default connect(
+  mapStateToProps,
+  { crudGetList, changeListParams, setPageParams, setFiltersParams }
+)(ListController);

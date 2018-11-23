@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Admin, Resource } from 'prophet-core';
+import { Layout } from 'prophet-antd';
 import dataProvider from './dataProvider';
 import Dashboard from './Dashboard';
 import Menu from './Menu';
@@ -21,8 +22,10 @@ class App extends Component {
       <Admin
         dataProvider={dataProvider}
         dashboard={Dashboard}
+        layout={Layout}
         menu={Menu}
         brand={Brand}
+        login={CatchAll}
         catchAll={CatchAll}
         customRoutes={[<Route exact path="/custom" component={Show} />]}
       >
