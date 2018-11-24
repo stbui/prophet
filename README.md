@@ -33,11 +33,13 @@ import dataJsonServer from 'prophet-data-json-server';
 </Admin>;
 ```
 
-## 包
+## Packages
 
-- prophet-core
-- prophet-antd
-- prophet-data-json-server
+| Package                                                  | Docs | Description |
+| -------------------------------------------------------- | ---- | ----------- |
+| [`prophet-core`](/packages/core)                         |      |             |
+| [`prophet-antd`](/packages/antd)                         |      |             |
+| [`prophet-data-json-server`](/packages/data-json-server) |      |             |
 
 ## prophet-core
 
