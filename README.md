@@ -1,6 +1,6 @@
-# Prophet
+# 中后台前端应用框架（Prophet）
 
-可插拔的企业级 react 中后台前端应用框架。基于 redux 和 redux-saga 数据流，抽离出 CURD 组件,支持各种数据格式的适配。
+用于构建企业级 react 中后台前端应用框架。基于 redux 和 redux-saga 数据流方案，提取出 CURD 组件,支持各种数据格式的适配。
 
 ## 特性
 
@@ -10,17 +10,12 @@
 
 # 架构
 
-Api -> GET -> dataProvider -> redux-saga -> reducers -> list
-Api -> POST -> dataProvider -> redux-saga -> reducers -> create
-Api -> PUT -> dataProvider -> redux-saga -> reducers -> edit
-Api -> DELETE -> dataProvider -> redux-saga -> reducers -> any
+![架构](docs/prophet.svg)
 
 ## 起步
 
 ```bash
-npm install && npx lerna bootstrap
-npm run build
-npm run demo
+npm install prophet-core
 ```
 
 ```js
@@ -76,3 +71,11 @@ import dataJsonServer from 'prophet-data-json-server';
 #### Show
 
 ## prophet-data-json-server
+
+## dev
+
+```bash
+npm install && npx lerna bootstrap
+npm run build
+npm run demo
+```
