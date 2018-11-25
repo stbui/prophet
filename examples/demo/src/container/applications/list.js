@@ -10,7 +10,12 @@ const panes = [
 const Label = ({ title }) => title;
 
 const appList = props => (
-  <ListTabbed defaultActiveKey="1" panes={panes} {...props}>
+  <ListTabbed
+    defaultActiveKey="1"
+    panes={panes}
+    filter={{ test: 1 }}
+    {...props}
+  >
     {({ key, title, total, basePath, ...other }) => (
       <Datagrid
         title={() => (

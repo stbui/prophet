@@ -32,11 +32,12 @@ export interface IProps {
   params?: any;
   setPageParams?: any;
   setFiltersParams?: any;
+  location?: any;
+  filter?: any;
 }
 
 const mapStateToProps = (state, props) => {
   const resourceState = state.resources[props.resource];
-  console.log('state', state);
   return {
     data: resourceState.data,
     total: resourceState.list.total,
@@ -65,9 +66,12 @@ export class ListController extends Component<IProps> {
   };
 
   changeParams = action => {
-    const query = { tab: 'pod' };
+    const { filter } = this.props;
+    const query = { filter };
     const newParams = queryReducer(query, action);
     console.log('newParams', newParams);
+
+    this.props.changeListParams(this.props.resource, newParams);
   };
 
   setPage = page => this.changeParams(this.props.setPageParams(page));
@@ -77,6 +81,8 @@ export class ListController extends Component<IProps> {
 
   render() {
     const { children, basePath, data, total, hasCreate, resource } = this.props;
+
+    console.log(this.props);
 
     return children({
       basePath,
