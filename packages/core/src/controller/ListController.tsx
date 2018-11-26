@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { parse, strigify } from 'query-string';
+import { createSelector } from 'reselect';
 
 import {
   crudGetList,
@@ -34,14 +36,26 @@ export interface IProps {
   setFiltersParams?: any;
   location?: any;
   filter?: any;
+  query?: any;
 }
+
+const getLocationPath = props => props.location.pathname;
+const getLocationSearch = props => props.location.search;
+const selectQuery = createSelector(
+  getLocationPath,
+  getLocationSearch,
+  (path, search) => {
+    return parse(search);
+  }
+);
 
 const mapStateToProps = (state, props) => {
   const resourceState = state.resources[props.resource];
   return {
     data: resourceState.data,
     total: resourceState.list.total,
-    params: resourceState.list.params
+    params: resourceState.list.params,
+    query: selectQuery(props)
   };
 };
 
@@ -52,6 +66,15 @@ const mapStateToProps = (state, props) => {
 export class ListController extends Component<IProps> {
   componentDidMount() {
     this.updateData();
+  }
+
+  getQuery() {
+    const query =
+      Object.keys(this.props.query).length > 0
+        ? this.props.query
+        : { ...this.props.params };
+
+    return query;
   }
 
   updateData(query?: object) {
@@ -66,8 +89,7 @@ export class ListController extends Component<IProps> {
   };
 
   changeParams = action => {
-    const { filter } = this.props;
-    const query = { filter };
+    const query = this.getQuery();
     const newParams = queryReducer(query, action);
     console.log('newParams', newParams);
 
