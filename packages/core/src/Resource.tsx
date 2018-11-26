@@ -10,11 +10,11 @@ export interface IProps {
   create: React.ComponentType;
   show: React.ComponentType;
   catchAll: React.ComponentType;
-  name: any;
-  label: any;
-  context: any;
+  name: string;
+  label: string;
+  context: 'registration';
   match: any;
-  registerResource: any;
+  registerResource: (resource: any) => void;
 }
 
 // @connect(

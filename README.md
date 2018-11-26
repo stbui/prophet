@@ -41,39 +41,6 @@ import dataJsonServer from 'prophet-data-json-server';
 | [`prophet-antd`](/packages/antd)                         |      |             |
 | [`prophet-data-json-server`](/packages/data-json-server) |      |             |
 
-## prophet-core
-
-#### Admin
-
-```js
-<Admin dataProvider={} layout={} menu={} dashboard={} customRoutes={} />
-```
-
-#### Resource
-
-```js
-<Resource
-  name="users"
-  label="用户"
-  list={}
-  edit={}
-  create={}
-  show={}
-/>
-```
-
-## prophet-antd
-
-#### List
-
-#### Create
-
-#### Edit
-
-#### Show
-
-## prophet-data-json-server
-
 ## dev
 
 ```bash
