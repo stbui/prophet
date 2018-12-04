@@ -44,7 +44,7 @@ import dataJsonServer from 'prophet-data-json-server';
 ## dev
 
 ```bash
-npm install && npx lerna bootstrap
+npm install
 npm run build
 npm run demo
 ```
