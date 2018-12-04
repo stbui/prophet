@@ -1,7 +1,5 @@
 import React, { Component, Children } from 'react';
 import { Table } from 'antd';
-import 'antd/lib/table/style/index.css';
-import 'antd/lib/pagination/style/index.css';
 
 /**
  * <Datagrid>
@@ -12,11 +10,19 @@ import 'antd/lib/pagination/style/index.css';
 
 export interface IProps {
   data?: any;
+  children?: [];
+  total?: number;
+  pagination?: any;
+  setPage?: (page?: any) => void;
 }
 
 export class Datagrid extends Component<IProps> {
+  handleTable = pagation => {
+    this.props.setPage(pagation);
+  };
+
   render() {
-    const { children = [], data } = this.props;
+    const { children = [], data, pagination } = this.props;
     const columns: any = [];
 
     Children.map(children, (child: any) => {
@@ -29,7 +35,15 @@ export class Datagrid extends Component<IProps> {
       });
     });
 
-    return <Table columns={columns} dataSource={data} {...this.props} />;
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={this.handleTable}
+        pagination={pagination}
+        {...this.props}
+      />
+    );
   }
 }
 

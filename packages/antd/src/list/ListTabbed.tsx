@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 
 export interface IProps {
   children: any;
-  changeParams: any;
+  setFilters: any;
   className: any;
   type: any;
   addContent: any;
@@ -19,20 +19,20 @@ export const ListView = ({
   type,
   children,
   className,
-  changeParams,
+  setFilters,
   ...other
 }: IProps) => (
   <Tabs
     className={className}
     type={type}
-    onChange={tab => changeParams({ tab })}
+    onChange={tab => setFilters({ tab })}
     {...other}
   >
     {panes.map(pane => (
       <TabPane tab={pane.title} key={pane.key}>
         {pane.content
-          ? cloneElement(pane.content, { changeParams, ...other })
-          : children({ ...pane, changeParams, ...other })}
+          ? cloneElement(pane.content, { setFilters, ...other })
+          : children({ ...pane, setFilters, ...other })}
       </TabPane>
     ))}
 

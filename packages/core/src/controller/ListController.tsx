@@ -19,6 +19,8 @@ export interface InjectedProps {
   hasCreate?: boolean;
   changeParams?: any;
   setFilters?: any;
+  setPage?: any;
+  pagination?: any;
 }
 
 export interface IProps {
@@ -34,6 +36,7 @@ export interface IProps {
   params?: any;
   setPageParams?: any;
   setFiltersParams?: any;
+  setPage?: any;
   location?: any;
   filter?: any;
   query?: any;
@@ -102,18 +105,29 @@ export class ListController extends Component<IProps> {
     this.changeParams(this.props.setFiltersParams(filters));
 
   render() {
-    const { children, basePath, data, total, hasCreate, resource } = this.props;
-
-    console.log(this.props);
-
-    return children({
+    const {
+      children,
       basePath,
       data,
       total,
       hasCreate,
       resource,
+      params
+    } = this.props;
+
+    const query = this.getQuery();
+    const pagination = query.page ? { ...params.page } : { total: 50 };
+
+    return children({
+      basePath,
+      data,
+      total,
+      pagination,
+      hasCreate,
+      resource,
       changeParams: this.setFilters,
-      setFilters: this.setFilters
+      setFilters: this.setFilters,
+      setPage: this.setPage
     });
   }
 }

@@ -11,12 +11,7 @@ export const Brand = () => (
       fontWeight: 500
     }}
   >
-    <img
-      width="80"
-      src="https://static.zhongan.com/website/tech/images/logo.png"
-      alt="智能监控系统"
-    />
-    <span>智能监控系统</span>
+    <span>智能监控平台</span>
   </div>
 );
 
