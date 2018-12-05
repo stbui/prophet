@@ -5,11 +5,12 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "allowJs": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
     "lib": ["esnext", "dom"]
   }
 }
