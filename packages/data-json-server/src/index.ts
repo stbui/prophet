@@ -3,18 +3,22 @@ import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
   return (type, resource, params) => {
-    // console.log('===', 'data-json-server', '===');
-    // console.log('apiUrl', apiUrl);
-    // console.log('type', type);
-    // console.log('resource', resource);
-    // console.log('params', params);
-    // console.log('===', 'data-json-server', '===');
-
     let url = '';
 
     switch (type) {
       case GET_LIST:
-        url = `${apiUrl}/${resource}?${stringify(params)}`;
+        const { pagination, ...ohter } = params;
+        const query = {
+          ...ohter
+        };
+        
+        if (pagination) {
+          const { current, pageSize } = pagination;
+          query.page = current;
+          query.pageSize = pageSize;
+        }
+
+        url = `${apiUrl}/${resource}?${stringify(query)}`;
         return httpClient(url)
           .then(resopnse => resopnse.json())
           .then(response => ({ data: response, total: 0 }));

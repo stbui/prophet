@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { parse, strigify } from 'query-string';
+import { parse, stringify } from 'query-string';
 import { createSelector } from 'reselect';
 
 import {
@@ -71,6 +71,28 @@ export class ListController extends Component<IProps> {
     this.updateData();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      'componentWillReceiveProps',
+      nextProps.query,
+      this.props.query,
+      nextProps.params,
+      this.props.params
+    );
+    if (this.props.params) {
+      if (
+        nextProps.params.page !== this.props.params.page ||
+        nextProps.params.filter !== this.props.params.filter
+      ) {
+        this.updateData(
+          Object.keys(nextProps.query).length > 0
+            ? nextProps.query
+            : nextProps.params
+        );
+      }
+    }
+  }
+
   getQuery() {
     const query =
       Object.keys(this.props.query).length > 0
@@ -81,11 +103,12 @@ export class ListController extends Component<IProps> {
   }
 
   updateData(query?: object) {
-    this.props.crudGetList(this.props.resource, { ...query });
+    const params = query || this.getQuery();
+    const { page, filter } = params;
+    const pagination = page;
+
+    this.props.crudGetList(this.props.resource, pagination, { ...filter });
   }
-  getListData = (query: object) => {
-    this.updateData(query);
-  };
 
   filterParams = query => {
     this.props.changeListParams(this.props.resource, query);
@@ -94,7 +117,7 @@ export class ListController extends Component<IProps> {
   changeParams = action => {
     const query = this.getQuery();
     const newParams = queryReducer(query, action);
-    console.log('newParams', newParams);
+    console.log('newParams', newParams, this.props.location);
 
     this.props.changeListParams(this.props.resource, newParams);
   };
@@ -125,7 +148,6 @@ export class ListController extends Component<IProps> {
       pagination,
       hasCreate,
       resource,
-      changeParams: this.setFilters,
       setFilters: this.setFilters,
       setPage: this.setPage
     });
