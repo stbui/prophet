@@ -11,7 +11,7 @@ export default (apiUrl: string, httpClient = fetch) => {
         const query = {
           ...ohter
         };
-        
+
         if (pagination) {
           const { current, pageSize } = pagination;
           query.page = current;

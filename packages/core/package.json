@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "rm -rf ./lib && tsc",

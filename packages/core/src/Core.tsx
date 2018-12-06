@@ -15,7 +15,7 @@ export interface PropsType {
   catchAll?: React.ComponentType;
   menu?: React.ComponentType;
   brand?: React.ComponentType;
-  dataProvider?: (action: any) => Promise<any>;
+  dataProvider?: (type?: any, resource?: any, params?: any) => Promise<any>;
   customRoutes?: any[];
   login?: React.ComponentType;
   layout?: React.ComponentType;
