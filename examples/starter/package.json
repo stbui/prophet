@@ -10,6 +10,7 @@
     "prophet-antd": "^0.0.5-alpha.0",
     "prophet-core": "^0.0.5-alpha.0",
     "prophet-data-json-server": "^0.0.5-alpha.0",
+    "prophet-common": "^0.0.5-alpha.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",

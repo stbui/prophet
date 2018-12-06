@@ -5,7 +5,6 @@ import ListActions from './ListActions';
 export interface IProps {
   children?: React.ComponentType;
   actions?: React.ComponentType;
-  changeParams?: any;
 }
 
 export const ListView = ({ children, actions = <ListActions />, ...other }) => {

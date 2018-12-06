@@ -39,7 +39,7 @@ export class Core extends Component<PropsType, any> {
       <Provider store={configureStore({ history, dataProvider })}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route exact path="llogin" component={login} />
+            <Route exact path="login" component={login} />
             <Route
               path="/"
               render={props => (

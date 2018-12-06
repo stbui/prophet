@@ -1,9 +1,10 @@
 import { GET_LIST } from 'prophet-core';
+import { crudMetadata } from 'prophet-common';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
-  return (type, resource, params) => {
-    let url = '';
+  return (type: crudMetadata, resource: any, params: any) => {
+    let url: string = '';
 
     switch (type) {
       case GET_LIST:

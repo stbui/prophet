@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Admin, Resource } from 'prophet-core';
 import { Layout } from 'prophet-antd';
 import jsonServerProvider from 'prophet-data-json-server';
+import { crudMetadata } from 'prophet-common';
 
 const List = (props: any) => <div>list</div>;
 const Edit = (props: any) => <div>edit</div>;

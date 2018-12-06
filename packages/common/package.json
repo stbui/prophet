@@ -1,7 +1,7 @@
 {
-  "name": "prophet-antd",
+  "name": "prophet-common",
   "version": "0.0.5-alpha.0",
-  "description": "",
+  "description": "用于构建企业级 react 中后台前端应用框架。",
   "main": "lib/index",
   "module": "esm/index.js",
   "typings": "./lib/index.d.ts",
@@ -12,21 +12,6 @@
     "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "stbui",
-  "license": "ISC",
-  "peerDependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
-  "dependencies": {
-    "antd": "^3.10.8",
-    "prophet-core": "^0.0.5-alpha.0",
-    "prophet-common": "^0.0.5-alpha.0",
-    "react-redux": "^5.1.1",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
-    "redux": "^4.0.1"
-  },
   "devDependencies": {
     "@types/react": "^16.7.7",
     "@types/react-dom": "16.0.10",
@@ -36,5 +21,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "d8a1a10ae6aee4e055bcd36846e71cdf654cc4d6"
+  "author": "stbui",
+  "homepage": "https://github.com/stbui/react-admin-kit#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stbui/react-admin-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stbui/react-admin-kit/issues"
+  }
 }

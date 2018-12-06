@@ -19,6 +19,7 @@
     "react-dom": "^16.6.3"
   },
   "dependencies": {
+    "prophet-common": "^0.0.5-alpha.0",
     "query-string": "^6.2.0",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
