@@ -8,6 +8,7 @@
     "build": "lerna run build",
     "postinstall": "lerna bootstrap",
     "demo": "cd examples/demo && npm run start",
+    "start": "cd examples/starter && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "cd docs && gitbook build",
     "publish:github": "gh-pages -d docs/_book",
