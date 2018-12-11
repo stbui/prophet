@@ -73,6 +73,17 @@ export class M extends Component {
               uri: '/call-chain'
             }
           ]
+        },
+        {
+          name: '系统设置',
+          icon: 'setting',
+          key: 'setting',
+          children: [
+            {
+              name: '用户管理',
+              uri: '/user'
+            }
+          ]
         }
       ]
     };

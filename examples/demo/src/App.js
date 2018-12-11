@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Admin, Resource } from 'prophet-core';
-import { Layout } from 'prophet-antd';
+import { Layout, CatchAll } from 'prophet-antd';
 import dataProvider from './dataProvider';
 import Dashboard from './Dashboard';
 import Menu from './Menu';
@@ -9,12 +9,14 @@ import Brand from './Menu/Brand';
 import { appList, appDetail } from './container/applications';
 import { resourceList } from './container/resources';
 import { InterfaceList } from './container/interfaces';
+import users from './setting/users';
+
+import './App.css';
 
 const List = props => <div>list</div>;
 const Edit = props => <div>edit</div>;
 const Create = props => <div>create</div>;
 const Show = props => <div>custom</div>;
-const CatchAll = props => <div>CatchAll</div>;
 
 class App extends Component {
   render() {
@@ -26,7 +28,7 @@ class App extends Component {
         menu={Menu}
         brand={Brand}
         login={CatchAll}
-        catchAll={CatchAll}
+        catchAll={() => <CatchAll auth={403} />}
         customRoutes={[<Route exact path="/custom" component={Show} />]}
       >
         <Resource
@@ -37,13 +39,7 @@ class App extends Component {
         <Resource name="container/resource" list={resourceList} />
         <Resource name="container/interface" list={InterfaceList} />
         <Resource name="container/application.pod" />
-        <Resource
-          name="forms"
-          list={List}
-          edit={Edit}
-          create={Create}
-          show={Show}
-        />
+        <Resource name="setting/user" {...users} />
       </Admin>
     );
   }

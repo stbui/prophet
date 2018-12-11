@@ -1,6 +1,5 @@
 import React, { Component, Children, cloneElement, createElement } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// import { Layout } from 'prophet-antd';
 
 export interface IProps {
   children: any;
@@ -26,7 +25,7 @@ export class CoreRouter extends Component<IProps, any> {
 
   render() {
     const { children, dashboard, customRoutes, catchAll, Layout } = this.props;
-    
+
     if (!children) {
       return <div>添加组件 &lt;Resource&gt;</div>;
     }
