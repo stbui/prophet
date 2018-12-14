@@ -2,18 +2,18 @@
 
 ## 映射 RESTful 服务器接口
 
-| 类型       | 方法   | url 示例                   | 说明 |
-| :--------- | :----- | :------------------------- | :--- |
-| GET_LIST   | GET    | http://127.0.0.1/users     |      |
-| GET_CREATE | POST   | http://127.0.0.1/users     |      |
-| GET_EDIT   | PUT    | http://127.0.0.1/users/:id |      |
-| GET_SHOW   | DELETE | http://127.0.0.1/users/:id |      |
-| ...        | GET    | http://127.0.0.1/users/:id |      |
+| 类型     | 方法   | url 示例                   | 说明 |
+| :------- | :----- | :------------------------- | :--- |
+| GET_LIST | GET    | http://127.0.0.1/users     |      |
+| CREATE   | POST   | http://127.0.0.1/users     |      |
+| UPDATE   | PUT    | http://127.0.0.1/users/:id |      |
+| DELETE   | DELETE | http://127.0.0.1/users/:id |      |
+| ...      | GET    | http://127.0.0.1/users/:id |      |
 
 ## 示例
 
 ```js
-import { GET_LIST, GET_CREATE, GET_EDIT, GET_SHOW } from 'prophet-core';
+import { GET_LIST, CREATE, UPDATE, DELETE } from 'prophet-core';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
@@ -26,11 +26,11 @@ export default (apiUrl: string, httpClient = fetch) => {
         return httpClient(url)
           .then(resopnse => resopnse.json())
           .then(response => ({ data: response, total: 0 }));
-      case GET_CREATE:
+      case CREATE:
         return;
-      case GET_EDIT:
+      case UPDATE:
         return;
-      case GET_SHOW:
+      case DELETE:
         return;
     }
 
