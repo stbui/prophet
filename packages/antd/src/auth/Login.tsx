@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
-import 'antd/lib/input/style/index.css';
-import 'antd/lib/checkbox/style/index.css';
-import 'antd/lib/button/style/index.css';
 
 export class Login extends Component<any, any> {
   handleSubmit = e => {

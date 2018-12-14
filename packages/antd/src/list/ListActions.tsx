@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Select, Button, Row, Col } from 'antd';
-import 'antd/lib/form/style/index.css';
-import 'antd/lib/select/style/index.css';
 
 const FormItem = Form.Item;
 const { Option } = Select;

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getResources } from 'prophet-core';
 import { Menu, Icon } from 'antd';
-import 'antd/lib/menu/style/index.css';
 
 // @connect(state => ({ resources: getResources(state) }))
 export class M extends Component<any, any> {

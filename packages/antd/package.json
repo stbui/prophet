@@ -19,7 +19,7 @@
     "react-dom": "^16.6.3"
   },
   "dependencies": {
-    "antd": "^3.10.8",
+    "antd": "^3.11.2",
     "prophet-core": "^0.0.5-alpha.0",
     "prophet-common": "^0.0.5-alpha.0",
     "react-redux": "^5.1.1",
