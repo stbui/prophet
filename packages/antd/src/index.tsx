@@ -7,5 +7,6 @@ export * from './edit';
 export * from './show';
 export * from './auth';
 export * from './field';
+export * from './form';
 
 import 'antd/dist/antd.css';

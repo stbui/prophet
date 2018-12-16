@@ -3,19 +3,17 @@ import { Route } from 'react-router';
 import { Admin, Resource } from 'prophet-core';
 import { Layout, CatchAll } from 'prophet-antd';
 import dataProvider from './dataProvider';
-import Dashboard from './Dashboard';
+import Dashboard from './dashboard';
 import Menu from './Menu';
 import Brand from './Menu/Brand';
 import { appList, appDetail } from './container/applications';
 import { resourceList } from './container/resources';
 import { InterfaceList } from './container/interfaces';
 import users from './setting/users';
+import logs from './setting/logs';
 
-import './App.css';
+import './App.scss';
 
-const List = props => <div>list</div>;
-const Edit = props => <div>edit</div>;
-const Create = props => <div>create</div>;
 const Show = props => <div>custom</div>;
 
 class App extends Component {
@@ -40,6 +38,7 @@ class App extends Component {
         <Resource name="container/interface" list={InterfaceList} />
         <Resource name="container/application.pod" />
         <Resource name="setting/user" {...users} />
+        <Resource name="setting/log" {...logs} />
       </Admin>
     );
   }

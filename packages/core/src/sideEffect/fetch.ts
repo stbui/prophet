@@ -20,13 +20,13 @@ export function* handleFetch(dataProvider, action) {
     });
   } catch (error) {
     console.log(error);
-    // yield put({
-    //   type: `${type}_FAILURE`,
-    //   error: error.message ? error.message : error,
-    //   payload: error.body ? error.body : null,
-    //   requestPayload: payload,
-    //   meta: { ...meta, ...onFailure, fetchResponse: restType }
-    // });
+    yield put({
+      type: `${type}_FAILURE`,
+      error: error.message ? error.message : error,
+      payload: error.body ? error.body : null,
+      requestPayload: payload,
+      meta: { ...meta, ...onFailure, fetchResponse: restType }
+    });
   }
 }
 

@@ -4,7 +4,6 @@ import Header from './Header';
 import Sider from './Sider';
 import Menu from './Menu';
 import Brand from './Brand';
-import 'antd/lib/layout/style/index.css';
 
 export class Layout extends Component<any, any> {
   static defaultProps = {
@@ -23,7 +22,8 @@ export class Layout extends Component<any, any> {
       dashboard,
       history,
       location,
-      match
+      match,
+      color
     } = this.props;
 
     return (
@@ -41,10 +41,8 @@ export class Layout extends Component<any, any> {
           {createElement(header)}
           <DefaultLayout.Content
             style={{
-              margin: 16,
-              padding: 24,
-              background: '#fff',
-              minHeight: 280
+              margin: 24,
+              backgroundColor: color
             }}
           >
             {this.props.children}

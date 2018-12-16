@@ -54,6 +54,7 @@ const selectQuery = createSelector(
 
 const mapStateToProps = (state, props) => {
   const resourceState = state.resources[props.resource];
+
   return {
     data: resourceState.data,
     total: resourceState.list.total,

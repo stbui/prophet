@@ -82,6 +82,10 @@ export class M extends Component {
             {
               name: '用户管理',
               uri: '/user'
+            },
+            {
+              name: '操作日志',
+              uri: '/log'
             }
           ]
         }

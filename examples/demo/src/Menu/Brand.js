@@ -11,7 +11,9 @@ export const Brand = () => (
       fontWeight: 500
     }}
   >
-    <span>智能监控平台</span>
+    <a href="/" style={{ color: '#fff' }}>
+      智能监控平台
+    </a>
   </div>
 );
 
