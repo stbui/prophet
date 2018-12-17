@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Show } from 'prophet-antd';
 
-export default class Show extends Component {
-  static propTypes = {};
+const Text = ({ title }) => title;
 
-  render() {
-    return <div>Show</div>;
-  }
-}
+export const UsersShow = props => (
+  <Show {...props}>
+    <Text title="用户名" />
+  </Show>
+);
+
+export default UsersShow;

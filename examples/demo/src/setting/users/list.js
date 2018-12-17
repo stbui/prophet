@@ -51,7 +51,14 @@ export default class UsersList extends Component {
           <Label dataIndex="phone">手机号</Label>
           <Label dataIndex="createTime">创建时间</Label>
           <Label dataIndex="status">状态</Label>
-          <Label render={text => <Link to={`${basePath}/2`}>编辑</Link>}>
+          <Label
+            render={text => (
+              <span>
+                <Link to={`${basePath}/2`}>编辑</Link>
+                <Link to={`${basePath}/2/show`}>查看</Link>
+              </span>
+            )}
+          >
             操作
           </Label>
         </Datagrid>
