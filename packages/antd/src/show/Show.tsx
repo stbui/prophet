@@ -8,6 +8,7 @@ export interface IShowProps {
   loading: boolean;
   basePath: string;
   resource: string;
+  record: any;
 }
 
 export const ShowView = ({
@@ -15,12 +16,14 @@ export const ShowView = ({
   title,
   loading,
   basePath,
-  resource
+  resource,
+  record
 }: IShowProps) => (
   <Card bordered={false} title={title} loading={loading}>
     {cloneElement(children, {
       basePath,
-      resource
+      resource,
+      record
     })}
   </Card>
 );

@@ -11,7 +11,16 @@ export interface IProps {
 }
 
 const mapStateToProps = (state, props) => {
-  return { id: 1, record: {} };
+  return {
+    id: 1,
+    record: {
+      username: 'stbui',
+      password: '123456',
+      nickname: 'stb',
+      role: 1,
+      email: 'stbui@stbui.com'
+    }
+  };
 };
 
 export class ShowController extends Component<IProps> {
