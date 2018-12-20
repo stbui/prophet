@@ -1,4 +1,4 @@
-import { GET_LIST, CREATE, UPDATE, DELETE } from 'prophet-core';
+import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from 'prophet-core';
 import { crudMetadata } from 'prophet-common';
 import { stringify } from 'query-string';
 
@@ -23,6 +23,12 @@ export default (apiUrl: string, httpClient = fetch) => {
         return httpClient(url)
           .then(resopnse => resopnse.json())
           .then(response => ({ data: response, total: 0 }));
+      case GET_ONE:
+        url = `${apiUrl}/${resource}/${params.id}`;
+
+        return httpClient(url)
+          .then(resopnse => resopnse.json())
+          .then(response => ({ data: response }));
       case CREATE:
         url = `${apiUrl}/${resource}`;
         return httpClient(url, {
@@ -31,7 +37,6 @@ export default (apiUrl: string, httpClient = fetch) => {
         })
           .then(resopnse => resopnse.json())
           .then(response => ({ data: { ...params.data, id: response.id } }));
-        return;
       case UPDATE:
         url = `${apiUrl}/${resource}/${params.id}`;
         return httpClient(url, {
@@ -40,13 +45,11 @@ export default (apiUrl: string, httpClient = fetch) => {
         })
           .then(resopnse => resopnse.json())
           .then(response => ({ data: response }));
-        return;
       case DELETE:
         url = `${apiUrl}/${resource}/${params.id}`;
         return httpClient(url, { method: 'DETETE' })
           .then(resopnse => resopnse.json())
           .then(response => ({ data: response }));
-        return;
       default:
         throw new Error(`不支持action类型 ${type}`);
     }

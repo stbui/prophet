@@ -9,6 +9,7 @@ export interface IProps {
   history?: any;
   basePath?: any;
   resource?: any;
+  record?: any;
   save?(data, redirect): any;
 }
 
@@ -58,12 +59,17 @@ export class Create extends Component<IProps, any> {
       }
     };
 
-    const { children } = this.props;
+    const { children, record } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         {Children.map(children, input => (
-          <FormInput input={input} form={this.props.form} {...formItemLayout} />
+          <FormInput
+            record={record}
+            input={input}
+            form={this.props.form}
+            {...formItemLayout}
+          />
         ))}
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" style={{ marginRight: 16 }}>

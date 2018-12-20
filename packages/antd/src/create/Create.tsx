@@ -8,12 +8,14 @@ export const CreateView = ({
   loading,
   basePath,
   resource,
+  record = {},
   save
 }) => (
   <Card bordered={false} title={title} loading={loading}>
     {cloneElement(children, {
       basePath,
       resource,
+      record,
       save
     })}
   </Card>

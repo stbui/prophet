@@ -45,7 +45,7 @@ export const UsersEdit = props => (
         ]}
       />
       <Input label="手机号" name="phone" placeholder="请输入手机号" />
-      <Radio.Group label="状态" name="status" initialValue={true}>
+      <Radio.Group label="状态" name="status">
         <Radio value={true}>启用</Radio>
         <Radio value={false}>禁用</Radio>
       </Radio.Group>
