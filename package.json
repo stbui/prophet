@@ -21,8 +21,8 @@
   "devDependencies": {
     "gh-pages": "^2.0.1",
     "gitbook-cli": "^2.3.2",
-    "lerna": "^3.4.3",
-    "typescript": "^3.1.6",
+    "lerna": "^3.7.2",
+    "typescript": "^3.2.2",
     "conventional-changelog-cli": "^2.0.11"
   }
 }
