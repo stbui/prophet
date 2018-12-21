@@ -1,14 +1,16 @@
 # dataProvider
 
+用于统一不同接口数据规范
+
 ## 映射 RESTful 服务器接口
 
 | 类型     | 方法   | url 示例                   | 说明 |
 | :------- | :----- | :------------------------- | :--- |
 | GET_LIST | GET    | http://127.0.0.1/users     |      |
+| GET_ONE  | GET    | http://127.0.0.1/users/:id |      |
 | CREATE   | POST   | http://127.0.0.1/users     |      |
 | UPDATE   | PUT    | http://127.0.0.1/users/:id |      |
 | DELETE   | DELETE | http://127.0.0.1/users/:id |      |
-| ...      | GET    | http://127.0.0.1/users/:id |      |
 
 ## 示例
 

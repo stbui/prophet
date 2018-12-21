@@ -35,5 +35,5 @@ import dataJsonServer from 'prophet-data-json-server';
 | layout       | ComponentType    | antd   |              |      |
 | menu         | ComponentType    | antd   |              |      |
 | brand        | ComponentType    | antd   |              |      |
-| login        | ComponentType    | -      |              |      |
-| catchAll     | ComponentType    | -      |              |      |
+| login        | ComponentType    | antd   |              |      |
+| catchAll     | ComponentType    | antd   |              |      |

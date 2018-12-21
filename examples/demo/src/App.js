@@ -10,7 +10,6 @@ import { appList, appDetail } from './container/applications';
 import { resourceList } from './container/resources';
 import { InterfaceList } from './container/interfaces';
 import users from './setting/users';
-import logs from './setting/logs';
 
 import './App.scss';
 
@@ -38,7 +37,6 @@ class App extends Component {
         <Resource name="container/interface" list={InterfaceList} />
         <Resource name="container/application.pod" />
         <Resource name="setting/user" {...users} />
-        <Resource name="setting/log" {...logs} />
       </Admin>
     );
   }
