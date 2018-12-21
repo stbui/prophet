@@ -1,4 +1,8 @@
 {
-  "packages": ["packages/*", "examples/demo", "examples/starter"],
-  "version": "0.0.5-alpha.0"
+  "packages": [
+    "examples/demo",
+    "examples/starter",
+    "packages/*"
+  ],
+  "version": "0.0.5"
 }
