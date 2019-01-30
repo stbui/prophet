@@ -33,6 +33,9 @@ export default (apiUrl: string, httpClient = fetch) => {
         url = `${apiUrl}/${resource}`;
         return httpClient(url, {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          },
           body: JSON.stringify(params.data)
         })
           .then(resopnse => resopnse.json())
