@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Datagrid, List, Link } from 'prophet-antd';
-import { Button, Icon } from 'antd';
+import { Button, Divider } from 'antd';
 
 const Label = ({ title }) => title;
 
@@ -52,9 +52,10 @@ export default class UsersList extends Component {
           <Label dataIndex="createTime">创建时间</Label>
           <Label dataIndex="status">状态</Label>
           <Label
-            render={(text,row) => (
+            render={(text, row) => (
               <span>
                 <Link to={`${basePath}/${row.key}`}>编辑</Link>
+                <Divider type="vertical" />
                 <Link to={`${basePath}/${row.key}/show`}>查看</Link>
               </span>
             )}

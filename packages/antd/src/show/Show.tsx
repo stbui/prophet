@@ -4,6 +4,7 @@ import { Card } from 'antd';
 
 export interface IShowProps {
   children: any;
+  id: string | number;
   title: string;
   loading: boolean;
   basePath: string;
@@ -13,6 +14,7 @@ export interface IShowProps {
 
 export const ShowView = ({
   children,
+  id,
   title,
   loading,
   basePath,
@@ -20,11 +22,14 @@ export const ShowView = ({
   record
 }: IShowProps) => (
   <Card bordered={false} title={title} loading={loading}>
-    {cloneElement(children, {
-      basePath,
-      resource,
-      record
-    })}
+    {record
+      ? cloneElement(children, {
+          basePath,
+          resource,
+          record,
+          id
+        })
+      : null}
   </Card>
 );
 

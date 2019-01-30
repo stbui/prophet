@@ -81,7 +81,7 @@ export class M extends Component {
           children: [
             {
               name: '用户管理',
-              uri: '/user'
+              uri: '/users'
             },
             {
               name: '操作日志',

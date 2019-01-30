@@ -13,13 +13,15 @@ export const EditView = ({
   save
 }) => (
   <Card bordered={false} title={title} loading={loading}>
-    {cloneElement(children, {
-      basePath,
-      resource,
-      save,
-      record,
-      id
-    })}
+    {record
+      ? cloneElement(children, {
+          basePath,
+          resource,
+          save,
+          record,
+          id
+        })
+      : null}
   </Card>
 );
 

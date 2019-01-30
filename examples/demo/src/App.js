@@ -36,7 +36,7 @@ class App extends Component {
         <Resource name="container/resource" list={resourceList} />
         <Resource name="container/interface" list={InterfaceList} />
         <Resource name="container/application.pod" />
-        <Resource name="setting/user" {...users} />
+        <Resource name="setting/users" {...users} />
       </Admin>
     );
   }
