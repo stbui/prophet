@@ -19,13 +19,12 @@ export class Create extends Component<IProps, any> {
 
     const { form, save, history } = this.props;
 
-    form.validateFieldsAndScroll((err, values) => {
+    form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        save(values, 'list');
+        history.go(-1);
       }
-
-      save(values, 'list');
-      history.go(-1);
     });
   };
 
