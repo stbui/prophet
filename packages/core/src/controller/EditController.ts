@@ -16,15 +16,9 @@ export interface IProps {
 const mapStateToProps = (state, props) => {
   return {
     id: props.id,
-    record: {
-      username: 'stbui',
-      password: '123456',
-      nickname: 'stb',
-      role: 1,
-      email: 'stbui@stbui.com',
-      phone: '13333333333',
-      status: true
-    }
+    record: state.resources[props.resource]
+      ? state.resources[props.resource].data[props.id]
+      : null
   };
 };
 

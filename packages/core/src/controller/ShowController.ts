@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { crudGetOne } from '../actions';
 
 export interface IProps {
   children(props): any;
   basePath: any;
   resource: any;
+  id: string | number;
   record: any;
-  id: any;
+  crudGetOne: (resource: string, id: string | number) => any;
 }
 
 const mapStateToProps = (state, props) => {
   return {
-    id: 1,
-    record: {
-      username: 'stbui',
-      password: '123456',
-      nickname: 'stb',
-      role: 1,
-      email: 'stbui@stbui.com'
-    }
+    id: props.id,
+    record: state.resources[props.resource]
+      ? state.resources[props.resource].data[props.id]
+      : null
   };
 };
-
 export class ShowController extends Component<IProps> {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.updateData();
+    const { resource, id } = this.props;
+    this.updateData(resource, id);
   }
 
-  updateData(resource?, id?) {}
+  updateData(resource, id) {
+    this.props.crudGetOne(resource, id);
+  }
 
   render() {
     const { children, basePath, resource, record, id } = this.props;
@@ -43,4 +43,7 @@ export class ShowController extends Component<IProps> {
   }
 }
 
-export default connect(mapStateToProps)(ShowController);
+export default connect(
+  mapStateToProps,
+  { crudGetOne }
+)(ShowController);
