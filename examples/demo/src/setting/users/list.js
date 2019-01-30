@@ -52,10 +52,10 @@ export default class UsersList extends Component {
           <Label dataIndex="createTime">创建时间</Label>
           <Label dataIndex="status">状态</Label>
           <Label
-            render={text => (
+            render={(text,row) => (
               <span>
-                <Link to={`${basePath}/2`}>编辑</Link>
-                <Link to={`${basePath}/2/show`}>查看</Link>
+                <Link to={`${basePath}/${row.key}`}>编辑</Link>
+                <Link to={`${basePath}/${row.key}/show`}>查看</Link>
               </span>
             )}
           >

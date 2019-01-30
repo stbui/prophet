@@ -4,6 +4,7 @@ import { Card } from 'antd';
 
 export const EditView = ({
   children,
+  id,
   title,
   loading,
   basePath,
@@ -16,7 +17,8 @@ export const EditView = ({
       basePath,
       resource,
       save,
-      record
+      record,
+      id
     })}
   </Card>
 );

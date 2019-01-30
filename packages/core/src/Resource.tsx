@@ -109,6 +109,7 @@ export class Resource extends Component<IProps, any> {
             render={props =>
               createElement(edit, {
                 basePath: match.url,
+                id: decodeURIComponent(match.params.id),
                 ...resource,
                 ...props
               })
