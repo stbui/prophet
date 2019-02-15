@@ -140,7 +140,7 @@ export class ListController extends Component<IProps> {
     } = this.props;
 
     const query = this.getQuery();
-    const pagination = query.page ? { ...params.page } : { total: 50 };
+    const pagination = query.page ? { ...params.page } : {};
 
     return children({
       basePath,
