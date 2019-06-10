@@ -1,6 +1,6 @@
 {
   "name": "prophet-core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
@@ -19,7 +19,7 @@
     "react-dom": "^16.7.0"
   },
   "dependencies": {
-    "prophet-common": "^0.0.5",
+    "prophet-common": "^0.0.6",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

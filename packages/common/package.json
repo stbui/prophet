@@ -1,6 +1,6 @@
 {
   "name": "prophet-common",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "用于构建企业级 react 中后台前端应用框架。",
   "main": "lib/index",
   "module": "esm/index.js",
