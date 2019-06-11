@@ -11,8 +11,8 @@
     "prophet-common": "^0.0.6",
     "prophet-core": "^0.0.6",
     "prophet-data-json-server": "^0.0.6",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "2.1.1",
     "typescript": "^3.2.2"
   },
