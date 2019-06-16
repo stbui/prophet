@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { SET_FILTERS, SET_PAGE } from '../../../actions/listActions';
 
 export default (previousState, { type, payload }) => {

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { CRUD_CHANGE_LIST_PARAMS } from '../../../actions/listActions';
 
 const initialState = {

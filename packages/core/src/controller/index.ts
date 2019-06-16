@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import ListController from './ListController';
 import CreateController from './CreateController';
 import EditController from './EditController';

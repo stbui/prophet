@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { ResourceDefinition } from './interfaces';
 
 export const REGISTER_RESOURCE = 'REGISTER_RESOURCE';

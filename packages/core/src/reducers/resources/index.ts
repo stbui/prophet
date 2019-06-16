@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { REGISTER_RESOURCE, UNREGISTER_RESOURCE } from '../../actions';
 import data from './data';
 import list from './list';

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { UPDATE } from './dataFatchActions';
 import { DataAction } from './interfaces';
 

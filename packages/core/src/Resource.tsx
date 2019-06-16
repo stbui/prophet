@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import React, { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';

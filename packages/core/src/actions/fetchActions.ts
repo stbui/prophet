@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 export const FETCH_START = 'FETCH_START';
 export const FETCH_END = 'FETCH_END';
 export const FETCH_ERROR = 'FETCH_ERROR';

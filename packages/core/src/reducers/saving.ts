@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { CRUD_CREATE } from '../actions';
 
 export default (previousState = false, { type, meta }) => {

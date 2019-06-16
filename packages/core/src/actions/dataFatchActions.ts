@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 export const GET_LIST = 'GET_LIST';
 export const GET_ONE = 'GET_ONE';
 export const CREATE = 'CREATE';

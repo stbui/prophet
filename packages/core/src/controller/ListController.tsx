@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { parse, stringify } from 'query-string';

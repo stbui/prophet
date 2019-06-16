@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { CRUD_GET_LIST_SUCCESS } from '../../../actions/dataActions';
 
 export default (previousState = 0, { type, payload }) => {

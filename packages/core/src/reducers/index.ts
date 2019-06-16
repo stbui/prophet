@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { combineReducers } from 'redux';
 import resources, { getResources as GetResources } from './resources';
 import saving from './saving';

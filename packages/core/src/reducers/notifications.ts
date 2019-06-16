@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions';
 
 export const notification = (previousState = '', { type, payload }) => {

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { CRUD_GET_LIST_SUCCESS } from '../../../actions';
 
 export const ids = (previousStatus = [], { type, payload }) => {

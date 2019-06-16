@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { FETCH_CANCEL, FETCH_END, FETCH_ERROR, FETCH_START } from '../actions';
 
 export const loading = (previousState = 0, { type }) => {

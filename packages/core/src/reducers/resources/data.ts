@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { GET_LIST } from '../../actions/dataFatchActions';
 
 const defaultCacheDuration = 10 * 60 * 1000;
