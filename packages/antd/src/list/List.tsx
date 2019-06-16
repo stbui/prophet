@@ -16,13 +16,8 @@ export const ListView = ({
   ...other
 }) => {
   return (
-    <Card
-      bordered={false}
-      title={title}
-      loading={loading}
-      bodyStyle={{ padding: 0 }}
-    >
-      {actions}
+    <Card bordered={false} title={title} loading={loading}>
+      {actions && cloneElement(actions, { ...other })}
       {children && cloneElement(children, { ...other })}
     </Card>
   );

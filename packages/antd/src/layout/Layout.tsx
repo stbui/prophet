@@ -4,13 +4,15 @@ import Header from './Header';
 import Sider from './Sider';
 import Menu from './Menu';
 import Brand from './Brand';
+import Notification from './Notification';
 
 export class Layout extends Component<any, any> {
   static defaultProps = {
     header: Header,
     sider: Sider,
     menu: Menu,
-    brand: Brand
+    brand: Brand,
+    notification: Notification
   };
 
   render() {
@@ -23,32 +25,36 @@ export class Layout extends Component<any, any> {
       history,
       location,
       match,
-      color
+      color,
+      notification
     } = this.props;
 
     return (
-      <DefaultLayout style={{ minHeight: '100vh' }}>
-        {createElement(sider, {
-          brand: createElement(brand),
-          children: createElement(menu, {
-            hasDashboard: !!dashboard,
-            history,
-            location,
-            match
-          })
-        })}
-        <DefaultLayout>
-          {createElement(header)}
-          <DefaultLayout.Content
-            style={{
-              margin: 24,
-              backgroundColor: color
-            }}
-          >
-            {this.props.children}
-          </DefaultLayout.Content>
+      <React.Fragment>
+        <DefaultLayout style={{ minHeight: '100vh' }}>
+          {createElement(sider, {
+            brand: createElement(brand),
+            children: createElement(menu, {
+              hasDashboard: !!dashboard,
+              history,
+              location,
+              match
+            })
+          })}
+          <DefaultLayout>
+            {createElement(header)}
+            <DefaultLayout.Content
+              style={{
+                margin: 24,
+                backgroundColor: color
+              }}
+            >
+              {this.props.children}
+            </DefaultLayout.Content>
+          </DefaultLayout>
         </DefaultLayout>
-      </DefaultLayout>
+        {createElement(notification)}
+      </React.Fragment>
     );
   }
 }

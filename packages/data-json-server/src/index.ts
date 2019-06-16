@@ -8,27 +8,32 @@ export default (apiUrl: string, httpClient = fetch) => {
 
     switch (type) {
       case GET_LIST:
-        const { pagination, ...ohter } = params;
+        const { pagination, filter, ...ohter } = params;
         const query = {
+          ...filter,
           ...ohter
         };
 
         if (pagination) {
-          const { current, pageSize } = pagination;
-          query.page = current;
-          query.pageSize = pageSize;
+          const { page, perPage } = pagination;
+          query.page = page;
+          query.perPage = perPage;
         }
 
         url = `${apiUrl}/${resource}?${stringify(query)}`;
         return httpClient(url)
           .then(resopnse => resopnse.json())
-          .then(response => ({ data: response, total: 0 }));
+          .then(response => ({
+            data: response.result.resultList,
+            total: response.result.total,
+            code: response.code
+          }));
       case GET_ONE:
         url = `${apiUrl}/${resource}/${params.id}`;
 
         return httpClient(url)
           .then(resopnse => resopnse.json())
-          .then(response => ({ data: response }));
+          .then(response => ({ data: response.result, code: response.code }));
       case CREATE:
         url = `${apiUrl}/${resource}`;
         return httpClient(url, {
@@ -47,12 +52,12 @@ export default (apiUrl: string, httpClient = fetch) => {
           body: JSON.stringify(params.data)
         })
           .then(resopnse => resopnse.json())
-          .then(response => ({ data: response }));
+          .then(response => ({ data: response.result, code: response.code }));
       case DELETE:
         url = `${apiUrl}/${resource}/${params.id}`;
         return httpClient(url, { method: 'DETETE' })
           .then(resopnse => resopnse.json())
-          .then(response => ({ data: response }));
+          .then(response => ({ data: response.result, code: response.code }));
       default:
         throw new Error(`不支持action类型 ${type}`);
     }

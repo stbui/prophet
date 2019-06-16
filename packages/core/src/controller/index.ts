@@ -2,5 +2,12 @@ import ListController from './ListController';
 import CreateController from './CreateController';
 import EditController from './EditController';
 import ShowController from './ShowController';
+import DeleteController from './DeleteController';
 
-export { ListController, CreateController, EditController, ShowController };
+export {
+  ListController,
+  CreateController,
+  EditController,
+  ShowController,
+  DeleteController
+};

@@ -6,11 +6,25 @@ export const CRUD_UPDATE_LOADING = 'CRUD_UPDATE_LOADING';
 export const CRUD_UPDATE_SUCCESS = 'CRUD_UPDATE_SUCCESS';
 export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 
-export const crudUpdate = (resource: string, data): DataAction => ({
+export const crudUpdate = (
+  resource: string,
+  data,
+  basePath,
+  redirectTo
+): DataAction => ({
   type: CRUD_UPDATE,
   payload: { data },
   meta: {
     resource,
-    fetch: UPDATE
+    fetch: UPDATE,
+    onSuccess: {
+      notification: {
+        type: 'info',
+        message: '更新成功'
+      },
+      redirectTo,
+      basePath
+    },
+    onFailure: {}
   }
 });

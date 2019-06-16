@@ -6,11 +6,17 @@ export const CRUD_DELETE_LOADING = 'CRUD_DELETE_LOADING';
 export const CRUD_DELETE_SUCCESS = 'CRUD_DELETE_SUCCESS';
 export const CRUD_DELETE_FAILURE = 'CRUD_DELETE_FAILURE';
 
-export const crudDelete = (resource: string, data): DataAction => ({
+export const crudDelete = (
+  resource: string,
+  id: number,
+  data: any
+): DataAction => ({
   type: CRUD_DELETE,
-  payload: { data },
+  payload: { id, data },
   meta: {
     resource,
-    fetch: DELETE
+    fetch: DELETE,
+    onSuccess: {},
+    onFail: {}
   }
 });

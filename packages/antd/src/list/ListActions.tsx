@@ -1,42 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Select, Button, Row, Col } from 'antd';
+import { Form, Input, Button } from 'antd';
+import { CreateButton } from '../button';
 
 const FormItem = Form.Item;
-const { Option } = Select;
 
 export class ListActions extends Component<any> {
   static propTypes = {};
-  handleSearch = () => {};
-  handleFormReset = () => {};
+  handleSearch = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      this.props.setFilters(values);
+    });
+  };
 
   render() {
     const {
-      children,
       form: { getFieldDecorator },
-      ...other
+      basePath,
+      filterValues
     } = this.props;
 
     return (
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <CreateButton basePath={basePath} />
+        <span style={{ flex: 'auto' }} />
         <Form onSubmit={this.handleSearch} layout="inline">
-          <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-            <Col md={8} sm={24}>
-              <FormItem>
-                {getFieldDecorator('name')(<Input placeholder="请输入" />)}
-              </FormItem>
-            </Col>
-            <Col md={8} sm={24} />
-            <Col md={8} sm={24} />
-            <Col md={8} sm={24}>
-              <Button type="primary" htmlType="submit">
-                查询
-              </Button>
-              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-                重置
-              </Button>
-            </Col>
-          </Row>
+          <FormItem>
+            {getFieldDecorator('q', {
+              initialValue: filterValues.q
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+          <Button type="primary" htmlType="submit">
+            查询
+          </Button>
         </Form>
       </div>
     );

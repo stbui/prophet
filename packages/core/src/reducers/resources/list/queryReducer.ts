@@ -1,7 +1,6 @@
 import { SET_FILTERS, SET_PAGE } from '../../../actions/listActions';
 
 export default (previousState, { type, payload }) => {
-  console.log(previousState, { type, payload });
   switch (type) {
     case SET_PAGE:
       return { ...previousState, page: payload };

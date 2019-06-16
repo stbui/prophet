@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Show } from 'prophet-antd';
 import { Row, Col } from 'antd';
 

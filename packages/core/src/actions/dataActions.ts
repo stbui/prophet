@@ -13,8 +13,8 @@ export const CRUD_GET_ONE_FAILURE = 'CRUD_GET_ONE_FAILURE';
 
 export const crudGetList = (
   resource: string,
-  pagination,
-  filter
+  pagination: object,
+  filter: object
 ): DataAction => ({
   type: CRUD_GET_LIST,
   payload: { pagination, ...filter },
@@ -27,7 +27,7 @@ export const crudGetList = (
 export const crudGetOne = (
   resource: string,
   id: string | number,
-  basePath
+  basePath: string
 ): DataAction => ({
   type: CRUD_GET_ONE,
   payload: { id },

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { parse, stringify } from 'query-string';
 import { createSelector } from 'reselect';
+import { push as pushAction } from 'react-router-redux';
 
 import {
   crudGetList,
@@ -20,7 +21,11 @@ export interface InjectedProps {
   changeParams?: any;
   setFilters?: any;
   setPage?: any;
-  pagination?: any;
+  page?: number;
+  perPage?: number;
+  filterValues?: any;
+  ids: any[];
+  isLoading: boolean;
 }
 
 export interface IProps {
@@ -34,12 +39,16 @@ export interface IProps {
   hasCreate?: boolean;
   changeParams?: any;
   params?: any;
+  perPage?: number;
   setPageParams?: any;
   setFiltersParams?: any;
   setPage?: any;
   location?: any;
   filter?: any;
   query?: any;
+  push?: any;
+  ids: any[];
+  isLoading: boolean;
 }
 
 const getLocationPath = props => props.location.pathname;
@@ -48,7 +57,15 @@ const selectQuery = createSelector(
   getLocationPath,
   getLocationSearch,
   (path, search) => {
-    return parse(search);
+    const query: any = parse(search);
+    if (query.filter && typeof query.filter === 'string') {
+      try {
+        query.filter = JSON.parse(query.filter);
+      } catch (err) {
+        delete query.filter;
+      }
+    }
+    return query;
   }
 );
 
@@ -59,15 +76,28 @@ const mapStateToProps = (state, props) => {
     data: resourceState.data,
     total: resourceState.list.total,
     params: resourceState.list.params,
-    query: selectQuery(props)
+    ids: resourceState.list.ids,
+    query: selectQuery(props),
+    isLoading: resourceState.loading > 0
   };
 };
 
 // @connect(
 //   mapStateToProps,
-//   { crudGetList, changeListParams, setPageParams, setFiltersParams }
+//   {
+//     crudGetList,
+//     changeListParams,
+//     setPageParams,
+//     setFiltersParams,
+//     push: pushAction
+//   }
 // )
 export class ListController extends Component<IProps> {
+  static defaultProps: Partial<IProps> = {
+    perPage: 10,
+    filter: {}
+  };
+
   componentDidMount() {
     this.updateData();
   }
@@ -80,17 +110,17 @@ export class ListController extends Component<IProps> {
       nextProps.params,
       this.props.params
     );
-    if (this.props.params) {
-      if (
-        nextProps.params.page !== this.props.params.page ||
-        nextProps.params.filter !== this.props.params.filter
-      ) {
-        this.updateData(
-          Object.keys(nextProps.query).length > 0
-            ? nextProps.query
-            : nextProps.params
-        );
-      }
+
+    if (
+      nextProps.query.page !== this.props.query.page ||
+      nextProps.query.perPage !== this.props.query.perPage ||
+      nextProps.resource !== this.props.resource
+    ) {
+      this.updateData(
+        Object.keys(nextProps.query).length > 0
+          ? nextProps.query
+          : nextProps.params
+      );
     }
   }
 
@@ -100,13 +130,23 @@ export class ListController extends Component<IProps> {
         ? this.props.query
         : { ...this.props.params };
 
+    if (!query.perPage) {
+      query.perPage = this.props.perPage;
+    }
+    if (!query.page) {
+      query.page = 1;
+    }
+
     return query;
   }
 
   updateData(query?: object) {
     const params = query || this.getQuery();
-    const { page, filter } = params;
-    const pagination = page;
+    const { page = 1, perPage, ...filter } = params;
+    const pagination = {
+      page: parseInt(page, 10),
+      perPage: parseInt(perPage, 10)
+    };
 
     this.props.crudGetList(this.props.resource, pagination, { ...filter });
   }
@@ -118,37 +158,60 @@ export class ListController extends Component<IProps> {
   changeParams = action => {
     const query = this.getQuery();
     const newParams = queryReducer(query, action);
-    console.log('newParams', newParams, this.props.location);
-
+    this.props.push({
+      ...this.props.location,
+      search: `?${stringify({
+        ...newParams,
+        filter: JSON.stringify(newParams.filter)
+      })}`
+    });
     this.props.changeListParams(this.props.resource, newParams);
   };
 
-  setPage = page => this.changeParams(this.props.setPageParams(page));
+  setPage = (page: number) => this.changeParams(this.props.setPageParams(page));
 
   setFilters = filters =>
     this.changeParams(this.props.setFiltersParams(filters));
+
+  getFilterValues() {
+    const query = this.getQuery();
+    return query.filter || {};
+  }
 
   render() {
     const {
       children,
       basePath,
       data,
+      ids,
       total,
       hasCreate,
       resource,
-      params
+      isLoading
     } = this.props;
 
     const query = this.getQuery();
-    const pagination = query.page ? { ...params.page } : {};
+    const page =
+      (typeof query.page === 'string'
+        ? parseInt(query.page, 10)
+        : query.page) || 1;
+
+    const perPage =
+      (typeof query.perPage === 'string'
+        ? parseInt(query.perPage, 10)
+        : query.perPage) || 10;
 
     return children({
       basePath,
       data,
+      ids,
       total,
-      pagination,
+      page,
+      perPage,
       hasCreate,
       resource,
+      isLoading,
+      filterValues: this.getFilterValues(),
       setFilters: this.setFilters,
       setPage: this.setPage
     });
@@ -157,5 +220,11 @@ export class ListController extends Component<IProps> {
 
 export default connect(
   mapStateToProps,
-  { crudGetList, changeListParams, setPageParams, setFiltersParams }
+  {
+    crudGetList,
+    changeListParams,
+    setPageParams,
+    setFiltersParams,
+    push: pushAction
+  }
 )(ListController);

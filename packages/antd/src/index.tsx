@@ -8,5 +8,6 @@ export * from './show';
 export * from './auth';
 export * from './field';
 export * from './form';
+export * from './button';
 
 import 'antd/dist/antd.css';
