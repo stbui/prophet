@@ -10,8 +10,8 @@ export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
 export const showNotification = (
   type: 'info' | 'error' | 'success' | 'warning' = 'info',
   message: string,
-  description: string,
-  duration: number
+  description?: string,
+  duration?: number
 ) => ({
   type: SHOW_NOTIFICATION,
   payload: {

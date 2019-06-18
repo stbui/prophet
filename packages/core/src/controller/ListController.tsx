@@ -109,14 +109,6 @@ export class ListController extends Component<IProps> {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(
-      'componentWillReceiveProps',
-      nextProps.query,
-      this.props.query,
-      nextProps.params,
-      this.props.params
-    );
-
     if (
       nextProps.query.page !== this.props.query.page ||
       nextProps.query.perPage !== this.props.query.perPage ||
