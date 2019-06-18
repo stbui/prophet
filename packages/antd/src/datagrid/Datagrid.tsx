@@ -41,7 +41,9 @@ export class Datagrid extends Component<IProps> {
       showSizeChanger: true,
       showQuickJumper: true,
       total: total,
-      current: page
+      current: page,
+      showTotal: () =>
+        `共 ${total} 条记录 第 ${page}/${Math.ceil(total / perPage)} 页`
     };
 
     const newData = ids && ids.map(d => data[d]);
