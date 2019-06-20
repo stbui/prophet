@@ -4,7 +4,7 @@ import FormInput from './FormInput';
 const FormItem = Form.Item;
 
 export interface IProps {
-  children?: React.ComponentType;
+  children?: any;
   form?: any;
   history?: any;
   basePath?: any;

@@ -11,7 +11,7 @@ import { Table } from 'antd';
 export interface IProps {
   data?: any;
   ids?: any;
-  children?: [];
+  children?: any;
   total?: number;
   page?: number;
   perPage?: number;

@@ -4,7 +4,7 @@ import ListActions from './ListActions';
 import { Card } from 'antd';
 
 export interface IProps {
-  children?: React.ComponentType;
+  children?: any;
   actions?: React.ComponentType;
 }
 
