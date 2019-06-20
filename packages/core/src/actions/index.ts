@@ -13,5 +13,6 @@ export * from './dataFatchActions';
 export * from './listActions';
 export * from './fetchActions';
 export * from './notifications';
+export * from './refreshAction';
 
 export * from './interfaces';
