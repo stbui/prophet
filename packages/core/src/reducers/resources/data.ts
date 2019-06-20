@@ -4,7 +4,7 @@
  * https://github.com/stbui
  */
 
-import { GET_LIST } from '../../actions/dataFatchActions';
+import { GET_LIST, GET_ONE, UPDATE, CREATE } from '../../actions/dataFatchActions';
 
 const defaultCacheDuration = 10 * 60 * 1000;
 
@@ -50,6 +50,10 @@ export default (previousState = {}, { type, payload, meta }) => {
   switch (meta.fetchResponse) {
     case GET_LIST:
       return addRecords(payload.data, previousState);
+    case GET_ONE:
+    case CREATE:
+    case UPDATE:
+      return payload.data;
     default:
       return previousState;
   }
