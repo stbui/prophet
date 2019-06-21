@@ -7,7 +7,7 @@
   "scripts": {
     "build": "lerna run build",
     "postinstall": "lerna bootstrap",
-    "release": "lerna publish --exact --conventional-commits",
+    "release": "npm run build && lerna publish --exact --conventional-commits",
     "demo": "cd examples/demo && npm run start",
     "start": "cd examples/starter && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
