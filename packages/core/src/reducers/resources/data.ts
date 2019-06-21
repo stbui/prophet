@@ -53,7 +53,7 @@ export default (previousState = {}, { type, payload, meta }) => {
     case GET_ONE:
     case CREATE:
     case UPDATE:
-      return payload.data;
+      return addRecords([payload.data], previousState);
     default:
       return previousState;
   }

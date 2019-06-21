@@ -55,6 +55,7 @@ export interface IProps {
   push?: any;
   ids: any[];
   isLoading: boolean;
+  version: any;
 }
 
 const getLocationPath = props => props.location.pathname;
@@ -84,7 +85,8 @@ const mapStateToProps = (state, props) => {
     params: resourceState.list.params,
     ids: resourceState.list.ids,
     query: selectQuery(props),
-    isLoading: resourceState.loading > 0
+    isLoading: resourceState.loading > 0,
+    version: state.refresh
   };
 };
 
@@ -112,7 +114,8 @@ export class ListController extends Component<IProps> {
     if (
       nextProps.query.page !== this.props.query.page ||
       nextProps.query.perPage !== this.props.query.perPage ||
-      nextProps.resource !== this.props.resource
+      nextProps.resource !== this.props.resource ||
+      nextProps.version !== this.props.version
     ) {
       this.updateData(
         Object.keys(nextProps.query).length > 0
@@ -167,6 +170,8 @@ export class ListController extends Component<IProps> {
   };
 
   setPage = (page: number) => this.changeParams(this.props.setPageParams(page));
+  setPerPage = (perPage: number) =>
+    this.changeParams(this.props.setPageParams(perPage));
 
   setFilters = filters =>
     this.changeParams(this.props.setFiltersParams(filters));
