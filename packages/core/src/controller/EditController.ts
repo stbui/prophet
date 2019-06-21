@@ -44,11 +44,11 @@ export class EditController extends Component<IProps> {
     }
   }
 
-  updateData(resource, id) {
+  updateData(resource: string, id: number | string) {
     this.props.crudGetOne(resource, id);
   }
 
-  save = data => {
+  save = (data: any) => {
     const { crudUpdate, resource } = this.props;
     crudUpdate(resource, data);
   };

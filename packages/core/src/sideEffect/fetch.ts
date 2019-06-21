@@ -7,7 +7,7 @@
 import { takeEvery, put, call, all, cancelled } from 'redux-saga/effects';
 import { FETCH_CANCEL, FETCH_END, FETCH_ERROR, FETCH_START } from '../actions';
 
-export function* handleFetch(dataProvider, action) {
+export function* handleFetch(dataProvider: any, action: any) {
   const {
     type,
     payload,

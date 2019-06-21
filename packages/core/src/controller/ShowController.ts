@@ -36,7 +36,7 @@ export class ShowController extends Component<IProps> {
     this.updateData(resource, id);
   }
 
-  updateData(resource, id) {
+  updateData(resource: string, id: string | number) {
     this.props.crudGetOne(resource, id);
   }
 

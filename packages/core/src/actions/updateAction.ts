@@ -14,9 +14,9 @@ export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 
 export const crudUpdate = (
   resource: string,
-  data,
-  basePath,
-  redirectTo
+  data: any,
+  basePath: string,
+  redirectTo: string
 ): DataAction => ({
   type: CRUD_UPDATE,
   payload: { data },
