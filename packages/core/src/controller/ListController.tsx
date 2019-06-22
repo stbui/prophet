@@ -26,6 +26,7 @@ export interface InjectedProps {
   hasCreate?: boolean;
   changeParams?: any;
   setFilters?: any;
+  setPerPage?: any;
   setPage?: any;
   page?: number;
   perPage?: number;
@@ -108,20 +109,26 @@ export class ListController extends Component<IProps> {
 
   componentDidMount() {
     this.updateData();
+    if (Object.keys(this.props.query).length > 0) {
+      this.props.changeListParams(this.props.resource, this.props.query);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.query.page !== this.props.query.page ||
       nextProps.query.perPage !== this.props.query.perPage ||
-      nextProps.resource !== this.props.resource ||
-      nextProps.version !== this.props.version
+      nextProps.resource !== this.props.resource
     ) {
       this.updateData(
         Object.keys(nextProps.query).length > 0
           ? nextProps.query
           : nextProps.params
       );
+    }
+
+    if (nextProps.version !== this.props.version) {
+      this.updateData();
     }
   }
 
@@ -170,6 +177,7 @@ export class ListController extends Component<IProps> {
   };
 
   setPage = (page: number) => this.changeParams(this.props.setPageParams(page));
+
   setPerPage = (perPage: number) =>
     this.changeParams(this.props.setPageParams(perPage));
 
@@ -216,7 +224,8 @@ export class ListController extends Component<IProps> {
       isLoading,
       filterValues: this.getFilterValues(),
       setFilters: this.setFilters,
-      setPage: this.setPage
+      setPage: this.setPage,
+      setPerPage: this.setPerPage
     });
   }
 }

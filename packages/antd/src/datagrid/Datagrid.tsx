@@ -16,11 +16,14 @@ export interface IProps {
   page?: number;
   perPage?: number;
   setPage?: (page?: any) => void;
+  setPerPage?: (page?: any) => void;
 }
 
 export class Datagrid extends Component<IProps> {
   handleTable = ({ current, pageSize, total }) => {
-    this.props.setPage(current);
+    const { setPage, setPerPage } = this.props;
+    setPage(current);
+    setPerPage(pageSize);
   };
 
   render() {
