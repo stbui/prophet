@@ -20,14 +20,23 @@ export interface IProps {
 }
 
 export class Datagrid extends Component<IProps> {
-  handleTable = ({ current, pageSize, total }) => {
-    const { setPage, setPerPage } = this.props;
-    setPage(current);
-    setPerPage(pageSize);
+  handleChange = (pagination: any, filters: any, sorter: any, extra: any) => {};
+
+  handlePageChange = (current: number, pageSize: number) => {
+    this.props.setPage(current);
+  };
+
+  handleShowSizeChange = (current: number, pageSize: number) => {
+    this.props.setPerPage(pageSize);
+  };
+
+  handleShowTotal = () => {
+    const { page, perPage, total } = this.props;
+    return `共 ${total} 条记录 第 ${page}/${Math.ceil(total / perPage)} 页`;
   };
 
   render() {
-    const { children = [], data, ids, page, perPage, total } = this.props;
+    const { children = [], data, ids, page, total } = this.props;
     const columns: any = [];
 
     Children.map(children, (child: any, key: any) => {
@@ -45,8 +54,9 @@ export class Datagrid extends Component<IProps> {
       showQuickJumper: true,
       total: total,
       current: page,
-      showTotal: () =>
-        `共 ${total} 条记录 第 ${page}/${Math.ceil(total / perPage)} 页`
+      showTotal: this.handleShowTotal,
+      onShowSizeChange: this.handleShowSizeChange,
+      onChange: this.handlePageChange
     };
 
     const newData = ids && ids.map(d => data[d]);
@@ -56,7 +66,7 @@ export class Datagrid extends Component<IProps> {
         rowKey="id"
         columns={columns}
         dataSource={newData}
-        onChange={this.handleTable}
+        onChange={this.handleChange}
         pagination={pagination}
         {...this.props}
       />
