@@ -7,10 +7,12 @@
 import { all } from 'redux-saga/effects';
 import fetch from './fetch';
 import notification from './notification';
+import auth from './auth';
+import refresh from './refresh';
 
-export default dataProvider => {
+export default (dataProvider, authProvider) => {
   return function* rootSaga() {
     console.log('saga root');
-    yield all([fetch(dataProvider)(), notification()]);
+    yield all([fetch(dataProvider)(), auth(authProvider), notification(), refresh()]);
   };
 };

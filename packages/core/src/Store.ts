@@ -13,17 +13,19 @@ import rootReducer from './reducers';
 import { rootSaga } from './sideEffect';
 
 export default function configureStore({
-  intialState = {},
+  initialState,
   history,
-  dataProvider
+  dataProvider,
+  authProvider,
+  customSagas = []
 }) {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [routerMiddleware(history), sagaMiddleware];
   const enhancers = [applyMiddleware(...middlewares)];
-  const store = createStore(rootReducer, intialState, compose(...enhancers));
+  const store = createStore(rootReducer, initialState, compose(...enhancers));
 
   const saga = function* Saga() {
-    yield all([rootSaga(dataProvider)].map(fork));
+    yield all([rootSaga(dataProvider, authProvider), ...customSagas].map(fork));
   };
 
   sagaMiddleware.run(saga);

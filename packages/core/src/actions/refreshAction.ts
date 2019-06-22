@@ -4,6 +4,6 @@
  * https://github.com/stbui
  */
 
-export const REFRESH_VIEW = 'refresh_view';
+export const REFRESH_VIEW = 'REFRESH_VIEW';
 
 export const refreshView = () => ({ type: REFRESH_VIEW });

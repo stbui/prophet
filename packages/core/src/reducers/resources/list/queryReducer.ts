@@ -11,9 +11,9 @@ export default (previousState, { type, payload }) => {
     case SET_PAGE:
       return { ...previousState, page: payload };
     case SET_PER_PAGE:
-      return { ...previousState, perPage: payload };
+      return { ...previousState, page: 1, perPage: payload };
     case SET_FILTERS:
-      return { ...previousState, filter: payload };
+      return { ...previousState, page: 1, filter: payload };
     default:
       return previousState;
   }

@@ -10,6 +10,7 @@ import saving from './saving';
 import loading from './loading';
 import notifications from './notifications';
 import refresh from './refresh';
+import auth from './auth';
 
 export const getResources = state => GetResources(state.resources);
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
   saving,
   loading,
   notifications,
-  refresh
+  refresh,
+  auth
 });

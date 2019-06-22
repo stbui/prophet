@@ -14,6 +14,7 @@ import {
   crudGetList,
   changeListParams,
   setPageParams,
+  setPerPageParams,
   setFiltersParams
 } from '../actions';
 import queryReducer from '../reducers/resources/list/queryReducer';
@@ -37,6 +38,7 @@ export interface InjectedProps {
 
 export interface IProps {
   children(props: InjectedProps): JSX.Element;
+
   crudGetList?: any;
   changeListParams?: any;
   resource: string;
@@ -47,7 +49,8 @@ export interface IProps {
   changeParams?: any;
   params?: any;
   perPage?: number;
-  setPageParams?: any;
+  setPageParams?: (page: number) => void;
+  setPerPageParams?: (perPage: number) => void;
   setFiltersParams?: any;
   setPage?: any;
   location?: any;
@@ -179,7 +182,7 @@ export class ListController extends Component<IProps> {
   setPage = (page: number) => this.changeParams(this.props.setPageParams(page));
 
   setPerPage = (perPage: number) =>
-    this.changeParams(this.props.setPageParams(perPage));
+    this.changeParams(this.props.setPerPageParams(perPage));
 
   setFilters = filters =>
     this.changeParams(this.props.setFiltersParams(filters));
@@ -236,6 +239,7 @@ export default connect(
     crudGetList,
     changeListParams,
     setPageParams,
+    setPerPageParams,
     setFiltersParams,
     push: pushAction
   }
