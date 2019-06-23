@@ -3,6 +3,10 @@ import { Form, Input, Button } from 'antd';
 import { CreateButton } from '../button';
 
 export class ListActions extends Component<any> {
+  static defaultProps = {
+    field: 'q'
+  };
+
   handleSearch = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -14,15 +18,16 @@ export class ListActions extends Component<any> {
     const {
       form: { getFieldDecorator },
       filterValues,
-      basePath
+      basePath,
+      field
     } = this.props;
 
     return (
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}>
         <Form onSubmit={this.handleSearch} layout="inline">
           <Form.Item>
-            {getFieldDecorator('q', {
-              initialValue: filterValues.q
+            {getFieldDecorator(field, {
+              initialValue: filterValues[field]
             })(<Input placeholder="请输入" style={{ width: 300 }} />)}
           </Form.Item>
           <Form.Item>

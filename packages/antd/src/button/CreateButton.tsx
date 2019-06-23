@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { Button } from 'antd';
 
 export const CreateButton: any = ({
@@ -9,19 +9,20 @@ export const CreateButton: any = ({
   icon,
   ...other
 }) => {
+  const hadleClick = () => {
+    push(`${basePath}/create`);
+  };
+
   return (
-    <Button type={type} icon={icon} {...other}>
-      <Link to={`${basePath}/create`} style={{ color: '#fff' }}>
-        {label}
-      </Link>
+    <Button type={type} onClick={hadleClick} {...other}>
+      {label}
     </Button>
   );
 };
 
 CreateButton.defaultProps = {
-  label: '新增',
-  type: 'primary',
-  icon: 'plus'
+  label: '添加',
+  type: 'primary'
 };
 
 export default CreateButton;

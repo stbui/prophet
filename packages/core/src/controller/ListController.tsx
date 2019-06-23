@@ -153,7 +153,9 @@ export class ListController extends Component<IProps> {
       nextProps.query.page !== this.props.query.page ||
       nextProps.query.perPage !== this.props.query.perPage ||
       nextProps.resource !== this.props.resource ||
-      !isEqual(nextProps.filter, this.props.filter)
+      !isEqual(nextProps.query.filter, this.props.query.filter) ||
+      !isEqual(nextProps.filter, this.props.filter) ||
+      !isEqual(nextProps.perPage, this.props.perPage)
     ) {
       this.updateData(
         Object.keys(nextProps.query).length > 0
