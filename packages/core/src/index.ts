@@ -7,8 +7,9 @@
 import Admin from './Core';
 import Resource from './Resource';
 import Reducers from './reducers';
+import Store from './Store';
 
-export { Admin, Resource, Reducers };
+export { Admin, Store, Resource, Reducers };
 export { getResources } from './reducers';
 
 export * from './controller';

@@ -22,15 +22,15 @@ export interface PropsType {
   menu?: React.ComponentType;
   brand?: React.ComponentType;
   dataProvider?: (type?: any, resource?: any, params?: any) => Promise<any>;
-  authProvider?: any;
-  customSagas?: any;
+  authProvider?: (type: any, params?: any) => Promise<any>;
+  customSagas?: any[];
   initialState?: object;
   customRoutes?: any[];
   login?: React.ComponentType;
   layout?: React.ComponentType;
 }
 
-export class Core extends Component<PropsType, any> {
+export class Core extends Component<PropsType> {
   render() {
     const {
       children,
