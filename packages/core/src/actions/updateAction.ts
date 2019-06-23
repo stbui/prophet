@@ -14,12 +14,13 @@ export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 
 export const crudUpdate = (
   resource: string,
-  data: any,
+  id: string | number,
+  data: object,
   basePath: string,
   redirectTo: string
 ): DataAction => ({
   type: CRUD_UPDATE,
-  payload: { data },
+  payload: { id, data },
   meta: {
     resource,
     fetch: UPDATE,
@@ -31,6 +32,11 @@ export const crudUpdate = (
       redirectTo,
       basePath
     },
-    onFailure: {}
+    onFailure: {
+      notification: {
+        type: 'warning',
+        message: '更新失败'
+      },
+    }
   }
 });

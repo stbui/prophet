@@ -21,4 +21,4 @@ export const showNotification = (
   }
 });
 
-export const hideNotificationnn = () => ({ type: HIDE_NOTIFICATION });
+export const hideNotification = () => ({ type: HIDE_NOTIFICATION });

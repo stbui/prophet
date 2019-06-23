@@ -80,6 +80,37 @@ const selectQuery = createSelector(
   }
 );
 
+const isEqual = (a: any, b: any) => {
+  let p, t;
+  for (p in a) {
+    if (typeof b[p] === 'undefined') {
+      return false;
+    }
+    if (b[p] && !a[p]) {
+      return false;
+    }
+    t = typeof a[p];
+    if (t === 'object' && !isEqual(a[p], b[p])) {
+      return false;
+    }
+    if (
+      t === 'function' &&
+      (typeof b[p] === 'undefined' || a[p].toString() !== b[p].toString())
+    ) {
+      return false;
+    }
+    if (a[p] !== b[p]) {
+      return false;
+    }
+  }
+  for (p in b) {
+    if (typeof a[p] === 'undefined') {
+      return false;
+    }
+  }
+  return true;
+};
+
 const mapStateToProps = (state, props) => {
   const resourceState = state.resources[props.resource];
 
@@ -121,7 +152,8 @@ export class ListController extends Component<IProps> {
     if (
       nextProps.query.page !== this.props.query.page ||
       nextProps.query.perPage !== this.props.query.perPage ||
-      nextProps.resource !== this.props.resource
+      nextProps.resource !== this.props.resource ||
+      !isEqual(nextProps.filter, this.props.filter)
     ) {
       this.updateData(
         Object.keys(nextProps.query).length > 0

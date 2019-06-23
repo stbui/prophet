@@ -24,9 +24,20 @@ export const crudCreate = (
     resource,
     fetch: CREATE,
     onSuccess: {
+      notification: {
+        type: 'success',
+        message: '创建成功',
+        // description: ''
+      },
       redirectTo,
       basePath
     },
-    onFailure: {}
+    onFailure: {
+      notification: {
+        type: 'warning',
+        message: '创建失败',
+        // description: ''
+      },
+    }
   }
 });

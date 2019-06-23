@@ -49,8 +49,8 @@ export class EditController extends Component<IProps> {
   }
 
   save = (data: any) => {
-    const { crudUpdate, resource } = this.props;
-    crudUpdate(resource, data);
+    const { crudUpdate, resource, id, basePath } = this.props;
+    crudUpdate(resource, id, data, basePath);
   };
 
   render() {

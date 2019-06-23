@@ -6,10 +6,12 @@
 
 import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions';
 
-export const notification = (previousState = '', { type, payload }) => {
+export const notification = (previousState = [], { type, payload }) => {
   switch (type) {
     case SHOW_NOTIFICATION:
-      return payload;
+      return previousState.concat(payload);
+    case HIDE_NOTIFICATION:
+      return previousState.slice(1);
     default:
       return previousState;
   }

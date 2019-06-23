@@ -1,44 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { notification } from 'antd';
+import { notification as notice } from 'antd';
+import { hideNotification } from 'prophet-core';
 
 export class Notify extends Component<any> {
   state = {
     open: false
   };
 
-  componentWillMount = () => {
+  componentWillMount() {
     this.setOpenState(this.props);
-  };
+  }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps(nextProps) {
     this.setOpenState(nextProps);
-  };
+  }
 
-  setOpenState = ({ notification }: any) => {
+  setOpenState({ notification }: any) {
     if (notification) {
-      this.openNotification();
+      this.openNotification(notification);
     } else {
       this.destroyNotification();
     }
-  };
+  }
 
-  destroyNotification = () => {
-    notification.destroy();
-  };
+  destroyNotification() {
+    this.props.hideNotification();
+    notice.destroy();
+  }
 
-  openNotification = () => {
-    notification[this.props.notification.type]({
-      message: this.props.notification.message,
-      description: this.props.notification.description
+  openNotification(notification) {
+    notice[notification.type]({
+      message: notification.message,
+      description: notification.description
     });
-  };
+  }
 
   render() {
     return null;
   }
 }
 
-const mapStateToProps = state => ({ notification: state.notification });
+const mapStateToProps = state => {
+  return { notification: state.notifications[0] };
+};
 
-export default connect(mapStateToProps)(Notify);
+export default connect(
+  mapStateToProps,
+  { hideNotification }
+)(Notify);
