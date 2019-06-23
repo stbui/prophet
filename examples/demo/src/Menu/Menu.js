@@ -18,7 +18,7 @@ export class M extends Component {
       >
         {hasDashboard && (
           <Menu.Item>
-            <Link to="/">customeMenu</Link>
+            <Link to="/">自定义</Link>
           </Menu.Item>
         )}
         {resources.map(resource => {
@@ -30,7 +30,6 @@ export class M extends Component {
             </Menu.Item>
           );
         })}
-
         {routes.map(route => {
           if (route.children) {
             return (

@@ -5,8 +5,7 @@ import {
   Column,
   EditButton,
   ShowButton,
-  DeleteButton,
-  RefreshButton
+  DeleteButton
 } from 'prophet-antd';
 import { Divider } from 'antd';
 
@@ -24,12 +23,11 @@ export default props => (
       <Column
         render={row => (
           <React.Fragment>
-            <EditButton record={row} {...props} />
+            <EditButton record={row} {...props} label="编辑" />
             <Divider type="vertical" />
-            <ShowButton record={row} {...props} />
+            <ShowButton record={row} {...props} label="详情" />
             <Divider type="vertical" />
-            <DeleteButton record={row} {...props} />
-            <RefreshButton label="refreshView" />
+            <DeleteButton record={row} {...props} label="删除" />
           </React.Fragment>
         )}
       >

@@ -12,7 +12,7 @@ export const Brand = () => (
     }}
   >
     <a href="/" style={{ color: '#fff' }}>
-      智能监控平台
+      Stbui
     </a>
   </div>
 );

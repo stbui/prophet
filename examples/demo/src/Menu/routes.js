@@ -10,7 +10,7 @@ export const routes = [
     id: 'ui',
     title: 'UI元素',
     type: 'collapse',
-    icon: 'bubble_chart',
+    icon: 'alert',
     children: [
       {
         id: 'pagination',
@@ -90,7 +90,7 @@ export const routes = [
     id: 'extend',
     title: '拓展组件',
     type: 'collapse',
-    icon: 'equalizer',
+    icon: 'appstore',
     badge: {
       title: '7',
       bg: '#ff4081',
@@ -145,7 +145,7 @@ export const routes = [
     id: 'forms',
     title: '表单',
     type: 'collapse',
-    icon: 'format_color_text',
+    icon: 'build',
     badge: {
       title: '2',
       bg: '#ff6f00',
@@ -176,7 +176,7 @@ export const routes = [
     id: 'table',
     title: '表格',
     type: 'collapse',
-    icon: 'list',
+    icon: 'database',
     children: [
       {
         id: 'static',
@@ -202,7 +202,7 @@ export const routes = [
     id: 'pages',
     title: '页面',
     type: 'collapse',
-    icon: 'content_copy',
+    icon: 'eye',
     children: [
       {
         id: 'file-manager',
@@ -240,7 +240,7 @@ export const routes = [
     id: 'extend-page',
     title: '扩展页面',
     type: 'collapse',
-    icon: 'more_horiz',
+    icon: 'file',
     children: [
       {
         id: 'sigin',
@@ -260,7 +260,7 @@ export const routes = [
     id: 'page-layouts',
     title: '页面布局',
     type: 'collapse',
-    icon: 'view_quilt',
+    icon: 'idcard',
     badge: {
       title: 'new',
       bg: '#ff9800',
@@ -279,7 +279,7 @@ export const routes = [
     id: 'apps',
     title: '应用',
     type: 'collapse',
-    icon: 'apps',
+    icon: 'star',
     children: [
       {
         id: 'todo',
@@ -316,7 +316,7 @@ export const routes = [
     id: 'analysis',
     title: '数据分析',
     type: 'collapse',
-    icon: 'poll',
+    icon: 'key',
     children: [
       {
         id: 'crowd',
@@ -354,7 +354,7 @@ export const routes = [
     id: 'crm',
     title: '客户关系',
     type: 'collapse',
-    icon: 'business',
+    icon: 'table',
     children: [
       {
         id: 'lead',
@@ -374,7 +374,7 @@ export const routes = [
     id: 'apm',
     title: '前端监控',
     type: 'collapse',
-    icon: 'code',
+    icon: 'wifi',
     children: [
       {
         id: 'error',
