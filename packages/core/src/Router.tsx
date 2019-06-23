@@ -13,6 +13,8 @@ export interface IProps {
   dashboard: React.ComponentType;
   catchAll: React.ComponentType;
   Layout: React.ComponentType;
+  menu: any;
+  brand: any;
 }
 export class CoreRouter extends Component<IProps, any> {
   constructor(props) {

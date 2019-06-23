@@ -11,11 +11,11 @@ import { Switch, Route } from 'react-router-dom';
 import { registerResource } from './actions';
 
 export interface IProps {
-  list?: React.ComponentType;
-  edit?: React.ComponentType;
-  create?: React.ComponentType;
-  show?: React.ComponentType;
-  catchAll?: React.ComponentType;
+  list?: any;
+  edit?: any;
+  create?: any;
+  show?: any;
+  catchAll?: any;
   name: string;
   label?: string;
   context?: 'registration';
