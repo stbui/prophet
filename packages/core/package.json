@@ -1,6 +1,6 @@
 {
   "name": "prophet-core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "lib/index",
   "module": "esm/index.js",
@@ -19,9 +19,9 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
+    "history": "^4.7.2",
     "prophet-common": "0.1.0",
     "query-string": "^6.2.0",
-    "history": "^4.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^5.1.0",
@@ -33,12 +33,12 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "@types/history": "^4.7.2",
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "^6.0.11",
     "@types/react-router": "^4.4.4",
     "@types/react-router-dom": "^4.3.1",
-    "@types/history": "^4.7.2",
     "typescript": "^3.2.2"
   },
   "publishConfig": {
