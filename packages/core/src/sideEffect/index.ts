@@ -8,5 +8,6 @@ import rootSaga from './root';
 import fetchSaga from './fetch';
 import notificationSaga from './notification';
 import refreshSage from './refresh';
+import callbackSage from './callback'
 
-export { rootSaga, fetchSaga, notificationSaga, refreshSage };
+export { rootSaga, fetchSaga, notificationSaga, refreshSage, callbackSage };

@@ -12,7 +12,6 @@ import refresh from './refresh';
 
 export default (dataProvider, authProvider) => {
   return function* rootSaga() {
-    console.log('saga root');
     yield all([fetch(dataProvider)(), auth(authProvider)(), notification(), refresh()]);
   };
 };
