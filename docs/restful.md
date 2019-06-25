@@ -18,14 +18,14 @@ GET http://127.0.0.1/users/:id
 可选参数
 
 ```
-http://127.0.0.1/users/1?page=1&pagesize=10
+http://127.0.0.1/users/1?page=1&perPage=10
 
 ```
 
 ```json
 {
   "page": "1",
-  "pagesize": "10"
+  "perPage": "10"
 }
 ```
 
@@ -44,10 +44,10 @@ GET http://127.0.0.1/users
   "message": "操作成功",
   "result": [
     {
-      "id": 1
+      "id": 1 // 必要字段
     },
     {
-      "id": 2
+      "id": 2 // 必要字段
     }
   ]
 }
