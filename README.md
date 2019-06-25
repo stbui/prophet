@@ -1,6 +1,6 @@
-# 中后台前端应用框架（Prophet）
+# 先知（Prophet）
 
-用于构建企业级 react 中后台前端应用框架。基于 redux 和 redux-saga 数据流方案，提取出 CURD 组件,支持各种数据格式的适配。
+用于构建 react 中后台前端应用框架。基于 redux 和 redux-saga 数据流方案，提取出 CURD 组件,支持各种数据格式的适配。
 
 ## 特性
 
