@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { Admin, Resource } from 'prophet-core';
+import { Prophet, Resource } from 'prophet-core';
 import { Layout, CatchAll } from 'prophet-antd';
 import dataProvider from './dataProvider';
 import Dashboard from './dashboard';
@@ -13,7 +13,7 @@ import './App.scss';
 const Show = props => <div>custom</div>;
 
 export default () => (
-  <Admin
+  <Prophet
     dataProvider={dataProvider}
     dashboard={Dashboard}
     layout={Layout}
@@ -24,5 +24,5 @@ export default () => (
     customRoutes={[<Route exact path="/custom" component={Show} />]}
   >
     <Resource name="user" label="用户设置" {...users} />
-  </Admin>
+  </Prophet>
 );
