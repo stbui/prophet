@@ -4,12 +4,12 @@
  * https://github.com/stbui
  */
 
-import Admin from './Core';
+import Prophet from './Core';
 import Resource from './Resource';
 import Reducers from './reducers';
 import Store from './Store';
 
-export { Admin, Store, Resource, Reducers };
+export { Prophet, Store, Resource, Reducers };
 export { getResources } from './reducers';
 
 export * from './controller';

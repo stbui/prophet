@@ -1,1 +1,1 @@
-export const Column = ({ title }) => title;
+export const Column = ({ title }: any) => title;
