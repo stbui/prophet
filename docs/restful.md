@@ -1,4 +1,4 @@
-## restFul
+## 前端接口规范
 
 ### 映射 RESTful 服务器接口
 
@@ -12,27 +12,38 @@
 
 ### request
 
-GET http://127.0.0.1/users
-GET http://127.0.0.1/users/:id
-
-可选参数
-
-```
-http://127.0.0.1/users/1?page=1&perPage=10
-
-```
+### 默认
 
 ```json
 {
-  "page": "1",
-  "perPage": "10"
+    "page": "1",
+    "perPage": "10"
 }
 ```
 
-POST http://127.0.0.1/users
+#### 分页
 
-PUT http://127.0.0.1/users/:id
-DELETE http://127.0.0.1/users/:id
+http://127.0.0.1/users/1?page=1&perPage=10
+
+#### 排序
+
+http://127.0.0.1/users/1?sort={name:'asc'}
+
+```json
+{
+    "sort": { "name": "asc" }
+}
+```
+
+#### 筛选
+
+http://127.0.0.1/users/1?filter={name:'stbui'}
+
+```json
+{
+    "filter": { "name": "stbui" }
+}
+```
 
 ### response
 
@@ -40,16 +51,16 @@ GET http://127.0.0.1/users
 
 ```json
 {
-  "code": "0",
-  "message": "操作成功",
-  "result": [
-    {
-      "id": 1 // 必要字段
-    },
-    {
-      "id": 2 // 必要字段
-    }
-  ]
+    "code": "0",
+    "message": "操作成功",
+    "result": [
+        {
+            "id": 1 // 必要字段
+        },
+        {
+            "id": 2 // 必要字段
+        }
+    ]
 }
 ```
 
@@ -57,11 +68,11 @@ GET http://127.0.0.1/users/:id
 
 ```json
 {
-  "code": "0",
-  "message": "操作成功",
-  "result": {
-    "id": 1
-  }
+    "code": "0",
+    "message": "操作成功",
+    "result": {
+        "id": 1
+    }
 }
 ```
 
@@ -69,11 +80,11 @@ POST http://127.0.0.1/users
 
 ```json
 {
-  "code": "0",
-  "message": "操作成功",
-  "result": {
-    "id": 1
-  }
+    "code": "0",
+    "message": "操作成功",
+    "result": {
+        "id": 1
+    }
 }
 ```
 
@@ -81,11 +92,11 @@ PUT http://127.0.0.1/users/:id
 
 ```json
 {
-  "code": "0",
-  "message": "操作成功",
-  "result": {
-    "id": 1
-  }
+    "code": "0",
+    "message": "操作成功",
+    "result": {
+        "id": 1
+    }
 }
 ```
 
@@ -93,9 +104,11 @@ DELETE http://127.0.0.1/users/:id
 
 ```json
 {
-  "code": "0",
-  "message": "操作成功",
-  "result": null
+    "code": "0",
+    "message": "操作成功",
+    "result": {
+        "id": 1
+    }
 }
 ```
 
@@ -103,24 +116,24 @@ DELETE http://127.0.0.1/users/:id
 
 ```json
 {
-  "code": "500",
-  "message": "系统异常",
-  "result": null
+    "code": "500",
+    "message": "系统异常",
+    "result": null
 }
 ```
 
 ```json
 {
-  "code": "502",
-  "message": "系统异常",
-  "result": null
+    "code": "502",
+    "message": "系统异常",
+    "result": null
 }
 ```
 
 ```json
 {
-  "code": "404",
-  "message": "请求不存在",
-  "result": null
+    "code": "404",
+    "message": "请求不存在",
+    "result": null
 }
 ```

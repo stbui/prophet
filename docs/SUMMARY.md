@@ -2,7 +2,7 @@
 
 - [介绍](README.md)
 - [起步](setup.md)
-- [Admin](Admin.md)
+- [Prophet](Prophet.md)
 - [dataProvider](dataProvider.md)
 - [customRoutes](customRoutes.md)
 - [Login](Login.md)
