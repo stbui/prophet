@@ -1,6 +1,6 @@
 {
   "name": "prophet-data-json-server",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "> TODO: description",
   "author": "stbui <w431106@163.com>",
   "homepage": "https://github.com/stbui/react-admin-kit#readme",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "prophet-common": "0.1.0",
-    "prophet-core": "^0.1.8",
+    "prophet-core": "^0.1.9",
     "query-string": "^6.2.0"
   }
 }
