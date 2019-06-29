@@ -13,7 +13,14 @@ export interface IProps {
     children?(props): any;
     basePath: any;
     resource: any;
-    crudDelete(resource: string, id: string | number, data: any): any;
+    refresh: boolean;
+    crudDelete(
+        resource: string,
+        id: string | number,
+        data: any,
+        basePath: string,
+        refresh: boolean
+    ): any;
 }
 
 const mapStateToProps = (state, props) => {
@@ -26,8 +33,8 @@ export class DeleteController extends Component<IProps> {
     }
 
     save = data => {
-        const { crudDelete, resource } = this.props;
-        crudDelete(resource, data.id, data);
+        const { crudDelete, resource, basePath, refresh } = this.props;
+        crudDelete(resource, data.id, data, basePath, refresh);
     };
 
     render() {

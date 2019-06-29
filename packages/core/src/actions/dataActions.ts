@@ -34,7 +34,7 @@ export const crudGetOne = (
     resource: string,
     id: string | number,
     basePath: string,
-    refresh: boolean = true
+    refresh: boolean = false
 ): DataAction => ({
     type: CRUD_GET_ONE,
     payload: { id },
@@ -42,7 +42,9 @@ export const crudGetOne = (
         resource,
         fetch: GET_ONE,
         basePath,
-        onSuccess: {},
+        onSuccess: {
+            refresh,
+        },
         onFailure: {
             notification: {
                 type: 'warning',

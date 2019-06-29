@@ -13,30 +13,32 @@ export const CRUD_UPDATE_SUCCESS = 'CRUD_UPDATE_SUCCESS';
 export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 
 export const crudUpdate = (
-  resource: string,
-  id: string | number,
-  data: object,
-  basePath: string,
-  redirectTo: string
+    resource: string,
+    id: string | number,
+    data: object,
+    basePath: string,
+    redirectTo: string,
+    refresh: boolean = false
 ): DataAction => ({
-  type: CRUD_UPDATE,
-  payload: { id, data },
-  meta: {
-    resource,
-    fetch: UPDATE,
-    onSuccess: {
-      notification: {
-        type: 'info',
-        message: '更新成功'
-      },
-      redirectTo,
-      basePath
+    type: CRUD_UPDATE,
+    payload: { id, data },
+    meta: {
+        resource,
+        fetch: UPDATE,
+        onSuccess: {
+            notification: {
+                type: 'info',
+                message: '更新成功',
+            },
+            redirectTo,
+            basePath,
+            refresh,
+        },
+        onFailure: {
+            notification: {
+                type: 'warning',
+                message: '更新失败',
+            },
+        },
     },
-    onFailure: {
-      notification: {
-        type: 'warning',
-        message: '更新失败'
-      },
-    }
-  }
 });

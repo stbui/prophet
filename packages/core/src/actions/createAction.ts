@@ -13,31 +13,33 @@ export const CRUD_CREATE_SUCCESS = 'CRUD_CREATE_SUCCESS';
 export const CRUD_CREATE_FAILURE = 'CRUD_CREATE_FAILURE';
 
 export const crudCreate = (
-  resource: string,
-  data: any,
-  basePath: string,
-  redirectTo: string
+    resource: string,
+    data: any,
+    basePath: string,
+    redirectTo: string,
+    refresh: boolean = false
 ): DataAction => ({
-  type: CRUD_CREATE,
-  payload: { data },
-  meta: {
-    resource,
-    fetch: CREATE,
-    onSuccess: {
-      notification: {
-        type: 'success',
-        message: '创建成功',
-        // description: ''
-      },
-      redirectTo,
-      basePath
+    type: CRUD_CREATE,
+    payload: { data },
+    meta: {
+        resource,
+        fetch: CREATE,
+        onSuccess: {
+            notification: {
+                type: 'success',
+                message: '创建成功',
+                // description: ''
+            },
+            redirectTo,
+            basePath,
+            refresh,
+        },
+        onFailure: {
+            notification: {
+                type: 'warning',
+                message: '创建失败',
+                // description: ''
+            },
+        },
     },
-    onFailure: {
-      notification: {
-        type: 'warning',
-        message: '创建失败',
-        // description: ''
-      },
-    }
-  }
 });
