@@ -9,7 +9,7 @@ export class DeleteWithButtonView extends React.Component<any> {
   render() {
     const { label } = this.props;
 
-    return <a onClick={this.handleClick}>{label}</a>;
+    return <a onClick={this.handleClick} {...this.props}>{label}</a>;
   }
 }
 

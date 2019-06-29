@@ -13,16 +13,30 @@ export const CRUD_DELETE_SUCCESS = 'CRUD_DELETE_SUCCESS';
 export const CRUD_DELETE_FAILURE = 'CRUD_DELETE_FAILURE';
 
 export const crudDelete = (
-  resource: string,
-  id: number,
-  data: any
+    resource: string,
+    id: string | number,
+    data: any,
+    basePath: string,
+    refresh: boolean = true
 ): DataAction => ({
-  type: CRUD_DELETE,
-  payload: { id, data },
-  meta: {
-    resource,
-    fetch: DELETE,
-    onSuccess: {},
-    onFail: {}
-  }
+    type: CRUD_DELETE,
+    payload: { id, data },
+    meta: {
+        resource,
+        fetch: DELETE,
+        onSuccess: {
+            notification: {
+                type: 'success',
+                message: '删除成功',
+            },
+            refresh,
+            basePath,
+        },
+        onFail: {
+            notification: {
+                type: 'warning',
+                message: '创建失败',
+            },
+        },
+    },
 });

@@ -18,30 +18,36 @@ export const CRUD_GET_ONE_SUCCESS = 'CRUD_GET_ONE_SUCCESS';
 export const CRUD_GET_ONE_FAILURE = 'CRUD_GET_ONE_FAILURE';
 
 export const crudGetList = (
-  resource: string,
-  pagination: object,
-  filter: object
+    resource: string,
+    pagination: object,
+    filter: object
 ): DataAction => ({
-  type: CRUD_GET_LIST,
-  payload: { pagination, ...filter },
-  meta: {
-    resource,
-    fetch: GET_LIST
-  }
+    type: CRUD_GET_LIST,
+    payload: { pagination, ...filter },
+    meta: {
+        resource,
+        fetch: GET_LIST,
+    },
 });
 
 export const crudGetOne = (
-  resource: string,
-  id: string | number,
-  basePath: string
+    resource: string,
+    id: string | number,
+    basePath: string,
+    refresh: boolean = true
 ): DataAction => ({
-  type: CRUD_GET_ONE,
-  payload: { id },
-  meta: {
-    resource,
-    fetch: GET_ONE,
-    basePath,
-    onSuccess: {},
-    onFailure: {}
-  }
+    type: CRUD_GET_ONE,
+    payload: { id },
+    meta: {
+        resource,
+        fetch: GET_ONE,
+        basePath,
+        onSuccess: {},
+        onFailure: {
+            notification: {
+                type: 'warning',
+                message: '获取失败',
+            },
+        },
+    },
 });

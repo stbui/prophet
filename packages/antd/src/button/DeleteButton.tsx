@@ -1,13 +1,17 @@
 import React from 'react';
 import DeleteWithButton from './DeleteWithButton';
+import DeleteWithConfirmButton from './DeleteWithConfirmButton';
 
-export const DeleteButton: any = ({ ...other }) => {
-  return <DeleteWithButton {...other} />;
-};
+export const DeleteButton: any = ({ confirm, ...other }) =>
+    confirm ? (
+        <DeleteWithConfirmButton {...other} />
+    ) : (
+        <DeleteWithButton {...other} />
+    );
 
 DeleteButton.defaultProps = {
-  label: '删除',
-  undoable: true
+    label: '删除',
+    confirm: true,
 };
 
 export default DeleteButton;
