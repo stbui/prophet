@@ -10,59 +10,67 @@ import { connect } from 'react-redux';
 import { crudGetOne, crudUpdate } from '../actions';
 
 export interface IProps {
-  children(props): any;
-  basePath: any;
-  resource: any;
-  id: string | number;
-  record: any;
-  crudUpdate: any;
-  crudGetOne: (resource: string, id: string | number) => any;
+    children(props): any;
+    basePath: any;
+    resource: any;
+    id: string | number;
+    record: any;
+    crudUpdate: any;
+    isLoading: boolean;
+    crudGetOne: (resource: string, id: string | number) => any;
 }
 
 const mapStateToProps = (state, props) => {
-  return {
-    id: props.id,
-    record: state.resources[props.resource]
-      ? state.resources[props.resource].data[props.id]
-      : null
-  };
+    return {
+        id: props.id,
+        isLoading: state.resources[props.resource].loading > 0,
+        record: state.resources[props.resource]
+            ? state.resources[props.resource].data[props.id]
+            : null,
+    };
 };
 
 export class EditController extends Component<IProps> {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const { resource, id } = this.props;
-    this.updateData(resource, id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.id !== nextProps.id) {
-      this.updateData(nextProps.resource, nextProps.id);
+    constructor(props) {
+        super(props);
     }
-  }
 
-  updateData(resource: string, id: number | string) {
-    this.props.crudGetOne(resource, id);
-  }
+    componentDidMount() {
+        const { resource, id } = this.props;
+        this.updateData(resource, id);
+    }
 
-  save = (data: any) => {
-    const { crudUpdate, resource, id, basePath } = this.props;
-    crudUpdate(resource, id, data, basePath);
-  };
+    componentWillReceiveProps(nextProps) {
+        if (this.props.id !== nextProps.id) {
+            this.updateData(nextProps.resource, nextProps.id);
+        }
+    }
 
-  render() {
-    const { children, basePath, resource, record } = this.props;
+    updateData(resource: string, id: number | string) {
+        this.props.crudGetOne(resource, id);
+    }
 
-    if (!children) return null;
+    save = (data: any) => {
+        const { crudUpdate, resource, id, basePath } = this.props;
+        crudUpdate(resource, id, data, basePath);
+    };
 
-    return children({ basePath, resource, save: this.save, record });
-  }
+    render() {
+        const { children, basePath, resource, record, isLoading } = this.props;
+
+        if (!children) return null;
+
+        return children({
+            basePath,
+            resource,
+            record,
+            isLoading,
+            save: this.save,
+        });
+    }
 }
 
 export default connect(
-  mapStateToProps,
-  { crudGetOne, crudUpdate }
+    mapStateToProps,
+    { crudGetOne, crudUpdate }
 )(EditController);

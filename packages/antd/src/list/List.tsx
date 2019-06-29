@@ -4,29 +4,29 @@ import ListActions from './ListActions';
 import { Card } from 'antd';
 
 export interface IProps {
-  children?: any;
-  actions?: React.ComponentType;
+    children?: any;
+    actions?: React.ComponentType;
 }
 
 export const ListView = ({
-  children,
-  loading,
-  title,
-  actions = <ListActions />,
-  ...other
+    children,
+    isLoading,
+    title,
+    actions = <ListActions />,
+    ...other
 }) => {
-  return (
-    <Card bordered={false} title={title} loading={loading}>
-      {actions && cloneElement(actions, { ...other })}
-      {children && cloneElement(children, { ...other })}
-    </Card>
-  );
+    return (
+        <Card bordered={false} title={title} loading={isLoading}>
+            {actions && cloneElement(actions, { ...other })}
+            {children && cloneElement(children, { ...other })}
+        </Card>
+    );
 };
 
 export const List: React.SFC<IProps> = (props: IProps) => (
-  <ListController {...props}>
-    {controllerProps => <ListView {...props} {...controllerProps} />}
-  </ListController>
+    <ListController {...props}>
+        {controllerProps => <ListView {...props} {...controllerProps} />}
+    </ListController>
 );
 
 export default List;

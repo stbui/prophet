@@ -10,46 +10,55 @@ import { connect } from 'react-redux';
 import { crudGetOne } from '../actions';
 
 export interface IProps {
-  children(props): any;
-  basePath: any;
-  resource: any;
-  id: string | number;
-  record: any;
-  crudGetOne: (resource: string, id: string | number) => any;
+    children(props): any;
+    basePath: any;
+    resource: any;
+    id: string | number;
+    record: any;
+    isLoading: boolean;
+    crudGetOne: (resource: string, id: string | number) => any;
 }
 
 const mapStateToProps = (state, props) => {
-  return {
-    id: props.id,
-    record: state.resources[props.resource]
-      ? state.resources[props.resource].data[props.id]
-      : null
-  };
+    return {
+        id: props.id,
+        isLoading: state.resources[props.resource].loading > 0,
+        record: state.resources[props.resource]
+            ? state.resources[props.resource].data[props.id]
+            : null,
+    };
 };
 export class ShowController extends Component<IProps> {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  componentDidMount() {
-    const { resource, id } = this.props;
-    this.updateData(resource, id);
-  }
+    componentDidMount() {
+        const { resource, id } = this.props;
+        this.updateData(resource, id);
+    }
 
-  updateData(resource: string, id: string | number) {
-    this.props.crudGetOne(resource, id);
-  }
+    updateData(resource: string, id: string | number) {
+        this.props.crudGetOne(resource, id);
+    }
 
-  render() {
-    const { children, basePath, resource, record, id } = this.props;
+    render() {
+        const {
+            children,
+            basePath,
+            resource,
+            record,
+            id,
+            isLoading,
+        } = this.props;
 
-    if (!children) return null;
+        if (!children) return null;
 
-    return children({ basePath, resource, record, id });
-  }
+        return children({ basePath, resource, record, id, isLoading });
+    }
 }
 
 export default connect(
-  mapStateToProps,
-  { crudGetOne }
+    mapStateToProps,
+    { crudGetOne }
 )(ShowController);
