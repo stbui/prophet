@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Button } from 'antd';
 
-export const CreateButton: any = ({
-    basePath,
-    label,
-    type,
-    icon,
-    ...other
-}) => {
-    const hadleClick = () => {
+export class CreateButton extends Component<any> {
+    static defaultProps = {
+        label: '添加',
+        type: 'primary',
+    };
+    handleClick = () => {
+        const { basePath, push } = this.props;
+
         push(`${basePath}/create`);
     };
+    render() {
+        const { label, type, icon, ghost } = this.props;
 
-    return (
-        <Button type={type} onClick={hadleClick} {...other}>
-            {label}
-        </Button>
-    );
-};
+        return (
+            <Button
+                ghost={ghost}
+                type={type}
+                onClick={this.handleClick}
+                icon={icon}
+            >
+                {label}
+            </Button>
+        );
+    }
+}
 
-CreateButton.defaultProps = {
-    label: '添加',
-    type: 'primary',
-};
-
-export default CreateButton;
+export default connect(
+    null,
+    { push }
+)(CreateButton);
