@@ -17,7 +17,8 @@ export const crudCreate = (
     data: any,
     basePath: string,
     redirectTo: string,
-    refresh: boolean = false
+    refresh: boolean = false,
+    callback?: any
 ): DataAction => ({
     type: CRUD_CREATE,
     payload: { data },
@@ -33,6 +34,7 @@ export const crudCreate = (
             redirectTo,
             basePath,
             refresh,
+            callback,
         },
         onFailure: {
             notification: {
@@ -40,6 +42,7 @@ export const crudCreate = (
                 message: '创建失败',
                 // description: ''
             },
+            callback,
         },
     },
 });

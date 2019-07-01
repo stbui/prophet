@@ -19,7 +19,8 @@ export interface IProps {
         id: string | number,
         data: any,
         basePath: string,
-        refresh: boolean
+        refresh: boolean,
+        callback: any
     ): any;
 }
 
@@ -32,9 +33,9 @@ export class DeleteController extends Component<IProps> {
         super(props);
     }
 
-    save = data => {
+    save = (data, callback) => {
         const { crudDelete, resource, basePath, refresh } = this.props;
-        crudDelete(resource, data.id, data, basePath, refresh);
+        crudDelete(resource, data.id, data, basePath, refresh, callback);
     };
 
     render() {

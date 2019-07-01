@@ -17,6 +17,8 @@ export interface IProps {
     record: any;
     crudUpdate: any;
     isLoading: boolean;
+    redirectTo: any;
+    refresh: any;
     crudGetOne: (resource: string, id: string | number) => any;
 }
 
@@ -50,9 +52,9 @@ export class EditController extends Component<IProps> {
         this.props.crudGetOne(resource, id);
     }
 
-    save = (data: any) => {
-        const { crudUpdate, resource, id, basePath } = this.props;
-        crudUpdate(resource, id, data, basePath);
+    save = (data: any, callback: any) => {
+        const { crudUpdate, resource, id, basePath, redirectTo, refresh } = this.props;
+        crudUpdate(resource, id, data, basePath, redirectTo, refresh, callback);
     };
 
     render() {

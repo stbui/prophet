@@ -18,7 +18,8 @@ export const crudUpdate = (
     data: object,
     basePath: string,
     redirectTo: string,
-    refresh: boolean = false
+    refresh: boolean = false,
+    callback?: any
 ): DataAction => ({
     type: CRUD_UPDATE,
     payload: { id, data },
@@ -32,13 +33,13 @@ export const crudUpdate = (
             },
             redirectTo,
             basePath,
-            refresh,
+            refresh, callback
         },
         onFailure: {
             notification: {
                 type: 'warning',
                 message: '更新失败',
-            },
+            }, callback
         },
     },
 });

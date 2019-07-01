@@ -13,7 +13,9 @@ export interface IProps {
   children?(props): any;
   basePath: any;
   resource: any;
-  crudCreate(resource: string, data): any;
+  redirectTo: any;
+  refresh: any;
+  crudCreate(resource: string, data: any, basePath?: any, redirectTo?: any, refresh?: any, callback?: any): any;
 }
 
 const mapStateToProps = (state, props) => {
@@ -25,9 +27,9 @@ export class CreateController extends Component<IProps> {
     super(props);
   }
 
-  save = data => {
-    const { crudCreate, resource } = this.props;
-    crudCreate(resource, data);
+  save = (data, callback?: any) => {
+    const { crudCreate, resource, basePath, redirectTo, refresh } = this.props;
+    crudCreate(resource, data, basePath, redirectTo, refresh, callback);
   };
 
   render() {

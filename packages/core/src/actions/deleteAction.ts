@@ -17,7 +17,8 @@ export const crudDelete = (
     id: string | number,
     data: any,
     basePath: string,
-    refresh: boolean = true
+    refresh: boolean = true,
+    callback?: any
 ): DataAction => ({
     type: CRUD_DELETE,
     payload: { id, data },
@@ -31,12 +32,14 @@ export const crudDelete = (
             },
             refresh,
             basePath,
+            callback
         },
         onFail: {
             notification: {
                 type: 'warning',
                 message: '创建失败',
             },
+            callback
         },
     },
 });
