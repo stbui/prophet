@@ -5,7 +5,7 @@ import { Card } from 'antd';
 
 export interface IProps {
     children?: any;
-    actions?: React.ComponentType;
+    actions?: any;
 }
 
 export const ListView = ({
@@ -23,7 +23,7 @@ export const ListView = ({
     );
 };
 
-export const List: React.SFC<IProps> = (props: IProps) => (
+export const List: any = (props: any) => (
     <ListController {...props}>
         {controllerProps => <ListView {...props} {...controllerProps} />}
     </ListController>
