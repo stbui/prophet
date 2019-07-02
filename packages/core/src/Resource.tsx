@@ -19,6 +19,8 @@ export interface IProps {
     label?: string;
     context?: 'registration';
     match?: any;
+    lazy?: any;
+    fallback?: any;
     registerResource?: (resource: any) => void;
 }
 
@@ -53,22 +55,8 @@ export class Resource extends Component<IProps, any> {
         }
     }
 
-    render() {
-        const {
-            name,
-            label,
-            list,
-            edit,
-            create,
-            show,
-            match,
-            context,
-        } = this.props;
-
-        if (context === 'registration') {
-            return null;
-        }
-
+    renderRoute() {
+        const { name, label, list, edit, create, show, match } = this.props;
         const resource = {
             resource: name,
             label,
@@ -133,6 +121,24 @@ export class Resource extends Component<IProps, any> {
                 )}
             </Switch>
         );
+    }
+
+    render() {
+        const { context, lazy, fallback } = this.props;
+
+        if (context === 'registration') {
+            return null;
+        }
+
+        if (lazy) {
+            return (
+                <React.Suspense fallback={fallback}>
+                    {this.renderRoute()}
+                </React.Suspense>
+            );
+        }
+
+        return this.renderRoute();
     }
 }
 
