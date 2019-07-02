@@ -1,37 +1,37 @@
 {
-  "name": "prophet-data-json-server",
-  "version": "0.1.12",
-  "description": "> TODO: description",
-  "author": "stbui <w431106@163.com>",
-  "homepage": "https://github.com/stbui/react-admin-kit#readme",
-  "license": "ISC",
-  "main": "lib/index",
-  "module": "esm/index.js",
-  "typings": "./lib/index.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stbui/react-admin-kit.git"
-  },
-  "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc --outDir esm --module es2015",
-    "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bugs": {
-    "url": "https://github.com/stbui/react-admin-kit/issues"
-  },
-  "dependencies": {
-    "prophet-common": "0.1.0",
-    "prophet-core": "^0.1.12",
-    "query-string": "^6.2.0"
-  }
+    "name": "prophet-data-json-server",
+    "version": "0.1.12",
+    "description": "用于构建中后台前端应用框架",
+    "author": "stbui <w431106@163.com>",
+    "homepage": "https://github.com/stbui/propht#readme",
+    "license": "ISC",
+    "main": "lib/index",
+    "module": "esm/index.js",
+    "typings": "./lib/index.d.ts",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stbui/propht.git"
+    },
+    "scripts": {
+        "build": "npm run build:cjs && npm run build:esm",
+        "build:cjs": "tsc",
+        "build:esm": "tsc --outDir esm --module es2015",
+        "watch": "tsc --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bugs": {
+        "url": "https://github.com/stbui/propht/issues"
+    },
+    "dependencies": {
+        "prophet-common": "0.1.0",
+        "prophet-core": "^0.1.12",
+        "query-string": "^6.2.0"
+    }
 }

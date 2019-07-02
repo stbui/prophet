@@ -1,34 +1,34 @@
 {
-  "name": "prophet-common",
-  "version": "0.1.0",
-  "description": "用于构建企业级 react 中后台前端应用框架。",
-  "main": "lib/index",
-  "module": "esm/index.js",
-  "typings": "./lib/index.d.ts",
-  "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "rm -rf ./lib && tsc",
-    "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
-    "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "16.0.11",
-    "@types/react-redux": "^6.0.10",
-    "typescript": "^3.2.2"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "stbui",
-  "homepage": "https://github.com/stbui/react-admin-kit#readme",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stbui/react-admin-kit.git"
-  },
-  "bugs": {
-    "url": "https://github.com/stbui/react-admin-kit/issues"
-  }
+    "name": "prophet-common",
+    "version": "0.1.0",
+    "description": "用于构建中后台前端应用框架",
+    "main": "lib/index",
+    "module": "esm/index.js",
+    "typings": "./lib/index.d.ts",
+    "scripts": {
+        "build": "npm run build:cjs && npm run build:esm",
+        "build:cjs": "rm -rf ./lib && tsc",
+        "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
+        "watch": "tsc --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "@types/react": "^16.7.17",
+        "@types/react-dom": "16.0.11",
+        "@types/react-redux": "^6.0.10",
+        "typescript": "^3.2.2"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "stbui",
+    "homepage": "https://github.com/stbui/prophet#readme",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stbui/prophet.git"
+    },
+    "bugs": {
+        "url": "https://github.com/stbui/prophet/issues"
+    }
 }
