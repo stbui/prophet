@@ -9,7 +9,7 @@ export class DeleteWithConfirmButton extends React.Component<any> {
     };
 
     render() {
-        const { label } = this.props;
+        const { label, className, style } = this.props;
 
         return (
             <Popconfirm
@@ -18,7 +18,9 @@ export class DeleteWithConfirmButton extends React.Component<any> {
                 cancelText="取消"
                 onConfirm={this.confirm}
             >
-                <a {...this.props}>{label}</a>
+                <a className={className} style={style}>
+                    {label}
+                </a>
             </Popconfirm>
         );
     }
