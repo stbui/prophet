@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Admin, Resource } from 'prophet-core';
+import { Prophet, Resource } from 'prophet-core';
 import { Layout } from 'prophet-antd';
 import jsonServerProvider from 'prophet-data-json-server';
 import { crudMetadata } from 'prophet-common';
@@ -13,7 +13,7 @@ const CatchAll = (props: any) => <div>CatchAll</div>;
 class App extends Component {
   render() {
     return (
-      <Admin
+      <Prophet
         dataProvider={jsonServerProvider('http://127.0.0.1')}
         layout={Layout}
       >
@@ -24,7 +24,7 @@ class App extends Component {
           create={Create}
           show={Show}
         />
-      </Admin>
+      </Prophet>
     );
   }
 }
