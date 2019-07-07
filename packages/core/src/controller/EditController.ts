@@ -19,13 +19,15 @@ export interface IProps {
     isLoading: boolean;
     redirectTo: any;
     refresh: any;
+    version: any;
     crudGetOne: (resource: string, id: string | number) => any;
 }
 
 const mapStateToProps = (state, props) => {
     return {
         id: props.id,
-        isLoading: state.resources[props.resource].loading > 0,
+        isLoading: state.loading > 0,
+        version: state.refresh,
         record: state.resources[props.resource]
             ? state.resources[props.resource].data[props.id]
             : null,
@@ -43,7 +45,7 @@ export class EditController extends Component<IProps> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.id !== nextProps.id) {
+        if (this.props.id !== nextProps.id || nextProps.version !== this.props.version) {
             this.updateData(nextProps.resource, nextProps.id);
         }
     }
@@ -58,7 +60,7 @@ export class EditController extends Component<IProps> {
     };
 
     render() {
-        const { children, basePath, resource, record, isLoading } = this.props;
+        const { children, basePath, resource, record, isLoading, version } = this.props;
 
         if (!children) return null;
 
@@ -68,6 +70,7 @@ export class EditController extends Component<IProps> {
             record,
             isLoading,
             save: this.save,
+            version
         });
     }
 }

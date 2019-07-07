@@ -29,6 +29,10 @@ export interface IProps {
 //   { registerResource }
 // )
 export class Resource extends Component<IProps, any> {
+    static defaultProps = {
+        fallback: <div />,
+    };
+
     componentWillMount() {
         const {
             registerResource,
