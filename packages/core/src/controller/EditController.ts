@@ -5,7 +5,6 @@
  */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { crudGetOne, crudUpdate } from '../actions';
 
@@ -26,7 +25,8 @@ export interface IProps {
 const mapStateToProps = (state, props) => {
     return {
         id: props.id,
-        isLoading: state.loading > 0,
+        // isLoading: state.loading > 0,
+        isLoading: false,
         version: state.refresh,
         record: state.resources[props.resource]
             ? state.resources[props.resource].data[props.id]
