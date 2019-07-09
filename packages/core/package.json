@@ -1,6 +1,6 @@
 {
     "name": "prophet-core",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "history": "^4.7.2",
-        "prophet-common": "0.1.0",
+        "prophet-common": "^0.1.13",
         "query-string": "^6.2.0",
         "react-redux": "^5.1.0",
         "react-router": "^4.3.1",
