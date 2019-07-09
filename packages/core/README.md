@@ -1,5 +1,1 @@
 # prophet-core
-
-## Admin
-
-## Resource
