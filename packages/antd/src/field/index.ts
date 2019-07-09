@@ -1,1 +1,1 @@
-export { default as ModalField } from './ModalField';
+export const filed = 'test'
