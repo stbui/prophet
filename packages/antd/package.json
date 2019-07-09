@@ -1,6 +1,6 @@
 {
     "name": "prophet-antd",
-    "version": "0.1.15",
+    "version": "0.1.16",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -23,7 +23,7 @@
     "dependencies": {
         "antd": "^3.19.3",
         "prophet-common": "^0.1.13",
-        "prophet-core": "^0.1.15",
+        "prophet-core": "^0.1.16",
         "react-redux": "^5.1.1",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
