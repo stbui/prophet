@@ -45,7 +45,7 @@ export class EditController extends Component<IProps> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.id !== nextProps.id || nextProps.version !== this.props.version) {
+        if (this.props.id !== nextProps.id) {
             this.updateData(nextProps.resource, nextProps.id);
         }
     }
