@@ -12,6 +12,7 @@ export const ListView = props => {
         create,
         edit,
         show,
+        ...other
     } = props;
     const handleClose = () => {
         const { history, basePath } = props;
@@ -20,39 +21,70 @@ export const ListView = props => {
 
     return (
         <React.Fragment>
+            {actions && cloneElement(actions, { basePath, ...other })}
             <Spin spinning={isLoading}>
-                {actions && cloneElement(actions, { ...props })}
-                {children && cloneElement(children, { ...props })}
+                {children && cloneElement(children, { basePath, ...other })}
             </Spin>
-            <Route path={`${basePath}/:id`}>
+            <Route exact extace path={`${basePath}/:id`}>
                 {({ match }) => {
                     const isMatch =
                         match && match.params && match.params.id !== 'create';
-                    return (
-                        <Drawer visible={!!match} onClose={handleClose}>
-                            {isMatch ? cloneElement(edit, { ...props }) : null}
+                    return edit ? (
+                        <Drawer
+                            width={edit.props.width}
+                            visible={!!match}
+                            onClose={handleClose}
+                        >
+                            {isMatch
+                                ? cloneElement(edit, {
+                                      id: match.params.id,
+                                      onCancel: handleClose,
+                                      onOk: handleClose,
+                                      ...props,
+                                  })
+                                : null}
                         </Drawer>
-                    );
+                    ) : null;
                 }}
             </Route>
-            <Route path={`${props.basePath}/:id/show`}>
+
+            <Route exact path={`${props.basePath}/:id/show`}>
                 {({ match }) => {
                     const isMatch =
                         match && match.params && match.params.id !== 'create';
-                    return (
-                        <Drawer visible={!!match} onClose={handleClose}>
-                            {isMatch ? cloneElement(show, { ...props }) : null}
+                    return show ? (
+                        <Drawer
+                            width={show.props.width}
+                            visible={!!match}
+                            onClose={handleClose}
+                        >
+                            {isMatch
+                                ? cloneElement(show, {
+                                      id: match.params.id,
+                                      onCancel: handleClose,
+                                      onOk: handleClose,
+                                      ...props,
+                                  })
+                                : null}
                         </Drawer>
-                    );
+                    ) : null;
                 }}
             </Route>
-            <Route path={`${basePath}/create`}>
+            <Route exact path={`${basePath}/create`}>
                 {({ match }) => {
-                    return (
-                        <Drawer visible={!!match} onClose={handleClose}>
-                            {cloneElement(create, { ...props })}
+                    return create ? (
+                        <Drawer
+                            width={create.props.width}
+                            visible={!!match}
+                            onClose={handleClose}
+                        >
+                            {cloneElement(create, {
+                                onCancel: handleClose,
+                                onOk: handleClose,
+                                ...props,
+                            })}
                         </Drawer>
-                    );
+                    ) : null;
                 }}
             </Route>
         </React.Fragment>
