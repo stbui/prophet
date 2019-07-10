@@ -3,7 +3,7 @@ import { ListController } from 'prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route } from 'react-router';
 
-export const DrawerListView = props => {
+export const ListView = props => {
     const {
         children,
         isLoading,
@@ -59,10 +59,10 @@ export const DrawerListView = props => {
     );
 };
 
-export const DrawerList = props => (
+export const ListDrawer = props => (
     <ListController {...props}>
-        {controllerProps => <DrawerList {...props} {...controllerProps} />}
+        {controllerProps => <ListView {...props} {...controllerProps} />}
     </ListController>
 );
 
-export default DrawerList;
+export default ListDrawer;
