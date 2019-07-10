@@ -1,13 +1,13 @@
 {
   "name": "starter",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "private": true,
   "dependencies": {
     "@types/jest": "23.3.10",
     "@types/node": "10.12.12",
     "@types/react": "^16.7.17",
     "@types/react-dom": "16.0.11",
-    "prophet-antd": "^0.1.18",
+    "prophet-antd": "^0.1.19",
     "prophet-common": "^0.1.13",
     "prophet-core": "^0.1.18",
     "prophet-data-json-server": "^0.1.18",
