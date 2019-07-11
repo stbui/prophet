@@ -2,12 +2,13 @@ import React, { cloneElement } from 'react';
 import { ListController } from 'prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route } from 'react-router';
+import ListActions from './ListActions';
 
 export const ListView = props => {
     const {
         children,
         isLoading,
-        actions,
+        actions = <ListActions />,
         basePath,
         create,
         edit,
