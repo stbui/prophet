@@ -1,6 +1,6 @@
 {
     "name": "prophet-antd",
-    "version": "0.1.19",
+    "version": "0.1.20",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
