@@ -20,7 +20,7 @@
         "url": "git+https://github.com/stbui/propht.git"
     },
     "scripts": {
-        "build": "npm run build:cjs && npm run build:esm",
+        "build": "yarn run build:cjs && yarn run build:esm",
         "build:cjs": "tsc",
         "build:esm": "tsc --outDir esm --module es2015",
         "watch": "tsc --watch",

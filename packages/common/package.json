@@ -6,7 +6,7 @@
     "module": "esm/index.js",
     "typings": "./lib/index.d.ts",
     "scripts": {
-        "build": "npm run build:cjs && npm run build:esm",
+        "build": "yarn run build:cjs && yarn run build:esm",
         "build:cjs": "rm -rf ./lib && tsc",
         "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
         "watch": "tsc --watch",
