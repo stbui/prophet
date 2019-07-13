@@ -32,6 +32,6 @@
     "dependencies": {
         "prophet-common": "^0.1.13",
         "prophet-core": "^0.1.18",
-        "query-string": "^6.2.0"
+        "query-string": "^6.8.1"
     }
 }

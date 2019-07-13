@@ -3,8 +3,8 @@
   "version": "0.1.20",
   "private": true,
   "dependencies": {
-    "antd": "^3.19.3",
-    "bizcharts": "^3.4.1",
+    "antd": "^3.20.2",
+    "bizcharts": "^3.5.4",
     "node-sass": "^4.10.0",
     "prophet-antd": "^0.1.20",
     "prophet-core": "^0.1.18",
@@ -12,11 +12,8 @@
     "query-string": "^6.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^5.1.1",
-    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "3.0.1",
-    "redux": "^4.0.1"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
