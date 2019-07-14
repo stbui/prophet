@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { parse, stringify } from 'query-string';
 import { createSelector } from 'reselect';
-import { push as pushAction } from 'react-router-redux';
+import { push as pushAction } from 'connected-react-router';
 
 import {
     crudGetList,

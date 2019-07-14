@@ -4,32 +4,30 @@
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
-    "typings": "./lib/index.d.ts",
-    "scripts": {
-        "build": "yarn run build:cjs && yarn run build:esm",
-        "build:cjs": "rm -rf ./lib && tsc",
-        "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
-        "watch": "tsc --watch",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "types": "esm/index.d.ts",
     "homepage": "https://github.com/stbui/prophet",
     "bugs": "https://github.com/stbui/prophet/issues",
     "author": "stbui",
     "license": "ISC",
+    "scripts": {
+        "build": "yarn run build-cjs && yarn run build-esm",
+        "build-cjs": "rimraf ./lib && tsc",
+        "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
+        "watch": "rimraf ./lib && tsc --watch"
+    },
     "peerDependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6"
     },
     "dependencies": {
-        "history": "^4.9.0",
-        "prophet-common": "^0.1.13",
+        "connected-react-router": "^6.4.0",
+        "prop-types": "^15.6.1",
         "query-string": "^6.8.1",
-        "react-redux": "^5.1.0",
-        "react-router": "^4.3.1",
-        "react-router-dom": "^4.3.1",
-        "react-router-redux": "~5.0.0-alpha.9",
-        "redux": "^4.0.1",
-        "redux-saga": "^1.0.3",
+        "react-redux": "^7.1.0",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1",
+        "redux": "^3.7.2 || ^4.0.0",
+        "redux-saga": "^1.0.0",
         "reselect": "^4.0.0"
     },
     "devDependencies": {
@@ -39,9 +37,10 @@
         "@types/react-redux": "^6.0.11",
         "@types/react-router": "^4.4.4",
         "@types/react-router-dom": "^4.3.1",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "typescript": "^3.2.2"
+        "history": "^4.7.2",
+        "react": "~16.8.6",
+        "react-dom": "~16.8.6",
+        "rimraf": "^2.6.3"
     },
     "publishConfig": {
         "access": "public"

@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
 
 import configureStore from './Store';
