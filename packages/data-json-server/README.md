@@ -15,21 +15,21 @@ import { Admin, Resource } from 'prophet-core';
 import dataJsonServer from 'prophet-data-json-server';
 
 <Admin dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
-  <Resource
-    name="users"
-    list={props => <div>list</div>}
-    edit={props => <div>edit</div>}
-    create={props => <div>create</div>}
-    show={props => <div>show</div>}
-  />
+    <Resource
+        name="users"
+        list={props => <div>list</div>}
+        edit={props => <div>edit</div>}
+        create={props => <div>create</div>}
+        show={props => <div>show</div>}
+    />
 </Admin>;
 ```
 
 直接调用
 
 ```js
-import dataProvider from 'prophet-json-demo';
+import dataProvider from 'prophet-data-json-server';
 dataProvider('http://127.0.0.1')('GET_LIST', 'users').then(response => {
-  console.log(response);
+    console.log(response);
 });
 ```

@@ -7,24 +7,16 @@
     "license": "ISC",
     "main": "lib/index",
     "module": "esm/index.js",
-    "typings": "./lib/index.d.ts",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
-    "files": [
-        "lib"
-    ],
+    "types": "esm/index.d.ts",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/stbui/propht.git"
     },
     "scripts": {
-        "build": "yarn run build:cjs && yarn run build:esm",
-        "build:cjs": "tsc",
-        "build:esm": "tsc --outDir esm --module es2015",
-        "watch": "tsc --watch",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "yarn run build-cjs && yarn run build-esm",
+        "build-cjs": "rimraf ./lib && tsc",
+        "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
+        "watch": "rimraf ./lib && tsc --watch"
     },
     "bugs": {
         "url": "https://github.com/stbui/propht/issues"

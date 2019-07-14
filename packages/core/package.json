@@ -20,24 +20,24 @@
         "react-dom": "^16.8.6"
     },
     "dependencies": {
-        "connected-react-router": "^6.4.0",
-        "prop-types": "^15.6.1",
+        "connected-react-router": "^6.5.2",
+        "prop-types": "^15.7.2",
         "query-string": "^6.8.1",
         "react-redux": "^7.1.0",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
-        "redux": "^3.7.2 || ^4.0.0",
-        "redux-saga": "^1.0.0",
+        "redux": "^4.0.4",
+        "redux-saga": "^1.0.5",
         "reselect": "^4.0.0"
     },
     "devDependencies": {
         "@types/history": "^4.7.2",
-        "@types/react": "16.8.22",
+        "@types/react": "16.8.23",
         "@types/react-dom": "16.8.4",
-        "@types/react-redux": "^6.0.11",
-        "@types/react-router": "^4.4.4",
-        "@types/react-router-dom": "^4.3.1",
-        "history": "^4.7.2",
+        "@types/react-redux": "^7.1.1",
+        "@types/react-router": "^5.0.3",
+        "@types/react-router-dom": "^4.3.4",
+        "history": "^4.9.0",
         "react": "~16.8.6",
         "react-dom": "~16.8.6",
         "rimraf": "^2.6.3"

@@ -4,19 +4,17 @@
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
-    "typings": "./lib/index.d.ts",
+    "types": "esm/index.d.ts",
     "scripts": {
-        "build": "yarn run build:cjs && yarn run build:esm",
-        "build:cjs": "rm -rf ./lib && tsc",
-        "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
-        "watch": "tsc --watch",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "yarn run build-cjs && yarn run build-esm",
+        "build-cjs": "rimraf ./lib && tsc",
+        "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
+        "watch": "rimraf ./lib && tsc --watch"
     },
     "devDependencies": {
-        "@types/react": "^16.7.17",
-        "@types/react-dom": "16.0.11",
-        "@types/react-redux": "^6.0.10",
-        "typescript": "^3.2.2"
+        "@types/react": "16.8.23",
+        "@types/react-dom": "16.8.4",
+        "@types/react-redux": "^7.1.1"
     },
     "publishConfig": {
         "access": "public"

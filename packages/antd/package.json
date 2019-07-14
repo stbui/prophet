@@ -4,18 +4,17 @@
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
-    "typings": "./lib/index.d.ts",
-    "scripts": {
-        "build": "yarn run build:cjs && yarn run build:esm",
-        "build:cjs": "rm -rf ./lib && tsc",
-        "build:esm": "rm -rf ./esm && tsc --outDir esm --module es2015",
-        "watch": "tsc --watch",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "types": "esm/index.d.ts",
     "homepage": "https://github.com/stbui/prophet",
     "bugs": "https://github.com/stbui/prophet/issues",
     "author": "stbui",
     "license": "ISC",
+    "scripts": {
+        "build": "yarn run build-cjs && yarn run build-esm",
+        "build-cjs": "rimraf ./lib && tsc",
+        "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
+        "watch": "rimraf ./lib && tsc --watch"
+    },
     "peerDependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6"
@@ -23,21 +22,20 @@
     "dependencies": {
         "antd": "^3.20.2",
         "prophet-core": "^0.1.18",
-        "connected-react-router": "^6.4.0",
+        "connected-react-router": "^6.5.2",
         "react-redux": "^7.1.0",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
-        "redux": "^3.7.2 || ^4.0.0"
+        "redux": "^4.0.4"
     },
     "devDependencies": {
-        "@types/react": "16.8.22",
+        "@types/react": "16.8.23",
         "@types/react-dom": "16.8.4",
-        "@types/react-redux": "^6.0.11",
-        "@types/react-router": "^4.4.4",
-        "@types/react-router-dom": "^4.3.1",
+        "@types/react-redux": "^7.1.1",
+        "@types/react-router": "^5.0.3",
+        "@types/react-router-dom": "^4.3.4",
         "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "typescript": "^3.2.2"
+        "react-dom": "^16.8.6"
     },
     "publishConfig": {
         "access": "public"
