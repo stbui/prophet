@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router';
 import { Prophet, Resource } from 'prophet-core';
 import { Layout, CatchAll } from 'prophet-antd';
