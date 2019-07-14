@@ -1,12 +1,12 @@
 {
   "name": "tutorial",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "dependencies": {
     "antd": "^3.20.2",
     "bizcharts": "^3.5.4",
     "node-sass": "^4.10.0",
-    "prophet-antd": "^0.2.3",
+    "prophet-antd": "^0.2.4",
     "prophet-core": "^0.2.1",
     "prophet-data-json-server": "^0.2.2",
     "query-string": "^6.8.1",
