@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { refreshView } from 'prophet-core';
 import { Button } from 'antd';
 
-export class RefreshButton extends Component<any> {
-  handleClick = () => {
-    const { refreshView, onClick } = this.props;
-    refreshView();
-    onClick && onClick();
-  };
+export default props => {
+    const { label, onClick, ...other } = props;
+    const dispatch = useDispatch();
 
-  render() {
-    const { label, ...other } = this.props;
+    const handleClick = () => {
+        dispatch(refreshView());
+        onClick && onClick();
+    };
+
     return (
-      <Button type="primary" onClick={this.handleClick} {...other}>
-        {label}
-      </Button>
+        <Button type="primary" onClick={handleClick} {...other}>
+            {label}
+        </Button>
     );
-  }
-}
-
-export default connect(
-  null,
-  { refreshView }
-)(RefreshButton);
+};
