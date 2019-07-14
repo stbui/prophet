@@ -80,7 +80,7 @@ export class Datagrid extends Component<IProps> {
             showQuickJumper: showQuickJumper,
             hideOnSinglePage: hideOnSinglePage,
             total: total,
-            defaultCurrent: page,
+            current: page,
             defaultPageSize: perPage,
             showTotal: this.handleShowTotal,
             onShowSizeChange: this.handleShowSizeChange,
