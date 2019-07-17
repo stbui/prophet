@@ -4,48 +4,60 @@
  * https://github.com/stbui
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { crudCreate } from '../actions/createAction';
+import { ReactNode, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { crudCreate } from '../actions';
 
-export interface IProps {
-  children?(props): any;
-  basePath: any;
-  resource: any;
-  redirectTo: any;
-  refresh: any;
-  crudCreate(resource: string, data: any, basePath?: any, redirectTo?: any, refresh?: any, callback?: any): any;
+export interface Props {
+    children(props: any): ReactNode;
+    resource: string;
+    basePath: string;
+    refresh?: boolean;
+    hasEdit?: boolean;
+    hasShow?: boolean;
 }
 
-const mapStateToProps = (state, props) => {
-  return {};
+export const getDefaultRedirectRoute = (hasEdit: boolean, hasShow: boolean) => {
+    if (hasEdit) {
+        return 'edit';
+    }
+
+    if (hasShow) {
+        return 'show';
+    }
+
+    return 'list';
 };
 
-export class CreateController extends Component<IProps> {
-  constructor(props) {
-    super(props);
-  }
+export const isLoading = useSelector((state: any) => state.loading > 0);
 
-  save = (data, callback?: any) => {
-    const { crudCreate, resource, basePath, redirectTo, refresh } = this.props;
-    crudCreate(resource, data, basePath, redirectTo, refresh, callback);
-  };
+const CreateController = (props: Props) => {
+    const { children, resource, basePath, hasEdit, hasShow } = props;
+    const dispatch = useDispatch();
 
-  render() {
-    const { children, basePath, resource } = this.props;
-
-    if (!children) return null;
+    const save = useCallback(
+        (data: any, callback?: any, redirect?: any, refresh?: any) => {
+            dispatch(
+                crudCreate(
+                    resource,
+                    basePath,
+                    data,
+                    redirect,
+                    refresh,
+                    callback
+                )
+            );
+        },
+        [resource, basePath]
+    );
 
     return children({
-      basePath,
-      resource,
-      save: this.save
+        resource,
+        basePath,
+        save,
+        isLoading,
+        redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     });
-  }
-}
+};
 
-export default connect(
-  mapStateToProps,
-  { crudCreate }
-)(CreateController);
+export default CreateController;

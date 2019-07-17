@@ -14,8 +14,8 @@ export const CRUD_CREATE_FAILURE = 'CRUD_CREATE_FAILURE';
 
 export const crudCreate = (
     resource: string,
-    data: any,
     basePath: string,
+    data: any,
     redirectTo: string,
     refresh: boolean = false,
     callback?: any

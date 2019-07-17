@@ -14,9 +14,9 @@ export const CRUD_DELETE_FAILURE = 'CRUD_DELETE_FAILURE';
 
 export const crudDelete = (
     resource: string,
+    basePath: string,
     id: string | number,
     data: any,
-    basePath: string,
     refresh: boolean = true,
     callback?: any
 ): DataAction => ({
@@ -32,14 +32,14 @@ export const crudDelete = (
             },
             refresh,
             basePath,
-            callback
+            callback,
         },
         onFail: {
             notification: {
                 type: 'warning',
-                message: '创建失败',
+                message: '删除失败',
             },
-            callback
+            callback,
         },
     },
 });
