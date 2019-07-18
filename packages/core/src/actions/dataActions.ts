@@ -29,22 +29,22 @@ export const crudGetList = (
         resource,
         fetch: GET_LIST,
         onSuccess: {
-            callback
+            callback,
         },
         onFailure: {
             notification: {
                 type: 'warning',
                 message: '获取失败',
             },
-            callback
+            callback,
         },
     },
 });
 
 export const crudGetOne = (
     resource: string,
-    id: string | number,
     basePath: string,
+    id: string | number,
     refresh: boolean = false,
     callback?: any
 ): DataAction => ({
@@ -56,7 +56,7 @@ export const crudGetOne = (
         basePath,
         onSuccess: {
             refresh,
-            callback
+            callback,
         },
         onFailure: {
             notification: {
@@ -64,7 +64,7 @@ export const crudGetOne = (
                 message: '获取失败',
             },
             refresh,
-            callback
+            callback,
         },
     },
 });
