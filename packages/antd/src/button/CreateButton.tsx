@@ -1,35 +1,47 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Button } from 'antd';
 
-export class CreateButton extends Component<any> {
-    static defaultProps = {
-        label: '添加',
-        type: 'primary',
-    };
-    handleClick = () => {
-        const { basePath, push } = this.props;
-
-        push(`${basePath}/create`);
-    };
-    render() {
-        const { label, type, icon, ghost } = this.props;
-
-        return (
-            <Button
-                ghost={ghost}
-                type={type}
-                onClick={this.handleClick}
-                icon={icon}
-            >
-                {label}
-            </Button>
-        );
-    }
+export interface CreateButtonProps {
+    basePath?: string;
+    label?: string;
+    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    ghost?: boolean;
+    icon?: string;
+    disabled?: boolean;
+    shape?: 'circle' | 'round';
+    size?: 'small' | 'large';
 }
 
-export default connect(
-    null,
-    { push }
-)(CreateButton);
+export const CreateButton = (props: CreateButtonProps) => {
+    const {
+        basePath,
+        label = '添加',
+        type = 'primary',
+        ghost,
+        icon,
+        disabled,
+        shape,
+        size,
+    } = props;
+    const dispatch = useDispatch();
+
+    const handleClick = () => dispatch(push(`${basePath}/create`));
+
+    return (
+        <Button
+            type={type}
+            ghost={ghost}
+            icon={icon}
+            disabled={disabled}
+            shape={shape}
+            size={size}
+            onClick={handleClick}
+        >
+            {label}
+        </Button>
+    );
+};
+
+export default CreateButton;

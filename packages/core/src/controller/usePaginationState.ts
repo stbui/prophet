@@ -4,9 +4,7 @@ export default (initialPerPage: number = 20) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(initialPerPage);
 
-    useEffect(() => {
-        setPerPage;
-    }, [initialPerPage]);
+    useEffect(() => setPerPage(initialPerPage), [initialPerPage]);
 
     return {
         page,

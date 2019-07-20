@@ -1,28 +1,28 @@
 import React from 'react';
-import { crudDelete, DeleteController } from 'prophet-core';
+import { useDeleteController } from 'prophet-core';
+import { Link } from '../Link';
 
-export class DeleteWithButtonView extends React.Component<any> {
-    handleClick = () => {
-        const { update, record } = this.props;
-        update(record);
-    };
-    render() {
-        const { label, className, style } = this.props;
+export const DeleteWithButtonView = props => {
+    const { label, disabled, className, style, update, record } = props;
 
-        return (
-            <a onClick={this.handleClick} className={className} style={style}>
-                {label}
-            </a>
-        );
-    }
-}
+    const onConfirm = () => update(record);
+
+    return (
+        <Link
+            to=""
+            type="link"
+            disabled={disabled}
+            className={className}
+            style={style}
+            onClick={onConfirm}
+        >
+            {label}
+        </Link>
+    );
+};
 
 export const DeleteWithButton = props => (
-    <DeleteController {...props}>
-        {controllerProps => (
-            <DeleteWithButtonView {...props} {...controllerProps} />
-        )}
-    </DeleteController>
+    <DeleteWithButtonView {...props} {...useDeleteController(props)} />
 );
 
 export default DeleteWithButton;

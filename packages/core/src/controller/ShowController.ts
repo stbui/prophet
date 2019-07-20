@@ -4,60 +4,16 @@
  * https://github.com/stbui
  */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { crudGetOne } from '../actions';
+import useShowController, { ShowProps } from './useShowController';
 
-export interface IProps {
-    children(props): any;
-    basePath: any;
-    resource: any;
-    id: string | number;
-    record: any;
-    isLoading: boolean;
-    crudGetOne: (resource: string, id: string | number) => any;
+export interface Props extends ShowProps {
+    children(props: any): JSX.Element;
 }
 
-const mapStateToProps = (state, props) => {
-    return {
-        id: props.id,
-        isLoading: false,
-        record: state.resources[props.resource]
-            ? state.resources[props.resource].data[props.id]
-            : null,
-    };
+const ShowController = ({ children, ...props }: Props) => {
+    const controllerProps = useShowController(props);
+
+    return children({ ...controllerProps });
 };
-export class ShowController extends Component<IProps> {
-    constructor(props) {
-        super(props);
-    }
 
-    componentDidMount() {
-        const { resource, id } = this.props;
-        this.updateData(resource, id);
-    }
-
-    updateData(resource: string, id: string | number) {
-        this.props.crudGetOne(resource, id);
-    }
-
-    render() {
-        const {
-            children,
-            basePath,
-            resource,
-            record,
-            id,
-            isLoading,
-        } = this.props;
-
-        if (!children) return null;
-
-        return children({ basePath, resource, record, id, isLoading });
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    { crudGetOne }
-)(ShowController);
+export default ShowController;

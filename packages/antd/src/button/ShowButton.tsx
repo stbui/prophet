@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../Link';
 
-export const ShowButton: any = ({ basePath, label, record }) => {
-  return <Link to={`${basePath}/${record.id}/show`}>{label}</Link>;
+export const ShowButton: any = ({ basePath, label, id }) => {
+    return <Link to={`${basePath}/${id}/show`}>{label}</Link>;
 };
 
 ShowButton.defaultProps = {
-  label: '详情',
-  record: {}
+    label: '详情',
 };
 
 export default ShowButton;

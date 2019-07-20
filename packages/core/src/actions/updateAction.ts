@@ -14,9 +14,9 @@ export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 
 export const crudUpdate = (
     resource: string,
+    basePath: string,
     id: string | number,
     data: object,
-    basePath: string,
     redirectTo: string,
     refresh: boolean = false,
     callback?: any

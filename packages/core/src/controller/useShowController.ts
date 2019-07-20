@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { crudGetOne } from '../actions';
 
 export interface ShowProps {
-    basePath: any;
-    resource: any;
+    resource: string;
+    basePath: string;
     id: string | number;
     refresh: boolean;
 }
@@ -34,3 +34,5 @@ export const useShowController = (props: ShowProps) => {
         isLoading: false,
     };
 };
+
+export default useShowController;

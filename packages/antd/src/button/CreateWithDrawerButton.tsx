@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
+import React, { cloneElement, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { refreshView } from 'prophet-core';
 import { Button, Drawer } from 'antd';
 
-export default props => {
+export interface CreateWithDrawerButtonProps {
+    children?: any;
+    width?: string | number;
+    destroyOnClose?: boolean;
+    label?: string;
+    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    ghost?: boolean;
+    icon?: string;
+    disabled?: boolean;
+    shape?: 'circle' | 'round';
+    size?: 'small' | 'large';
+}
+
+export const CreateWithDrawerButton = (props: CreateWithDrawerButtonProps) => {
     const { children, width, destroyOnClose } = props;
+    const {
+        label = '添加',
+        type = 'primary',
+        ghost,
+        icon,
+        disabled,
+        shape,
+        size,
+    } = props;
+
     const [visible, setVisible] = useState(false);
     const dispatch = useDispatch();
 
@@ -13,14 +36,20 @@ export default props => {
         dispatch(refreshView());
     };
 
-    const handleDrawerShow = () => {
-        setVisible(true);
-    };
+    const handleDrawerShow = () => setVisible(true);
 
     return (
         <React.Fragment>
-            <Button type="primary" onClick={handleDrawerShow}>
-                添加
+            <Button
+                type={type}
+                ghost={ghost}
+                icon={icon}
+                disabled={disabled}
+                shape={shape}
+                size={size}
+                onClick={handleDrawerShow}
+            >
+                {label}
             </Button>
             <Drawer
                 width={width}
@@ -28,7 +57,7 @@ export default props => {
                 onClose={handleDrawerClose}
                 destroyOnClose={destroyOnClose}
             >
-                {React.cloneElement(children, {
+                {cloneElement(children, {
                     onOk: handleDrawerClose,
                     onCancel: handleDrawerClose,
                 })}
@@ -36,3 +65,5 @@ export default props => {
         </React.Fragment>
     );
 };
+
+export default CreateWithDrawerButton;

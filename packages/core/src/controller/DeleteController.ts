@@ -4,34 +4,15 @@
  * https://github.com/stbui
  */
 
-import { ReactNode, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudDelete } from '../actions/deleteAction';
+import useDeleteController, { DeleteProps } from './useDeleteController';
 
-export interface Props {
-    children(props: any): ReactNode;
-    resource: any;
-    basePath: any;
+export interface Props extends DeleteProps {
+    children(props: any): JSX.Element;
 }
 
-export const DeleteController = (props: Props) => {
-    const { children, resource, basePath } = props;
-    const dispatch = useDispatch();
-
-    const save = useCallback(
-        (data: any, callback?: any, refresh?: boolean) => {
-            dispatch(
-                crudDelete(resource, basePath, data.id, data, refresh, callback)
-            );
-        },
-        [resource, basePath]
-    );
-
-    return children({
-        resource,
-        basePath,
-        update: save,
-    });
+const DeleteController = ({ children, ...props }: Props) => {
+    const controllerProps = useDeleteController(props);
+    return children({ ...controllerProps });
 };
 
 export default DeleteController;

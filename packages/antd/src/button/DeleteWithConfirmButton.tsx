@@ -1,37 +1,35 @@
 import React from 'react';
-import { DeleteController } from 'prophet-core';
+import { useDeleteController } from 'prophet-core';
 import { Popconfirm } from 'antd';
+import { Link } from '../Link';
 
-export class DeleteWithConfirmButton extends React.Component<any> {
-    confirm = e => {
-        const { update, record } = this.props;
-        update(record);
-    };
+export const DeleteWithConfirmButton = props => {
+    const { label, disabled, className, style, update, record } = props;
 
-    render() {
-        const { label, className, style } = this.props;
+    const onConfirm = () => update(record);
 
-        return (
-            <Popconfirm
-                title="你确定要删除吗？"
-                okText="确定"
-                cancelText="取消"
-                onConfirm={this.confirm}
+    return (
+        <Popconfirm
+            title="你确定要删除吗？"
+            okText="确定"
+            cancelText="取消"
+            onConfirm={onConfirm}
+        >
+            <Link
+                to=""
+                type="link"
+                disabled={disabled}
+                className={className}
+                style={style}
             >
-                <a className={className} style={style}>
-                    {label}
-                </a>
-            </Popconfirm>
-        );
-    }
-}
+                {label}
+            </Link>
+        </Popconfirm>
+    );
+};
 
-export const DeleteWithButton = props => (
-    <DeleteController {...props}>
-        {controllerProps => (
-            <DeleteWithConfirmButton {...props} {...controllerProps} />
-        )}
-    </DeleteController>
+const DeleteWithButton = props => (
+    <DeleteWithConfirmButton {...props} {...useDeleteController(props)} />
 );
 
 export default DeleteWithButton;

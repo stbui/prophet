@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../Link';
 
-export const EditButton: any = ({ basePath, label, record }) => {
-  return <Link to={`${basePath}/${record.id}`}>{label}</Link>;
-};
+const EditButton = ({ basePath, label, id }) => (
+    <Link to={`${basePath}/${id}`}>{label}</Link>
+);
 
 EditButton.defaultProps = {
-  label: '编辑',
-  record: {}
+    label: '编辑',
 };
 
 export default EditButton;

@@ -1,31 +1,21 @@
 import React, { cloneElement } from 'react';
-import { ShowController } from 'prophet-core';
+import { useShowController } from 'prophet-core';
 import { Card } from 'antd';
 
-export interface IShowProps {
-    children: any;
-    id: string | number;
-    title: string;
-    isLoading: boolean;
-    basePath: string;
-    resource: string;
-    record: any;
-}
-
 export const ShowView = ({
+    resource,
+    basePath,
     children,
     id,
     title,
     isLoading,
-    basePath,
-    resource,
     record,
-}: IShowProps) => (
+}) => (
     <Card bordered={false} title={title} loading={isLoading}>
         {record
             ? cloneElement(children, {
-                  basePath,
                   resource,
+                  basePath,
                   record,
                   id,
               })
@@ -33,10 +23,6 @@ export const ShowView = ({
     </Card>
 );
 
-export const Show = props => (
-    <ShowController {...props}>
-        {controllerProps => <ShowView {...props} {...controllerProps} />}
-    </ShowController>
-);
+const Show = props => <ShowView {...props} {...useShowController(props)} />;
 
 export default Show;

@@ -13,9 +13,7 @@ export default props => {
         dispatch(refreshView());
     };
 
-    const handleDrawerShow = () => {
-        setVisible(true);
-    };
+    const handleDrawerShow = () => setVisible(true);
 
     return (
         <React.Fragment>

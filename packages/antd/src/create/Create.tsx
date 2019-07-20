@@ -1,30 +1,32 @@
 import React, { cloneElement } from 'react';
-import { CreateController } from 'prophet-core';
+import { useCreateController } from 'prophet-core';
 import { Card } from 'antd';
 
-export const CreateView = ({
-  children,
-  title,
-  loading,
-  basePath,
-  resource,
-  record = {},
-  save
-}) => (
-  <Card bordered={false} title={title} loading={loading}>
-    {cloneElement(children, {
-      basePath,
-      resource,
-      record,
-      save
-    })}
-  </Card>
-);
+export const CreateView = props => {
+    const {
+        resource,
+        basePath,
+        children,
+        title,
+        loading,
+        record = {},
+        save,
+    } = props;
 
-export const Create = props => (
-  <CreateController {...props}>
-    {controllerProps => <CreateView {...props} {...controllerProps} />}
-  </CreateController>
+    return (
+        <Card bordered={false} title={title} loading={loading}>
+            {cloneElement(children, {
+                basePath,
+                resource,
+                record,
+                save,
+            })}
+        </Card>
+    );
+};
+
+const Create = props => (
+    <CreateView {...props} {...useCreateController(props)} />
 );
 
 export default Create;

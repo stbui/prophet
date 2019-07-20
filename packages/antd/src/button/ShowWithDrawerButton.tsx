@@ -5,13 +5,8 @@ export default props => {
     const { children, width, destroyOnClose } = props;
     const [visible, setVisible] = useState(false);
 
-    const handleDrawerClose = () => {
-        setVisible(false);
-    };
-
-    const handleDrawerShow = () => {
-        setVisible(true);
-    };
+    const handleDrawerClose = () => setVisible(false);
+    const handleDrawerShow = () => setVisible(true);
 
     return (
         <React.Fragment>

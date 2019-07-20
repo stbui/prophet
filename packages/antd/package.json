@@ -35,7 +35,8 @@
         "@types/react-router": "^5.0.3",
         "@types/react-router-dom": "^4.3.4",
         "react": "^16.8.6",
-        "react-dom": "^16.8.6"
+        "react-dom": "^16.8.6",
+        "rimraf": "^2.6.3"
     },
     "publishConfig": {
         "access": "public"
