@@ -1,70 +1,66 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { getResources } from 'prophet-core';
+import { Link } from 'prophet-antd';
 import { Menu, Icon } from 'antd';
 import { routes } from './routes';
-import 'antd/lib/menu/style/index.css';
 
-export class M extends Component {
-  render() {
-    const { resources, hasDashboard, location } = this.props;
+export const CustomMenu = props => {
+    const { hasDashboard, location } = props;
+    const resources = useSelector(state => getResources(state));
 
     return (
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={[location.pathname]}
-      >
-        {hasDashboard && (
-          <Menu.Item>
-            <Link to="/">自定义</Link>
-          </Menu.Item>
-        )}
-        {resources.map(resource => {
-          return (
-            <Menu.Item key={`/${resource.name}`}>
-              <Link to={`/${resource.name}`}>
-                {resource.label ? resource.label : resource.name}
-              </Link>
-            </Menu.Item>
-          );
-        })}
-        {routes.map(route => {
-          if (route.children) {
-            return (
-              <Menu.SubMenu
-                key={route.id}
-                title={
-                  <span>
-                    <Icon type={route.icon} />
-                    {route.title}
-                  </span>
-                }
-              >
-                {route.children.map(r => {
-                  return (
-                    <Menu.Item key={r.id}>
-                      <Link to={r.url}>{r.title}</Link>
+        <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={[location.pathname]}
+        >
+            {hasDashboard && (
+                <Menu.Item>
+                    <Link to="/">自定义</Link>
+                </Menu.Item>
+            )}
+            {resources.map(resource => {
+                return (
+                    <Menu.Item key={`/${resource.name}`}>
+                        <Link to={`/${resource.name}`}>
+                            {resource.label ? resource.label : resource.name}
+                        </Link>
                     </Menu.Item>
-                  );
-                })}
-              </Menu.SubMenu>
-            );
-          } else {
-            return (
-              <Menu.Item key={route.id}>
-                <Icon type={route.icon} />
-                <span>{route.title}</span>
-              </Menu.Item>
-            );
-          }
-        })}
-      </Menu>
+                );
+            })}
+            {routes.map(route => {
+                if (route.children) {
+                    return (
+                        <Menu.SubMenu
+                            key={route.id}
+                            title={
+                                <span>
+                                    <Icon type={route.icon} />
+                                    {route.title}
+                                </span>
+                            }
+                        >
+                            {route.children.map(r => {
+                                return (
+                                    <Menu.Item key={r.id}>
+                                        <Link to={r.url}>{r.title}</Link>
+                                    </Menu.Item>
+                                );
+                            })}
+                        </Menu.SubMenu>
+                    );
+                } else {
+                    return (
+                        <Menu.Item key={route.id}>
+                            <Icon type={route.icon} />
+                            <span>{route.title}</span>
+                        </Menu.Item>
+                    );
+                }
+            })}
+        </Menu>
     );
-  }
-}
+};
 
-const mapStateToProps = state => ({ resources: getResources(state) });
-
-export default connect(mapStateToProps)(M);
+export default CustomMenu;
