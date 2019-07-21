@@ -33,13 +33,15 @@ export const crudUpdate = (
             },
             redirectTo,
             basePath,
-            refresh, callback
+            refresh,
+            callback,
         },
         onFailure: {
             notification: {
                 type: 'warning',
                 message: '更新失败',
-            }, callback
+            },
+            callback,
         },
     },
 });

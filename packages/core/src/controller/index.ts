@@ -9,11 +9,14 @@ import CreateController from './CreateController';
 import EditController from './EditController';
 import ShowController from './ShowController';
 import DeleteController from './DeleteController';
+
+import useListController from './useListController';
 import useCreateController from './useCreateController';
-import usePaginationState from './usePaginationState';
-import useShowController from './useShowController';
 import useEditController from './useEditController';
+import useShowController from './useShowController';
 import useDeleteController from './useDeleteController';
+
+import usePaginationState from './usePaginationState';
 
 export {
     ListController,
@@ -21,9 +24,10 @@ export {
     EditController,
     ShowController,
     DeleteController,
+    useListController,
     useCreateController,
-    usePaginationState,
+    useEditController,
     useShowController,
     useDeleteController,
-    useEditController,
+    usePaginationState,
 };

@@ -21,10 +21,11 @@ export const crudGetList = (
     resource: string,
     pagination: object,
     filter: object,
+    sort: any,
     callback?: any
 ): DataAction => ({
     type: CRUD_GET_LIST,
-    payload: { pagination, ...filter },
+    payload: { pagination, sort, ...filter },
     meta: {
         resource,
         fetch: GET_LIST,

@@ -41,7 +41,7 @@ export const useEditController = (props: EditProps) => {
 
     useEffect(() => {
         dispatch(crudGetOne(resource, basePath, id, refresh));
-    }, [id]);
+    }, [resource, id]);
 
     return {
         resource,

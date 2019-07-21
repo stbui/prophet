@@ -26,6 +26,7 @@ export class ListActions extends Component<any> {
             filterValues,
             basePath,
             field,
+            hasCreate,
         } = this.props;
 
         return (
@@ -56,7 +57,7 @@ export class ListActions extends Component<any> {
                     </Form.Item>
                 </Form>
                 <span style={{ flex: 'auto' }} />
-                <CreateButton basePath={basePath} />
+                {hasCreate ? <CreateButton basePath={basePath} /> : null}
             </div>
         );
     }

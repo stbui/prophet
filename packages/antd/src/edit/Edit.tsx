@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { EditController } from 'prophet-core';
+import { useEditController } from 'prophet-core';
 import { Card } from 'antd';
 
 export const EditView = ({
@@ -26,9 +26,7 @@ export const EditView = ({
 );
 
 export const Edit = props => (
-    <EditController {...props}>
-        {controllerProps => <EditView {...props} {...controllerProps} />}
-    </EditController>
+    <EditView {...props} {...useEditController(props)} />
 );
 
 export default Edit;

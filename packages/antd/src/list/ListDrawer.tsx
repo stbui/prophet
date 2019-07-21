@@ -1,4 +1,4 @@
-import React, { cloneElement, createElement } from 'react';
+import React, { cloneElement } from 'react';
 import { ListController } from 'prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route } from 'react-router';
@@ -8,7 +8,7 @@ export const ListView = props => {
     const {
         children,
         isLoading,
-        actions = ListActions,
+        actions = <ListActions />,
         basePath,
         create,
         edit,
@@ -21,11 +21,23 @@ export const ListView = props => {
         history.push(basePath);
     };
 
+    const resource = {
+        hasEdit: !!edit,
+        hasCreate: !!create,
+        hasShow: !!show,
+    };
+
     return (
         <React.Fragment>
-            {actions && createElement(actions, { basePath, ...other })}
+            {actions &&
+                cloneElement(actions, {
+                    basePath,
+                    ...other,
+                    ...resource,
+                })}
             <Spin spinning={isLoading}>
-                {children && cloneElement(children, { basePath, ...other })}
+                {children &&
+                    cloneElement(children, { basePath, ...other, ...resource })}
             </Spin>
             <Route exact extace path={`${basePath}/:id`}>
                 {({ match }) => {
