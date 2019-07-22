@@ -1,393 +1,197 @@
 export const routes = [
-  {
-    id: 'home',
-    title: '主页',
-    type: 'item',
-    icon: 'home',
-    url: '/home'
-  },
-  {
-    id: 'ui',
-    title: 'UI元素',
-    type: 'collapse',
-    icon: 'alert',
-    children: [
-      {
-        id: 'pagination',
-        title: '分页',
+    {
+        id: 'home',
+        title: '主页',
         type: 'item',
-        url: '/materials/pagination'
-      },
-      {
-        id: 'date-picker',
-        title: '日期选择器',
-        type: 'item',
-        url: '/materials/date-picker'
-      },
-      {
-        id: 'modal',
-        title: '弹出框',
-        type: 'item',
-        url: '/materials/popover'
-      },
-      {
-        id: 'buttons',
-        title: '按钮',
-        type: 'item',
-        url: '/materials/buttons'
-      },
-      {
-        id: 'cards',
-        title: '卡片',
-        type: 'item',
-        url: '/materials/cards'
-      },
-      {
-        id: 'lists',
-        title: '列表',
-        type: 'item',
-        url: '/materials/lists'
-      },
-      {
-        id: 'menu',
-        title: '菜单',
-        type: 'item',
-        url: '/materials/menu'
-      },
-      {
-        id: 'slider',
-        title: '滑块',
-        type: 'item',
-        url: '/materials/slider'
-      },
-      {
-        id: 'tabs',
-        title: '标签页',
-        type: 'item',
-        url: '/materials/tabs'
-      },
-      {
-        id: 'tooltips',
-        title: '文字提示',
-        type: 'item',
-        url: '/materials/tooltips'
-      },
-      {
-        id: 'dialogs',
-        title: '对话框',
-        type: 'item',
-        url: '/materials/dialogs'
-      },
-      {
-        id: 'icon',
-        title: '图标',
-        type: 'item',
-        url: '/materials/icon'
-      }
-    ]
-  },
-  {
-    id: 'extend',
-    title: '拓展组件',
-    type: 'collapse',
-    icon: 'appstore',
-    badge: {
-      title: '7',
-      bg: '#ff4081',
-      fg: '#fff'
+        icon: 'home',
+        url: '/home',
     },
-    children: [
-      {
-        id: 'amap',
-        title: '高德地图',
-        type: 'item',
-        url: '/materials/amap'
-      },
-      {
-        id: 'notification',
-        title: '通知',
-        type: 'item',
-        url: '/materials/notification'
-      },
-      {
-        id: 'calendar',
-        title: '日历',
-        type: 'item',
-        url: '/materials/calendar'
-      },
-      {
-        id: 'popover',
-        title: '文件上传',
-        type: 'item',
-        url: '/materials/popover'
-      },
-      {
-        id: 'chat-widget',
-        title: 'chat-widget',
-        type: 'item',
-        url: '/materials/chat-widget'
-      },
-      {
-        id: 'speed-dial',
-        title: 'speed-dial',
-        type: 'item',
-        url: '/materials/chat-widget'
-      },
-      {
-        id: 'message',
-        title: 'message',
-        type: 'item',
-        url: '/materials/message'
-      }
-    ]
-  },
-  {
-    id: 'forms',
-    title: '表单',
-    type: 'collapse',
-    icon: 'build',
-    badge: {
-      title: '2',
-      bg: '#ff6f00',
-      fg: '#fff'
+    {
+        id: 'goods',
+        title: '商品管理',
+        type: 'collapse',
+        icon: 'alert',
+        children: [
+            {
+                id: 'list',
+                title: '商品列表',
+                type: 'item',
+                url: '/goods/list',
+            },
+            {
+                id: 'category',
+                title: '商品分类',
+                type: 'item',
+                url: '/goods/category',
+            },
+            {
+                id: 'comment',
+                title: '商品评价',
+                type: 'item',
+                url: '/goods/comment',
+            },
+        ],
     },
-    children: [
-      {
-        id: 'elements',
-        title: '表单元素',
-        type: 'item',
-        url: '/forms/elements'
-      },
-      {
-        id: 'validation',
-        title: '表单验证',
-        type: 'item',
-        url: '/forms/validation'
-      },
-      {
-        id: 'editor',
-        title: '编辑器',
-        type: 'item',
-        url: '/forms/editor'
-      }
-    ]
-  },
-  {
-    id: 'table',
-    title: '表格',
-    type: 'collapse',
-    icon: 'database',
-    children: [
-      {
-        id: 'static',
-        title: '基本表格',
-        type: 'item',
-        url: '/tables/static'
-      },
-      {
-        id: 'datatable',
-        title: '数据表格',
-        type: 'item',
-        url: '/tables/datatable'
-      },
-      {
-        id: 'dynamic',
-        title: '动态表格',
-        type: 'item',
-        url: '/tables/dynamic'
-      }
-    ]
-  },
-  {
-    id: 'pages',
-    title: '页面',
-    type: 'collapse',
-    icon: 'eye',
-    children: [
-      {
-        id: 'file-manager',
-        title: '文件管理',
-        type: 'item',
-        url: '/pages/file-manager'
-      },
-      {
-        id: 'projects',
-        title: '项目管理',
-        type: 'item',
-        url: '/pages/projects'
-      },
-      {
-        id: 'profile',
-        title: '个人资料',
-        type: 'item',
-        url: '/pages/profile'
-      },
-      {
-        id: 'blog',
-        title: '博客(graphql)',
-        type: 'item',
-        url: '/pages/blog'
-      },
-      {
+    {
+        id: 'order',
+        title: '订单管理',
+        type: 'collapse',
+        icon: 'appstore',
+        badge: {
+            title: '7',
+            bg: '#ff4081',
+            fg: '#fff',
+        },
+        children: [
+            {
+                id: 'orderlist',
+                title: '全部订单',
+                type: 'item',
+                url: '/order/list',
+            },
+            {
+                id: 'delivery',
+                title: '待发货',
+                type: 'item',
+                url: '/order/delivery',
+            },
+            {
+                id: 'receipt',
+                title: '待收货',
+                type: 'item',
+                url: '/order/receipt',
+            },
+            {
+                id: 'pay',
+                title: '待付款',
+                type: 'item',
+                url: '/order/pay',
+            },
+            {
+                id: 'complete',
+                title: '已完成',
+                type: 'item',
+                url: '/order/complete',
+            },
+            {
+                id: 'cancel',
+                title: 'cancel',
+                type: 'item',
+                url: '/order/cancel',
+            },
+            {
+                id: 'refund',
+                title: '售后管理',
+                type: 'item',
+                url: '/order/refund',
+            },
+        ],
+    },
+    {
         id: 'user',
         title: '用户管理',
-        type: 'item',
-        url: '/pages/user'
-      }
-    ]
-  },
-  {
-    id: 'extend-page',
-    title: '扩展页面',
-    type: 'collapse',
-    icon: 'file',
-    children: [
-      {
-        id: 'sigin',
-        title: '登录',
-        type: 'item',
-        url: '/sigin'
-      },
-      {
-        id: 'sigup',
-        title: '注册',
-        type: 'item',
-        url: '/sigup'
-      }
-    ]
-  },
-  {
-    id: 'page-layouts',
-    title: '页面布局',
-    type: 'collapse',
-    icon: 'idcard',
-    badge: {
-      title: 'new',
-      bg: '#ff9800',
-      fg: '#fff'
-    },
-    children: [
-      {
-        id: 'carded-full-width',
-        title: '卡片式',
-        type: 'item',
-        url: '/page-layouts/carded/full-width'
-      }
-    ]
-  },
-  {
-    id: 'apps',
-    title: '应用',
-    type: 'collapse',
-    icon: 'star',
-    children: [
-      {
-        id: 'todo',
-        title: '任务',
-        type: 'item',
-        url: '/apps/todo/ALL'
-      },
-      {
-        id: 'chats',
-        title: '聊天',
-        type: 'item',
-        url: '/apps/chats'
-      },
-      {
-        id: 'mail',
-        title: '信箱',
-        type: 'item',
-        url: '/apps/mail'
-      },
-      {
-        id: 'navigation',
-        title: '码农庄园',
-        type: 'item',
-        url: '/apps/navigation',
+        type: 'collapse',
+        icon: 'build',
         badge: {
-          title: '10',
-          bg: '#ff6f00',
-          fg: '#fff'
-        }
-      }
-    ]
-  },
-  {
-    id: 'analysis',
-    title: '数据分析',
-    type: 'collapse',
-    icon: 'key',
-    children: [
-      {
-        id: 'crowd',
-        title: '人群分布',
-        type: 'item',
-        url: '/analysis/crowd'
-      },
-      {
-        id: 'preference',
-        title: '行为偏好',
-        type: 'item',
-        url: '/analysis/preference'
-      },
-      {
-        id: 'population',
-        title: '人口分布',
-        type: 'item',
-        url: '/analysis/population'
-      },
-      {
-        id: 'equipment',
-        title: '设备分布',
-        type: 'item',
-        url: '/analysis/equipment'
-      },
-      {
-        id: 'scePortrait',
-        title: '场景画像',
-        type: 'item',
-        url: '/analysis/scePortrait'
-      }
-    ]
-  },
-  {
-    id: 'crm',
-    title: '客户关系',
-    type: 'collapse',
-    icon: 'table',
-    children: [
-      {
-        id: 'lead',
-        title: '线索',
-        type: 'item',
-        url: '/crm/lead'
-      },
-      {
-        id: 'contacts',
-        title: '联系人',
-        type: 'item',
-        url: '/crm/contacts'
-      }
-    ]
-  },
-  {
-    id: 'apm',
-    title: '前端监控',
-    type: 'collapse',
-    icon: 'wifi',
-    children: [
-      {
-        id: 'error',
-        title: '脚本异常',
-        type: 'item',
-        url: '/apm/error'
-      },
-      {
-        id: 'performance',
-        title: '性能分析',
-        type: 'item',
-        url: '/apm/performance'
-      }
-    ]
-  }
+            title: '2',
+            bg: '#ff6f00',
+            fg: '#fff',
+        },
+        children: [
+            {
+                id: 'list',
+                title: '用户列表',
+                type: 'item',
+                url: '/user/list',
+            },
+            {
+                id: 'grade',
+                title: '会员等级',
+                type: 'item',
+                url: '/user/grade',
+            },
+            {
+                id: 'recharge',
+                title: '充值记录',
+                type: 'item',
+                url: '/user/recharge',
+            },
+            {
+                id: 'balance',
+                title: '余额明细',
+                type: 'item',
+                url: '/user/balance',
+            },
+        ],
+    },
+    {
+        id: 'market',
+        title: '营销管理',
+        type: 'collapse',
+        icon: 'database',
+        children: [
+            {
+                id: 'coupon',
+                title: '优惠券列表',
+                type: 'item',
+                url: '/market/coupon',
+            },
+        ],
+    },
+    {
+        id: 'setting',
+        title: '设置',
+        type: 'collapse',
+        icon: 'eye',
+        children: [
+            {
+                id: 'store',
+                title: '商城设置',
+                type: 'item',
+                url: '/setting/store',
+            },
+            {
+                id: 'trade',
+                title: '交易设置',
+                type: 'item',
+                url: '/setting/trade',
+            },
+            {
+                id: 'delivery',
+                title: '运费模板',
+                type: 'item',
+                url: '/setting/delivery',
+            },
+            {
+                id: 'express',
+                title: '物流公司',
+                type: 'item',
+                url: '/setting/express',
+            },
+            {
+                id: 'sms',
+                title: '短信通知',
+                type: 'item',
+                url: '/setting/sms',
+            },
+            {
+                id: 'tplmsg',
+                title: '模板消息',
+                type: 'item',
+                url: '/setting/tplmsg',
+            },
+            {
+                id: 'address',
+                title: '退货地址',
+                type: 'item',
+                url: '/setting/address',
+            },
+            {
+                id: 'storage',
+                title: '上传设置',
+                type: 'item',
+                url: '/setting/storage',
+            },
+        ],
+    },
 ];

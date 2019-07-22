@@ -15,11 +15,6 @@ export const CustomMenu = props => {
             mode="inline"
             defaultSelectedKeys={[location.pathname]}
         >
-            {hasDashboard && (
-                <Menu.Item>
-                    <Link to="/">自定义</Link>
-                </Menu.Item>
-            )}
             {resources.map(resource => {
                 return (
                     <Menu.Item key={`/${resource.name}`}>
