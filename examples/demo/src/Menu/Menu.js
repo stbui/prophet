@@ -13,9 +13,11 @@ export const CustomMenu = props => {
         <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={[location.pathname]}
+            // defaultSelectedKeys={[location.pathname]}
+            selectedKeys={[location.pathname]}
+            defaultOpenKeys={[location.pathname.split('/')[1]]}
         >
-            {resources.map(resource => {
+            {/* {resources.map(resource => {
                 return (
                     <Menu.Item key={`/${resource.name}`}>
                         <Link to={`/${resource.name}`}>
@@ -23,7 +25,7 @@ export const CustomMenu = props => {
                         </Link>
                     </Menu.Item>
                 );
-            })}
+            })} */}
             {routes.map(route => {
                 if (route.children) {
                     return (

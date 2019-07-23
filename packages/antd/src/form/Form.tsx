@@ -1,84 +1,75 @@
-import React, { Component, Children } from 'react';
+import React, { Children } from 'react';
+import { useDispatch } from 'react-redux';
+import { push, goBack } from 'connected-react-router';
 import { Form, Button } from 'antd';
 import FormInput from './FormInput';
 const FormItem = Form.Item;
 
-export interface IProps {
-  children?: any;
-  form?: any;
-  history?: any;
-  basePath?: any;
-  resource?: any;
-  record?: any;
-  save?(data, redirect): any;
-}
-
 const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 }
-  }
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
 };
 
 const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0,
+        },
+        sm: {
+            span: 16,
+            offset: 8,
+        },
     },
-    sm: {
-      span: 16,
-      offset: 8
-    }
-  }
 };
 
-export class Create extends Component<IProps, any> {
-  handleSubmit = e => {
-    e.preventDefault();
+export const Create = props => {
+    const { children, record, form, save } = props;
 
-    const { form, save, history } = this.props;
+    const dispatch = useDispatch();
 
-    form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        save(values, 'list');
-        history.go(-1);
-      }
-    });
-  };
+    const handleSubmit = e => {
+        e.preventDefault();
 
-  handleBackClick = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
+        form.validateFields((err, values) => {
+            if (!err) {
+                save(values, () => {}, 'list');
+            }
+        });
+    };
 
-  render() {
-    const { children, record } = this.props;
+    const handleBackClick = () => {
+        dispatch(goBack());
+    };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        {Children.map(children, input => (
-          <FormInput
-            record={record}
-            input={input}
-            form={this.props.form}
-            {...formItemLayout}
-          />
-        ))}
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" style={{ marginRight: 16 }}>
-            提交
-          </Button>
-          <Button onClick={this.handleBackClick}>返回</Button>
-        </FormItem>
-      </Form>
+        <Form onSubmit={handleSubmit}>
+            {Children.map(children, input => (
+                <FormInput
+                    record={record}
+                    input={input}
+                    form={form}
+                    {...formItemLayout}
+                />
+            ))}
+            <FormItem {...tailFormItemLayout}>
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{ marginRight: 16 }}
+                >
+                    提交
+                </Button>
+                <Button onClick={handleBackClick}>返回</Button>
+            </FormItem>
+        </Form>
     );
-  }
-}
+};
 
-export default Form.create()(Create as any);
+export default Form.create()(Create);

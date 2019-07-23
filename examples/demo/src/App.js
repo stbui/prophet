@@ -8,6 +8,7 @@ import Menu from './Menu/Menu';
 import Brand from './Menu/Brand';
 import users from './setting/users';
 import goodsCategory from './goods/category';
+import goodsList from './goods/list';
 
 import './App.scss';
 
@@ -24,8 +25,8 @@ export default () => (
         catchAll={() => <CatchAll auth={403} />}
         customRoutes={[<Route exact path="/custom" component={Show} />]}
     >
-        <Resource name="user" label="用户设置" {...users} />
-        <Resource name="goods/list" {...users} />
+        <Resource name="store" {...goodsList} />
         <Resource name="goods/category" {...goodsCategory} />
+        <Resource name="user" label="用户设置" {...users} />
     </Prophet>
 );

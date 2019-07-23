@@ -16,7 +16,7 @@ export const routes = [
                 id: 'list',
                 title: '商品列表',
                 type: 'item',
-                url: '/goods/list',
+                url: '/store',
             },
             {
                 id: 'category',

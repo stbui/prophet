@@ -16,8 +16,8 @@ export const CreateView = props => {
     return (
         <Card bordered={false} title={title} loading={loading}>
             {cloneElement(children, {
-                basePath,
                 resource,
+                basePath,
                 record,
                 save,
             })}
