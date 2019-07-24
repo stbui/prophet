@@ -58,6 +58,9 @@ export default (apiUrl: string, httpClient = fetch) => {
                 url = `${apiUrl}/${resource}/${params.id}`;
                 return httpClient(url, {
                     method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
                     body: JSON.stringify(params.data),
                 })
                     .then(resopnse => resopnse.json())
