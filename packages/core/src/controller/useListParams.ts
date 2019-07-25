@@ -55,12 +55,12 @@ export const useListParams = ({
     );
 
     const setPage = useCallback(
-        page => changeParams({ type: 'SET_PAGE', payload: { page } }),
+        page => changeParams({ type: 'SET_PAGE', payload: page }),
         requestSignature
     );
 
     const setPerPage = useCallback(
-        perPage => changeParams({ type: 'SET_PER_PAGE', payload: { perPage } }),
+        perPage => changeParams({ type: 'SET_PER_PAGE', payload: perPage }),
         requestSignature
     );
 
@@ -71,7 +71,7 @@ export const useListParams = ({
             return;
         }
 
-        changeParams({ type: 'SET_FILTER', payload: filterValues });
+        changeParams({ type: 'SET_FILTERS', payload: filter });
     }, requestSignature);
 
     const hideFilter = useCallback(filterName => {
@@ -112,7 +112,7 @@ export const useListParams = ({
 export const parseQueryFromLocation = ({ search }) => {
     const query: any = pickBy(
         parse(search),
-        v => ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(v) !== -1
+        (v, k) => ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
     );
 
     if (query.filter && typeof query.filter === 'string') {
@@ -155,8 +155,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-            ? { ...params }
-            : { filter: filterDefaultValues || {} };
+                ? { ...params }
+                : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;

@@ -4,7 +4,7 @@
  * https://github.com/stbui
  */
 
-import { isValidElement, useEffect, useCallback, useMemo } from 'react';
+import { isValidElement, useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useListParams } from './useListParams';
 import { crudGetList } from '../actions';
@@ -38,12 +38,11 @@ export const useListController = (props: ListProps) => {
         throw new Error('<List filter={{}}>...</List>');
     }
 
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    const [data] = useSelector((state: any) => state.resources[resource]);
-    const [version] = useSelector((state: any) => state.refresh);
-    const [total, ids] = useSelector(
-        (state: any) => state.resources[resource].list
-    );
+    const { data, list } = useSelector((state: any) => state.resources[resource]);
+    const { total, ids } = list;
+    const version = useSelector((state: any) => state.refresh);
 
     const [query, queryMethod] = useListParams({
         resource,
@@ -54,7 +53,7 @@ export const useListController = (props: ListProps) => {
         debounce,
     });
 
-    useCallback(() => {
+    useEffect(() => {
         dispatch(
             crudGetList(
                 resource,
@@ -63,10 +62,13 @@ export const useListController = (props: ListProps) => {
                     perPage: query.perPage,
                 },
                 { ...query.filter, ...filter },
-                { field: query.sort, order: query.order }
+                { field: query.sort, order: query.order },
+                () => {
+                    setLoading(false)
+                }
             )
         );
-    }, [resource, basePath]);
+    }, [resource, basePath, query.page, query.perPage, query.sort, query.order, JSON.stringify(query.filterValues), version]);
 
     if (!query.page && query.page > 1 && total > 0) {
         queryMethod.setPage(query.page - 1);
@@ -84,21 +86,21 @@ export const useListController = (props: ListProps) => {
         resource,
         basePath,
         data,
-        currentSort,
-        displayedFilters: query.displayedFilters,
-        filterValues: query.filterValues,
         ids,
+        currentSort,
+        total,
+        hasCreate,
         page: query.page,
         perPage: query.perPage,
+        filterValues: query.filterValues,
+        displayedFilters: query.displayedFilters,
         setFilters: queryMethod.setFilters,
         hideFilter: queryMethod.hideFilter,
         showFilter: queryMethod.showFilter,
         setPage: queryMethod.setPage,
         setPerPage: queryMethod.setPerPage,
         setSort: queryMethod.setSort,
-        hasCreate,
-        total,
-        isLoading: false,
+        isLoading: loading,
         version,
     };
 };
