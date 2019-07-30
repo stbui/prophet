@@ -24,6 +24,6 @@
     "dependencies": {
         "prophet-common": "^0.2.7",
         "prophet-core": "^0.2.8",
-        "query-string": "^6.8.2"
+        "query-string": "~5.1.1"
     }
 }

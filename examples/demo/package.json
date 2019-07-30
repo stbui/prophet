@@ -9,7 +9,7 @@
     "prophet-antd": "^0.2.5",
     "prophet-core": "^0.2.1",
     "prophet-data-json-server": "^0.2.2",
-    "query-string": "^6.8.1",
+    "query-string": "~5.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
