@@ -1,6 +1,6 @@
 {
     "name": "prophet-core",
-    "version": "0.2.9",
+    "version": "0.2.10",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
