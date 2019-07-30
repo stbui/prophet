@@ -11,12 +11,10 @@ import { crudCreate } from '../actions';
 export interface CreateProps {
     resource: string;
     basePath: string;
-    refresh?: boolean;
 }
 
-
-const useUpdate = (props: CreateProps) => {
-    const { resource, basePath, } = props;
+const useCreate = (props: CreateProps) => {
+    const { resource, basePath } = props;
     const dispatch = useDispatch();
 
     const update = useCallback(
@@ -42,4 +40,4 @@ const useUpdate = (props: CreateProps) => {
     }];
 };
 
-export default useUpdate;
+export default useCreate;
