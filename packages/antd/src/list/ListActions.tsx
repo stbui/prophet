@@ -1,66 +1,61 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { CreateButton } from 'prophet-antd';
 import { Form, Input, Button } from 'antd';
-import { CreateButton } from '../button';
 
-export class ListActions extends Component<any> {
-    static defaultProps = {
-        field: 'q',
-    };
+export const ListActions = props => {
+    const {
+        basePath,
+        hasCreate,
+        filterValues,
+        setFilters,
+        form: { getFieldDecorator, validateFields },
+        field,
+    } = props;
 
-    handleSearch = e => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            this.props.setFilters(values);
+    const handleSearch = () =>
+        validateFields((err, values) => {
+            if (!err) {
+                setFilters(values);
+            }
         });
-    };
 
-    handleInputChange = ({ target: { value } }) => {
+    const handleInputChange = ({ target: { value } }) => {
         if (value === '') {
-            this.props.setFilters({});
+            setFilters({});
         }
     };
 
-    render() {
-        const {
-            form: { getFieldDecorator },
-            filterValues,
-            basePath,
-            field,
-            hasCreate,
-        } = this.props;
+    return (
+        <div
+            style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}
+        >
+            <Form layout="inline">
+                <Form.Item>
+                    {getFieldDecorator(field, {
+                        initialValue: filterValues[field],
+                    })(
+                        <Input
+                            placeholder="请输入"
+                            style={{ width: 300 }}
+                            allowClear
+                            onChange={handleInputChange}
+                        />
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" onClick={handleSearch}>
+                        查询
+                    </Button>
+                </Form.Item>
+            </Form>
+            <span style={{ flex: 'auto' }} />
+            {hasCreate ? <CreateButton basePath={basePath} /> : null}
+        </div>
+    );
+};
 
-        return (
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: 24,
-                }}
-            >
-                <Form onSubmit={this.handleSearch} layout="inline">
-                    <Form.Item>
-                        {getFieldDecorator(field, {
-                            initialValue: filterValues[field],
-                        })(
-                            <Input
-                                placeholder="请输入"
-                                style={{ width: 300 }}
-                                allowClear
-                                onChange={this.handleInputChange}
-                            />
-                        )}
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            查询
-                        </Button>
-                    </Form.Item>
-                </Form>
-                <span style={{ flex: 'auto' }} />
-                {hasCreate ? <CreateButton basePath={basePath} /> : null}
-            </div>
-        );
-    }
-}
+ListActions.defaultProps = {
+    field: 'q',
+};
 
 export default Form.create()(ListActions);
