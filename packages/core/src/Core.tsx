@@ -4,7 +4,7 @@
  * https://github.com/stbui
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
@@ -12,6 +12,7 @@ import { createHashHistory } from 'history';
 
 import configureStore from './Store';
 import Router from './Router';
+import DataProviderContext from './dataProvider/dataProviderContext';
 
 const history = createHashHistory();
 
@@ -29,33 +30,33 @@ export interface PropsType {
     layout?: React.ComponentType;
 }
 
-export class Core extends Component<PropsType> {
-    render() {
-        const {
-            children,
-            dashboard,
-            customRoutes = [],
-            catchAll,
-            menu,
-            dataProvider,
-            brand,
-            login,
-            layout,
-            authProvider,
-            initialState,
-            customSagas,
-        } = this.props;
+export const Core = props => {
+    const {
+        children,
+        dashboard,
+        customRoutes = [],
+        catchAll,
+        menu,
+        dataProvider,
+        brand,
+        login,
+        layout,
+        authProvider,
+        initialState,
+        customSagas,
+    } = props;
 
-        return (
-            <Provider
-                store={configureStore({
-                    initialState,
-                    history,
-                    dataProvider,
-                    authProvider,
-                    customSagas,
-                })}
-            >
+    return (
+        <Provider
+            store={configureStore({
+                initialState,
+                history,
+                dataProvider,
+                authProvider,
+                customSagas,
+            })}
+        >
+            <DataProviderContext.Provider value={dataProvider}>
                 <ConnectedRouter history={history}>
                     <Switch>
                         <Route exact path="login" component={login} />
@@ -77,9 +78,9 @@ export class Core extends Component<PropsType> {
                         />
                     </Switch>
                 </ConnectedRouter>
-            </Provider>
-        );
-    }
-}
+            </DataProviderContext.Provider>
+        </Provider>
+    );
+};
 
 export default Core;

@@ -1,24 +1,29 @@
-import { useEffect, useState } from 'react'
-import useDataProvider from './useDataProvider'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import useDataProvider from './useDataProvider';
 
-const useQuery = (query, options = {}) => {
+const useQueryWithStore = (
+    query,
+    options,
+    dataSelector = () => undefined,
+    totalSelector = () => null
+) => {
     const { type, resource, payload } = query;
+    const data = useSelector(dataSelector);
+    const total = useSelector(totalSelector);
     const [state, setState]: any = useState({
-        data: undefined,
+        data,
+        total,
         error: null,
-        total: null,
         loading: true,
         loaded: false,
-    })
-
+    });
     const dataProvider = useDataProvider();
 
     useEffect(() => {
         dataProvider(type, resource, payload, options)
-            .then(({ data, total }) => {
+            .then(() => {
                 setState({
-                    data,
-                    total,
                     loading: false,
                     loaded: true,
                 });
@@ -30,10 +35,9 @@ const useQuery = (query, options = {}) => {
                     loaded: false,
                 });
             });
-    }, [dataProvider, JSON.stringify({ query, options })])
+    }, [JSON.stringify({ query, options })]);
 
+    return state;
+};
 
-    return state
-}
-
-export default useQuery
+export default useQueryWithStore;
