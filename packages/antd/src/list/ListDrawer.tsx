@@ -13,7 +13,6 @@ export const ListView = props => {
         create,
         edit,
         show,
-        destroyOnClose = true,
         ...other
     } = props;
     const handleClose = () => {
@@ -48,7 +47,7 @@ export const ListView = props => {
                             width={edit.props.width}
                             visible={!!match}
                             onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
+                            destroyOnClose
                         >
                             {isMatch
                                 ? cloneElement(edit, {
@@ -72,7 +71,7 @@ export const ListView = props => {
                             width={show.props.width}
                             visible={!!match}
                             onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
+                            destroyOnClose
                         >
                             {isMatch
                                 ? cloneElement(show, {
@@ -93,7 +92,7 @@ export const ListView = props => {
                             width={create.props.width}
                             visible={!!match}
                             onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
+                            destroyOnClose
                         >
                             {cloneElement(create, {
                                 onCancel: handleClose,

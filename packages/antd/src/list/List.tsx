@@ -29,4 +29,6 @@ export const List: any = (props: any) => (
     </ListController>
 );
 
+ListView.defautProps = {};
+
 export default List;

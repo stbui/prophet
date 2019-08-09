@@ -2,16 +2,14 @@ import React from 'react';
 import { CreateButton } from 'prophet-antd';
 import { Form, Input, Button } from 'antd';
 
-export const ListActions = props => {
-    const {
-        basePath,
-        hasCreate,
-        filterValues,
-        setFilters,
-        form: { getFieldDecorator, validateFields },
-        field,
-    } = props;
-
+export const ListActions = ({
+    basePath,
+    hasCreate,
+    filterValues,
+    setFilters,
+    form: { getFieldDecorator, validateFields },
+    field,
+}) => {
     const handleSearch = () =>
         validateFields((err, values) => {
             if (!err) {
