@@ -7,6 +7,8 @@ import useDelete from './useDelete';
 import useDataProvider from './useDataProvider';
 import useQuery from './useQuery';
 import useQueryWithStore from './useQueryWithStore';
+import withDataProvider from './withDataProvider';
+import Query from './Query';
 
 export {
     dataProviderContext,
@@ -17,4 +19,6 @@ export {
     useGetOne,
     useUpdate,
     useDelete,
+    withDataProvider,
+    Query,
 };

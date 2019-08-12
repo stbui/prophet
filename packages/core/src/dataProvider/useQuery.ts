@@ -1,7 +1,65 @@
-import { useEffect, useState } from 'react'
-import useDataProvider from './useDataProvider'
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
 
-const useQuery = (query, options = {}) => {
+import { useEffect, useState } from 'react';
+import useDataProvider from './useDataProvider';
+
+export interface Query {
+    type: string;
+    resource: string;
+    payload: object;
+}
+
+/* 
+import { useQuery } from 'prophet-core';
+
+const UserProfile = record => {
+    const { data, loading, error } = useQuery({
+        type: 'GET_ONE',
+        resource: 'users',
+        payload: { id: record.id },
+    });
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+
+    return <div>{data.username}</div>;
+};
+
+const UserList = () => {
+    const { data, loading, error } = useQuery({
+        type: 'GET_ONE',
+        resource: 'users',
+        payload: {
+            pagination: { page: 1, perPage: 10 },
+            sort: { field: 'username', order: 'ASC' },
+        },
+    });
+    
+    if (loading) {
+        return <Loading />;
+    }
+    if (error) {
+        return <Error />;
+    }
+
+    return (
+        <div>
+            total:{total},{data.map(user => user.username)}
+        </div>
+    );
+};
+ */
+
+const useQuery = (query: Query, options = {}) => {
     const { type, resource, payload } = query;
     const [state, setState]: any = useState({
         data: undefined,
@@ -9,7 +67,7 @@ const useQuery = (query, options = {}) => {
         total: null,
         loading: true,
         loaded: false,
-    })
+    });
 
     const dataProvider = useDataProvider();
 
@@ -30,10 +88,9 @@ const useQuery = (query, options = {}) => {
                     loaded: false,
                 });
             });
-    }, [dataProvider, JSON.stringify({ query, options })])
+    }, [dataProvider, JSON.stringify({ query, options })]);
 
+    return state;
+};
 
-    return state
-}
-
-export default useQuery
+export default useQuery;

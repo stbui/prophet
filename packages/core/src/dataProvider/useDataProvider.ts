@@ -1,8 +1,40 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import DataProviderContext from './dataProviderContext';
 import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
+
+/* 
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useDataProvider, showNotification } from 'prophet-core';
+
+const UserList = () => {
+    const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
+    const dataProvider = useDataProvider();
+
+    useEffect(() => {
+        dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
+            .then(({ data }) => setUsers(data))
+            .catch(error => dispatch(showNotification('error', error.message)));
+    }, []);
+
+    return (
+        <React.Fragment>
+            {users.map((user, key) => (
+                <UserDetail user={user} key={key} />
+            ))}
+        </React.Fragment>
+    );
+};
+ */
 
 export const useDataProvider = () => {
     const dispatch = useDispatch();
@@ -10,7 +42,12 @@ export const useDataProvider = () => {
 
     return useCallback(
         (type, resource, payload, options) => {
-            const { action = 'CUSTOM_FETCH', onSuccess, onFailure, ...other } = options;
+            const {
+                action = 'CUSTOM_FETCH',
+                onSuccess,
+                onFailure,
+                ...other
+            } = options;
 
             dispatch({
                 type: action,
