@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateButton } from 'prophet-antd';
+import { CreateButton } from '../button';
 import { Form, Input, Button } from 'antd';
 
 export const ListActions = ({
