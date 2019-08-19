@@ -6,14 +6,6 @@
 
 import useQuery from './useQuery';
 
-interface ChildrenFunParms {
-    data?: any;
-    total?: number;
-    loading?: boolean;
-    loaded?: boolean;
-    error?: any;
-}
-
 /* 
 import { Query } from 'prophet-core';
 
@@ -52,6 +44,14 @@ const UserList = () => (
 );
  */
 
+interface ChildrenFunParms {
+    data?: any;
+    total?: number;
+    loading?: boolean;
+    loaded?: boolean;
+    error?: any;
+}
+
 export interface Props {
     children(props: ChildrenFunParms): JSX.Element;
     type: string;
@@ -60,7 +60,7 @@ export interface Props {
     options?: any;
 }
 
-const Query = ({ children, type, resource, payload, options }: Props) =>
+const Query = ({ children, type, resource, payload, options }) =>
     children(useQuery({ type, resource, payload }, options));
 
 export default Query;

@@ -6,7 +6,7 @@ import useDataProvider from './useDataProvider';
 import { useMutation } from 'prophet-core';
 
 const UserProfile = record => {
-    const { data, loading, error } = useMutation({
+    const [update, { data, loading, error }] = useMutation({
         type: 'UPDATE',
         resource: 'users',
         payload: { id: record.id, data: { username: 'stbui' } },
@@ -20,7 +20,29 @@ const UserProfile = record => {
         return <Error />;
     }
 
-    return <div>{data.username}</div>;
+    return <div onClick={update}>{data.username}</div>;
+};
+
+const UserProfile = record => {
+    const [update, { data, loading, error }] = useMutation({
+        type: 'UPDATE',
+        resource: 'users',
+        payload: { id: record.id, data: { username: 'stbui' } },
+    });
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+
+    return (
+        <div onClick={() => update(null, { data: { updateAt: new Date() } })}>
+            {data.username}
+        </div>
+    );
 };
  */
 

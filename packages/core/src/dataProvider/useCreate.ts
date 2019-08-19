@@ -4,40 +4,31 @@
  * https://github.com/stbui
  */
 
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudCreate } from '../actions';
+import { CREATE, CRUD_CREATE } from '../actions';
+import useMuation from './useMutation';
 
-export interface CreateProps {
-    resource: string;
-    basePath: string;
-}
+import { useCreate } from 'props-core';
 
-const useCreate = (props: CreateProps) => {
-    const { resource, basePath } = props;
-    const dispatch = useDispatch();
+const UserProfile = ({ record }) => {
+    const [create, { loading, error }] = useCreate('users', {
+        id: record.id,
+    });
 
-    const update = useCallback(
-        (data: any, callback?: any, redirect?: any, refresh?: any) => {
-            dispatch(
-                crudCreate(
-                    resource,
-                    basePath,
-                    data,
-                    redirect,
-                    refresh,
-                    callback
-                )
-            );
-        },
-        [resource, basePath]
+    if (error) {
+        return <Error />;
+    }
+
+    return (
+        <div loading={loading} onClick={create}>
+            create
+        </div>
     );
-
-    return [update, {
-        resource,
-        basePath,
-        isLoading: false,
-    }];
 };
+
+const useCreate = (resource: string, data = {}, options?: any) =>
+    useMuation(
+        { type: CREATE, resource, payload: { data } },
+        { ...options, action: CRUD_CREATE }
+    );
 
 export default useCreate;
