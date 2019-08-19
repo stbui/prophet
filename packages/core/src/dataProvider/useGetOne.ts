@@ -4,35 +4,40 @@
  * https://github.com/stbui
  */
 
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { crudGetOne } from '../actions';
+import useQueryWithStore from './useQueryWithStore';
+import { GET_ONE, CRUD_GET_ONE } from '../actions';
 
-export interface ShowProps {
-    resource: string;
-    basePath: string;
-    id: string | number;
-    refresh: boolean;
-}
+/* 
+import { useGetOne } from 'prophet-core';
 
-export const useGetOne = (props: ShowProps) => {
-    const { resource, basePath, id, refresh } = props;
-    const dispatch = useDispatch();
-    const record = useSelector((state: any) =>
-        state.resources[resource] ? state.resources[resource].data[id] : null
-    );
+cconst UserProfile = record => {
+    const { data, loading, error } = useGetOne('users', record.id);
 
-    useEffect(() => {
-        dispatch(crudGetOne(resource, basePath, id, refresh));
-    }, [resource, basePath]);
+    if (loading) {
+        return <Loading />;
+    }
 
-    return {
-        resource,
-        basePath,
-        record, 
-        id,
-        isLoading: false,
-    };
+    if (error) {
+        return <Error />;
+    }
+
+    return <div>{data.username}</div>;
 };
+ */
 
+export const useGetOne = (
+    resource: string,
+    id: string | number,
+    options?: any
+) =>
+    useQueryWithStore(
+        {
+            type: GET_ONE,
+            resource,
+            payload: { id },
+        },
+        { ...options, action: CRUD_GET_ONE },
+        state =>
+            state.resource[resource] ? state.resource[resource].data[id] : null
+    );
 export default useGetOne;

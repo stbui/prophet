@@ -35,6 +35,11 @@ export interface Query {
     payload: object;
 }
 
+export interface QueryOptions {
+    meta?: any;
+    action?: any;
+}
+
 const isEmptyList = data =>
     Array.isArray(data)
         ? data.length === 0
@@ -44,9 +49,9 @@ const isEmptyList = data =>
 
 const useQueryWithStore = (
     query: Query,
-    options,
-    dataSelector: (state) => any = () => undefined,
-    totalSelector?: (state) => number
+    options: QueryOptions = { action: 'CUSTOM_QUERY' },
+    dataSelector: (state: any) => any = () => undefined,
+    totalSelector?: (state: any) => number
 ) => {
     const { type, resource, payload } = query;
     const data = useSelector(dataSelector);
@@ -59,7 +64,6 @@ const useQueryWithStore = (
         loading: true,
         loaded: data !== undefined && !isEmptyList(data),
     });
-    const dataProvider = useDataProvider();
 
     if (!isEqual(state.data, data) || state.total !== total) {
         setState({
@@ -70,6 +74,7 @@ const useQueryWithStore = (
         });
     }
 
+    const dataProvider = useDataProvider();
     useEffect(() => {
         dataProvider(type, resource, payload, options)
             .then(() => {

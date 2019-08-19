@@ -18,7 +18,7 @@ class UserList extends Component {
 
     componentDidMount() {
         const { dataProvider, dispatch } = this.props;
-        dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
+        dataProvider('GET_LIST', 'users', { filter: { username: 'stbui' } })
             .then(({ data: users }) => this.setState({ users }))
             .catch(error => dispatch(showNotification('error', error.message)));
     }
