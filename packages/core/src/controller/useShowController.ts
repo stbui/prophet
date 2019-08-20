@@ -4,9 +4,9 @@
  * https://github.com/stbui
  */
 
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { crudGetOne } from '../actions';
+import { useGetOne } from '../dataProvider';
+import useVerison from './useVersion';
+import { useRefresh } from '../sideEffect';
 
 export interface ShowProps {
     resource: string;
@@ -16,22 +16,19 @@ export interface ShowProps {
 }
 
 export const useShowController = (props: ShowProps) => {
-    const { resource, basePath, id, refresh } = props;
-    const dispatch = useDispatch();
-    const record = useSelector((state: any) =>
-        state.resources[resource] ? state.resources[resource].data[id] : null
-    );
+    const { resource, basePath, id } = props;
+    const version = useVerison();
+    const refresh = useRefresh();
 
-    useEffect(() => {
-        dispatch(crudGetOne(resource, basePath, id, refresh));
-    }, [resource, basePath]);
+    const { data: record, loading } = useGetOne(resource, id, {
+        version,
+    });
 
     return {
         resource,
         basePath,
         record,
-        id,
-        isLoading: false,
+        isLoading: loading,
     };
 };
 
