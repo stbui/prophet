@@ -7,11 +7,12 @@
 import { CREATE, CRUD_CREATE } from '../actions';
 import useMuation from './useMutation';
 
+/*
 import { useCreate } from 'props-core';
 
 const UserProfile = ({ record }) => {
     const [create, { loading, error }] = useCreate('users', {
-        id: record.id,
+        username: 'stbui',
     });
 
     if (error) {
@@ -24,8 +25,9 @@ const UserProfile = ({ record }) => {
         </div>
     );
 };
+*/
 
-const useCreate = (resource: string, data = {}, options?: any) =>
+const useCreate = (resource: string, data: any = {}, options?: any) =>
     useMuation(
         { type: CREATE, resource, payload: { data } },
         { ...options, action: CRUD_CREATE }

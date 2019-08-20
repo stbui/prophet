@@ -7,12 +7,6 @@
 import { useEffect, useState } from 'react';
 import useDataProvider from './useDataProvider';
 
-export interface Query {
-    type: string;
-    resource: string;
-    payload: object;
-}
-
 /* 
 import { useQuery } from 'prophet-core';
 
@@ -58,6 +52,12 @@ const UserList = () => {
     );
 };
  */
+
+export interface Query {
+    type: string;
+    resource: string;
+    payload: object;
+}
 
 const useQuery = (query: Query, options = {}) => {
     const { type, resource, payload } = query;

@@ -4,31 +4,36 @@
  * https://github.com/stbui
  */
 
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudDelete } from '../actions';
+import { DELETE, CRUD_DELETE } from '../actions';
+import useMuation from './useMutation';
 
-export interface DeleteProps {
-    resource: string;
-    basePath: string;
-}
+/*
+import { useDelete } from 'props-core';
 
-export const useDelete = (props: DeleteProps) => {
-    const { resource, basePath } = props;
-    const dispatch = useDispatch();
+const UserProfile = ({ record }) => {
+    const [delete, { loading, error }] = useDelete('users', record.id);
 
-    const update = useCallback(
-        (data: any, callback?: any, refresh?: boolean) =>
-            dispatch(
-                crudDelete(resource, basePath, data.id, data, refresh, callback)
-            ),
-        [resource, basePath]
+    if (error) {
+        return <Error />;
+    }
+
+    return (
+        <div loading={loading} onClick={delete}>
+            delete
+        </div>
     );
-
-    return [update, {
-        resource,
-        basePath,
-    }];
 };
+*/
+
+export const useDelete = (
+    resource: string,
+    id: string | number,
+    previousData: any = {},
+    options?: any
+) =>
+    useMuation(
+        { type: DELETE, resource, payload: { id, previousData } },
+        { ...options, action: CRUD_DELETE }
+    );
 
 export default useDelete;

@@ -4,42 +4,19 @@
  * https://github.com/stbui
  */
 
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudCreate } from '../actions';
+import { UPDATE, CRUD_UPDATE } from '../actions';
+import useMuation from './useMutation';
 
-export interface CreateProps {
-    resource: string;
-    basePath: string;
-    refresh?: boolean;
-}
-
-
-const useUpdate = (props: CreateProps) => {
-    const { resource, basePath, } = props;
-    const dispatch = useDispatch();
-
-    const update = useCallback(
-        (data: any, callback?: any, redirect?: any, refresh?: any) => {
-            dispatch(
-                crudCreate(
-                    resource,
-                    basePath,
-                    data,
-                    redirect,
-                    refresh,
-                    callback
-                )
-            );
-        },
-        [resource, basePath]
+const useUpdate = (
+    resource: string,
+    id: string | number,
+    data?: any,
+    previousData: any = {},
+    options?: any
+) =>
+    useMuation(
+        { type: UPDATE, resource, payload: { id, data, previousData } },
+        { ...options, action: CRUD_UPDATE }
     );
-
-    return [update, {
-        resource,
-        basePath,
-        isLoading: false,
-    }];
-};
 
 export default useUpdate;
