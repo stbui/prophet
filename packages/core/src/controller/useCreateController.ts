@@ -5,8 +5,7 @@
  */
 
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudCreate } from '../actions';
+import { useCreate } from '../dataProvider';
 
 export interface CreateProps {
     resource: string;
@@ -14,6 +13,7 @@ export interface CreateProps {
     refresh?: boolean;
     hasEdit?: boolean;
     hasShow?: boolean;
+    record?: object;
 }
 
 export const getDefaultRedirectRoute = (hasEdit: boolean, hasShow: boolean) => {
@@ -29,23 +29,19 @@ export const getDefaultRedirectRoute = (hasEdit: boolean, hasShow: boolean) => {
 };
 
 const useCreateController = (props: CreateProps) => {
-    const { resource, basePath, hasEdit, hasShow } = props;
-    const dispatch = useDispatch();
+    const { resource, basePath, hasEdit, hasShow, record = {} } = props;
+
+    const [create, { loading: isSaving }] = useCreate(resource);
 
     const save = useCallback(
-        (data: any, callback?: any, redirect?: any, refresh?: any) => {
-            dispatch(
-                crudCreate(
-                    resource,
-                    basePath,
-                    data,
-                    redirect,
-                    refresh,
-                    callback
-                )
-            );
+        (
+            data: any,
+            { onSuccess, onFailure, refresh }: any = {},
+            redirect?: any
+        ) => {
+            create(null, { data }, { onSuccess, onFailure, refresh });
         },
-        [resource, basePath]
+        [resource, basePath, create]
     );
 
     return {
@@ -53,6 +49,7 @@ const useCreateController = (props: CreateProps) => {
         basePath,
         save,
         isLoading: false,
+        isSaving,
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };
 };

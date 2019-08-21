@@ -5,8 +5,7 @@
  */
 
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { crudDelete } from '../actions';
+import { useDelete } from '../dataProvider';
 
 export interface DeleteProps {
     resource: string;
@@ -15,13 +14,10 @@ export interface DeleteProps {
 
 export const useDeleteController = (props: DeleteProps) => {
     const { resource, basePath } = props;
-    const dispatch = useDispatch();
-
     const save = useCallback(
-        (data: any, callback?: any, refresh?: boolean) =>
-            dispatch(
-                crudDelete(resource, basePath, data.id, data, refresh, callback)
-            ),
+        (id: any, data, { onSuccess, onFailure, refresh }: any = {}) => {
+            useDelete(resource, id, data, { onSuccess, onFailure, refresh });
+        },
         [resource, basePath]
     );
 
