@@ -31,17 +31,16 @@ export const Layout = ({
                         match,
                     }),
                 })}
-                <DefaultLayout>
-                    {createElement(header)}
-                    <DefaultLayout.Content
-                        style={{
-                            margin: 24,
-                            backgroundColor: color,
-                        }}
-                    >
-                        {children}
-                    </DefaultLayout.Content>
-                </DefaultLayout>
+
+                {createElement(header)}
+                <DefaultLayout.Content
+                    style={{
+                        margin: 24,
+                        backgroundColor: color,
+                    }}
+                >
+                    {children}
+                </DefaultLayout.Content>
             </DefaultLayout>
             {createElement(notification)}
         </React.Fragment>
