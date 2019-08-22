@@ -12,38 +12,17 @@
 
 ### request
 
-### 默认
-
-```json
-{
-    "page": "1",
-    "perPage": "10"
-}
-```
-
 #### 分页
 
-http://127.0.0.1/users/1?page=1&perPage=10
+http://127.0.0.1/users?page=1&perPage=10
 
 #### 排序
 
-http://127.0.0.1/users/1?sort={name:'asc'}
-
-```json
-{
-    "sort": { "name": "asc" }
-}
-```
+http://127.0.0.1/users?sort=stbui&order=ASC
 
 #### 筛选
 
-http://127.0.0.1/users/1?filter={name:'stbui'}
-
-```json
-{
-    "filter": { "name": "stbui" }
-}
-```
+http://127.0.0.1/users?name=stbui&id=1
 
 ### response
 
@@ -53,6 +32,7 @@ GET http://127.0.0.1/users
 {
     "code": "0",
     "message": "操作成功",
+    "total": 100,
     "result": [
         {
             "id": 1 // 必要字段
