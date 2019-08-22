@@ -1,10 +1,9 @@
 import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from 'prophet-core';
-import { crudMetadata } from 'prophet-common';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
     return (
-        type: crudMetadata,
+        type: any,
         resource: string,
         params: any
     ): Promise<any> => {
@@ -12,17 +11,16 @@ export default (apiUrl: string, httpClient = fetch) => {
 
         switch (type) {
             case GET_LIST:
-                const { pagination, filter, ...ohter } = params;
-                const query = {
-                    ...filter,
-                    ...ohter,
-                };
+                const { page, perPage } = params.pagination;
+                const { field, order } = params.sort;
 
-                if (pagination) {
-                    const { page, perPage } = pagination;
-                    query.page = page;
-                    query.perPage = perPage;
-                }
+                const query = {
+                    ...params.filter,
+                    sort: field,
+                    order: order,
+                    page: page,
+                    perPage: perPage
+                };
 
                 url = `${apiUrl}/${resource}?${stringify(query)}`;
                 return httpClient(url)
