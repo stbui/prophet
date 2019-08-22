@@ -4,52 +4,46 @@
  * https://github.com/stbui
  */
 
-import { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { crudGetOne, crudUpdate } from '../actions';
+import { useCallback } from 'react';
+import { useUpdate, useGetOne } from '../dataProvider';
+import useVerison from './useVersion';
+
 
 export interface EditProps {
     resource: string;
     basePath: string;
     id: string | number;
-    refresh: boolean;
 }
 
 export const useEditController = (props: EditProps) => {
-    const { resource, basePath, id, refresh } = props;
-    const dispatch = useDispatch();
-    const record = useSelector((state: any) =>
-        state.resources[resource] ? state.resources[resource].data[id] : null
+    const { resource, basePath, id } = props;
+
+    const version = useVerison();
+    const { data: record, loading } = useGetOne(resource, id, {
+        version,
+    });
+
+    const [update, { loading: isSaving }] = useUpdate(
+        resource,
+        id,
+        {},
+        record
     );
 
     const save = useCallback(
-        (data: any, callback?: any, redirect?: any, refresh?: any) => {
-            dispatch(
-                crudUpdate(
-                    resource,
-                    basePath,
-                    id,
-                    data,
-                    redirect,
-                    refresh,
-                    callback
-                )
-            );
-        },
-        [resource, basePath]
+        (data: any, { onSuccess, onFailure, refresh }: any = {}) => update(null, { data }, { onSuccess, onFailure, refresh }),
+        [resource, basePath, update]
     );
-
-    useEffect(() => {
-        dispatch(crudGetOne(resource, basePath, id, refresh));
-    }, [resource, id]);
 
     return {
         resource,
         basePath,
         record,
         id,
-        isLoading: false,
+        isLoading: loading,
+        isSaving,
         save,
+        version
     };
 };
 

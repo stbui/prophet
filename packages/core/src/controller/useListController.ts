@@ -4,21 +4,21 @@
  * https://github.com/stbui
  */
 
-import { isValidElement, useState, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { isValidElement, useMemo } from 'react';
 import { useListParams } from './useListParams';
-import { crudGetList } from '../actions';
+import { useGetList } from '../dataProvider';
+import useVerison from './useVersion';
 
 export interface ListProps {
     resource: string;
     basePath: string;
     location: any;
-    hasCreate: any;
-    filterDefaultValues: any;
-    sort: any;
-    perPage: any;
-    filter: any;
-    debounce: any;
+    hasCreate?: boolean;
+    filterDefaultValues?: object;
+    sort?: any;
+    perPage?: number;
+    filter?: object;
+    debounce?: number;
 }
 
 export const useListController = (props: ListProps) => {
@@ -28,9 +28,9 @@ export const useListController = (props: ListProps) => {
         location,
         hasCreate,
         filterDefaultValues,
+        filter,
         sort,
         perPage = 10,
-        filter,
         debounce = 500,
     } = props;
 
@@ -38,11 +38,7 @@ export const useListController = (props: ListProps) => {
         throw new Error('<List filter={{}}>...</List>');
     }
 
-    const [loading, setLoading] = useState(true);
-    const dispatch = useDispatch();
-    const { data, list } = useSelector((state: any) => state.resources[resource]);
-    const { total, ids } = list;
-    const version = useSelector((state: any) => state.refresh);
+    const version = useVerison();
 
     const [query, queryMethod] = useListParams({
         resource,
@@ -53,24 +49,18 @@ export const useListController = (props: ListProps) => {
         debounce,
     });
 
-    useEffect(() => {
-        dispatch(
-            crudGetList(
-                resource,
-                {
-                    page: query.page,
-                    perPage: query.perPage,
-                },
-                { ...query.filter, ...filter },
-                { field: query.sort, order: query.order },
-                () => {
-                    setLoading(false)
-                }
-            )
-        );
-    }, [resource, basePath, query.page, query.perPage, query.sort, query.order, JSON.stringify(query.filterValues), version]);
+    const { data, ids, total, loading, loaded } = useGetList(
+        resource,
+        {
+            page: query.page,
+            perPage: query.perPage,
+        },
+        { ...query.filter, ...filter },
+        { field: query.sort, order: query.order },
+        { version }
+    );
 
-    if (!query.page && query.page > 1 && total > 0) {
+    if (!query.page && !(ids || []).length && query.page > 1 && total > 0) {
         queryMethod.setPage(query.page - 1);
     }
 
@@ -101,6 +91,7 @@ export const useListController = (props: ListProps) => {
         setPerPage: queryMethod.setPerPage,
         setSort: queryMethod.setSort,
         isLoading: loading,
+        loaded,
         version,
     };
 };
