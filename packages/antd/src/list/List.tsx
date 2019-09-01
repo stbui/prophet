@@ -1,5 +1,5 @@
 import React, { cloneElement, Children } from 'react';
-import { useListController, useLoading } from 'prophet-core';
+import { useListController } from 'prophet-core';
 import ListActions from './ListActions';
 import { Card } from 'antd';
 
@@ -16,16 +16,6 @@ ListView.defaultProps = {
     actions: <ListActions />,
 };
 
-const List = props => {
-    const loading = useLoading();
-
-    return (
-        <ListView
-            {...props}
-            {...useListController(props)}
-            isLoading={loading}
-        />
-    );
-};
+const List = props => <ListView {...props} {...useListController(props)} />;
 
 export default List;

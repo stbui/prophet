@@ -9,37 +9,54 @@ import data from './data';
 import list from './list';
 
 export default (previousState = {}, { type, payload, meta }) => {
-  switch (type) {
-    case REGISTER_RESOURCE:
-      const resuorceState = { props: payload, data: [], list: {} };
-      return { ...previousState, [payload.name]: resuorceState };
-    case UNREGISTER_RESOURCE:
-      return { resources: 'UNREGISTER_RESOURCE' };
-  }
+    switch (type) {
+        case REGISTER_RESOURCE:
+            const resuorceState = {
+                props: payload,
+                data: data(undefined, { type, payload, meta }),
+                list: list(undefined, { type, payload, meta }),
+            };
+            return { ...previousState, [payload.name]: resuorceState };
+        case UNREGISTER_RESOURCE:
+            return Object.keys(previousState).reduce((acc, key) => {
+                if (key === payload) {
+                    return acc;
+                }
 
-  if (!meta || !meta.resource) {
-    return previousState;
-  }
+                return { ...acc, [key]: previousState[key] };
+            }, {});
+    }
 
-  const resources = Object.keys(previousState);
+    if (!meta || !meta.resource) {
+        return previousState;
+    }
 
-  const newState = resources.reduce(
-    (acc, resource) => ({
-      ...acc,
-      [resource]:
-        meta.resource === resource
-          ? {
-              props: previousState[resource].props,
-              data: data(previousState[resource].data, { type, payload, meta }),
-              list: list(previousState[resource].list, { type, payload })
-            }
-          : previousState[resource]
-    }),
-    {}
-  );
+    const resources = Object.keys(previousState);
 
-  return newState;
+    const newState = resources.reduce(
+        (acc, resource) => ({
+            ...acc,
+            [resource]:
+                meta.resource === resource
+                    ? {
+                          props: previousState[resource].props,
+                          data: data(previousState[resource].data, {
+                              type,
+                              payload,
+                              meta,
+                          }),
+                          list: list(previousState[resource].list, {
+                              type,
+                              payload,
+                          }),
+                      }
+                    : previousState[resource],
+        }),
+        {}
+    );
+
+    return newState;
 };
 
 export const getResources = state =>
-  Object.keys(state).map(key => state[key].props);
+    Object.keys(state).map(key => state[key].props);

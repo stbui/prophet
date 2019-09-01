@@ -11,36 +11,7 @@ import {
     CREATE,
 } from '../../actions/dataFatchActions';
 import { FETCH_END } from '../../actions/fetchActions';
-import { pickBy } from '../../util';
-
-const defaultCacheDuration = 10 * 60 * 1000;
-
-/**
- *
- * @param newRecordIds [1,2,3,4,5,6,7,8,9]
- * @param oldRecordFetchedAt
- * @param now
- * @param cacheDuration
- */
-export const getFetchedAt = (
-    newRecordIds: any[],
-    oldRecordFetchedAt = {},
-    now = new Date(),
-    cacheDuration = defaultCacheDuration
-) => {
-    const newFetchedAt = {};
-    newRecordIds.forEach(recordId => (newFetchedAt[recordId] = now));
-
-    const latestValidDate = new Date();
-    latestValidDate.setTime(latestValidDate.getTime() - cacheDuration);
-
-    const stillValidFetchedAt = pickBy(
-        oldRecordFetchedAt,
-        date => date > latestValidDate
-    );
-
-    return { ...stillValidFetchedAt, ...newFetchedAt };
-};
+import { getFetchedAt } from '../../util';
 
 export const hideFetchedAt = records => {
     Object.defineProperty(records, 'fetchedAt', {
@@ -68,7 +39,7 @@ export const addRecords = (newRecords, oldRecords) => {
     return records;
 };
 
-export default (previousState = {}, { type, payload, meta }) => {
+export default (previousState = {}, { payload, meta }) => {
     if (!meta || !meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
         return previousState;
     }
