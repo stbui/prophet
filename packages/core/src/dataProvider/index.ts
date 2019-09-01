@@ -11,6 +11,7 @@ import useGetList from './useGetList';
 import useGetOne from './useGetOne';
 import useUpdate from './useUpdate';
 import useDelete from './useDelete';
+import useEdit from './useEdit';
 
 export {
     dataProviderContext,
@@ -26,4 +27,5 @@ export {
     useGetOne,
     useUpdate,
     useDelete,
+    useEdit,
 };

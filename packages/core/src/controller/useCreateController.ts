@@ -34,11 +34,7 @@ const useCreateController = (props: CreateProps) => {
     const [create, { loading: isSaving }] = useCreate(resource);
 
     const save = useCallback(
-        (
-            data: any,
-            { onSuccess, onFailure, refresh }: any = {},
-            redirect?: any
-        ) => {
+        (data: any, { onSuccess, onFailure, refresh }: any = {}) => {
             create(null, { data }, { onSuccess, onFailure, refresh });
         },
         [resource, basePath, create]

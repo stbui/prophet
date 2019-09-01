@@ -6,8 +6,6 @@
 
 import { useCallback } from 'react';
 import { useUpdate, useGetOne } from '../dataProvider';
-import useVerison from './useVersion';
-
 
 export interface EditProps {
     resource: string;
@@ -18,20 +16,13 @@ export interface EditProps {
 export const useEditController = (props: EditProps) => {
     const { resource, basePath, id } = props;
 
-    const version = useVerison();
-    const { data: record, loading } = useGetOne(resource, id, {
-        version,
-    });
+    const { data: record, loading } = useGetOne(resource, id);
 
-    const [update, { loading: isSaving }] = useUpdate(
-        resource,
-        id,
-        {},
-        record
-    );
+    const [update, { loading: isSaving }] = useUpdate(resource, id, {}, record);
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, refresh }: any = {}) => update(null, { data }, { onSuccess, onFailure, refresh }),
+        (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
+            update(null, { data }, { onSuccess, onFailure, refresh }),
         [resource, basePath, update]
     );
 
@@ -43,7 +34,6 @@ export const useEditController = (props: EditProps) => {
         isLoading: loading,
         isSaving,
         save,
-        version
     };
 };
 

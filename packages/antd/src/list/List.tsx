@@ -1,34 +1,31 @@
-import React, { cloneElement } from 'react';
-import { ListController } from 'prophet-core';
+import React, { cloneElement, Children } from 'react';
+import { useListController, useLoading } from 'prophet-core';
 import ListActions from './ListActions';
 import { Card } from 'antd';
 
-export interface IProps {
-    children?: any;
-    actions?: any;
-}
-
-export const ListView = ({
-    children,
-    isLoading,
-    title,
-    actions = <ListActions />,
-    ...other
-}) => {
+const ListView = ({ children, isLoading, title, actions, ...other }) => {
     return (
         <Card bordered={false} title={title} loading={isLoading}>
             {actions && cloneElement(actions, { ...other })}
-            {children && cloneElement(children, { ...other })}
+            {children && cloneElement(Children.only(children), { ...other })}
         </Card>
     );
 };
 
-export const List: any = (props: any) => (
-    <ListController {...props}>
-        {controllerProps => <ListView {...props} {...controllerProps} />}
-    </ListController>
-);
+ListView.defaultProps = {
+    actions: <ListActions />,
+};
 
-ListView.defautProps = {};
+const List = props => {
+    const loading = useLoading();
+
+    return (
+        <ListView
+            {...props}
+            {...useListController(props)}
+            isLoading={loading}
+        />
+    );
+};
 
 export default List;

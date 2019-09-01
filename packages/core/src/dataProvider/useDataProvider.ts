@@ -36,9 +36,11 @@ const UserList = () => {
 };
  */
 
+const defaultDataProvider = () => Promise.resolve();
+
 export const useDataProvider = () => {
     const dispatch = useDispatch();
-    const dataProvider = useContext(DataProviderContext);
+    const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
     return useCallback(
         (type, resource, payload, options) => {

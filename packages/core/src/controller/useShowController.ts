@@ -5,24 +5,17 @@
  */
 
 import { useGetOne } from '../dataProvider';
-import useVerison from './useVersion';
-import { useRefresh } from '../sideEffect';
 
 export interface ShowProps {
     resource: string;
     basePath: string;
     id: string | number;
-    refresh: boolean;
 }
 
 export const useShowController = (props: ShowProps) => {
     const { resource, basePath, id } = props;
-    const version = useVerison();
-    const refresh = useRefresh();
 
-    const { data: record, loading } = useGetOne(resource, id, {
-        version,
-    });
+    const { data: record, loading } = useGetOne(resource, id);
 
     return {
         resource,

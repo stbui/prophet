@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { ListController } from 'prophet-core';
+import { useListController, useLoading } from 'prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route } from 'react-router';
 import ListActions from './ListActions';
@@ -8,13 +8,15 @@ export const ListView = props => {
     const {
         children,
         isLoading,
-        actions = <ListActions />,
+        actions,
         basePath,
         create,
         edit,
         show,
+        destroyOnClose,
         ...other
     } = props;
+
     const handleClose = () => {
         const { history, basePath } = props;
         history.push(basePath);
@@ -107,10 +109,20 @@ export const ListView = props => {
     );
 };
 
-export const ListDrawer = props => (
-    <ListController {...props}>
-        {controllerProps => <ListView {...props} {...controllerProps} />}
-    </ListController>
-);
+ListView.defaultProps = {
+    actions: <ListActions />,
+    destroyOnClose: true,
+};
 
+export const ListDrawer = props => {
+    const loading = useLoading();
+
+    return (
+        <ListView
+            {...props}
+            {...useListController(props)}
+            isLoading={loading}
+        />
+    );
+};
 export default ListDrawer;

@@ -38,6 +38,6 @@ export const useGetOne = (
         },
         { ...options, action: CRUD_GET_ONE },
         state =>
-            state.resource[resource] ? state.resource[resource].data[id] : null
+            state.resources[resource] ? state.resources[resource].data[id] : null
     );
 export default useGetOne;

@@ -40,16 +40,16 @@ export const useGetList = (
         },
         { ...options, action: CRUD_GET_LIST },
         state =>
-            state.resource[resource] ? state.resource[resource].list.ids : null,
+            state.resources[resource] ? state.resources[resource].list.ids : null,
         state =>
-            state.resource[resource]
-                ? state.resource[resource].list.total
+            state.resources[resource]
+                ? state.resources[resource].list.total
                 : null
     );
 
     const data = useSelector(
         (state: any) =>
-            state.resource[resource] ? state.resource[resource].data : null,
+            state.resources[resource] ? state.resources[resource].data : null,
         shallowEqual
     );
 

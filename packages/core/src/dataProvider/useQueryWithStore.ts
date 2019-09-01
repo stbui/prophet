@@ -47,15 +47,21 @@ const isEmptyList = data =>
           Object.keys(data).length === 0 &&
           data.hasOwnProperty('fetchedAt');
 
+const defaultDataSelector = query => (state: any) => {
+    return undefined;
+};
+
+const defaultTotalSelector = () => null;
+
 const useQueryWithStore = (
     query: Query,
     options: QueryOptions = { action: 'CUSTOM_QUERY' },
-    dataSelector: (state: any) => any = () => undefined,
+    dataSelector: (state: any) => any = defaultDataSelector(query),
     totalSelector?: (state: any) => number
 ) => {
     const { type, resource, payload } = query;
     const data = useSelector(dataSelector);
-    const total = useSelector(totalSelector);
+    const total = useSelector(totalSelector || defaultTotalSelector);
 
     const [state, setState]: any = useState({
         data,
