@@ -13,7 +13,7 @@ export default (previousState = {}, { type, payload, meta }) => {
         case REGISTER_RESOURCE:
             const resuorceState = {
                 props: payload,
-                data: data(undefined, { type, payload, meta }),
+                data: data(undefined, { payload, meta }),
                 list: list(undefined, { type, payload, meta }),
             };
             return { ...previousState, [payload.name]: resuorceState };
@@ -39,17 +39,16 @@ export default (previousState = {}, { type, payload, meta }) => {
             [resource]:
                 meta.resource === resource
                     ? {
-                          props: previousState[resource].props,
-                          data: data(previousState[resource].data, {
-                              type,
-                              payload,
-                              meta,
-                          }),
-                          list: list(previousState[resource].list, {
-                              type,
-                              payload,
-                          }),
-                      }
+                        props: previousState[resource].props,
+                        data: data(previousState[resource].data, {
+                            payload,
+                            meta,
+                        }),
+                        list: list(previousState[resource].list, {
+                            type,
+                            payload,
+                        }),
+                    }
                     : previousState[resource],
         }),
         {}
