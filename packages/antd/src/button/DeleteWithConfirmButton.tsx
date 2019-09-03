@@ -6,7 +6,7 @@ import { Link } from '../Link';
 export const DeleteWithConfirmButton = props => {
     const { label, disabled, className, style, update, record } = props;
 
-    const onConfirm = () => update(record);
+    const onConfirm = () => update(record.id, record, { refresh: true });
 
     return (
         <Popconfirm

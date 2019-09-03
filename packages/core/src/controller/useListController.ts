@@ -7,6 +7,7 @@
 import { isValidElement, useMemo } from 'react';
 import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
+import useVerison from './useVersion';
 
 export interface ListProps {
     resource: string;
@@ -37,6 +38,8 @@ export const useListController = (props: ListProps) => {
         throw new Error('<List filter={{}}>...</List>');
     }
 
+    const version = useVerison();
+
     const [query, queryMethod] = useListParams({
         resource,
         location,
@@ -53,7 +56,8 @@ export const useListController = (props: ListProps) => {
             perPage: query.perPage,
         },
         { ...query.filter, ...filter },
-        { field: query.sort, order: query.order }
+        { field: query.sort, order: query.order },
+        { version }
     );
 
     if (!query.page && !(ids || []).length && query.page > 1 && total > 0) {
@@ -88,6 +92,7 @@ export const useListController = (props: ListProps) => {
         setSort: queryMethod.setSort,
         isLoading: loading,
         loaded,
+        version,
     };
 };
 
