@@ -1,6 +1,6 @@
 {
     "name": "prophet-data-json-server",
-    "version": "0.4.5",
+    "version": "0.4.6",
     "description": "用于构建中后台前端应用框架",
     "author": "stbui <w431106@163.com>",
     "homepage": "https://github.com/stbui/propht#readme",
@@ -22,7 +22,7 @@
         "url": "https://github.com/stbui/propht/issues"
     },
     "dependencies": {
-        "prophet-common": "0.4.0",
+        "prophet-common": "0.4.6",
         "prophet-core": "^0.4.5",
         "query-string": "~5.1.1"
     }
