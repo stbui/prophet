@@ -18,7 +18,8 @@ export const ids = (previousState = [], { type, payload }) => {
         case CRUD_GET_ONE_SUCCESS:
         case CRUD_CREATE_SUCCESS:
         case CRUD_UPDATE_SUCCESS:
-            return [payload.data.id];
+            // return [payload.data.id];
+            return previousState;
         default:
             return previousState;
     }
