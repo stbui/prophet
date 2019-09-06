@@ -4,10 +4,16 @@
 
 ## 特性
 
-- 基于 Ant Design 组件布局
-- 提炼后台应用的典型页面和场景
-- 提供 dataProvider 来适配各种数据规范
+-   提炼 CRUD 容器组件，快速开始前端开发
+-   基于 Ant Design 组件布局
+-   提炼后台应用的典型页面和场景
+-   提供 dataProvider 来适配各种数据规范
 
 ## 架构
 
-![架构](prophet.svg)
+![架构](prophet.png)
+
+-   ** 数据源: ** 后端接口提供方式，如 REST，Graphql， RPC 等
+-   ** 数据处理: ** 通过数据源提供来的数据进行规范化处理
+-   ** 组件/Hook: ** 将数据封装 CRUD 组件和 Hook
+-   ** UI: ** 包装成业务组件

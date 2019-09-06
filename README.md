@@ -4,9 +4,10 @@
 
 ## 特性
 
-- 基于 Ant Design 组件布局
-- 提炼后台应用的典型页面和场景
-- 提供 dataProvider 来适配各种数据规范
+-   提炼 CRUD 容器组件，快速开始前端开发
+-   基于 Ant Design 组件布局
+-   提炼后台应用的典型页面和场景
+-   提供 dataProvider 来适配各种数据规范
 
 # 架构
 
@@ -23,13 +24,13 @@ import { Prophet, Resource } from 'prophet-core';
 import dataJsonServer from 'prophet-data-json-server';
 
 <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
-  <Resource
-    name="users"
-    list={props => <div>list</div>}
-    edit={props => <div>edit</div>}
-    create={props => <div>create</div>}
-    show={props => <div>show</div>}
-  />
+    <Resource
+        name="users"
+        list={props => <div>list</div>}
+        edit={props => <div>edit</div>}
+        create={props => <div>create</div>}
+        show={props => <div>show</div>}
+    />
 </Prophet>;
 ```
 
