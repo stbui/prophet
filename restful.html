@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>介绍 · GitBook</title>
+        <title>接口规范 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="setup.html" />
+    <link rel="next" href="antd/antd.html" />
     
+    
+    <link rel="prev" href="setup.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -113,7 +115,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="restful.html">
+        <li class="chapter active" data-level="1.3" data-path="restful.html">
             
                 <a href="restful.html">
             
@@ -428,7 +430,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >介绍</a>
+        <a href="." >接口规范</a>
     </h1>
 </div>
 
@@ -443,49 +445,128 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4E2D;&#x540E;&#x53F0;&#x524D;&#x7AEF;&#x5E94;&#x7528;&#x6846;&#x67B6;&#xFF08;prophet&#xFF09;">&#x4E2D;&#x540E;&#x53F0;&#x524D;&#x7AEF;&#x5E94;&#x7528;&#x6846;&#x67B6;&#xFF08;Prophet&#xFF09;</h1>
-<p>&#x7528;&#x4E8E;&#x6784;&#x5EFA;&#x4F01;&#x4E1A;&#x7EA7; react &#x4E2D;&#x540E;&#x53F0;&#x524D;&#x7AEF;&#x5E94;&#x7528;&#x6846;&#x67B6;&#x3002;&#x57FA;&#x4E8E; redux &#x548C; redux-saga &#x6570;&#x636E;&#x6D41;&#x65B9;&#x6848;&#xFF0C;&#x63D0;&#x53D6;&#x51FA; CURD &#x7EC4;&#x4EF6;,&#x652F;&#x6301;&#x5404;&#x79CD;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x7684;&#x9002;&#x914D;&#x3002;</p>
-<h2 id="&#x7279;&#x6027;">&#x7279;&#x6027;</h2>
-<ul>
-<li>&#x63D0;&#x70BC; CRUD &#x5BB9;&#x5668;&#x7EC4;&#x4EF6;&#xFF0C;&#x5FEB;&#x901F;&#x5F00;&#x59CB;&#x524D;&#x7AEF;&#x5F00;&#x53D1;</li>
-<li>&#x57FA;&#x4E8E; Ant Design &#x7EC4;&#x4EF6;&#x5E03;&#x5C40;</li>
-<li>&#x63D0;&#x70BC;&#x540E;&#x53F0;&#x5E94;&#x7528;&#x7684;&#x5178;&#x578B;&#x9875;&#x9762;&#x548C;&#x573A;&#x666F;</li>
-<li>&#x63D0;&#x4F9B; dataProvider &#x6765;&#x5904;&#x7406;&#x5404;&#x79CD;&#x6570;&#x636E;&#x89C4;&#x8303;</li>
-</ul>
-<h2 id="&#x67B6;&#x6784;">&#x67B6;&#x6784;</h2>
-<p><img src="prophet.png" alt="&#x67B6;&#x6784;"></p>
-<ul>
-<li><strong> &#x6570;&#x636E;&#x6E90;: </strong> &#x540E;&#x7AEF;&#x63A5;&#x53E3;&#x63D0;&#x4F9B;&#x65B9;&#x5F0F;&#xFF0C;&#x5982; REST&#xFF0C;Graphql&#xFF0C; RPC &#x7B49;</li>
-<li><strong> &#x6570;&#x636E;&#x5904;&#x7406;: </strong> &#x901A;&#x8FC7;&#x6570;&#x636E;&#x6E90;&#x63D0;&#x4F9B;&#x6765;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x89C4;&#x8303;&#x5316;&#x5904;&#x7406;</li>
-<li><strong> &#x7EC4;&#x4EF6;/Hook: </strong> &#x5C06;&#x6570;&#x636E;&#x5C01;&#x88C5; CRUD &#x7EC4;&#x4EF6;&#x548C; Hook</li>
-<li><strong> UI: </strong> &#x5305;&#x88C5;&#x6210;&#x4E1A;&#x52A1;&#x7EC4;&#x4EF6;</li>
-</ul>
+                                <h2 id="&#x524D;&#x7AEF;&#x63A5;&#x53E3;&#x89C4;&#x8303;">&#x524D;&#x7AEF;&#x63A5;&#x53E3;&#x89C4;&#x8303;</h2>
+<h3 id="&#x6620;&#x5C04;-restful-&#x63A5;&#x53E3;">&#x6620;&#x5C04; RESTful &#x63A5;&#x53E3;</h3>
 <table>
 <thead>
 <tr>
-<th>Package</th>
-<th>Docs</th>
-<th>Description</th>
+<th style="text-align:left">&#x7C7B;&#x578B;</th>
+<th style="text-align:left">&#x65B9;&#x6CD5;</th>
+<th style="text-align:left">url &#x793A;&#x4F8B;</th>
+<th style="text-align:left">&#x8BF4;&#x660E;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="packages/core"><code>prophet-core</code></a></td>
-<td></td>
-<td>&#x5E95;&#x5C42;&#x7EC4;&#x4EF6;&#x7684;&#x5C01;&#x88C5;</td>
+<td style="text-align:left">GET_LIST</td>
+<td style="text-align:left">GET</td>
+<td style="text-align:left"><a href="http://127.0.0.1/users" target="_blank">http://127.0.0.1/users</a></td>
+<td style="text-align:left">&#x83B7;&#x53D6; users &#x5217;&#x8868;</td>
 </tr>
 <tr>
-<td><a href="packages/antd"><code>prophet-antd</code></a></td>
-<td></td>
-<td>antd UI &#x5B9E;&#x73B0;</td>
+<td style="text-align:left">GET_ONE</td>
+<td style="text-align:left">GET</td>
+<td style="text-align:left"><a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></td>
+<td style="text-align:left">&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684; users</td>
 </tr>
 <tr>
-<td><a href="packages/data-json-server"><code>prophet-data-json-server</code></a></td>
-<td></td>
-<td>REST &#x63A5;&#x53E3;&#x89C4;&#x8303;&#x5B9E;&#x73B0;</td>
+<td style="text-align:left">CREATE</td>
+<td style="text-align:left">POST</td>
+<td style="text-align:left"><a href="http://127.0.0.1/users" target="_blank">http://127.0.0.1/users</a></td>
+<td style="text-align:left">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; users</td>
+</tr>
+<tr>
+<td style="text-align:left">UPDATE</td>
+<td style="text-align:left">PUT</td>
+<td style="text-align:left"><a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></td>
+<td style="text-align:left">&#x66F4;&#x65B0; users</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left"><a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></td>
+<td style="text-align:left">&#x5220;&#x9664; users</td>
 </tr>
 </tbody>
 </table>
+<h3 id="request">request</h3>
+<h4 id="&#x5206;&#x9875;">&#x5206;&#x9875;</h4>
+<p><a href="http://127.0.0.1/users?page=1&amp;perPage=10" target="_blank">http://127.0.0.1/users?page=1&amp;perPage=10</a></p>
+<h4 id="&#x6392;&#x5E8F;">&#x6392;&#x5E8F;</h4>
+<p><a href="http://127.0.0.1/users?sort=stbui&amp;order=ASC" target="_blank">http://127.0.0.1/users?sort=stbui&amp;order=ASC</a></p>
+<h4 id="&#x7B5B;&#x9009;">&#x7B5B;&#x9009;</h4>
+<p><a href="http://127.0.0.1/users?name=stbui&amp;id=1" target="_blank">http://127.0.0.1/users?name=stbui&amp;id=1</a></p>
+<h3 id="response">response</h3>
+<p>GET <a href="http://127.0.0.1/users" target="_blank">http://127.0.0.1/users</a></p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x64CD;&#x4F5C;&#x6210;&#x529F;&quot;</span>,
+    <span class="hljs-string">&quot;total&quot;</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span> <span class="hljs-comment">// &#x5FC5;&#x8981;&#x5B57;&#x6BB5;</span>
+        },
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// &#x5FC5;&#x8981;&#x5B57;&#x6BB5;</span>
+        }
+    ]
+}
+</code></pre>
+<p>GET <a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x64CD;&#x4F5C;&#x6210;&#x529F;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>
+    }
+}
+</code></pre>
+<p>POST <a href="http://127.0.0.1/users" target="_blank">http://127.0.0.1/users</a></p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x64CD;&#x4F5C;&#x6210;&#x529F;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>
+    }
+}
+</code></pre>
+<p>PUT <a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x64CD;&#x4F5C;&#x6210;&#x529F;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>
+    }
+}
+</code></pre>
+<p>DELETE <a href="http://127.0.0.1/users/:id" target="_blank">http://127.0.0.1/users/:id</a></p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x64CD;&#x4F5C;&#x6210;&#x529F;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: {
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>
+    }
+}
+</code></pre>
+<h3 id="code">code</h3>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;500&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x7CFB;&#x7EDF;&#x5F02;&#x5E38;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;502&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x7CFB;&#x7EDF;&#x5F02;&#x5E38;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;404&quot;</span>,
+    <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&#x8BF7;&#x6C42;&#x4E0D;&#x5B58;&#x5728;&quot;</span>,
+    <span class="hljs-string">&quot;result&quot;</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
 
                                 
                                 </section>
@@ -513,8 +594,12 @@
 
             
                 
+                <a href="setup.html" class="navigation navigation-prev " aria-label="Previous page: 起步">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="setup.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 起步">
+                
+                <a href="antd/antd.html" class="navigation navigation-next " aria-label="Next page: UI">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -525,7 +610,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.1","depth":1,"next":{"title":"起步","level":"1.2","depth":1,"path":"setup.md","ref":"setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2019-09-07T12:32:05.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-07T12:39:02.275Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"接口规范","level":"1.3","depth":1,"next":{"title":"UI","level":"1.4","depth":1,"path":"antd/antd.md","ref":"antd/antd.md","articles":[{"title":"Layout","level":"1.4.1","depth":2,"path":"antd/Layout.md","ref":"antd/Layout.md","articles":[]},{"title":"List","level":"1.4.2","depth":2,"path":"antd/List.md","ref":"antd/List.md","articles":[]},{"title":"Create","level":"1.4.3","depth":2,"path":"antd/Create.md","ref":"antd/Create.md","articles":[]},{"title":"Edit","level":"1.4.4","depth":2,"path":"antd/Edit.md","ref":"antd/Edit.md","articles":[]},{"title":"Show","level":"1.4.5","depth":2,"path":"antd/Show.md","ref":"antd/Show.md","articles":[]},{"title":"Delete","level":"1.4.6","depth":2,"path":"antd/Delete.md","ref":"antd/Delete.md","articles":[]},{"title":"Datagrid","level":"1.4.7","depth":2,"path":"antd/Datagrid.md","ref":"antd/Datagrid.md","articles":[]}]},"previous":{"title":"起步","level":"1.2","depth":1,"path":"setup.md","ref":"setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"restful.md","mtime":"2019-09-07T04:29:14.242Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-07T12:39:02.275Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
