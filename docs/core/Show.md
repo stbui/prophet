@@ -5,7 +5,7 @@
 ## 组件依赖关系
 
 ```
-ShowController -> useShowController -> useShow -> useMuation -> useDataProvider -> ajax
+ShowController -> useShowController -> useShow -> useGetOne -> useDataProvider -> ajax
 ```
 
 ## ShowController 示例
@@ -74,17 +74,13 @@ const UserProfile = ({ record }) => {
 };
 ```
 
-### useMuation 示例
+### useGetOne 示例
 
 ```js
-import { useMutation } from 'prophet-core';
+import { useGetOne } from 'prophet-core';
 
-const UserProfile = record => {
-    const [update, { data, loading, error }] = useMutation({
-        type: 'UPDATE',
-        resource: 'users',
-        payload: { id: record.id, data: { username: 'stbui' } },
-    });
+cconst UserProfile = record => {
+    const { data, loading, error } = useGetOne('users', record.id);
 
     if (loading) {
         return <Loading />;
@@ -94,29 +90,7 @@ const UserProfile = record => {
         return <Error />;
     }
 
-    return <div onClick={update}>{data.username}</div>;
-};
-
-const UserProfile = record => {
-    const [update, { data, loading, error }] = useMutation({
-        type: 'UPDATE',
-        resource: 'users',
-        payload: { id: record.id, data: { username: 'stbui' } },
-    });
-
-    if (loading) {
-        return <Loading />;
-    }
-
-    if (error) {
-        return <Error />;
-    }
-
-    return (
-        <div onClick={() => update(null, { data: { updateAt: new Date() } })}>
-            {data.username}
-        </div>
-    );
+    return <div>{data.username}</div>;
 };
 ```
 

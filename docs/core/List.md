@@ -1,22 +1,147 @@
 # List
 
-用于抓取数据列表
+List 组件
+
+## 组件依赖关系
+
+```
+ListController -> useListController -> useGetList -> useQueryWithStore -> useDataProvider -> ajax
+```
 
 ## 示例
 
-### 基本用法
+```js
+import { ListController } from 'prophet-core';
+
+export default props => {
+    <ListController {...props}>...</ListController>;
+};
+```
 
 ## API
 
-| 属性             | 类型   | 默认值 | 可选值／参数 | 说明 |
-| :--------------- | :----- | :----- | :----------- | :--- |
-| resource         | string |        |              |      |
-| basePath         |        |        |              |      |
-| params           |        |        |              |      |
-| changeParams     |        |        |              |      |
-| setFiltersParams |        |        |              |      |
-| setPageParams    |        |        |              |      |
-| setPage          |        |        |              |      |
-| location         |        |        |              |      |
-| filter           |        |        |              |      |
-| query            |        |        |              |      |
+| 属性     | 类型   | 默认值 | 可选值／参数 | 说明 |
+| :------- | :----- | :----- | :----------- | :--- |
+| resource | string |        | 否           |      |
+| basePath | string |        | 否           |      |
+
+## useListController 示例
+
+```js
+import { useListController } from 'prophet-core';
+
+export default props => {
+    const {
+        data,
+        ids,
+        isLoading,
+        total,
+        page,
+        perPage,
+        filterValues,
+        setFilters,
+        setPage,
+        setPerPage,
+        setSort,
+        error,
+    } = useListController(props);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+
+    return <div>{ids.map(id => data[id].username)}</div>;
+};
+```
+
+## useGetList 示例
+
+```js
+import { useGetList } from 'prophet-core';
+
+const UserList = () => {
+    const { data, ids, loading, error } = useGetList(
+        'users',
+        { page: 1, perPage: 10 },
+        { username: 'stbui' },
+        { field: 'id', order: 'DESC' }
+    );
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+
+    return <div>{ids.map(id => data[id].username)}</div>;
+};
+```
+
+### useQueryWithStore 示例
+
+```js
+import { useQueryWithStore } from 'prophet-core';
+
+const UserProfile = record => {
+    const { data, ids, total, loading, loaded, error } = useQueryWithStore(
+        {
+            type: 'GET_LIST',
+            resource: 'users',
+            payload: { pagination: {}, filter: {}, sort: {} },
+        },
+        { action: CRUD_GET_LIST },
+        state =>
+            state.resources[resource]
+                ? state.resources[resource].list.ids
+                : null,
+        state =>
+            state.resources[resource]
+                ? state.resources[resource].list.total
+                : null
+    );
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <Error />;
+    }
+
+    return <div>{data.username}</div>;
+};
+```
+
+### useDataProvider 示例
+
+```js
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useDataProvider, showNotification } from 'prophet-core';
+
+const UserList = () => {
+    const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
+    const dataProvider = useDataProvider();
+
+    useEffect(() => {
+        dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
+            .then(({ data }) => setUsers(data))
+            .catch(error => dispatch(showNotification('error', error.message)));
+    }, []);
+
+    return (
+        <React.Fragment>
+            {users.map((user, key) => (
+                <UserDetail user={user} key={key} />
+            ))}
+        </React.Fragment>
+    );
+};
+```

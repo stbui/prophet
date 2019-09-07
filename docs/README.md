@@ -17,3 +17,9 @@
 -   ** 数据处理: ** 通过数据源提供来的数据进行规范化处理
 -   ** 组件/Hook: ** 将数据封装 CRUD 组件和 Hook
 -   ** UI: ** 包装成业务组件
+
+| Package                                                  | Docs | Description       |
+| -------------------------------------------------------- | ---- | ----------------- |
+| [`prophet-core`](/packages/core)                         |      | 底层组件的封装    |
+| [`prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
+| [`prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |

@@ -4,6 +4,12 @@
 
 ### 基本用法
 
+```js
+import { Layout } from 'prophet-antd';
+
+<Prophet layout={Layout}>...</Prophet>;
+```
+
 ## API
 
 | 属性   | 类型          | 默认值              | 实现参考                         |

@@ -1,8 +1,8 @@
 # dataProvider
 
-用于统一不同接口数据规范
+用于处理接口数据规范
 
-## 映射 RESTful 服务器接口
+## RESTful 接口规范实现
 
 | 类型     | 方法   | url 示例                   | 说明 |
 | :------- | :----- | :------------------------- | :--- |
@@ -19,25 +19,25 @@ import { GET_LIST, CREATE, UPDATE, DELETE } from 'prophet-core';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
-  return (type, resource, params) => {
-    let url = '';
+    return (type, resource, params) => {
+        let url = '';
 
-    switch (type) {
-      case GET_LIST:
-        url = `${apiUrl}/${resource}?${stringify(params)}`;
-        return httpClient(url)
-          .then(resopnse => resopnse.json())
-          .then(response => ({ data: response, total: 0 }));
-      case CREATE:
-        return;
-      case UPDATE:
-        return;
-      case DELETE:
-        return;
-    }
+        switch (type) {
+            case GET_LIST:
+                url = `${apiUrl}/${resource}?${stringify(params)}`;
+                return httpClient(url)
+                    .then(resopnse => resopnse.json())
+                    .then(response => ({ data: response, total: 0 }));
+            case CREATE:
+                return;
+            case UPDATE:
+                return;
+            case DELETE:
+                return;
+        }
 
-    // 其他操作处理
-  };
+        // 其他操作处理
+    };
 };
 ```
 
@@ -48,7 +48,7 @@ export default (apiUrl: string, httpClient = fetch) => {
 ```js
 import dataProvider from 'prophet-json-demo';
 dataProvider('http://127.0.0.1')('GET_LIST', 'users').then(response => {
-  console.log(response);
+    console.log(response);
 });
 /**
  * console.log
@@ -61,18 +61,12 @@ dataProvider('http://127.0.0.1')('GET_LIST', 'users').then(response => {
 ```js
 import dataProvider from 'prophet-json-demo';
 dataProvider('http://127.0.0.1:3000')('GET_EDIT', 'users', { id: 1 }).then(
-  response => {
-    console.log(response);
-  }
+    response => {
+        console.log(response);
+    }
 );
 /**
  * console.log
  * {data: {}}
  */
 ```
-
-## API
-
-| 属性 | 类型 | 默认值 | 可选值／参数 | 说明 |
-| :--- | :--- | :----- | :----------- | :--- |
-
