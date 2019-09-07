@@ -7,7 +7,7 @@
 -   提炼 CRUD 容器组件，快速开始前端开发
 -   基于 Ant Design 组件布局
 -   提炼后台应用的典型页面和场景
--   提供 dataProvider 来适配各种数据规范
+-   提供 dataProvider 来处理各种数据规范
 
 ## 架构
 

@@ -1,5 +1,7 @@
 # 快速开始
 
+create-react-app 脚手架快速创建项目
+
 ```bash
 npm install prophet-core@latest prophet-antd@latest prophet-data-json-server@latest
 ```

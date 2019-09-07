@@ -7,23 +7,24 @@
 -   提炼 CRUD 容器组件，快速开始前端开发
 -   基于 Ant Design 组件布局
 -   提炼后台应用的典型页面和场景
--   提供 dataProvider 来适配各种数据规范
+-   提供 dataProvider 来处理各种数据规范
 
 # 架构
 
-![架构](docs/prophet.svg)
+![架构](docs/prophet.png)
 
 ## 起步
 
 ```bash
-npm install prophet-core
+npm install prophet-core@latest prophet-antd@latest prophet-data-json-server@latest
 ```
 
 ```js
 import { Prophet, Resource } from 'prophet-core';
+import { Layout } from 'prophet-antd';
 import dataJsonServer from 'prophet-data-json-server';
 
-<Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
+<Prophet layout={Layout} dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
     <Resource
         name="users"
         list={props => <div>list</div>}
@@ -36,16 +37,8 @@ import dataJsonServer from 'prophet-data-json-server';
 
 ## Packages
 
-| Package                                                  | Docs | Description |
-| -------------------------------------------------------- | ---- | ----------- |
-| [`prophet-core`](/packages/core)                         |      |             |
-| [`prophet-antd`](/packages/antd)                         |      |             |
-| [`prophet-data-json-server`](/packages/data-json-server) |      |             |
-
-## dev
-
-```bash
-npm install
-npm run build
-npm run demo
-```
+| Package                                                  | Docs | Description       |
+| -------------------------------------------------------- | ---- | ----------------- |
+| [`prophet-core`](/packages/core)                         |      | 底层组件的封装    |
+| [`prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
+| [`prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |
