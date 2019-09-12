@@ -1,12 +1,21 @@
 import React from 'react';
 import { useDeleteController } from 'prophet-core';
-import { Popconfirm } from 'antd';
+import { Popconfirm, message } from 'antd';
 import { Link } from '../Link';
 
 export const DeleteWithConfirmButton = props => {
     const { label, disabled, className, style, update, record } = props;
 
-    const onConfirm = () => update(record.id, record, { refresh: true });
+    const onConfirm = () =>
+        update(record.id, record, {
+            onSuccess() {
+                message.info('删除成功');
+            },
+            onFailure(error) {
+                message.error(error.message);
+            },
+            refresh: true,
+        });
 
     return (
         <Popconfirm
