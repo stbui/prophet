@@ -90,7 +90,7 @@ export const useListController = (props: ListProps) => {
         setPage: queryMethod.setPage,
         setPerPage: queryMethod.setPerPage,
         setSort: queryMethod.setSort,
-        isLoading: loading,
+        loading,
         loaded,
         version,
     };

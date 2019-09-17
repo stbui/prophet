@@ -21,7 +21,7 @@ export const useShowController = (props: ShowProps) => {
         resource,
         basePath,
         record,
-        isLoading: loading,
+        loading,
     };
 };
 

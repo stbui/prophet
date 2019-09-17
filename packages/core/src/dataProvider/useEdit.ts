@@ -60,7 +60,7 @@ export const useEdit = (props: EditProps) => {
         basePath,
         record,
         id,
-        isLoading: loading,
+        loading,
         isSaving,
         save,
     };

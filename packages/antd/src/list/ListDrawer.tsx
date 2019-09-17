@@ -7,7 +7,7 @@ import ListActions from './ListActions';
 export const ListView = props => {
     const {
         children,
-        isLoading,
+        loading,
         actions,
         basePath,
         create,
@@ -36,7 +36,7 @@ export const ListView = props => {
                     ...other,
                     ...resource,
                 })}
-            <Spin spinning={isLoading}>
+            <Spin spinning={loading}>
                 {children &&
                     cloneElement(children, { basePath, ...other, ...resource })}
             </Spin>

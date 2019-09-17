@@ -44,7 +44,7 @@ const useCreateController = (props: CreateProps) => {
         resource,
         basePath,
         save,
-        isLoading: false,
+        loading: false,
         isSaving,
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };

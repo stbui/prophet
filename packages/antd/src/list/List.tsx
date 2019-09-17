@@ -3,9 +3,9 @@ import { useListController } from 'prophet-core';
 import ListActions from './ListActions';
 import { Card } from 'antd';
 
-const ListView = ({ children, isLoading, title, actions, ...other }) => {
+const ListView = ({ children, loading, title, actions, ...other }) => {
     return (
-        <Card bordered={false} title={title} loading={isLoading}>
+        <Card bordered={false} title={title} loading={loading}>
             {actions && cloneElement(actions, { ...other })}
             {children && cloneElement(Children.only(children), { ...other })}
         </Card>

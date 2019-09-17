@@ -6,13 +6,13 @@ export const EditView = ({
     children,
     id,
     title,
-    isLoading,
+    loading,
     basePath,
     resource,
     record,
     save,
 }) => (
-    <Card bordered={false} title={title} loading={isLoading}>
+    <Card bordered={false} title={title} loading={loading}>
         {record
             ? cloneElement(children, {
                   basePath,
