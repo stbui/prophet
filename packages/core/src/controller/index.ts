@@ -19,6 +19,7 @@ import useDeleteController from './useDeleteController';
 import usePaginationState from './usePaginationState';
 import { useListParams, parseQueryFromLocation } from './useListParams';
 import useLoading from './useLoading';
+import useVersion from './useVersion'
 
 export {
     ListController,
@@ -35,4 +36,5 @@ export {
     useListParams,
     parseQueryFromLocation,
     useLoading,
+    useVersion
 };
