@@ -10,7 +10,6 @@
         "release": "yarn run build && lerna publish --exact --conventional-commits",
         "demo": "cd examples/demo && yarn run start",
         "start": "cd examples/starter && yarn run start",
-        "test": "echo \"Error: no test specified\" && exit 1",
         "docs": "cd docs && gitbook build",
         "prettier": "prettier --config ./.prettierrc.js --write --list-different \"packages/*/src/**/*.{js,json,ts,tsx}\"",
         "start:docs": "cd docs && gitbook serve",
@@ -26,11 +25,11 @@
         "examples/*"
     ],
     "devDependencies": {
-        "gh-pages": "^2.0.1",
+        "gh-pages": "^2.1.1",
         "gitbook-cli": "^2.3.2",
-        "lerna": "^3.15.0",
+        "lerna": "^3.16.4",
         "prettier": "^1.18.2",
-        "typescript": "^3.5.3",
-        "conventional-changelog-cli": "^2.0.21"
+        "typescript": "^3.6.3",
+        "conventional-changelog-cli": "^2.0.23"
     }
 }
