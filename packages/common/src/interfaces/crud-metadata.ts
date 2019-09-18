@@ -1,6 +1,6 @@
 export interface crudMetadata {
-  GET_LIST?: string;
-  CREATE?: string;
-  UPDATE?: string;
-  DELETE?: string;
+    GET_LIST?: string;
+    CREATE?: string;
+    UPDATE?: string;
+    DELETE?: string;
 }

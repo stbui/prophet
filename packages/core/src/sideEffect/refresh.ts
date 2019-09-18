@@ -5,8 +5,8 @@ function* handleRefresh() {
     yield put(refreshView());
 }
 
-export const takeRefreshActions = action => action.meta && action.meta.refresh
+export const takeRefreshActions = action => action.meta && action.meta.refresh;
 
-export default function* () {
+export default function*() {
     yield takeEvery(takeRefreshActions, handleRefresh);
 }

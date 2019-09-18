@@ -18,21 +18,20 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_GET_PERMISSIONS = 'AUTH_GET_PERMISSIONS';
 
-
 export const userLogin = (payload: object) => ({
     type: USER_LOGIN,
     payload,
-    meta: { auth: true }
-})
+    meta: { auth: true },
+});
 
 export const userCheck = (payload: object) => ({
     type: USER_CHECK,
     payload,
-    meta: { auth: true }
-})
+    meta: { auth: true },
+});
 
 export const userLogout = (redirectTo?: string) => ({
     type: USER_LOGOUT,
     payload: { redirectTo },
-    meta: { auth: true }
-})
+    meta: { auth: true },
+});

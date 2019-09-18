@@ -4,48 +4,48 @@ import { notification as notice } from 'antd';
 import { hideNotification } from 'prophet-core';
 
 export class Notify extends Component<any> {
-  state = {
-    open: false
-  };
+    state = {
+        open: false,
+    };
 
-  componentWillMount() {
-    this.setOpenState(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setOpenState(nextProps);
-  }
-
-  setOpenState({ notification }: any) {
-    if (notification) {
-      this.openNotification(notification);
-    } else {
-      this.destroyNotification();
+    componentWillMount() {
+        this.setOpenState(this.props);
     }
-  }
 
-  destroyNotification() {
-    this.props.hideNotification();
-    notice.destroy();
-  }
+    componentWillReceiveProps(nextProps) {
+        this.setOpenState(nextProps);
+    }
 
-  openNotification(notification) {
-    notice[notification.type]({
-      message: notification.message,
-      description: notification.description
-    });
-  }
+    setOpenState({ notification }: any) {
+        if (notification) {
+            this.openNotification(notification);
+        } else {
+            this.destroyNotification();
+        }
+    }
 
-  render() {
-    return null;
-  }
+    destroyNotification() {
+        this.props.hideNotification();
+        notice.destroy();
+    }
+
+    openNotification(notification) {
+        notice[notification.type]({
+            message: notification.message,
+            description: notification.description,
+        });
+    }
+
+    render() {
+        return null;
+    }
 }
 
 const mapStateToProps = state => {
-  return { notification: state.notifications[0] };
+    return { notification: state.notifications[0] };
 };
 
 export default connect(
-  mapStateToProps,
-  { hideNotification }
+    mapStateToProps,
+    { hideNotification }
 )(Notify);

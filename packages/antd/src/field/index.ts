@@ -1,1 +1,1 @@
-export const filed = 'test'
+export const filed = 'test';

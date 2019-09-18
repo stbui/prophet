@@ -2,11 +2,7 @@ import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from 'prophet-core';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {
-    return (
-        type: any,
-        resource: string,
-        params: any
-    ): Promise<any> => {
+    return (type: any, resource: string, params: any): Promise<any> => {
         let url: string = '';
 
         switch (type) {
@@ -19,7 +15,7 @@ export default (apiUrl: string, httpClient = fetch) => {
                     sort: field,
                     order: order,
                     page: page,
-                    perPage: perPage
+                    perPage: perPage,
                 };
 
                 url = `${apiUrl}/${resource}?${stringify(query)}`;

@@ -40,7 +40,9 @@ export const useGetList = (
         },
         { ...options, action: CRUD_GET_LIST },
         state =>
-            state.resources[resource] ? state.resources[resource].list.ids : null,
+            state.resources[resource]
+                ? state.resources[resource].list.ids
+                : null,
         state =>
             state.resources[resource]
                 ? state.resources[resource].list.total

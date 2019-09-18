@@ -11,22 +11,22 @@ export const SET_PER_PAGE = 'SET_PER_PAGE';
 export const SET_FILTERS = 'SET_FILTERS';
 
 export const changeListParams = (resource: string, params: any) => ({
-  type: CRUD_CHANGE_LIST_PARAMS,
-  payload: params,
-  meta: { resource }
+    type: CRUD_CHANGE_LIST_PARAMS,
+    payload: params,
+    meta: { resource },
 });
 
 export const setPageParams = (page: number) => ({
-  type: SET_PAGE,
-  payload: page
+    type: SET_PAGE,
+    payload: page,
 });
 
 export const setPerPageParams = (perPage: number) => ({
-  type: SET_PER_PAGE,
-  payload: perPage
+    type: SET_PER_PAGE,
+    payload: perPage,
 });
 
 export const setFiltersParams = (filters: any) => ({
-  type: SET_FILTERS,
-  payload: filters
+    type: SET_FILTERS,
+    payload: filters,
 });

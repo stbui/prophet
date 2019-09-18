@@ -20,7 +20,7 @@ export const useDeleteController = (props: DeleteProps) => {
 
     const save = useCallback(
         (id: any, data, { onSuccess, onFailure, refresh }: any = {}) => {
-            update(null, { id, data }, { onSuccess, onFailure, refresh })
+            update(null, { id, data }, { onSuccess, onFailure, refresh });
         },
         [resource, basePath, update]
     );
@@ -29,7 +29,7 @@ export const useDeleteController = (props: DeleteProps) => {
         resource,
         basePath,
         update: save,
-        isDeleted: isDeleted
+        isDeleted: isDeleted,
     };
 };
 

@@ -1,6 +1,14 @@
-import { all, takeEvery, put, call, } from 'redux-saga/effects'
-import { USER_LOGIN, USER_CHECK, USER_CHECK_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_LOADING, USER_LOGIN_SUCCESS, USER_LOGOUT } from '../actions'
-import { AUTH_LOGIN, AUTH_CHECK, AUTH_ERROR, AUTH_LOGOUT } from '../actions'
+import { all, takeEvery, put, call } from 'redux-saga/effects';
+import {
+    USER_LOGIN,
+    USER_CHECK,
+    USER_CHECK_SUCCESS,
+    USER_LOGIN_FAILURE,
+    USER_LOGIN_LOADING,
+    USER_LOGIN_SUCCESS,
+    USER_LOGOUT,
+} from '../actions';
+import { AUTH_LOGIN, AUTH_CHECK, AUTH_ERROR, AUTH_LOGOUT } from '../actions';
 
 export function* handleAuth(authProvider: any, action: any) {
     const { type, payload, error, meta } = action;
@@ -10,7 +18,11 @@ export function* handleAuth(authProvider: any, action: any) {
             try {
                 yield put({ type: USER_LOGIN_LOADING });
 
-                const authPayload = yield call(authProvider, AUTH_LOGIN, payload)
+                const authPayload = yield call(
+                    authProvider,
+                    AUTH_LOGIN,
+                    payload
+                );
                 yield put({
                     type: USER_LOGIN_SUCCESS,
                     payload: authPayload,
@@ -34,17 +46,16 @@ export function* handleAuth(authProvider: any, action: any) {
             yield call(authProvider, AUTH_LOGOUT);
             break;
     }
-
 }
 
-const takeAuthAction = action => action.meta && action.meta.auth
+const takeAuthAction = action => action.meta && action.meta.auth;
 
-export default (authProvider) => {
+export default authProvider => {
     if (!authProvider) {
-        return () => null
+        return () => null;
     }
 
     return function* watchAuth() {
-        yield all([takeEvery(takeAuthAction, handleAuth, authProvider)])
-    }
-}
+        yield all([takeEvery(takeAuthAction, handleAuth, authProvider)]);
+    };
+};

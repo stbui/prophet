@@ -1,5 +1,5 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
 const DataProviderContext = createContext(null);
 
-export default DataProviderContext
+export default DataProviderContext;
