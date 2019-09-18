@@ -31,7 +31,7 @@ export const Datagrid = props => {
     const handleShowTotal = () =>
         `共 ${total} 条记录 第 ${page}/${Math.ceil(total / perPage)} 页`;
 
-    const columns = [];
+    const columns: any = [];
 
     Children.map(children, (child, key) => {
         const { children, dataIndex, ...other } = child.props;

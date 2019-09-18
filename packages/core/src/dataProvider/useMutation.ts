@@ -81,7 +81,7 @@ const useMutation = (query: Query, options: QueryOptions) => {
                     ...callTimeOptions,
                 }
             )
-                .then(({ data, total }) => {
+                .then(({ data, total }: any) => {
                     setState({
                         data,
                         total,

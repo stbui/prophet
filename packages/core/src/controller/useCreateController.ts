@@ -16,7 +16,10 @@ export interface CreateProps {
     record?: object;
 }
 
-export const getDefaultRedirectRoute = (hasEdit: boolean, hasShow: boolean) => {
+export const getDefaultRedirectRoute = (
+    hasEdit?: boolean,
+    hasShow?: boolean
+) => {
     if (hasEdit) {
         return 'edit';
     }

@@ -41,7 +41,7 @@ export const ListView = props => {
                     cloneElement(children, { basePath, ...other, ...resource })}
             </Spin>
             <Route exact extace path={`${basePath}/:id`}>
-                {({ match }) => {
+                {({ match }: any) => {
                     const isMatch =
                         match && match.params && match.params.id !== 'create';
                     return edit ? (
@@ -65,7 +65,7 @@ export const ListView = props => {
             </Route>
 
             <Route exact path={`${props.basePath}/:id/show`}>
-                {({ match }) => {
+                {({ match }: any) => {
                     const isMatch =
                         match && match.params && match.params.id !== 'create';
                     return show ? (

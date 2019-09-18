@@ -2,6 +2,7 @@ function keys(obj) {
     const keyList = [];
     for (let k in obj) {
         if (obj.hasOwnProperty(k)) {
+            //@ts-ignore
             keyList.push(k);
         }
     }

@@ -36,7 +36,7 @@ const UserList = () => {
 };
  */
 
-const defaultDataProvider = () => Promise.resolve();
+const defaultDataProvider = (type, resource, payload) => Promise.resolve();
 
 export const useDataProvider = () => {
     const dispatch = useDispatch();

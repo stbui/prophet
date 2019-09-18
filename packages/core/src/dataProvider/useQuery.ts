@@ -73,7 +73,7 @@ const useQuery = (query: Query, options = {}) => {
 
     useEffect(() => {
         dataProvider(type, resource, payload, options)
-            .then(({ data, total }) => {
+            .then(({ data, total }: any) => {
                 setState({
                     data,
                     total,

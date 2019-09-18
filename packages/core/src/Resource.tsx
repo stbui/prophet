@@ -21,7 +21,7 @@ export interface IProps {
     match?: any;
     lazy?: any;
     fallback?: any;
-    registerResource?: (resource: any) => void;
+    registerResource?: any;
 }
 
 // @connect(
