@@ -1,10 +1,22 @@
 import { useState, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { parse, stringify } from 'query-string';
 import { push } from 'connected-react-router';
 import { changeListParams } from '../actions/listActions';
 import queryReducer from '../reducers/resources/list/queryReducer';
 import { pickBy, isEqual, removeKey } from '../util';
+
+// const [query, queryMethod] = useListParams({ resource: 'users', location: {}, filterDefaultValues: { username: 'stbui' }, sort: { field: 'id', order: 'ASC' }, perPage: 20 })
+
+interface Options {
+    resource: string;
+    location: Location;
+    filterDefaultValues?: object;
+    sort?: object;
+    perPage?: number;
+    debounce?: number;
+}
+
 
 export const useListParams = ({
     resource,
@@ -13,11 +25,11 @@ export const useListParams = ({
     sort = { field: 'id', order: 'ASC' },
     perPage = 10,
     debounce = 500,
-}) => {
+}: Options) => {
     const [displayedFilters, setDisplayedFilters] = useState({});
     const dispatch = useDispatch();
     const { params } = useSelector(
-        (state: any) => state.resources[resource].list
+        (state: any) => state.resources[resource].list, shallowEqual
     );
 
     const requestSignature = [
@@ -75,13 +87,13 @@ export const useListParams = ({
     }, requestSignature);
 
     const hideFilter = useCallback(filterName => {
-        setDisplayedFilters({ [filterName]: false });
+        setDisplayedFilters((previousFilters) => ({ ...previousFilters, [filterName]: false }));
         const newFilters = removeKey(filterValues, filterName);
         setFilters(newFilters);
     }, requestSignature);
 
     const showFilter = useCallback((filterName, defaultValue) => {
-        setDisplayedFilters({ [filterName]: true });
+        setDisplayedFilters((previousFilters) => ({ ...previousFilters, [filterName]: true }));
         if (typeof defaultValue !== 'undefined') {
             setFilters({
                 ...filterValues,
@@ -156,8 +168,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-            ? { ...params }
-            : { filter: filterDefaultValues || {} };
+                ? { ...params }
+                : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;
