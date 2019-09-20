@@ -16,14 +16,15 @@ export default function configureStore({
     initialState,
     history,
     dataProvider,
-    authProvider,
+    authProvider = null,
     customSagas = [],
+    customReducers = {},
 }) {
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [routerMiddleware(history), sagaMiddleware];
     const enhancers = [applyMiddleware(...middlewares)];
     const store = createStore(
-        rootReducer(history),
+        rootReducer(history, customReducers),
         initialState,
         compose(...enhancers)
     );

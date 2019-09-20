@@ -6,6 +6,7 @@
 
 import { useCallback } from 'react';
 import { useDelete } from '../dataProvider';
+import { useNotify, useRedirect } from '../sideEffect';
 
 export interface DeleteProps {
     resource: string;
@@ -16,11 +17,27 @@ export interface DeleteProps {
 
 export const useDeleteController = (props: DeleteProps) => {
     const { resource, basePath, id, record } = props;
+    const notify = useNotify();
     const [update, { loading: isDeleted }] = useDelete(resource, id, record);
 
     const save = useCallback(
         (id: any, data, { onSuccess, onFailure, refresh }: any = {}) => {
-            update(null, { id, data }, { onSuccess, onFailure, refresh });
+            update(
+                { id, data },
+                {
+                    onSuccess: onSuccess
+                        ? onSuccess
+                        : () => {
+                              notify('删除成功', 'success');
+                          },
+                    onFailure: onFailure
+                        ? onFailure
+                        : () => {
+                              notify('删除失败', 'error');
+                          },
+                    refresh,
+                }
+            );
         },
         [resource, basePath, update]
     );

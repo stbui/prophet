@@ -6,9 +6,8 @@ const useNotify = () => {
     const dispatch = useDispatch();
 
     return useCallback(
-        (type, message, description, duration) => {
-            dispatch(showNotification(type, message, description, duration));
-        },
+        (message, type = 'info', description?, duration?) =>
+            dispatch(showNotification(type, message, description, duration)),
         [dispatch]
     );
 };

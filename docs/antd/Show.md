@@ -5,7 +5,7 @@ Show 组件
 ## 示例
 
 ```js
-import { Show } from 'prophet-antd';
+import { Show } from '@stbui/prophet-antd';
 
 const ShowView = props => {
     const { record } = props;

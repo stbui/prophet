@@ -1,6 +1,6 @@
 {
-    "name": "prophet-core",
-    "version": "0.4.5",
+    "name": "@stbui/prophet-core",
+    "version": "0.5.0",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -16,8 +16,8 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "peerDependencies": {
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6"
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2"
     },
     "dependencies": {
         "connected-react-router": "^6.5.2",
@@ -30,16 +30,16 @@
         "reselect": "^4.0.0"
     },
     "devDependencies": {
-        "@types/history": "^4.7.2",
-        "@types/react": "16.8.23",
-        "@types/react-dom": "16.8.4",
-        "@types/react-redux": "^7.1.1",
-        "@types/react-router": "^5.0.3",
-        "@types/react-router-dom": "^4.3.4",
-        "history": "^4.9.0",
-        "react": "~16.8.6",
-        "react-dom": "~16.8.6",
-        "rimraf": "^2.6.3"
+        "@types/history": "^4.7.3",
+        "@types/react": "16.9.5",
+        "@types/react-dom": "16.9.1",
+        "@types/react-redux": "^7.1.4",
+        "@types/react-router": "^5.1.1",
+        "@types/react-router-dom": "^5.1.0",
+        "history": "^4.10.1",
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2",
+        "rimraf": "^3.0.0"
     },
     "publishConfig": {
         "access": "public"

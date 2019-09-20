@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/stbui/prophet/compare/v0.4.6...v0.5.0) (2019-09-21)
+
+
+### Features
+
+* **antd:** 删除提示 ([3fd0cd1](https://github.com/stbui/prophet/commit/3fd0cd1))
+* **core:** update ([6bad038](https://github.com/stbui/prophet/commit/6bad038))
+* **core:** 调整loading ([31a2bdc](https://github.com/stbui/prophet/commit/31a2bdc))
+
+
+
+
+
 ## [0.4.6](https://github.com/stbui/prophet/compare/v0.4.5...v0.4.6) (2019-09-03)
 
 **Note:** Version bump only for package prophet-antd

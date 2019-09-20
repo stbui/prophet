@@ -1,4 +1,4 @@
-import dataProviderContext from './dataProviderContext';
+import DataProviderContext from './DataProviderContext';
 import useDataProvider from './useDataProvider';
 import withDataProvider from './withDataProvider';
 import useQueryWithStore from './useQueryWithStore';
@@ -12,9 +12,10 @@ import useGetOne from './useGetOne';
 import useUpdate from './useUpdate';
 import useDelete from './useDelete';
 import useEdit from './useEdit';
+import * as fetchUtils from './fetch';
 
 export {
-    dataProviderContext,
+    DataProviderContext,
     useDataProvider,
     withDataProvider,
     useQueryWithStore,
@@ -28,4 +29,5 @@ export {
     useUpdate,
     useDelete,
     useEdit,
+    fetchUtils,
 };

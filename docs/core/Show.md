@@ -11,7 +11,7 @@ ShowController -> useShowController -> useShow -> useGetOne -> useDataProvider -
 ## ShowController 示例
 
 ```js
-import { ShowController } from 'prophet-core';
+import { ShowController } from '@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>submit</button>;
@@ -35,7 +35,7 @@ export default props => (
 ## useShowController 示例
 
 ```js
-import { useShowController } from 'prophet-core';
+import { useShowController } from '@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>form</button>;
@@ -77,7 +77,7 @@ const UserProfile = ({ record }) => {
 ### useGetOne 示例
 
 ```js
-import { useGetOne } from 'prophet-core';
+import { useGetOne } from '@stbui/prophet-core';
 
 cconst UserProfile = record => {
     const { data, loading, error } = useGetOne('users', record.id);
@@ -99,7 +99,7 @@ cconst UserProfile = record => {
 ```js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useDataProvider, showNotification } from 'prophet-core';
+import { useDataProvider, showNotification } from '@stbui/prophet-core';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);

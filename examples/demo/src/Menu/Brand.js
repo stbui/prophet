@@ -3,16 +3,16 @@ import React from 'react';
 export const Brand = () => (
     <div
         style={{
-            height: 32,
-            margin: '16px 0',
-            fontSize: 20,
+            height: 64,
+            fontSize: 24,
             color: '#fff',
             textAlign: 'center',
-            fontWeight: 500,
+            fontWeight: 700,
+            width: 200,
         }}
     >
         <a href="/" style={{ color: '#fff' }}>
-            商城
+            Demo
         </a>
     </div>
 );

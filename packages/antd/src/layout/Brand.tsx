@@ -3,15 +3,17 @@ import React from 'react';
 export const Brand = () => (
     <div
         style={{
-            height: 32,
-            margin: 16,
+            height: 64,
             fontSize: 24,
             color: '#fff',
             textAlign: 'center',
-            fontWeight: 500,
+            fontWeight: 700,
+            width: 200,
         }}
     >
-        stbui
+        <a href="/" style={{ color: '#fff' }}>
+            stbui
+        </a>
     </div>
 );
 

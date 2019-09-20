@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDeleteController } from 'prophet-core';
+import { useDeleteController } from '@stbui/prophet-core';
 import { Popconfirm, message } from 'antd';
 import { Link } from '../Link';
 
@@ -9,7 +9,7 @@ export const DeleteWithConfirmButton = props => {
     const onConfirm = () =>
         update(record.id, record, {
             onSuccess() {
-                message.info('删除成功');
+                message.success('删除成功');
             },
             onFailure(error) {
                 message.error(error.message);

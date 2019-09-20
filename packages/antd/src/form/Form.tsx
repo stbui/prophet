@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import { useDispatch } from 'react-redux';
-import { push, goBack } from 'connected-react-router';
+import { goBack } from 'connected-react-router';
 import { Form, Button } from 'antd';
 import FormInput from './FormInput';
 const FormItem = Form.Item;
@@ -39,7 +39,7 @@ export const Create = props => {
 
         form.validateFields((err, values) => {
             if (!err) {
-                save(values, () => {}, 'list');
+                save(values);
             }
         });
     };
@@ -49,14 +49,9 @@ export const Create = props => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} {...formItemLayout}>
             {Children.map(children, input => (
-                <FormInput
-                    record={record}
-                    input={input}
-                    form={form}
-                    {...formItemLayout}
-                />
+                <FormInput record={record} input={input} form={form} />
             ))}
             <FormItem {...tailFormItemLayout}>
                 <Button

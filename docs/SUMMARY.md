@@ -27,4 +27,4 @@
     -   [router](customRoutes.md)
     -   [customRoutes](customRoutes.md)
 
-*   [常见问题](setup.md)
+*   [常见问题](faq.md)

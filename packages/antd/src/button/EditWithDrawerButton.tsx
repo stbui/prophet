@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { refreshView } from 'prophet-core';
+import { refreshView } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export default props => {

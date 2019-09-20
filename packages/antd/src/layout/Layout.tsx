@@ -22,25 +22,30 @@ export const Layout = ({
     return (
         <React.Fragment>
             <DefaultLayout style={{ minHeight: '100vh' }}>
-                {createElement(sider, {
-                    brand: createElement(brand),
-                    children: createElement(menu, {
-                        hasDashboard: !!dashboard,
-                        history,
-                        location,
-                        match,
-                    }),
-                })}
+                {createElement(header, { brand: createElement(brand) })}
 
-                {createElement(header)}
-                <DefaultLayout.Content
-                    style={{
-                        margin: 24,
-                        backgroundColor: color,
-                    }}
-                >
-                    {children}
-                </DefaultLayout.Content>
+                <DefaultLayout>
+                    {createElement(sider, {
+                        brand: createElement(brand),
+                        children: createElement(menu, {
+                            hasDashboard: !!dashboard,
+                            history,
+                            location,
+                            match,
+                        }),
+                    })}
+
+                    <DefaultLayout.Content
+                        style={{
+                            margin: 24,
+                            marginLeft: 224,
+                            marginTop: 84,
+                            backgroundColor: color,
+                        }}
+                    >
+                        {children}
+                    </DefaultLayout.Content>
+                </DefaultLayout>
             </DefaultLayout>
             {createElement(notification)}
         </React.Fragment>

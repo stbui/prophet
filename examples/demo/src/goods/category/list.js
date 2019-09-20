@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, Column } from 'prophet-antd';
+import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => {
     return (
@@ -12,7 +12,6 @@ export default props => {
                 <Column dataIndex="name">库存</Column>
                 <Column dataIndex="name">上架</Column>
                 <Column dataIndex="name">添加时间</Column>
-                <Column>操作</Column>
             </Datagrid>
         </List>
     );

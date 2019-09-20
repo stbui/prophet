@@ -1,8 +1,8 @@
 import { all, takeEvery, put, call } from 'redux-saga/effects';
+import { push, replace } from 'connected-react-router';
 import {
     USER_LOGIN,
     USER_CHECK,
-    USER_CHECK_SUCCESS,
     USER_LOGIN_FAILURE,
     USER_LOGIN_LOADING,
     USER_LOGIN_SUCCESS,
@@ -27,6 +27,9 @@ export function* handleAuth(authProvider: any, action: any) {
                     type: USER_LOGIN_SUCCESS,
                     payload: authPayload,
                 });
+
+                const redirectTo = yield meta.pathName || '/';
+                yield put(push(redirectTo));
             } catch (error) {
                 yield put({
                     type: USER_LOGIN_FAILURE,
@@ -40,10 +43,19 @@ export function* handleAuth(authProvider: any, action: any) {
                 yield call(authProvider, AUTH_CHECK, payload);
             } catch (error) {
                 yield call(authProvider, AUTH_LOGOUT);
+                const redirectTo = replace({
+                    pathname: (error && error.redirectTo) || '/login',
+                    state: { nextPathName: meta.pathName },
+                });
+                yield put(redirectTo);
             }
             break;
         case USER_LOGOUT:
             yield call(authProvider, AUTH_LOGOUT);
+            const redirectTo = push(
+                (payload && payload.redirectTo) || '/login'
+            );
+            yield put(redirectTo);
             break;
     }
 }

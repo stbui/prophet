@@ -4,10 +4,7 @@ import { refreshView } from '../actions';
 
 const useRefresh = () => {
     const dispatch = useDispatch();
-
-    return useCallback(() => {
-        dispatch(refreshView());
-    }, [dispatch]);
+    return useCallback(() => dispatch(refreshView()), [dispatch]);
 };
 
 export default useRefresh;

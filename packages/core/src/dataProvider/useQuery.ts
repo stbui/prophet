@@ -72,6 +72,8 @@ const useQuery = (query: Query, options = {}) => {
     const dataProvider = useDataProvider();
 
     useEffect(() => {
+        setState(prevState => ({ ...prevState, loading: true }));
+
         dataProvider(type, resource, payload, options)
             .then(({ data, total }: any) => {
                 setState({

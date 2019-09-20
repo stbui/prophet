@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getResources } from 'prophet-core';
+import { getResources } from '@stbui/prophet-core';
 import { Menu, Icon } from 'antd';
 import { Link } from '../Link';
 

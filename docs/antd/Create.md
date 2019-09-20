@@ -5,7 +5,7 @@
 ## 示例
 
 ```js
-import { Create } from 'prophet-antd';
+import { Create } from '@stbui/prophet-antd';
 
 const CreateView = props => {
     const { save } = props;

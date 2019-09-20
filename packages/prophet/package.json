@@ -1,0 +1,38 @@
+{
+    "name": "@stbui/prophet",
+    "version": "0.5.0",
+    "description": "用于构建中后台前端应用框架",
+    "main": "lib/index",
+    "module": "esm/index.js",
+    "types": "esm/index.d.ts",
+    "scripts": {
+        "build": "yarn run build-cjs && yarn run build-esm",
+        "build-cjs": "rimraf ./lib && tsc",
+        "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
+        "watch": "rimraf ./lib && tsc --watch"
+    },
+    "peerDependencies": {
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2"
+    },
+    "dependencies": {
+        "@stbui/prophet-antd": "0.5.0",
+        "@stbui/prophet-core": "0.5.0"
+    },
+    "devDependencies": {
+        "rimraf": "^3.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "stbui",
+    "homepage": "https://github.com/stbui/prophet#readme",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stbui/prophet.git"
+    },
+    "bugs": {
+        "url": "https://github.com/stbui/prophet/issues"
+    }
+}

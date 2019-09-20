@@ -5,7 +5,7 @@
 ### 基本用法
 
 ```js
-import { Layout } from 'prophet-antd';
+import { Layout } from '@stbui/prophet-antd';
 
 <Prophet layout={Layout}>...</Prophet>;
 ```

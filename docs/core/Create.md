@@ -11,7 +11,7 @@ CreateController -> useCreateController -> useCreate -> useMuation -> useDataPro
 ## CreateController 示例
 
 ```js
-import { CreateController } from 'prophet-core';
+import { CreateController } from '@stbui/@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>submit</button>;
@@ -35,7 +35,7 @@ export default props => (
 ## useCreateController 示例
 
 ```js
-import { useCreateController } from 'prophet-core';
+import { useCreateController } from '@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>form</button>;
@@ -77,7 +77,7 @@ const UserProfile = ({ record }) => {
 ### useMuation 示例
 
 ```js
-import { useMutation } from 'prophet-core';
+import { useMutation } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const [update, { data, loading, error }] = useMutation({
@@ -125,7 +125,7 @@ const UserProfile = record => {
 ```js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useDataProvider, showNotification } from 'prophet-core';
+import { useDataProvider, showNotification } from '@stbui/prophet-core';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);

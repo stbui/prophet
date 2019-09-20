@@ -1,5 +1,5 @@
 import React from 'react';
-import { Show } from 'prophet-antd';
+import { Show } from '@stbui/prophet-antd';
 import { Row, Col } from 'antd';
 
 const Text = ({ name, label, record }) => (
