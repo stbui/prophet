@@ -1,8 +1,15 @@
-import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from 'prophet-core';
+import {
+    GET_LIST,
+    GET_ONE,
+    CREATE,
+    UPDATE,
+    DELETE,
+    fetchUtils,
+} from '@stbui/prophet-core';
 import { stringify } from 'query-string';
 
-export default (apiUrl: string, httpClient = fetch) => {
-    return (type: any, resource: string, params: any): Promise<any> => {
+export default (apiUrl: string, httpClient = fetchUtils.fetchJson) => {
+    return (type: string, resource: string, params: any): Promise<any> => {
         let url: string = '';
 
         switch (type) {
@@ -11,7 +18,7 @@ export default (apiUrl: string, httpClient = fetch) => {
                 const { field, order } = params.sort;
 
                 const query = {
-                    ...params.filter,
+                    ...fetchUtils.flattenObject(params.filter),
                     sort: field,
                     order: order,
                     page: page,
@@ -19,57 +26,44 @@ export default (apiUrl: string, httpClient = fetch) => {
                 };
 
                 url = `${apiUrl}/${resource}?${stringify(query)}`;
-                return httpClient(url)
-                    .then(resopnse => resopnse.json())
-                    .then(response => ({
-                        data: response.result.resultList,
-                        total: response.result.total,
-                        code: response.code,
-                    }));
+                return httpClient(url).then(({ json }: any) => ({
+                    data: json.result.resultList,
+                    total: json.result.total,
+                    code: json.code,
+                }));
             case GET_ONE:
                 url = `${apiUrl}/${resource}/${params.id}`;
 
-                return httpClient(url)
-                    .then(resopnse => resopnse.json())
-                    .then(response => ({
-                        data: response.result,
-                        code: response.code,
-                    }));
+                return httpClient(url).then(({ json }: any) => ({
+                    data: json.result,
+                    code: json.code,
+                }));
             case CREATE:
                 url = `${apiUrl}/${resource}`;
                 return httpClient(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
                     body: JSON.stringify(params.data),
-                })
-                    .then(resopnse => resopnse.json())
-                    .then(response => ({
-                        data: { ...params.data, id: response.id },
-                    }));
+                }).then(({ json }: any) => ({
+                    data: { ...params.data, id: json.id },
+                }));
             case UPDATE:
                 url = `${apiUrl}/${resource}/${params.id}`;
                 return httpClient(url, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    },
                     body: JSON.stringify(params.data),
-                })
-                    .then(resopnse => resopnse.json())
-                    .then(response => ({
-                        data: response.result,
-                        code: response.code,
-                    }));
+                }).then(({ json }) => ({
+                    data: json.result,
+                    code: json.code,
+                }));
             case DELETE:
                 url = `${apiUrl}/${resource}/${params.id}`;
-                return httpClient(url, { method: 'DELETE' })
-                    .then(resopnse => resopnse.json())
-                    .then(response => ({
-                        data: response.result,
-                        code: response.code,
-                    }));
+                return httpClient(url, { method: 'DELETE' }).then(
+                    ({ json }) => ({
+                        data: json.result,
+                        code: json.code,
+                    })
+                );
+
             default:
                 throw new Error(`不支持action类型 ${type}`);
         }

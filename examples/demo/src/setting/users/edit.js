@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Select, Radio } from 'antd';
-import { Edit, Form } from 'prophet-antd';
+import { Edit, Form } from '@stbui/prophet-antd';
 
 export const UsersEdit = props => (
   <Edit {...props}>

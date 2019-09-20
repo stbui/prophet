@@ -16,13 +16,13 @@
 ## 起步
 
 ```bash
-npm install prophet-core@latest prophet-antd@latest prophet-data-json-server@latest
+npm install @stbui/prophet-core@latest @stbui/prophet-antd@latest @stbui/prophet-data-json-server@latest
 ```
 
 ```js
-import { Prophet, Resource } from 'prophet-core';
-import { Layout } from 'prophet-antd';
-import dataJsonServer from 'prophet-data-json-server';
+import { Prophet, Resource } from '@stbui/prophet-core';
+import { Layout } from '@stbui/prophet-antd';
+import dataJsonServer from '@stbui/prophet-data-json-server';
 
 <Prophet layout={Layout} dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
     <Resource
@@ -37,8 +37,8 @@ import dataJsonServer from 'prophet-data-json-server';
 
 ## Packages
 
-| Package                                                  | Docs | Description       |
-| -------------------------------------------------------- | ---- | ----------------- |
-| [`prophet-core`](/packages/core)                         |      | 底层组件的封装    |
-| [`prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
-| [`prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |
+| Package                                                         | Docs | Description       |
+| --------------------------------------------------------------- | ---- | ----------------- |
+| [`@stbui/prophet-core`](/packages/core)                         |      | 底层组件的封装    |
+| [`@stbui/prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
+| [`@stbui/prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |

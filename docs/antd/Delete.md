@@ -10,7 +10,7 @@
 ## 示例
 
 ```js
-import { List, Datagrid, Column, DeleteButton } from 'prophet-antd';
+import { List, Datagrid, Column, DeleteButton } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>

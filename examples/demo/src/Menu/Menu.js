@@ -1,31 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getResources } from 'prophet-core';
-import { Link } from 'prophet-antd';
+import { Link } from '@stbui/prophet-antd';
 import { Menu, Icon } from 'antd';
 import { routes } from './routes';
 
-export const CustomMenu = props => {
+const CustomMenu = props => {
     const { hasDashboard, location } = props;
-    const resources = useSelector(state => getResources(state));
 
     return (
         <Menu
             theme="dark"
             mode="inline"
-            // defaultSelectedKeys={[location.pathname]}
             selectedKeys={[location.pathname]}
             defaultOpenKeys={[location.pathname.split('/')[1]]}
         >
-            {/* {resources.map(resource => {
-                return (
-                    <Menu.Item key={`/${resource.name}`}>
-                        <Link to={`/${resource.name}`}>
-                            {resource.label ? resource.label : resource.name}
-                        </Link>
-                    </Menu.Item>
-                );
-            })} */}
+            {hasDashboard && (
+                <Menu.Item>
+                    <Icon type="home" />
+                    <Link to="/" style={{ display: 'inline-block' }}>
+                        主页
+                    </Link>
+                </Menu.Item>
+            )}
             {routes.map(route => {
                 if (route.children) {
                     return (

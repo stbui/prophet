@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { useListController } from 'prophet-core';
+import { useListController } from '@stbui/prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route } from 'react-router';
 import ListActions from './ListActions';

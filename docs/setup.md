@@ -1,23 +1,37 @@
 # 快速开始
 
-create-react-app 脚手架快速创建项目
+我们以 create-react-app 脚手架快速创建项目
 
 ```bash
-npm install prophet-core@latest prophet-antd@latest prophet-data-json-server@latest
+npx create-react-app demo
 ```
 
-```js
-import { Prophet, Resource } from 'prophet-core';
-import { Layout } from 'prophet-antd';
-import dataJsonServer from 'prophet-data-json-server';
+安装 prophet 相关依赖
 
-<Prophet layout={Layout} dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
-    <Resource
-        name="users"
-        list={props => <div>list</div>}
-        edit={props => <div>edit</div>}
-        create={props => <div>create</div>}
-        show={props => <div>show</div>}
-    />
-</Prophet>;
+```bash
+npm install @stbui/prophet-core@latest @stbui/prophet-antd@latest prophet-data-json-server@latest
+```
+
+然后在 App.js 文件写入代码
+
+```js
+import React from 'react';
+import { Prophet, Resource } from '@stbui/prophet-core';
+import { Layout } from '@stbui/prophet-antd';
+import dataJsonServer from '@stbui/prophet-data-json-server';
+
+export default () => (
+    <Prophet
+        layout={Layout}
+        dataProvider={dataJsonServer('http://127.0.0.1:3001')}
+    >
+        <Resource
+            name="users"
+            list={props => <div>list</div>}
+            edit={props => <div>edit</div>}
+            create={props => <div>create</div>}
+            show={props => <div>show</div>}
+        />
+    </Prophet>
+);
 ```

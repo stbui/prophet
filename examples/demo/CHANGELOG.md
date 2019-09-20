@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/stbui/prophet/compare/v0.4.6...v0.5.0) (2019-09-21)
+
+
+### Features
+
+* **core:** update ([6bad038](https://github.com/stbui/prophet/commit/6bad038))
+* **demo:** update ([771d57c](https://github.com/stbui/prophet/commit/771d57c))
+
+
+
+
+
 # [0.2.0](https://github.com/stbui/react-admin-kit/compare/v0.1.20...v0.2.0) (2019-07-14)
 
 

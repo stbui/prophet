@@ -70,12 +70,13 @@ const useMutation = (query: Query, options: QueryOptions) => {
     const dataProvider = useDataProvider();
 
     const mutate = useCallback(
-        (event, callTimePayload, callTimeOptions = {}) => {
-            setState({ loading: true });
+        (callTimeQuery, callTimeOptions = {}) => {
+            setState(prevState => ({ ...prevState, loading: true }));
+
             dataProvider(
                 type,
                 resource,
-                { ...payload, ...callTimePayload },
+                { ...payload, ...callTimeQuery },
                 {
                     ...options,
                     ...callTimeOptions,

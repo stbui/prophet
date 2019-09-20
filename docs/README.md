@@ -18,8 +18,8 @@
 -   ** 组件/Hook: ** 将数据封装 CRUD 组件和 Hook
 -   ** UI: ** 包装成业务组件
 
-| Package                                                  | Docs | Description       |
-| -------------------------------------------------------- | ---- | ----------------- |
-| [`prophet-core`](/packages/core)                         |      | 底层组件的封装    |
-| [`prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
-| [`prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |
+| Package                                                         | Docs | Description       |
+| --------------------------------------------------------------- | ---- | ----------------- |
+| [`@stbui/prophet-core`](/packages/core)                         |      | 底层组件的封装    |
+| [`@stbui/prophet-antd`](/packages/antd)                         |      | antd UI 实现      |
+| [`@stbui/prophet-data-json-server`](/packages/data-json-server) |      | REST 接口规范实现 |

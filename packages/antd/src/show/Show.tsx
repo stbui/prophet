@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { useShowController } from 'prophet-core';
+import { useShowController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 export const ShowView = ({

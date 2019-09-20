@@ -7,7 +7,7 @@
 import { useContext, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import DataProviderContext from './dataProviderContext';
+import DataProviderContext from './DataProviderContext';
 import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
 
 /* 
@@ -36,7 +36,8 @@ const UserList = () => {
 };
  */
 
-const defaultDataProvider = (type, resource, payload) => Promise.resolve();
+const defaultDataProvider = (type: string, resource: string, payload: any) =>
+    Promise.resolve();
 
 export const useDataProvider = () => {
     const dispatch = useDispatch();
@@ -105,7 +106,7 @@ export const useDataProvider = () => {
 
                     onFailure && onFailure(error);
 
-                    throw new Error(error.message ? error.message : error);
+                    throw error;
                 });
         },
         [dataProvider, dispatch]

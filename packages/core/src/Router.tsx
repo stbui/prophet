@@ -4,24 +4,20 @@
  * https://github.com/stbui
  */
 
-import React, { Component, Children, cloneElement, createElement } from 'react';
+import React, { Children, cloneElement, createElement } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-export interface IProps {
-    children: any;
-    customRoutes: any;
-    dashboard: React.ComponentType;
-    catchAll: React.ComponentType;
-    Layout: React.ComponentType;
-    menu: any;
-    brand: any;
-}
-export class CoreRouter extends Component<IProps, any> {
-    constructor(props) {
-        super(props);
+export default props => {
+    const { children, dashboard, customRoutes, catchAll, Layout } = props;
+
+    if (!children) {
+        return <div>缺失组件 &lt;Resource&gt;</div>;
     }
 
-    renderCustomRoutesWithoutLayout = (route, props) => {
+    const childrenArray = Children.toArray(children);
+    const firstChild: any = childrenArray.length > 0 ? childrenArray[0] : null;
+
+    const renderCustomRoutesWithoutLayout = (route, props) => {
         if (route.props.render) {
             return route.props.render({ ...props });
         }
@@ -31,63 +27,40 @@ export class CoreRouter extends Component<IProps, any> {
         }
     };
 
-    render() {
-        const {
-            children,
-            dashboard,
-            customRoutes,
-            catchAll,
-            Layout,
-        } = this.props;
-
-        if (!children) {
-            return <div>添加组件 &lt;Resource&gt;</div>;
-        }
-
-        const childrenArray = Children.toArray(children);
-        const firstChild: any =
-            childrenArray.length > 0 ? childrenArray[0] : null;
-
-        return (
-            <Layout {...this.props}>
-                {Children.map(children, (child: any) =>
-                    cloneElement(child, {
-                        key: child.props.name,
-                        context: 'registration',
+    return (
+        <Layout {...props}>
+            {Children.map(children, (child: any) =>
+                cloneElement(child, {
+                    key: child.props.name,
+                    context: 'registration',
+                })
+            )}
+            <Switch>
+                {customRoutes.map((route: any, key: any) =>
+                    cloneElement(route, {
+                        key,
+                        render: props =>
+                            renderCustomRoutesWithoutLayout(route, props),
                     })
                 )}
-                <Switch>
-                    {customRoutes.map((route: any, key: any) =>
-                        cloneElement(route, {
-                            key,
-                            render: props =>
-                                this.renderCustomRoutesWithoutLayout(
-                                    route,
-                                    props
-                                ),
-                        })
-                    )}
-                    {Children.map(children, (child: any) => (
-                        <Route
-                            key={child.props.name}
-                            path={`/${child.props.name}`}
-                            render={props => cloneElement(child, { ...props })}
-                        />
-                    ))}
-                    {dashboard ? (
-                        <Route exact path="/" component={dashboard} />
-                    ) : firstChild ? (
-                        <Redirect to={`/${firstChild.props.name}`} />
-                    ) : null}
+                {Children.map(children, (child: any) => (
                     <Route
-                        render={(props: any) =>
-                            createElement(catchAll, { ...props })
-                        }
+                        key={child.props.name}
+                        path={`/${child.props.name}`}
+                        render={props => cloneElement(child, { ...props })}
                     />
-                </Switch>
-            </Layout>
-        );
-    }
-}
-
-export default CoreRouter;
+                ))}
+                {dashboard ? (
+                    <Route exact path="/" component={dashboard} />
+                ) : firstChild ? (
+                    <Redirect to={`/${firstChild.props.name}`} />
+                ) : null}
+                <Route
+                    render={(props: any) =>
+                        createElement(catchAll, { ...props })
+                    }
+                />
+            </Switch>
+        </Layout>
+    );
+};

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Create, Form, FormInput } from 'prophet-antd';
-import { Input, Select, Radio } from 'antd';
+import { Create, Form } from '@stbui/prophet';
+import { Input } from 'antd';
 
 export default props => {
     return (
@@ -52,11 +52,7 @@ export default props => {
                     name="agent_price"
                     placeholder="请输入分佣方式"
                 />
-                <Input
-                    label="app_id"
-                    name="app_id"
-                    placeholder="app_id"
-                />
+                <Input label="app_id" name="app_id" placeholder="app_id" />
             </Form>
         </Create>
     );

@@ -1,21 +1,38 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Layout, Icon } from 'antd';
+import React, { cloneElement } from 'react';
+import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { useLogout } from '@stbui/prophet-core';
 
-export const Header = () => (
-    <Layout.Header style={{ background: '#fff', padding: 0 }}>
-        <Icon
-            className="trigger"
-            type="menu-unfold"
+export const Header = ({ brand }) => {
+    const logout = useLogout();
+
+    return (
+        <Layout.Header
             style={{
-                fontSize: 18,
-                lineHeight: '64px',
-                padding: '0 24px',
-                cursor: 'pointer',
-                transition: 'color .3s',
+                display: 'flex',
+                position: 'fixed',
+                zIndex: 1,
+                width: '100%',
+                padding: 0,
             }}
-        />
-    </Layout.Header>
-);
+        >
+            {cloneElement(brand)}
+            <span style={{ flex: 'auto' }}></span>
+            <Dropdown
+                overlay={
+                    <Menu>
+                        <Menu.Item onClick={logout}>退出</Menu.Item>
+                    </Menu>
+                }
+            >
+                <div
+                    className="ant-dropdown-link"
+                    style={{ paddingRight: 20, color: '#fff' }}
+                >
+                    我的用户 <Icon type="down" />
+                </div>
+            </Dropdown>
+        </Layout.Header>
+    );
+};
 
 export default Header;

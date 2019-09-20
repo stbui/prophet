@@ -5,7 +5,7 @@ Edit 组件
 ## 示例
 
 ```js
-import { Edit } from 'prophet-antd';
+import { Edit } from '@stbui/prophet-antd';
 
 const EditView = props => {
     const { record, save } = props;

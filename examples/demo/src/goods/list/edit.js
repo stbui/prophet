@@ -1,6 +1,6 @@
 import React from 'react';
-import { Edit, Form, FormInput } from 'prophet-antd';
-import { Input, Select, Radio } from 'antd';
+import { Edit, Form } from '@stbui/prophet-antd';
+import { Input } from 'antd';
 
 export default props => {
     return (

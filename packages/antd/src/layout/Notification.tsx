@@ -1,51 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { notification as notice } from 'antd';
-import { hideNotification } from 'prophet-core';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { message } from 'antd';
+import { hideNotification } from '@stbui/prophet-core';
 
-export class Notify extends Component<any> {
-    state = {
-        open: false,
-    };
+export default () => {
+    const dispatch = useDispatch();
+    const notification = useSelector((state: any) => state.notifications[0]);
 
-    componentWillMount() {
-        this.setOpenState(this.props);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setOpenState(nextProps);
-    }
-
-    setOpenState({ notification }: any) {
+    useEffect(() => {
         if (notification) {
-            this.openNotification(notification);
-        } else {
-            this.destroyNotification();
+            message[notification.type](
+                notification.message,
+                notification.duration
+            );
+            dispatch(hideNotification());
         }
-    }
+    }, [dispatch, notification]);
 
-    destroyNotification() {
-        this.props.hideNotification();
-        notice.destroy();
-    }
-
-    openNotification(notification) {
-        notice[notification.type]({
-            message: notification.message,
-            description: notification.description,
-        });
-    }
-
-    render() {
-        return null;
-    }
-}
-
-const mapStateToProps = state => {
-    return { notification: state.notifications[0] };
+    return null;
 };
-
-export default connect(
-    mapStateToProps,
-    { hideNotification }
-)(Notify);

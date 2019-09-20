@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { useCreateController } from 'prophet-core';
+import { useCreateController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 export const CreateView = props => {

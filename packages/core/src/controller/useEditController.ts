@@ -6,6 +6,7 @@
 
 import { useCallback } from 'react';
 import { useUpdate, useGetOne } from '../dataProvider';
+import { useNotify, useRedirect } from '../sideEffect';
 
 export interface EditProps {
     resource: string;
@@ -15,14 +16,39 @@ export interface EditProps {
 
 export const useEditController = (props: EditProps) => {
     const { resource, basePath, id } = props;
+    const notify = useNotify();
+    const redirect = useRedirect();
 
-    const { data: record, loading } = useGetOne(resource, id);
+    const { data: record, loading } = useGetOne(resource, id, {
+        onFailure: () => {
+            notify('获取失败', 'error');
+        },
+    });
 
     const [update, { loading: isSaving }] = useUpdate(resource, id, {}, record);
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
-            update(null, { data }, { onSuccess, onFailure, refresh }),
+        (
+            data: any,
+            { onSuccess, onFailure, refresh, redirectTo = 'list' }: any = {}
+        ) =>
+            update(
+                { data },
+                {
+                    onSuccess: onSuccess
+                        ? onSuccess
+                        : () => {
+                              notify('更新成功', 'success');
+                              redirect(redirectTo, basePath, data.id);
+                          },
+                    onFailure: onFailure
+                        ? onFailure
+                        : () => {
+                              notify('更新失败', 'error');
+                          },
+                    refresh,
+                }
+            ),
         [resource, basePath, update]
     );
 

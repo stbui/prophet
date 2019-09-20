@@ -15,7 +15,7 @@
 ## 示例
 
 ```js
-import { GET_LIST, CREATE, UPDATE, DELETE } from 'prophet-core';
+import { GET_LIST, CREATE, UPDATE, DELETE } from '@stbui/prophet-core';
 import { stringify } from 'query-string';
 
 export default (apiUrl: string, httpClient = fetch) => {

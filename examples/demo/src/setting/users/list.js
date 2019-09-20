@@ -6,7 +6,7 @@ import {
     EditButton,
     ShowButton,
     DeleteButton,
-} from 'prophet-antd';
+} from '@stbui/prophet-antd';
 import { Divider } from 'antd';
 
 export default props => (

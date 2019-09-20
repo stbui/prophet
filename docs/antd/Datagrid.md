@@ -5,7 +5,7 @@ ant table 组件
 ## 示例
 
 ```js
-import { List, Datagrid, Column } from 'prophet-antd';
+import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>
@@ -28,7 +28,7 @@ export default props => (
 ## 编辑示例
 
 ```js
-import { List, Datagrid, Column, EditButton } from 'prophet-antd';
+import { List, Datagrid, Column, EditButton } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>
@@ -63,7 +63,7 @@ export default props => (
 ## 详情示例
 
 ```js
-import { List, Datagrid, Column, ShowButton } from 'prophet-antd';
+import { List, Datagrid, Column, ShowButton } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>
@@ -98,7 +98,7 @@ export default props => (
 ## 删除示例
 
 ```js
-import { List, Datagrid, Column, DeleteButton } from 'prophet-antd';
+import { List, Datagrid, Column, DeleteButton } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>

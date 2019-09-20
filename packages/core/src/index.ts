@@ -15,4 +15,5 @@ export { getResources } from './reducers';
 export * from './controller';
 export * from './actions';
 export * from './dataProvider';
+export * from './auth';
 export * from './sideEffect';

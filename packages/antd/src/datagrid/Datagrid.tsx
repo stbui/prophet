@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import { Table } from 'antd';
-
+import { EditButton, ShowButton, DeleteButton } from '../button';
 /**
  * <Datagrid>
  *  <Column dataIndex="name">姓名</Column>
@@ -22,6 +22,10 @@ export const Datagrid = props => {
         showQuickJumper,
         hideOnSinglePage,
         noData,
+        hasCreate,
+        hasEdit,
+        hasShow,
+        allowCustomOpera,
     } = props;
 
     const handlePageChange = (current, pageSize) => setPage(current);
@@ -34,7 +38,8 @@ export const Datagrid = props => {
     const columns: any = [];
 
     Children.map(children, (child, key) => {
-        const { children, dataIndex, ...other } = child.props;
+        const { children, dataIndex, isOpera, ...other } = child.props;
+
         columns.push({
             title: children || dataIndex,
             dataIndex,
@@ -42,6 +47,44 @@ export const Datagrid = props => {
             ...other,
         });
     });
+
+    if (allowCustomOpera) {
+        if (hasCreate === false && hasEdit === false && hasShow === false) {
+            // console.log(hasCreate, hasEdit, hasShow);
+        } else {
+            columns.push({
+                title: '操作',
+                width: 180,
+                render: record => (
+                    <React.Fragment>
+                        {hasEdit ? (
+                            <EditButton
+                                id={record.id}
+                                basePath={props.basePath}
+                            />
+                        ) : null}
+                        <span style={{ marginRight: 12 }}></span>
+                        {hasShow ? (
+                            <ShowButton
+                                id={record.id}
+                                resource={props.resource}
+                                basePath={props.basePath}
+                            />
+                        ) : null}
+                        <span style={{ marginRight: 12 }}></span>
+                        {hasCreate ? (
+                            <DeleteButton
+                                id={record.id}
+                                record={record}
+                                resource={props.resource}
+                                basePath={props.basePath}
+                            />
+                        ) : null}
+                    </React.Fragment>
+                ),
+            });
+        }
+    }
 
     const pagination = {
         showSizeChanger,
@@ -68,16 +111,17 @@ export const Datagrid = props => {
             dataSource={newData}
             pagination={pagination}
             {...props}
-        />
+        ></Table>
     );
 };
 
 Datagrid.defaultProps = {
     showSizeChanger: true,
     showQuickJumper: true,
-    hideOnSinglePage: false,
+    hideOnSinglePage: true,
     data: [],
     page: 1,
+    allowCustomOpera: true,
 };
 
 export default Datagrid;

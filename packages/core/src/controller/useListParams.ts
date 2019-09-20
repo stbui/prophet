@@ -17,7 +17,6 @@ interface Options {
     debounce?: number;
 }
 
-
 export const useListParams = ({
     resource,
     location,
@@ -29,7 +28,8 @@ export const useListParams = ({
     const [displayedFilters, setDisplayedFilters] = useState({});
     const dispatch = useDispatch();
     const { params } = useSelector(
-        (state: any) => state.resources[resource].list, shallowEqual
+        (state: any) => state.resources[resource].list,
+        shallowEqual
     );
 
     const requestSignature = [
@@ -87,13 +87,19 @@ export const useListParams = ({
     }, requestSignature);
 
     const hideFilter = useCallback(filterName => {
-        setDisplayedFilters((previousFilters) => ({ ...previousFilters, [filterName]: false }));
+        setDisplayedFilters(previousFilters => ({
+            ...previousFilters,
+            [filterName]: false,
+        }));
         const newFilters = removeKey(filterValues, filterName);
         setFilters(newFilters);
     }, requestSignature);
 
     const showFilter = useCallback((filterName, defaultValue) => {
-        setDisplayedFilters((previousFilters) => ({ ...previousFilters, [filterName]: true }));
+        setDisplayedFilters(previousFilters => ({
+            ...previousFilters,
+            [filterName]: true,
+        }));
         if (typeof defaultValue !== 'undefined') {
             setFilters({
                 ...filterValues,
@@ -168,8 +174,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-                ? { ...params }
-                : { filter: filterDefaultValues || {} };
+            ? { ...params }
+            : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;

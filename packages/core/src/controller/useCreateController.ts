@@ -6,6 +6,7 @@
 
 import { useCallback } from 'react';
 import { useCreate } from '../dataProvider';
+import { useNotify, useRedirect } from '../sideEffect';
 
 export interface CreateProps {
     resource: string;
@@ -33,12 +34,32 @@ export const getDefaultRedirectRoute = (
 
 const useCreateController = (props: CreateProps) => {
     const { resource, basePath, hasEdit, hasShow, record = {} } = props;
-
+    const notify = useNotify();
+    const redirect = useRedirect();
     const [create, { loading: isSaving }] = useCreate(resource);
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, refresh }: any = {}) => {
-            create(null, { data }, { onSuccess, onFailure, refresh });
+        (
+            data: any,
+            { onSuccess, onFailure, refresh, redirectTo = 'list' }: any = {}
+        ) => {
+            create(
+                { data },
+                {
+                    onSuccess: onSuccess
+                        ? onSuccess
+                        : () => {
+                              notify('创建成功', 'success');
+                              redirect(redirectTo, basePath, data.id);
+                          },
+                    onFailure: onFailure
+                        ? onFailure
+                        : () => {
+                              notify('创建失败', 'error');
+                          },
+                    refresh,
+                }
+            );
         },
         [resource, basePath, create]
     );

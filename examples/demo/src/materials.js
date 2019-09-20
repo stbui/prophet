@@ -1,5 +1,5 @@
 import React from 'react';
-import { Datagrid, Link, List, Create, Edit, Show } from 'prophet-antd';
+import { Datagrid, Link, List, Create, Edit, Show } from '@stbui/prophet-antd';
 import { Divider } from 'antd';
 
 const Label = ({ title }) => title;

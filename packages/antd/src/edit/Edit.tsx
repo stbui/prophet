@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { useEditController } from 'prophet-core';
+import { useEditController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 export const EditView = ({

@@ -11,7 +11,7 @@ ListController -> useListController -> useGetList -> useQueryWithStore -> useDat
 ## 示例
 
 ```js
-import { ListController } from 'prophet-core';
+import { ListController } from '@stbui/prophet-core';
 
 export default props => {
     <ListController {...props}>...</ListController>;
@@ -28,7 +28,7 @@ export default props => {
 ## useListController 示例
 
 ```js
-import { useListController } from 'prophet-core';
+import { useListController } from '@stbui/prophet-core';
 
 export default props => {
     const {
@@ -61,7 +61,7 @@ export default props => {
 ## useGetList 示例
 
 ```js
-import { useGetList } from 'prophet-core';
+import { useGetList } from '@stbui/prophet-core';
 
 const UserList = () => {
     const { data, ids, loading, error } = useGetList(
@@ -86,7 +86,7 @@ const UserList = () => {
 ### useQueryWithStore 示例
 
 ```js
-import { useQueryWithStore } from 'prophet-core';
+import { useQueryWithStore } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const { data, ids, total, loading, loaded, error } = useQueryWithStore(
@@ -123,7 +123,7 @@ const UserProfile = record => {
 ```js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useDataProvider, showNotification } from 'prophet-core';
+import { useDataProvider, showNotification } from '@stbui/prophet-core';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);

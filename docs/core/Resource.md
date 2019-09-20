@@ -5,7 +5,7 @@
 ## 示例
 
 ```js
-import { Prophet, Resource } from 'prophet-core';
+import { Prophet, Resource } from '@stbui/prophet-core';
 import dataJsonServer from 'prophet-data-json-server';
 
 <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>

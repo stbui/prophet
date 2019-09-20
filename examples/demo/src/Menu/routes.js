@@ -1,12 +1,5 @@
 export const routes = [
     {
-        id: 'home',
-        title: '主页',
-        type: 'item',
-        icon: 'home',
-        url: '/home',
-    },
-    {
         id: 'goods',
         title: '商品管理',
         type: 'collapse',

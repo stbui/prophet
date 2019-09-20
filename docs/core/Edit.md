@@ -11,7 +11,7 @@ EditController -> useEditController -> useEdit -> useMuation -> useDataProvider 
 ## 示例
 
 ```js
-import { EditController } from 'prophet-core';
+import { EditController } from '@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>form</button>;

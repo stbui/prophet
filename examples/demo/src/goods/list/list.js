@@ -6,7 +6,7 @@ import {
     EditButton,
     ShowButton,
     DeleteButton,
-} from 'prophet-antd';
+} from '@stbui/prophet-antd';
 
 export default props => {
     return (
@@ -19,7 +19,7 @@ export default props => {
                 <Column dataIndex="store_count">库存</Column>
                 <Column dataIndex="is_on_sale">上架</Column>
                 <Column dataIndex="create_time">添加时间</Column>
-                <Column
+                {/* <Column
                     render={record => (
                         <React.Fragment>
                             <EditButton
@@ -44,7 +44,7 @@ export default props => {
                     )}
                 >
                     操作
-                </Column>
+                </Column> */}
             </Datagrid>
         </List>
     );
