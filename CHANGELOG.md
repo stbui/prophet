@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/stbui/prophet/compare/v0.4.6...v1.0.0) (2019-10-11)
+
+
+### Features
+
+* **antd:** 删除提示 ([3fd0cd1](https://github.com/stbui/prophet/commit/3fd0cd1))
+* **core:** export useVersion ([e4782fc](https://github.com/stbui/prophet/commit/e4782fc))
+* **core:** useListParams update ([6663288](https://github.com/stbui/prophet/commit/6663288))
+* **core:** 功能完善 ([940c939](https://github.com/stbui/prophet/commit/940c939))
+* **core:** 增加csv文件下载 ([07e1d21](https://github.com/stbui/prophet/commit/07e1d21))
+* **core:** 新增router ([961629b](https://github.com/stbui/prophet/commit/961629b))
+* **core:** 调整loading ([31a2bdc](https://github.com/stbui/prophet/commit/31a2bdc))
+
+
+
+
+
 # [0.5.0](https://github.com/stbui/prophet/compare/v0.4.6...v0.5.0) (2019-09-21)
 
 

@@ -126,4 +126,3 @@ packages/*/yarn.lock
 esm
 lib
 *.tgz
-examples/**

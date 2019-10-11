@@ -1,10 +1,10 @@
 {
     "name": "demo",
-    "version": "0.5.0",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@stbui/prophet": "0.5.0",
-        "@stbui/prophet-data-json-server": "0.5.0",
+        "@stbui/prophet": "^1.0.0",
+        "@stbui/prophet-data-json-server": "^1.0.0",
         "antd": "^3.23.6",
         "bizcharts": "^3.5.4",
         "node-sass": "^4.10.0",
