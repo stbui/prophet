@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/stbui/prophet/compare/v0.4.6...v1.1.0) (2019-10-11)
+
+
+### Features
+
+* **antd:** 删除提示 ([3fd0cd1](https://github.com/stbui/prophet/commit/3fd0cd1))
+* **core:** 功能完善 ([fd9dde4](https://github.com/stbui/prophet/commit/fd9dde4))
+* **core:** 调整loading ([31a2bdc](https://github.com/stbui/prophet/commit/31a2bdc))
+
+
+
+
+
 # [1.0.0](https://github.com/stbui/prophet/compare/v0.4.6...v1.0.0) (2019-10-11)
 
 
