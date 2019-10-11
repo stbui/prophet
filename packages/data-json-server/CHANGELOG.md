@@ -14,6 +14,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+# [1.0.0](https://github.com/stbui/propht/compare/v0.4.6...v1.0.0) (2019-10-11)
+
+
+### Features
+
+* **core:** 功能完善 ([940c939](https://github.com/stbui/propht/commit/940c939))
+
+
+
+
+
 # [0.5.0](https://github.com/stbui/propht/compare/v0.4.6...v0.5.0) (2019-09-21)
 
 
