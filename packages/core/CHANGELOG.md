@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/stbui/prophet/compare/v1.1.0...v1.1.1) (2019-10-12)
+
+
+### Bug Fixes
+
+* **core:** 修复已只问题 ([9234a6b](https://github.com/stbui/prophet/commit/9234a6b))
+
+
+
+
+
 # [1.1.0](https://github.com/stbui/prophet/compare/v0.4.6...v1.1.0) (2019-10-11)
 
 
