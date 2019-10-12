@@ -24,5 +24,8 @@
     "dependencies": {
         "@stbui/prophet-core": "^1.1.0",
         "query-string": "~5.1.1"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
