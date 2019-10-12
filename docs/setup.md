@@ -9,15 +9,15 @@ npx create-react-app demo
 安装 prophet 相关依赖
 
 ```bash
-npm install @stbui/prophet-core@latest @stbui/prophet-antd@latest prophet-data-json-server@latest
+npm install @stbui/prophet@latest @stbui/prophet-data-json-server@latest
 ```
 
 然后在 App.js 文件写入代码
 
 ```js
 import React from 'react';
-import { Prophet, Resource } from '@stbui/prophet-core';
-import { Layout } from '@stbui/prophet-antd';
+import { Prophet, Resource } from '@stbui/prophet';
+import { Layout } from '@stbui/prophet';
 import dataJsonServer from '@stbui/prophet-data-json-server';
 
 export default () => (

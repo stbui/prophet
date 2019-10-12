@@ -1,14 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { refreshView } from '@stbui/prophet-core';
+import { useRefresh } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export default props => {
     const { label, onClick, ...other } = props;
-    const dispatch = useDispatch();
+    const refresh = useRefresh();
 
     const handleClick = () => {
-        dispatch(refreshView());
+        refresh();
         onClick && onClick();
     };
 

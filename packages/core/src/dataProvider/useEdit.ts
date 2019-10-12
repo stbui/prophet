@@ -51,7 +51,7 @@ export const useEdit = (props: EditProps) => {
 
     const save = useCallback(
         (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
-            update(null, { data }, { onSuccess, onFailure, refresh }),
+            update({ data }, { onSuccess, onFailure, refresh }),
         [resource, basePath, update]
     );
 

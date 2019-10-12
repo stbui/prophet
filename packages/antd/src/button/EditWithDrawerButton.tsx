@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { refreshView } from '@stbui/prophet-core';
+import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export default props => {
     const { children, width, destroyOnClose } = props;
     const [visible, setVisible] = useState(false);
-    const dispatch = useDispatch();
 
     const handleDrawerClose = () => {
         setVisible(false);
-        dispatch(refreshView());
+        useRefresh();
     };
 
     const handleDrawerShow = () => setVisible(true);

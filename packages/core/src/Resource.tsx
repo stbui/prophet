@@ -39,7 +39,7 @@ const ResourceRegister: any = ({
         return () => {
             dispatch(unregisterResource(name));
         };
-    }, [dispatch, label, name, list, create, edit, show, icon, options]);
+    }, [dispatch, label, name, list, create, edit, show]);
 
     return null;
 };

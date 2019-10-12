@@ -10,7 +10,6 @@ import resources, { getResources as GetResources } from './resources';
 import loading from './loading';
 import notifications from './notifications';
 import refresh from './refresh';
-import auth from './auth';
 
 export const getResources = state => GetResources(state.resources);
 export default (history, customReducers) =>
@@ -19,7 +18,6 @@ export default (history, customReducers) =>
         loading,
         notifications,
         refresh,
-        auth,
         ...customReducers,
         router: connectRouter(history),
     });

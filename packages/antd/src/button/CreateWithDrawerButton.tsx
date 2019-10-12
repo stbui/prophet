@@ -1,6 +1,5 @@
 import React, { cloneElement, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { refreshView } from '@stbui/prophet-core';
+import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export interface CreateWithDrawerButtonProps {
@@ -29,11 +28,10 @@ export const CreateWithDrawerButton = (props: CreateWithDrawerButtonProps) => {
     } = props;
 
     const [visible, setVisible] = useState(false);
-    const dispatch = useDispatch();
 
     const handleDrawerClose = () => {
         setVisible(false);
-        dispatch(refreshView());
+        useRefresh();
     };
 
     const handleDrawerShow = () => setVisible(true);

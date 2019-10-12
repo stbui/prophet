@@ -25,7 +25,7 @@ export const Datagrid = props => {
         hasCreate,
         hasEdit,
         hasShow,
-        allowCustomOpera,
+        defaultOpera,
     } = props;
 
     const handlePageChange = (current, pageSize) => setPage(current);
@@ -48,7 +48,7 @@ export const Datagrid = props => {
         });
     });
 
-    if (allowCustomOpera) {
+    if (defaultOpera) {
         if (hasCreate === false && hasEdit === false && hasShow === false) {
             // console.log(hasCreate, hasEdit, hasShow);
         } else {
@@ -121,7 +121,7 @@ Datagrid.defaultProps = {
     hideOnSinglePage: true,
     data: [],
     page: 1,
-    allowCustomOpera: true,
+    defaultOpera: true,
 };
 
 export default Datagrid;
