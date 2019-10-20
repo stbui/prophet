@@ -1,0 +1,19 @@
+{
+    "name": "@stbui/prophet-language-chinese",
+    "version": "1.1.1",
+    "description": "用于构建中后台前端应用框架",
+    "main": "index.js",
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "stbui",
+    "homepage": "https://github.com/stbui/prophet#readme",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stbui/prophet.git"
+    },
+    "bugs": {
+        "url": "https://github.com/stbui/prophet/issues"
+    }
+}
