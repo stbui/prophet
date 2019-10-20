@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslate } from '@stbui/prophet-core';
 import { CreateButton } from '../button';
 import { Form, Input, Button } from 'antd';
 
@@ -10,6 +11,8 @@ export const ListActions = ({
     form: { getFieldDecorator, validateFields },
     field,
 }) => {
+    const translate = useTranslate();
+
     const handleSearch = () =>
         validateFields((err, values) => {
             if (!err) {
@@ -42,7 +45,7 @@ export const ListActions = ({
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" onClick={handleSearch}>
-                        查询
+                        {translate('prophet.action.search')}
                     </Button>
                 </Form.Item>
             </Form>

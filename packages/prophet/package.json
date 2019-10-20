@@ -17,7 +17,9 @@
     },
     "dependencies": {
         "@stbui/prophet-antd": "^1.1.1",
-        "@stbui/prophet-core": "^1.1.1"
+        "@stbui/prophet-core": "^1.1.1",
+        "@stbui/prophet-language-chinese": "^1.1.1",
+        "@stbui/prophet-i18n-polyglot": "^1.1.1"
     },
     "devDependencies": {
         "rimraf": "^3.0.0"

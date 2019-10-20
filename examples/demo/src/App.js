@@ -1,30 +1,31 @@
 import React from 'react';
-import { Route } from 'react-router';
-import { Prophet, Resource, Layout, CatchAll, Login } from '@stbui/prophet';
+import { Prophet, Resource } from '@stbui/prophet';
 import dataProvider from './dataProvider';
-import Dashboard from './dashboard';
 import authProvider from './authProvider';
+import i18nProvider from './i18n';
+import Dashboard from './dashboard';
 import Menu from './Menu/Menu';
 import Brand from './Menu/Brand';
+import routes from './routes';
+
 import users from './setting/users';
 import goodsCategory from './goods/category';
 import goodsList from './goods/list';
 
-import './App.scss';
+import { createBrowserHistory } from 'history';
 
-const Show = props => <div>custom</div>;
+import './App.scss';
 
 export default () => (
     <Prophet
         dataProvider={dataProvider}
         authProvider={authProvider}
+        i18nProvider={i18nProvider}
+        history={createBrowserHistory()}
+        customRoutes={routes}
         dashboard={Dashboard}
-        layout={Layout}
         menu={Menu}
         brand={Brand}
-        login={() => <Login />}
-        catchAll={() => <CatchAll auth={403} />}
-        customRoutes={[<Route exact path="/custom" component={Show} />]}
     >
         <Resource name="store" {...goodsList} />
         <Resource name="goods/category" {...goodsCategory} />

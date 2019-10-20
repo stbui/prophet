@@ -5,6 +5,9 @@
     "dependencies": {
         "@stbui/prophet": "^1.1.1",
         "@stbui/prophet-data-json-server": "^1.1.1",
+        "@stbui/prophet-language-english": "^1.1.1",
+        "@stbui/prophet-language-chinese": "^1.1.1",
+        "@stbui/prophet-i18n-polyglot": "^1.1.1",
         "antd": "^3.23.6",
         "bizcharts": "^3.5.4",
         "node-sass": "^4.10.0",

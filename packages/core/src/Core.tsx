@@ -5,8 +5,8 @@
  */
 
 import React, { FunctionComponent, ComponentType } from 'react';
-import { Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
 
@@ -14,9 +14,7 @@ import configureStore from './Store';
 import Router from './Router';
 import { DataProviderContext } from './dataProvider';
 import { AuthProviderContext } from './auth';
-import { TranslationProviderContext } from './i18n';
-
-const history = createHashHistory();
+import { TranslationProvider } from './i18n';
 
 interface CoreProps {
     dashboard: ComponentType;
@@ -32,6 +30,7 @@ interface CoreProps {
     customRoutes: any;
     customSagas: any;
     customReducers: any;
+    history: any;
 }
 
 export const Core: FunctionComponent<CoreProps> = props => {
@@ -50,6 +49,7 @@ export const Core: FunctionComponent<CoreProps> = props => {
         customRoutes = [],
         customSagas,
         customReducers,
+        history,
     } = props;
 
     return (
@@ -65,7 +65,7 @@ export const Core: FunctionComponent<CoreProps> = props => {
                 })}
             >
                 <DataProviderContext.Provider value={dataProvider}>
-                    <TranslationProviderContext.Provider value={i18nProvider}>
+                    <TranslationProvider i18nProvider={i18nProvider}>
                         <ConnectedRouter history={history}>
                             <Switch>
                                 <Route exact path="/login" component={login} />
@@ -87,7 +87,7 @@ export const Core: FunctionComponent<CoreProps> = props => {
                                 />
                             </Switch>
                         </ConnectedRouter>
-                    </TranslationProviderContext.Provider>
+                    </TranslationProvider>
                 </DataProviderContext.Provider>
             </Provider>
         </AuthProviderContext.Provider>
@@ -96,6 +96,7 @@ export const Core: FunctionComponent<CoreProps> = props => {
 
 Core.defaultProps = {
     catchAll: () => null,
+    history: createHashHistory(),
 };
 
 export default Core;

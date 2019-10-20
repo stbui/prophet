@@ -4,12 +4,12 @@
  * https://github.com/stbui
  */
 
-import Prophet from './Core';
+import ProphetCore from './Core';
 import Resource from './Resource';
 import Reducers from './reducers';
 import Store from './Store';
 
-export { Prophet, Store, Resource, Reducers };
+export { ProphetCore, Store, Resource, Reducers };
 export { getResources } from './reducers';
 
 export * from './controller';
@@ -17,3 +17,4 @@ export * from './actions';
 export * from './dataProvider';
 export * from './auth';
 export * from './sideEffect';
+export * from './i18n';

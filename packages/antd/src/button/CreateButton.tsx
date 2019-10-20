@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { useTranslate } from '@stbui/prophet-core';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Button } from 'antd';
@@ -14,17 +15,9 @@ export interface CreateButtonProps {
     size?: 'small' | 'large';
 }
 
-export const CreateButton = (props: CreateButtonProps) => {
-    const {
-        basePath,
-        label = '添加',
-        type = 'primary',
-        ghost,
-        icon,
-        disabled,
-        shape,
-        size,
-    } = props;
+const CreateButton: FunctionComponent<CreateButtonProps> = props => {
+    const { basePath, label, type, ghost, icon, disabled, shape, size } = props;
+    const translate = useTranslate();
     const dispatch = useDispatch();
 
     const handleClick = () => dispatch(push(`${basePath}/create`));
@@ -39,9 +32,14 @@ export const CreateButton = (props: CreateButtonProps) => {
             size={size}
             onClick={handleClick}
         >
-            {label}
+            {translate(label)}
         </Button>
     );
+};
+
+CreateButton.defaultProps = {
+    label: 'prophet.action.add',
+    type: 'primary',
 };
 
 export default CreateButton;
