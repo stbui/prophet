@@ -9,13 +9,13 @@ import { Prophet, Resource } from '@stbui/prophet-core';
 import dataJsonServer from 'prophet-data-json-server';
 
 <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
-  <Resource
-    name="users"
-    list={props => <div>list</div>}
-    edit={props => <div>edit</div>}
-    create={props => <div>create</div>}
-    show={props => <div>show</div>}
-  />
+    <Resource
+        name="users"
+        list={props => <div>list</div>}
+        edit={props => <div>edit</div>}
+        create={props => <div>create</div>}
+        show={props => <div>show</div>}
+    />
 </Prophet>;
 ```
 
@@ -27,13 +27,21 @@ import dataJsonServer from 'prophet-data-json-server';
 
 ## API
 
-| 属性         | 类型             | 默认值 | 可选值／参数 | 说明 |
-| :----------- | :--------------- | :----- | :----------- | :--- |
-| dataProvider | Promise Function | -      |              |      |
-| customRoutes | []               | -      |              |      |
-| dashboard    | ComponentType    | -      |              |      |
-| layout       | ComponentType    | antd   |              |      |
-| menu         | ComponentType    | antd   |              |      |
-| brand        | ComponentType    | antd   |              |      |
-| login        | ComponentType    | antd   |              |      |
-| catchAll     | ComponentType    | antd   |              |      |
+```ts
+interface CoreProps {
+    dashboard: ComponentType;
+    menu: ComponentType;
+    brand: ComponentType;
+    login: ComponentType;
+    layout: ComponentType;
+    catchAll: ComponentType;
+    initialState: any;
+    authProvider: any;
+    dataProvider: any;
+    i18nProvider: any;
+    customRoutes: any;
+    customSagas: any;
+    customReducers: any;
+    history: any;
+}
+```
