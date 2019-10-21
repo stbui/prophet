@@ -1,10 +1,10 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { parse, stringify } from 'query-string';
-import { push } from 'connected-react-router';
+import { useHistory } from 'react-router-dom';
 import { changeListParams } from '../actions/listActions';
 import queryReducer from '../reducers/resources/list/queryReducer';
-import { pickBy, isEqual, removeKey } from '../util';
+import { pickBy, removeKey } from '../util';
 
 // const [query, queryMethod] = useListParams({ resource: 'users', location: {}, filterDefaultValues: { username: 'stbui' }, sort: { field: 'id', order: 'ASC' }, perPage: 20 })
 
@@ -27,6 +27,8 @@ export const useListParams = ({
 }: Options) => {
     const [displayedFilters, setDisplayedFilters] = useState({});
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const { params } = useSelector(
         (state: any) => state.resources[resource].list,
         shallowEqual
@@ -48,15 +50,22 @@ export const useListParams = ({
     );
 
     const changeParams = useCallback(action => {
-        const newParams = queryReducer(query, action);
-        dispatch(
-            push({
-                search: `?${stringify({
-                    ...newParams,
-                    filter: JSON.stringify(newParams.filter),
-                })}`,
-            })
-        );
+        const newQuery = getQuery({
+            location: window.location,
+            params,
+            filterDefaultValues,
+            sort,
+            perPage,
+        });
+
+        const newParams = queryReducer(newQuery, action);
+
+        history.push({
+            search: `?${stringify({
+                ...newParams,
+                filter: JSON.stringify(newParams.filter),
+            })}`,
+        });
 
         dispatch(changeListParams(resource, newParams));
     }, requestSignature);
@@ -79,10 +88,6 @@ export const useListParams = ({
     const filterValues = query.filter || {};
 
     const setFilters = useCallback(filter => {
-        if (isEqual(filter, filterValues)) {
-            return;
-        }
-
         changeParams({ type: 'SET_FILTERS', payload: filter });
     }, requestSignature);
 

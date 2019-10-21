@@ -20,15 +20,14 @@ export default props => {
 
 ## API
 
-| 属性                | 类型   | 默认值 | 可选值／参数 | 说明 |
-| :------------------ | :----- | :----- | :----------- | :--- |
-| resource            | string |        | 否           |      |
-| basePath            | string |        | 否           |      |
-| perPage             | number |        | 否           |      |
-| perPage             | number |        | 否           |      |
-| sort                | any    |        | 否           |      |
-| filter              | any    |        | 否           |      |
-| filterDefaultValues | any    |        | 否           |      |
+| 属性                | 类型   | 默认值                         | 可选值／参数 | 说明 |
+| :------------------ | :----- | :----------------------------- | :----------- | :--- |
+| resource            | string |                                | 否           |      |
+| basePath            | string |                                | 否           |      |
+| perPage             | number | 10                             | 否           |      |
+| sort                | object | { field: 'id', order: 'ASC' } | 否           |      |
+| filter              | any    |                                | 否           |      |
+| filterDefaultValues | object |                                | 否           |      |
 
 ## useListController 示例
 

@@ -1,19 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useCallback, useRef, useReducer } from 'react';
 
 /**
  * 分页
  * const [page, perPage, setPage, setPerPage] = usePaginationState();
  */
-export default (initialPerPage: number = 10) => {
-    const [page, setPage] = useState(1);
-    const [perPage, setPerPage] = useState(initialPerPage);
 
-    useEffect(() => setPerPage(initialPerPage), [initialPerPage]);
+const paginationReducer = (prevState, nextState) => {
+    return {
+        ...prevState,
+        ...nextState,
+    };
+};
+
+const defaultPagination = {
+    page: 1,
+    perPage: 10,
+};
+
+export default (initialPagination: any = {}) => {
+    const [pagination, setPagination] = useReducer(paginationReducer, {
+        ...defaultPagination,
+        ...initialPagination,
+    });
+    const isFirstRender = useRef(true);
+
+    const setPerPage = useCallback(perPage => setPagination({ perPage }), []);
+    const setPage = useCallback(page => setPagination({ page }), []);
+
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+
+        setPerPage(initialPagination.perPage || 10);
+    }, [initialPagination.perPage, setPerPage]);
 
     return {
-        page,
-        perPage,
+        page: pagination.page,
+        perPage: pagination.perPage,
         setPage,
         setPerPage,
+        pagination,
+        setPagination,
     };
 };
