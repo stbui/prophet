@@ -8,7 +8,7 @@ interface Props {
     id: string | number;
 }
 
-const EditButton: FunctionComponent<Props> = ({ basePath, label, id }) => {
+const EditButton: FunctionComponent<any> = ({ basePath, label, id }) => {
     const translate = useTranslate();
     return <Link to={`${basePath}/${id}`}>{translate(label)}</Link>;
 };
