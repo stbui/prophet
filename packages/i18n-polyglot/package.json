@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet-i18n-polyglot",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",

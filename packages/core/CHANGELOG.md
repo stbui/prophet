@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/stbui/prophet/compare/v1.1.1...v1.2.0) (2019-10-21)
+
+
+### Features
+
+* update ([822b76a](https://github.com/stbui/prophet/commit/822b76acaaecdf1c8e2b31f329da60f810546e34))
+* update i18n ([30c6a0c](https://github.com/stbui/prophet/commit/30c6a0c593bd91f0fc92a96e2a4b6d0735099909))
+* **core:** add useloading ([cf6adaa](https://github.com/stbui/prophet/commit/cf6adaab847d3ada655515434697bd9a0ec14f92))
+
+
+
+
+
 ## [1.1.1](https://github.com/stbui/prophet/compare/v1.1.0...v1.1.1) (2019-10-12)
 
 
