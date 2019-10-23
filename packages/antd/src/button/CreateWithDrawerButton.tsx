@@ -1,5 +1,5 @@
-import React, { cloneElement, useState } from 'react';
-import { useRefresh } from '@stbui/prophet-core';
+import React, { cloneElement, useState, FunctionComponent } from 'react';
+import { useRefresh, useTranslate } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export interface CreateWithDrawerButtonProps {
@@ -15,17 +15,12 @@ export interface CreateWithDrawerButtonProps {
     size?: 'small' | 'large';
 }
 
-export const CreateWithDrawerButton = (props: CreateWithDrawerButtonProps) => {
+const CreateWithDrawerButton: FunctionComponent<
+    CreateWithDrawerButtonProps
+> = props => {
     const { children, width, destroyOnClose } = props;
-    const {
-        label = '添加',
-        type = 'primary',
-        ghost,
-        icon,
-        disabled,
-        shape,
-        size,
-    } = props;
+    const { label, type, ghost, icon, disabled, shape, size } = props;
+    const translate = useTranslate();
 
     const [visible, setVisible] = useState(false);
 
@@ -47,7 +42,7 @@ export const CreateWithDrawerButton = (props: CreateWithDrawerButtonProps) => {
                 size={size}
                 onClick={handleDrawerShow}
             >
-                {label}
+                {translate(label)}
             </Button>
             <Drawer
                 width={width}
@@ -62,6 +57,11 @@ export const CreateWithDrawerButton = (props: CreateWithDrawerButtonProps) => {
             </Drawer>
         </React.Fragment>
     );
+};
+
+CreateWithDrawerButton.defaultProps = {
+    label: 'prophet.action.add',
+    type: 'primary',
 };
 
 export default CreateWithDrawerButton;

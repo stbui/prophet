@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useRefresh } from '@stbui/prophet-core';
+import { useRefresh, useTranslate } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
-export default props => {
-    const { children, width, destroyOnClose } = props;
+const EditWithDrawerButton = props => {
+    const { children, width, destroyOnClose, label, type } = props;
     const [visible, setVisible] = useState(false);
+    const translate = useTranslate();
 
     const handleDrawerClose = () => {
         setVisible(false);
@@ -15,8 +16,8 @@ export default props => {
 
     return (
         <React.Fragment>
-            <Button type="link" onClick={handleDrawerShow}>
-                编辑
+            <Button type={type} onClick={handleDrawerShow}>
+                {translate(label)}
             </Button>
             <Drawer
                 width={width}
@@ -32,3 +33,10 @@ export default props => {
         </React.Fragment>
     );
 };
+
+EditWithDrawerButton.defaultProps = {
+    label: 'prophet.action.edit',
+    type: 'link',
+};
+
+export default EditWithDrawerButton;
