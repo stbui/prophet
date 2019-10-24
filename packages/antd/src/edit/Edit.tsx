@@ -3,16 +3,19 @@ import { useEditController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 export const EditView = ({
+    basePath,
+    resource,
     children,
     id,
     title,
     loading,
-    basePath,
-    resource,
     record,
     save,
+    actions,
+    ...other
 }) => (
     <Card bordered={false} title={title} loading={loading}>
+        {actions && cloneElement(actions, { ...other })}
         {record
             ? cloneElement(children, {
                   basePath,
@@ -20,6 +23,7 @@ export const EditView = ({
                   save,
                   record,
                   id,
+                  ...other,
               })
             : null}
     </Card>

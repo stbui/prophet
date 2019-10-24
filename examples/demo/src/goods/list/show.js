@@ -2,10 +2,12 @@ import React from 'react';
 import { Show, Form } from '@stbui/prophet-antd';
 import { Input } from 'antd';
 
+import ShowTabbed from './ShowTabbed';
+
 export default props => {
     return (
         <Show {...props}>
-            <Form>
+            {/* <Form>
                 <Input
                     label="商品名称"
                     name="goods_name"
@@ -13,7 +15,8 @@ export default props => {
                 />
 
                 <Input label="app_id" name="app_id" placeholder="app_id" />
-            </Form>
+            </Form> */}
+            <ShowTabbed />
         </Show>
     );
 };

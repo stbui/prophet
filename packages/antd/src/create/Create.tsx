@@ -11,15 +11,19 @@ export const CreateView = props => {
         loading,
         record = {},
         save,
+        actions,
+        ...other
     } = props;
 
     return (
         <Card bordered={false} title={title} loading={loading}>
+            {actions && cloneElement(actions, { ...other })}
             {cloneElement(children, {
                 resource,
                 basePath,
                 record,
                 save,
+                ...other,
             })}
         </Card>
     );

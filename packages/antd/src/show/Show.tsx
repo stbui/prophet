@@ -10,14 +10,18 @@ export const ShowView = ({
     title,
     loading,
     record,
+    actions,
+    ...other
 }) => (
     <Card bordered={false} title={title} loading={loading}>
+        {actions && cloneElement(actions, { ...other })}
         {record
             ? cloneElement(children, {
                   resource,
                   basePath,
                   record,
                   id,
+                  ...other,
               })
             : null}
     </Card>
