@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDeleteController } from '@stbui/prophet-core';
-import { Popconfirm, message } from 'antd';
-import { Link } from '../Link';
+import { useDeleteController, useTranslate } from '@stbui/prophet-core';
+import { Popconfirm, message, Button } from 'antd';
 
 export const DeleteWithConfirmButton = props => {
     const { label, disabled, className, style, update, record } = props;
+    const translate = useTranslate();
 
     const onConfirm = () =>
         update(record.id, record, {
@@ -19,20 +19,19 @@ export const DeleteWithConfirmButton = props => {
 
     return (
         <Popconfirm
-            title="你确定要删除吗？"
+            title={translate('prophet.message.delete_content')}
             okText="确定"
-            cancelText="取消"
+            cancelText={translate('prophet.action.cancel')}
             onConfirm={onConfirm}
         >
-            <Link
-                to=""
+            <Button
                 type="link"
                 disabled={disabled}
                 className={className}
                 style={style}
             >
                 {label}
-            </Link>
+            </Button>
         </Popconfirm>
     );
 };

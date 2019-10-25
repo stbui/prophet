@@ -7,7 +7,7 @@ export interface IProps {
     record?: any;
 }
 
-export const FormInput = ({ form, input, record, ...other }: IProps) => {
+const FormInput = ({ form, input, record, ...other }: IProps) => {
     const { getFieldDecorator } = form;
 
     return input ? (

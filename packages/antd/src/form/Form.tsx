@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
-import { useDispatch } from 'react-redux';
-import { goBack } from 'connected-react-router';
+import { useHistory } from 'react-router-dom';
+
 import { Form, Button } from 'antd';
 import FormInput from './FormInput';
 const FormItem = Form.Item;
@@ -29,10 +29,10 @@ const tailFormItemLayout = {
     },
 };
 
-export const Create = props => {
+export default Form.create()((props: any) => {
     const { children, record, form, save } = props;
 
-    const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -44,9 +44,7 @@ export const Create = props => {
         });
     };
 
-    const handleBackClick = () => {
-        dispatch(goBack());
-    };
+    const handleBackClick = () => history.goBack();
 
     return (
         <Form onSubmit={handleSubmit} {...formItemLayout}>
@@ -65,6 +63,4 @@ export const Create = props => {
             </FormItem>
         </Form>
     );
-};
-
-export default Form.create()(Create);
+});

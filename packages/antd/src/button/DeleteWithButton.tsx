@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDeleteController } from '@stbui/prophet-core';
-import { message } from 'antd';
-import { Link } from '../Link';
+import { message, Button } from 'antd';
 
 export const DeleteWithButtonView = props => {
     const { label, disabled, className, style, update, record } = props;
@@ -18,8 +17,7 @@ export const DeleteWithButtonView = props => {
         });
 
     return (
-        <Link
-            to=""
+        <Button
             type="link"
             disabled={disabled}
             className={className}
@@ -27,7 +25,7 @@ export const DeleteWithButtonView = props => {
             onClick={onConfirm}
         >
             {label}
-        </Link>
+        </Button>
     );
 };
 

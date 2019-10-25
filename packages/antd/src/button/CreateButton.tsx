@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useTranslate } from '@stbui/prophet-core';
-import { useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 
 export interface CreateButtonProps {
@@ -18,9 +17,9 @@ export interface CreateButtonProps {
 const CreateButton: FunctionComponent<CreateButtonProps> = props => {
     const { basePath, label, type, ghost, icon, disabled, shape, size } = props;
     const translate = useTranslate();
-    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const handleClick = () => dispatch(push(`${basePath}/create`));
+    const handleClick = () => history.push(`${basePath}/create`);
 
     return (
         <Button
