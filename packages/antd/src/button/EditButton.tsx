@@ -10,6 +10,8 @@ const EditButton: FunctionComponent<any> = ({
     id,
     className,
     style,
+    size,
+    type,
 }) => {
     const translate = useTranslate();
     const history = useHistory();
@@ -18,10 +20,11 @@ const EditButton: FunctionComponent<any> = ({
 
     return (
         <Button
-            type="link"
+            type={type}
             onClick={onClick}
             className={className}
             style={style}
+            size={size}
         >
             {translate(label)}
         </Button>
@@ -30,6 +33,8 @@ const EditButton: FunctionComponent<any> = ({
 
 EditButton.defaultProps = {
     label: 'prophet.action.edit',
+    size: 'small',
+    type: 'link',
 };
 
 export default EditButton;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Icon } from 'antd';
 
-const RefreshIcon = props => {
+const RefreshIconButton = props => {
     const { label, onClick, type, ...other } = props;
     const refresh = useRefresh();
 
@@ -14,8 +14,8 @@ const RefreshIcon = props => {
     return <Icon type={type} onClick={handleClick} {...other}></Icon>;
 };
 
-RefreshIcon.defaultProps = {
+RefreshIconButton.defaultProps = {
     type: 'refresh',
 };
 
-export default RefreshIcon;
+export default RefreshIconButton;

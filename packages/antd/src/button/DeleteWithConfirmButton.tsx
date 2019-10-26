@@ -2,8 +2,18 @@ import React from 'react';
 import { useDeleteController, useTranslate } from '@stbui/prophet-core';
 import { Popconfirm, message, Button } from 'antd';
 
-export const DeleteWithConfirmButton = props => {
-    const { label, disabled, className, style, update, record } = props;
+const DeleteWithConfirmButton = props => {
+    const {
+        label,
+        disabled,
+        className,
+        style,
+        update,
+        record,
+        size,
+        type,
+        okText,
+    } = props;
     const translate = useTranslate();
 
     const onConfirm = () =>
@@ -20,20 +30,27 @@ export const DeleteWithConfirmButton = props => {
     return (
         <Popconfirm
             title={translate('prophet.message.delete_content')}
-            okText="确定"
+            okText={okText}
             cancelText={translate('prophet.action.cancel')}
             onConfirm={onConfirm}
         >
             <Button
-                type="link"
+                type={type}
                 disabled={disabled}
                 className={className}
                 style={style}
+                size={size}
             >
                 {label}
             </Button>
         </Popconfirm>
     );
+};
+
+DeleteWithConfirmButton.defaultProps = {
+    size: 'small',
+    type: 'link',
+    okText: '确定',
 };
 
 const DeleteWithButton = props => (

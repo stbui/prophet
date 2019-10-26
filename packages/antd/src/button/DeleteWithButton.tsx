@@ -3,7 +3,16 @@ import { useDeleteController } from '@stbui/prophet-core';
 import { message, Button } from 'antd';
 
 export const DeleteWithButtonView = props => {
-    const { label, disabled, className, style, update, record } = props;
+    const {
+        label,
+        disabled,
+        className,
+        style,
+        update,
+        record,
+        size,
+        type,
+    } = props;
 
     const onConfirm = () =>
         update(record.id, record, {
@@ -18,15 +27,21 @@ export const DeleteWithButtonView = props => {
 
     return (
         <Button
-            type="link"
+            type={type}
             disabled={disabled}
             className={className}
             style={style}
             onClick={onConfirm}
+            size={size}
         >
             {label}
         </Button>
     );
+};
+
+DeleteWithButtonView.defaultProps = {
+    size: 'small',
+    type: 'link',
 };
 
 export const DeleteWithButton = props => (
