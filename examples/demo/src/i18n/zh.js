@@ -7,7 +7,7 @@ export default {
             fields: {
                 id: '商品ID',
                 name: '商品名称',
-                category: '分类',
+                categories: '分类',
                 price: '价格',
             },
         },

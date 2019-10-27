@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    Datagrid,
-    List,
-    Column,
-    EditButton,
-    ShowButton,
-    DeleteButton,
-} from '@stbui/prophet-antd';
-import { Divider } from 'antd';
+import { Datagrid, List, Column } from '@stbui/prophet-antd';
 
 export default props => (
     <List {...props}>
@@ -20,34 +12,6 @@ export default props => (
             <Column dataIndex="phone">手机号</Column>
             <Column dataIndex="create_time">创建时间</Column>
             <Column dataIndex="status">状态</Column>
-            <Column
-                render={record => (
-                    <React.Fragment>
-                        <EditButton
-                            label="编辑"
-                            id={record.id}
-                            resource={props.resource}
-                            basePath={props.basePath}
-                        />
-                        <Divider type="vertical" />
-                        <ShowButton
-                            label="详情"
-                            id={record.id}
-                            resource={props.resource}
-                            basePath={props.basePath}
-                        />
-                        <Divider type="vertical" />
-                        <DeleteButton
-                            label="删除"
-                            id={record.id}
-                            resource={props.resource}
-                            basePath={props.basePath}
-                        />
-                    </React.Fragment>
-                )}
-            >
-                操作
-            </Column>
         </Datagrid>
     </List>
 );

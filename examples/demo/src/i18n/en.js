@@ -7,7 +7,7 @@ export default {
             fields: {
                 id: 'ID',
                 name: 'name',
-                category: 'category',
+                categories: 'category',
                 price: 'price',
             },
         },

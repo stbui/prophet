@@ -8,7 +8,7 @@ export default props => {
             <Form>
                 <Input
                     label="商品名称"
-                    name="goods_name"
+                    name="name"
                     placeholder="请输入商品名称"
                     rules={[
                         {
@@ -24,7 +24,7 @@ export default props => {
                 />
                 <Input
                     label="商品分类"
-                    name="username"
+                    name="categories"
                     placeholder="请输入商品分类"
                 />
                 <Input

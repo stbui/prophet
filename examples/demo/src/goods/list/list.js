@@ -10,12 +10,12 @@ export default props => {
                 <Column dataIndex="id">
                     {translate('resources.' + props.resource + '.fields.id')}
                 </Column>
-                <Column dataIndex="goods_name">
+                <Column dataIndex="name">
                     {translate('resources.' + props.resource + '.fields.name')}
                 </Column>
-                <Column dataIndex="category_id">
+                <Column dataIndex="categories">
                     {translate(
-                        'resources.' + props.resource + '.fields.category'
+                        'resources.' + props.resource + '.fields.categories'
                     )}
                 </Column>
                 <Column dataIndex="price">

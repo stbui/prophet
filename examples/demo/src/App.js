@@ -29,6 +29,6 @@ export default () => (
     >
         <Resource name="store" {...goodsList} />
         <Resource name="goods/category" {...goodsCategory} />
-        <Resource name="user" label="用户设置" {...users} />
+        <Resource name="user/list" {...users} />
     </Prophet>
 );

@@ -6,29 +6,18 @@
 import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from '@stbui/prophet';
 
 const list = {
-    data: [
-        {
-            id: 1,
-            username: '1',
-            nickName: '2',
-            address_id: '3',
-            phone: '4',
-            create_time: '5',
-            status: '6',
-            goods_name: 'test',
-        },
-        {
-            id: 2,
-            username: '1',
-            nickName: '2',
-            address_id: '3',
-            phone: '4',
-            create_time: '5',
-            status: '6',
-            goods_name: 'test',
-        },
-    ],
-    total: 2,
+    data: Array.from(Array(200).keys()).map(id => {
+        return {
+            id: id + 1,
+            name: '电脑',
+            categories: '未分类',
+            price: Math.floor(Math.random() * 100),
+            store_count: Math.floor(Math.random() * 1000 + 100),
+            is_on_sale: 1,
+            create_time: new Date().toLocaleDateString(),
+        };
+    }),
+    total: 200,
 };
 
 const dataProvider = (apiUrl = './api', httpClient = fetch) => {
@@ -40,13 +29,12 @@ const dataProvider = (apiUrl = './api', httpClient = fetch) => {
                 return Promise.resolve({
                     data: {
                         id: 1,
-                        username: '1',
-                        nickName: '2',
-                        address_id: '3',
-                        phone: '4',
-                        create_time: '5',
-                        status: '6',
-                        goods_name: 'test',
+                        name: '电脑',
+                        categories: '未分类',
+                        price: Math.floor(Math.random() * 100),
+                        store_count: Math.floor(Math.random() * 1000 + 100),
+                        is_on_sale: 1,
+                        create_time: new Date().toLocaleDateString(),
                     },
                 });
             case CREATE:
