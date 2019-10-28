@@ -52,12 +52,14 @@ export const Core: FunctionComponent<CoreProps> = props => {
         history,
     } = props;
 
+    const _history = history || createHashHistory();
+
     return (
         <AuthProviderContext.Provider value={authProvider}>
             <Provider
                 store={configureStore({
                     initialState,
-                    history,
+                    history: _history,
                     dataProvider,
                     authProvider,
                     customSagas,
@@ -66,7 +68,7 @@ export const Core: FunctionComponent<CoreProps> = props => {
             >
                 <DataProviderContext.Provider value={dataProvider}>
                     <TranslationProvider i18nProvider={i18nProvider}>
-                        <ConnectedRouter history={history}>
+                        <ConnectedRouter history={_history}>
                             <Switch>
                                 <Route exact path="/login" component={login} />
                                 <Route
