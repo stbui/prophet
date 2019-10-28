@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import { useListController } from '@stbui/prophet-core';
 import { Spin, Drawer } from 'antd';
-import { Route } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import ListActions from './ListActions';
 
 export const ListView = props => {
@@ -14,13 +14,16 @@ export const ListView = props => {
         edit,
         show,
         destroyOnClose,
+        maskClosable,
+        mask,
+        maskStyle,
+        bodyStyle,
+        placement,
         ...other
     } = props;
+    const history = useHistory();
 
-    const handleClose = () => {
-        const { history, basePath } = props;
-        history.push(basePath);
-    };
+    const handleClose = () => history.push(basePath);
 
     const resource = {
         hasEdit: !!edit,
@@ -40,71 +43,94 @@ export const ListView = props => {
                 {children &&
                     cloneElement(children, { basePath, ...other, ...resource })}
             </Spin>
-            <Route exact extace path={`${basePath}/:id`}>
-                {({ match }: any) => {
-                    const isMatch =
-                        match && match.params && match.params.id !== 'create';
-                    return edit ? (
-                        <Drawer
-                            width={edit.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose
-                        >
-                            {isMatch
-                                ? cloneElement(edit, {
-                                      id: match.params.id,
-                                      onCancel: handleClose,
-                                      onOk: handleClose,
-                                      ...props,
-                                  })
-                                : null}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
 
-            <Route exact path={`${props.basePath}/:id/show`}>
-                {({ match }: any) => {
-                    const isMatch =
-                        match && match.params && match.params.id !== 'create';
-                    return show ? (
-                        <Drawer
-                            width={show.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose
-                        >
-                            {isMatch
-                                ? cloneElement(show, {
-                                      id: match.params.id,
-                                      onCancel: handleClose,
-                                      onOk: handleClose,
-                                      ...props,
-                                  })
-                                : null}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
-            <Route exact path={`${basePath}/create`}>
-                {({ match }) => {
-                    return create ? (
-                        <Drawer
-                            width={create.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose
-                        >
-                            {cloneElement(create, {
-                                onCancel: handleClose,
-                                onOk: handleClose,
-                                ...props,
-                            })}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
+            <Switch>
+                <Route exact path={`${basePath}/create`}>
+                    {({ match }) => {
+                        return create ? (
+                            <Drawer
+                                width={create.props.width}
+                                visible={!!match}
+                                onClose={handleClose}
+                                maskClosable={maskClosable}
+                                mask={mask}
+                                maskStyle={maskStyle}
+                                bodyStyle={bodyStyle}
+                                placement={placement}
+                                destroyOnClose={destroyOnClose}
+                            >
+                                {cloneElement(create, {
+                                    onCancel: handleClose,
+                                    onOk: handleClose,
+                                    ...props,
+                                })}
+                            </Drawer>
+                        ) : null;
+                    }}
+                </Route>
+
+                <Route exact path={`${basePath}/:id`}>
+                    {({ match }: any) => {
+                        const isMatch =
+                            match &&
+                            match.params &&
+                            match.params.id !== 'create';
+                        return edit ? (
+                            <Drawer
+                                width={edit.props.width}
+                                visible={!!match}
+                                onClose={handleClose}
+                                maskClosable={maskClosable}
+                                mask={mask}
+                                maskStyle={maskStyle}
+                                bodyStyle={bodyStyle}
+                                placement={placement}
+                                destroyOnClose={destroyOnClose}
+                            >
+                                {isMatch
+                                    ? cloneElement(edit, {
+                                          id: match.params.id,
+                                          onCancel: handleClose,
+                                          onOk: handleClose,
+                                          ...props,
+                                      })
+                                    : null}
+                            </Drawer>
+                        ) : null;
+                    }}
+                </Route>
+
+                <Route exact path={`${basePath}/:id/show`}>
+                    {({ match }: any) => {
+                        const isMatch =
+                            match &&
+                            match.params &&
+                            match.params.id !== 'create';
+                        return show ? (
+                            <Drawer
+                                width={show.props.width}
+                                visible={!!match}
+                                onClose={handleClose}
+                                maskClosable={maskClosable}
+                                mask={mask}
+                                maskStyle={maskStyle}
+                                bodyStyle={bodyStyle}
+                                placement={placement}
+                                destroyOnClose={destroyOnClose}
+                            >
+                                {isMatch
+                                    ? cloneElement(show, {
+                                          id: match.params.id,
+                                          onCancel: handleClose,
+                                          onOk: handleClose,
+                                          ...props,
+                                      })
+                                    : null}
+                            </Drawer>
+                        ) : null;
+                    }}
+                </Route>
+            </Switch>
         </React.Fragment>
     );
 };
