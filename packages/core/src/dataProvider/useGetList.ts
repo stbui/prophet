@@ -1,9 +1,15 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useSelector, shallowEqual } from 'react-redux';
 import useQueryWithStore from './useQueryWithStore';
 import { GET_LIST, CRUD_GET_LIST } from '../actions';
 
 /* 
-import { useGetList } from 'prophet-core';
+import { useGetList } from '@stbui/prophet-core';
 
 const UserList = () => {
     const { data, ids, loading, error } = useGetList(
@@ -14,12 +20,13 @@ const UserList = () => {
     );
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
+
 
     return <div>{ids.map(id => data[id].username)}</div>;
 };

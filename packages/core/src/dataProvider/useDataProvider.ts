@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { useContext, useCallback } from 'react';
@@ -13,7 +13,7 @@ import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
 /* 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useDataProvider, showNotification } from 'prophet-core';
+import { useDataProvider } from '@stbui/prophet-core';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
@@ -23,7 +23,7 @@ const UserList = () => {
     useEffect(() => {
         dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
             .then(({ data }) => setUsers(data))
-            .catch(error => dispatch(showNotification('error', error.message)));
+            .catch(error => error.message);
     }, []);
 
     return (

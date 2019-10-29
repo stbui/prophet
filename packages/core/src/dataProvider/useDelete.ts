@@ -1,20 +1,20 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { DELETE, CRUD_DELETE } from '../actions';
 import useMuation from './useMutation';
 
 /*
-import { useDelete } from 'props-core';
+import { useDelete } from '@stbui/props-core';
 
 const UserProfile = ({ record }) => {
     const [delete, { loading, error }] = useDelete('users', record.id);
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return (

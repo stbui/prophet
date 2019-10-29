@@ -1,24 +1,24 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import useQueryWithStore from './useQueryWithStore';
 import { GET_ONE, CRUD_GET_ONE } from '../actions';
 
 /* 
-import { useGetOne } from 'prophet-core';
+import { useGetOne } from '@stbui/prophet-core';
 
 cconst UserProfile = record => {
     const { data, loading, error } = useGetOne('users', record.id);
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return <div>{data.username}</div>;

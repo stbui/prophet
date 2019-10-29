@@ -1,14 +1,14 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { CREATE, CRUD_CREATE } from '../actions';
 import useMuation from './useMutation';
 
 /*
-import { useCreate } from 'props-core';
+import { useCreate } from '@stbui/prophet-core';
 
 const UserProfile = ({ record }) => {
     const [create, { loading, error }] = useCreate('users', {
@@ -16,7 +16,7 @@ const UserProfile = ({ record }) => {
     });
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return (

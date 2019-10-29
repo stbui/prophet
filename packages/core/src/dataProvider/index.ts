@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import DataProviderContext from './DataProviderContext';
 import useDataProvider from './useDataProvider';
 import withDataProvider from './withDataProvider';

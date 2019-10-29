@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { stringify } from 'query-string';
 
 export const fetchJson = (url, options: any = {}) => {

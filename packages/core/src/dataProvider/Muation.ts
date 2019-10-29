@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import useMutation from './useMutation';
@@ -17,11 +17,13 @@ const UserProfile = ({ record }) => (
     >
         {([update, { data, loading, error }]) => {
             if (loading) {
-                return <Loading />;
+                return 'loading';
             }
+
             if (error) {
-                return <Error />;
+                return error.message;
             }
+
 
             return <div onClick={update}>{data.username}</div>;
         }}

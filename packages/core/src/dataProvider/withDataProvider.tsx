@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import React from 'react';
@@ -9,7 +9,7 @@ import useDataProvider from './useDataProvider';
 
 /* 
 import React, { Component } from 'react';
-import { withDataProvider, showNotification } from 'prophet-core';
+import { withDataProvider, showNotification } from '@stbui/prophet-core';
 
 class UserList extends Component {
     state = {

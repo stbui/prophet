@@ -1,7 +1,7 @@
 /**
- * @license
+@license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { useCallback } from 'react';
@@ -9,19 +9,20 @@ import { useMutation, useQuery } from '../dataProvider';
 import { GET_ONE, UPDATE } from '../actions';
 
 /**
- * import {useEdit} from 'prophet-core';
- *
- * const UserEdit = () => {
- *     const { record, loading, save, isSaving } = useEdit({ resource, id payload: { data: { userId:1 } } });
- *     if (loading) {
- *         return <Loading />;
- *     }
- *     if (error) {
- *         return <Error />;
- *     }
- *     return <div onclick={save}>{record.username}</div>;
- * }
- *
+import { useEdit } from '@atbui/prophet-core';
+
+const UserEdit = () => {
+    const { record, loading, save, isSaving } = useEdit({ resource, id payload: { data: { userId:1 } } });
+    if (loading) {
+        return 'loading';
+    }
+
+    if (error) {
+        return error.message;
+    }
+
+    return <div onclick={save}>{record.username}</div>;
+}
  */
 
 export interface EditProps {

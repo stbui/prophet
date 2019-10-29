@@ -1,14 +1,14 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { useEffect, useState } from 'react';
 import useDataProvider from './useDataProvider';
 
 /* 
-import { useQuery } from 'prophet-core';
+import { useQuery } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const { data, loading, error } = useQuery({
@@ -18,11 +18,11 @@ const UserProfile = record => {
     });
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return <div>{data.username}</div>;
@@ -39,10 +39,10 @@ const UserList = () => {
     });
     
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return (

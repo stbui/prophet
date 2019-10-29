@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import useQuery from './useQuery';
@@ -13,11 +13,13 @@ const UserProfile = ({ record }) => (
     <Query type="GET_ONE" resource="users" payload={{ id: record.id }}>
         {({ data, loading, error }) => {
             if (loading) {
-                return <Loading />;
+                return 'loading';
             }
+
             if (error) {
-                return <Error />;
+                return error.message;
             }
+
 
             return <div>{data.username}</div>;
         }}

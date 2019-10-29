@@ -1,9 +1,14 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 import useDataProvider from './useDataProvider';
 
 /*
-import { useMutation } from 'prophet-core';
+import { useMutation } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const [update, { data, loading, error }] = useMutation({
@@ -13,11 +18,11 @@ const UserProfile = record => {
     });
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return <div onClick={update}>{data.username}</div>;
@@ -31,11 +36,11 @@ const UserProfile = record => {
     });
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return (
