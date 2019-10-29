@@ -51,7 +51,7 @@ export const useListParams = ({
 
     const changeParams = useCallback(action => {
         const newQuery = getQuery({
-            location: window.location,
+            location,
             params,
             filterDefaultValues,
             sort,

@@ -1,10 +1,16 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useDataProvider from './useDataProvider';
 import { isEqual } from '../util';
 
 /* 
-import { useQueryWithStore } from 'prophet-core';
+import { useQueryWithStore } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const { data, loading, error } = useQueryWithStore(
@@ -18,11 +24,11 @@ const UserProfile = record => {
     );
 
     if (loading) {
-        return <Loading />;
+        return 'loading';
     }
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return <div>{data.username}</div>;
@@ -82,6 +88,8 @@ const useQueryWithStore = (
 
     const dataProvider = useDataProvider();
     useEffect(() => {
+        setState(prevState => ({ ...prevState, loading: true }));
+
         dataProvider(type, resource, payload, options)
             .then(() => {
                 setState(prevState => ({
