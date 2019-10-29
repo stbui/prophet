@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import ProphetCore from './Core';
@@ -12,9 +12,10 @@ import Store from './Store';
 export { ProphetCore, Store, Resource, Reducers };
 export { getResources } from './reducers';
 
-export * from './controller';
 export * from './actions';
+export * from './sideEffect';
+export * from './controller';
 export * from './dataProvider';
 export * from './auth';
-export * from './sideEffect';
 export * from './i18n';
+export * from './loading';

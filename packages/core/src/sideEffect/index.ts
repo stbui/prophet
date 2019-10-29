@@ -12,7 +12,6 @@ import callbackSage from './callback';
 import useNotify from './useNotify';
 import useRefresh from './useRefresh';
 import useRedirect from './useRedirect';
-import useLoading from './useLoading';
 
 export {
     rootSaga,
@@ -23,5 +22,4 @@ export {
     useNotify,
     useRefresh,
     useRedirect,
-    useLoading,
 };
