@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useReducer, useRef, useEffect, useCallback } from 'react';
 
 const sortReducer = (state, { type, payload }) => {
