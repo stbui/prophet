@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/stbui/prophet/compare/v1.2.0...v1.3.0) (2019-10-30)
+
+
+### Features
+
+* **antd:** update ([54f9583](https://github.com/stbui/prophet/commit/54f9583b00049b4bae15329f776fd1aaa8bd49b5))
+* **antd:** 修复重复渲染组件 ([23760c2](https://github.com/stbui/prophet/commit/23760c20c6eea32142f3211d2245d22b674fab61))
+* **antd:** 新增组件 ([643effd](https://github.com/stbui/prophet/commit/643effd02e26dc748de87265677fd6023f1b6723))
+* **antd:** 更新组件 ([d9e0ba9](https://github.com/stbui/prophet/commit/d9e0ba90159234e50095e017c3206f71fa419480))
+* **antd:** 更新组件 ([d28fde4](https://github.com/stbui/prophet/commit/d28fde469c0142664945541336e96b1154a61599))
+* **core:** updatr ([6f52633](https://github.com/stbui/prophet/commit/6f52633777d86fe13b1a554b233b0d6918d4ee51))
+
+
+
+
+
 # [1.2.0](https://github.com/stbui/prophet/compare/v1.1.1...v1.2.0) (2019-10-21)
 
 

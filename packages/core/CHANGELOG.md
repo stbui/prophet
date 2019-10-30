@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/stbui/prophet/compare/v1.2.0...v1.3.0) (2019-10-30)
+
+
+### Bug Fixes
+
+* **core:** 修复默认history ([7ceca1c](https://github.com/stbui/prophet/commit/7ceca1cfd6e1bb88902433c129e4722b2fb3e2b5))
+
+
+### Features
+
+* **core:** ids 更新 ([5349976](https://github.com/stbui/prophet/commit/5349976967d94aa4cc2567104fe2022b6b418ac9))
+* **core:** set loading ([384b189](https://github.com/stbui/prophet/commit/384b18978693519fdae0a6574ff2219501e2d03e))
+* **core:** update ([35e46f9](https://github.com/stbui/prophet/commit/35e46f96cdb1a8c8a459c11d56d4b7fed2e356a7))
+* **core:** update loading ([7a7477e](https://github.com/stbui/prophet/commit/7a7477e3383ba9c7591f0fd87472c94c45bca78d))
+* **core:** update useListParams ([c94dd19](https://github.com/stbui/prophet/commit/c94dd1943e95260beb7a6cbcdc8f34a566992c6b))
+
+
+
+
+
 # [1.2.0](https://github.com/stbui/prophet/compare/v1.1.1...v1.2.0) (2019-10-21)
 
 
