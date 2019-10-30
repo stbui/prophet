@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { useCallback } from 'react';
@@ -36,7 +36,7 @@ const useCreateController = (props: CreateProps) => {
     const { resource, basePath, hasEdit, hasShow, record = {} } = props;
     const notify = useNotify();
     const redirect = useRedirect();
-    const [create, { loading: isSaving }] = useCreate(resource);
+    const [create, { loading: saving }] = useCreate(resource);
 
     const save = useCallback(
         (
@@ -69,7 +69,7 @@ const useCreateController = (props: CreateProps) => {
         basePath,
         save,
         loading: false,
-        isSaving,
+        saving,
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };
 };

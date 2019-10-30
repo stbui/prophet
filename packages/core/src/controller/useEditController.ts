@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import { useCallback } from 'react';
@@ -25,7 +25,7 @@ export const useEditController = (props: EditProps) => {
         },
     });
 
-    const [update, { loading: isSaving }] = useUpdate(resource, id, {}, record);
+    const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
 
     const save = useCallback(
         (
@@ -58,7 +58,7 @@ export const useEditController = (props: EditProps) => {
         record,
         id,
         loading,
-        isSaving,
+        saving,
         save,
     };
 };
