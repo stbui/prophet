@@ -1,10 +1,11 @@
 /**
  * @license
  * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui
+ * https://github.com/stbui/prophet
  */
 
 import useDeleteController, { DeleteProps } from './useDeleteController';
+import { useTranslate } from '../i18n';
 
 export interface Props extends DeleteProps {
     children(props: any): JSX.Element;
@@ -12,7 +13,9 @@ export interface Props extends DeleteProps {
 
 const DeleteController = ({ children, ...props }: Props) => {
     const controllerProps = useDeleteController(props);
-    return children({ ...controllerProps });
+    const translate = useTranslate();
+
+    return children({ translate, ...controllerProps });
 };
 
 export default DeleteController;
