@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteWithButton from './DeleteWithButton';
 import DeleteWithConfirmButton from './DeleteWithConfirmButton';
 
-export const DeleteButton: any = ({ confirm, ...other }) =>
+export const DeleteButton = ({ confirm, ...other }) =>
     confirm ? (
         <DeleteWithConfirmButton {...other} />
     ) : (

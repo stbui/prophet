@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useTranslate } from '@stbui/prophet-core';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 
@@ -16,7 +15,6 @@ export interface CreateButtonProps {
 
 const CreateButton: FunctionComponent<CreateButtonProps> = props => {
     const { basePath, label, type, ghost, icon, disabled, shape, size } = props;
-    const translate = useTranslate();
     const history = useHistory();
 
     const handleClick = () => history.push(`${basePath}/create`);
@@ -31,13 +29,13 @@ const CreateButton: FunctionComponent<CreateButtonProps> = props => {
             size={size}
             onClick={handleClick}
         >
-            {translate(label)}
+            {label}
         </Button>
     );
 };
 
 CreateButton.defaultProps = {
-    label: 'prophet.action.add',
+    label: '添加',
     type: 'primary',
 };
 

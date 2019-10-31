@@ -1,6 +1,5 @@
-import React, { useState, cloneElement, createElement } from 'react';
+import React, { useState, cloneElement } from 'react';
 import { useTranslate } from '@stbui/prophet-core';
-import { useHistory } from 'react-router-dom';
 import { Popover, Button } from 'antd';
 
 export const EditWithPopoverButton = ({
@@ -56,14 +55,14 @@ export const EditWithPopoverButton = ({
                 style={style}
                 size={size}
             >
-                {translate(label)}
+                {label}
             </Button>
         </Popover>
     );
 };
 
 EditWithPopoverButton.defaultProps = {
-    label: 'prophet.action.show',
+    label: '编辑',
     size: 'small',
     type: 'link',
     trigger: 'click',

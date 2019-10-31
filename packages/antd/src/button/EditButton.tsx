@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useTranslate } from '@stbui/prophet-core';
 import { useHistory } from 'react-router-dom';
-
 import { Button } from 'antd';
 
 const EditButton: FunctionComponent<any> = ({
@@ -13,7 +11,6 @@ const EditButton: FunctionComponent<any> = ({
     size,
     type,
 }) => {
-    const translate = useTranslate();
     const history = useHistory();
 
     const onClick = () => history.push(`${basePath}/${id}`);
@@ -26,13 +23,13 @@ const EditButton: FunctionComponent<any> = ({
             style={style}
             size={size}
         >
-            {translate(label)}
+            {label}
         </Button>
     );
 };
 
 EditButton.defaultProps = {
-    label: 'prophet.action.edit',
+    label: '编辑',
     size: 'small',
     type: 'link',
 };

@@ -1,5 +1,5 @@
 import React, { cloneElement, useState, FunctionComponent } from 'react';
-import { useRefresh, useTranslate } from '@stbui/prophet-core';
+import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export interface CreateWithDrawerButtonProps {
@@ -20,7 +20,6 @@ const CreateWithDrawerButton: FunctionComponent<
 > = props => {
     const { children, width, destroyOnClose } = props;
     const { label, type, ghost, icon, disabled, shape, size } = props;
-    const translate = useTranslate();
 
     const [visible, setVisible] = useState(false);
 
@@ -42,7 +41,7 @@ const CreateWithDrawerButton: FunctionComponent<
                 size={size}
                 onClick={handleDrawerShow}
             >
-                {translate(label)}
+                {label}
             </Button>
             <Drawer
                 width={width}
@@ -60,7 +59,7 @@ const CreateWithDrawerButton: FunctionComponent<
 };
 
 CreateWithDrawerButton.defaultProps = {
-    label: 'prophet.action.add',
+    label: '添加',
     type: 'primary',
 };
 

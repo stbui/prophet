@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslate } from '@stbui/prophet-core';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 
@@ -12,7 +11,6 @@ export const ShowButton: any = ({
     size,
     type,
 }) => {
-    const translate = useTranslate();
     const history = useHistory();
 
     const onClick = () => history.push(`${basePath}/${id}/show`);
@@ -25,13 +23,13 @@ export const ShowButton: any = ({
             style={style}
             size={size}
         >
-            {translate(label)}
+            {label}
         </Button>
     );
 };
 
 ShowButton.defaultProps = {
-    label: 'prophet.action.show',
+    label: '详情',
     size: 'small',
     type: 'link',
 };
