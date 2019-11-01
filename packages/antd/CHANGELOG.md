@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/stbui/prophet/compare/v1.3.0...v1.3.1) (2019-11-01)
+
+
+### Features
+
+* **antd:** buttons 默认不设置i18n ([72c6bcc](https://github.com/stbui/prophet/commit/72c6bcccc48a17df2ab0fbacdfb415d5c349c4c6))
+
+
+
+
+
 # [1.3.0](https://github.com/stbui/prophet/compare/v1.2.0...v1.3.0) (2019-10-30)
 
 
