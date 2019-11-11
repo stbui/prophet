@@ -20,9 +20,9 @@ export const useEditController = (props: EditProps) => {
     const redirect = useRedirect();
 
     const { data: record, loading } = useGetOne(resource, id, {
-        onFailure: () => {
-            notify('获取失败', 'error');
-        },
+        onFailure: (error) => notify(typeof error === 'string'
+            ? error
+            : error.message || 'prophet.notification.http_error', 'error')
     });
 
     const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
@@ -38,14 +38,14 @@ export const useEditController = (props: EditProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify('更新成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                          },
+                            notify('更新成功', 'success');
+                            redirect(redirectTo, basePath, data.id);
+                        },
                     onFailure: onFailure
                         ? onFailure
-                        : () => {
-                              notify('更新失败', 'error');
-                          },
+                        : (error) => notify(typeof error === 'string'
+                            ? error
+                            : error.message || 'prophet.notification.http_error', 'error'),
                     refresh,
                 }
             ),

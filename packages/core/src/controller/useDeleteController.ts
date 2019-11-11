@@ -28,13 +28,13 @@ export const useDeleteController = (props: DeleteProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify('删除成功', 'success');
-                          },
+                            notify('删除成功', 'success');
+                        },
                     onFailure: onFailure
                         ? onFailure
-                        : () => {
-                              notify('删除失败', 'error');
-                          },
+                        : (error) => notify(typeof error === 'string'
+                            ? error
+                            : error.message || 'prophet.notification.http_error', 'error'),
                     refresh,
                 }
             );

@@ -8,6 +8,7 @@ import { isValidElement, useMemo } from 'react';
 import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
 import useVerison from './useVersion';
+import { useNotify } from '../sideEffect';
 
 export interface ListProps {
     resource: string;
@@ -39,6 +40,7 @@ export const useListController = (props: ListProps) => {
     }
 
     const version = useVerison();
+    const notify = useNotify();
 
     const [query, queryMethod] = useListParams({
         resource,
@@ -57,7 +59,11 @@ export const useListController = (props: ListProps) => {
         },
         { ...query.filter, ...filter },
         { field: query.sort, order: query.order },
-        { version }
+        {
+            version, onFailure: error => notify(typeof error === 'string'
+                ? error
+                : error.message || 'prophet.notification.http_error', 'error')
+        }
     );
 
     if (!query.page && !(ids || []).length && query.page > 1 && total > 0) {

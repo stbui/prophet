@@ -18,9 +18,9 @@ export const useShowController = (props: ShowProps) => {
     const notify = useNotify();
 
     const { data: record, loading } = useGetOne(resource, id, {
-        onFailure: () => {
-            notify('获取失败', 'error');
-        },
+        onFailure: (error) => notify(typeof error === 'string'
+            ? error
+            : error.message || 'prophet.notification.http_error', 'error'),
     });
 
     return {

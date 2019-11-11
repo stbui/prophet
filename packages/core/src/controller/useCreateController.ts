@@ -49,14 +49,14 @@ const useCreateController = (props: CreateProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify('创建成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                          },
+                            notify('创建成功', 'success');
+                            redirect(redirectTo, basePath, data.id);
+                        },
                     onFailure: onFailure
                         ? onFailure
-                        : () => {
-                              notify('创建失败', 'error');
-                          },
+                        : (error) => notify(typeof error === 'string'
+                            ? error
+                            : error.message || 'prophet.notification.http_error', 'error'),
                     refresh,
                 }
             );
