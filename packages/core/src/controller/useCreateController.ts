@@ -5,16 +5,31 @@
  */
 
 import { useCallback } from 'react';
+import { parse } from 'query-string';
 import { useCreate } from '../dataProvider';
 import { useNotify, useRedirect } from '../sideEffect';
+import useVersion from './useVersion';
 
+export interface CreateControllerProps {
+    resource: string;
+    basePath: string;
+    loading: boolean;
+    loaded: boolean;
+    save: any;
+    saving: boolean;
+    record?: any;
+    redirect: any;
+    version: number;
+}
 export interface CreateProps {
     resource: string;
     basePath: string;
-    refresh?: boolean;
+    hasCreate?: boolean;
     hasEdit?: boolean;
     hasShow?: boolean;
+    location?: any;
     record?: object;
+    successMessage?: string;
 }
 
 export const getDefaultRedirectRoute = (
@@ -32,10 +47,29 @@ export const getDefaultRedirectRoute = (
     return 'list';
 };
 
-const useCreateController = (props: CreateProps) => {
-    const { resource, basePath, hasEdit, hasShow, record = {} } = props;
+export const getRecord = ({ state, search }, record: any = {}) =>
+    state && state.record
+        ? state.record
+        : search
+        ? JSON.parse(parse(search).source)
+        : record;
+
+const useCreateController = (props: CreateProps): CreateControllerProps => {
+    const {
+        resource,
+        basePath,
+        hasEdit,
+        hasShow,
+        location,
+        record = {},
+        successMessage,
+    } = props;
+
     const notify = useNotify();
     const redirect = useRedirect();
+    const version = useVersion();
+    const recordToUse = getRecord(location, record);
+
     const [create, { loading: saving }] = useCreate(resource);
 
     const save = useCallback(
@@ -49,27 +83,35 @@ const useCreateController = (props: CreateProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                            notify('创建成功', 'success');
-                            redirect(redirectTo, basePath, data.id);
-                        },
+                              notify('创建成功', 'success');
+                              redirect(redirectTo, basePath, data.id);
+                          },
                     onFailure: onFailure
                         ? onFailure
-                        : (error) => notify(typeof error === 'string'
-                            ? error
-                            : error.message || 'prophet.notification.http_error', 'error'),
+                        : error =>
+                              notify(
+                                  typeof error === 'string'
+                                      ? error
+                                      : error.message ||
+                                            'prophet.notification.http_error',
+                                  'error'
+                              ),
                     refresh,
                 }
             );
         },
-        [resource, basePath, create]
+        [resource, basePath, create, notify, redirect]
     );
 
     return {
         resource,
         basePath,
-        save,
         loading: false,
+        loaded: true,
+        save,
         saving,
+        version,
+        record: recordToUse,
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };
 };
