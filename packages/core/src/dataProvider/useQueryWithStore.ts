@@ -94,6 +94,7 @@ const useQueryWithStore = (
             .then(() => {
                 setState(prevState => ({
                     ...prevState,
+                    error: null,
                     loading: false,
                     loaded: true,
                 }));
