@@ -7,8 +7,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { WithPermissions } from './auth';
-import { registerResource, unregisterResource } from './actions';
+import { WithPermissions } from '../auth';
+import { registerResource, unregisterResource } from '../actions';
 
 const ResourceRegister: any = ({
     label,

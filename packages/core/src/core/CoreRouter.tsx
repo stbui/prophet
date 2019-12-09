@@ -4,13 +4,38 @@
  * https://github.com/stbui
  */
 
-import React, { Children, cloneElement, createElement } from 'react';
+import React, {
+    Children,
+    cloneElement,
+    createElement,
+    FunctionComponent,
+    ComponentType,
+} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-export default props => {
-    const { children, dashboard, customRoutes, catchAll, Layout } = props;
+export interface CoreRouterProps {
+    children: any;
+    title?: string;
+    dashboard?: ComponentType;
+    menu?: ComponentType;
+    brand?: ComponentType;
+    catchAll: ComponentType;
+    Layout: ComponentType;
+    customRoutes: any[];
+}
 
-    if (!children) {
+const CoreRouter: FunctionComponent<CoreRouterProps> = ({
+    children,
+    dashboard,
+    customRoutes = [],
+    catchAll,
+    Layout,
+    menu,
+    brand,
+    title,
+    ...other
+}) => {
+    if (typeof children !== 'function' && !children) {
         return <div>缺失组件 &lt;Resource&gt;</div>;
     }
 
@@ -28,7 +53,7 @@ export default props => {
     };
 
     return (
-        <Layout {...props}>
+        <Layout {...other}>
             {Children.map(children, (child: any) =>
                 cloneElement(child, {
                     key: child.props.name,
@@ -64,3 +89,5 @@ export default props => {
         </Layout>
     );
 };
+
+export default CoreRouter;

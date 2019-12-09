@@ -9,17 +9,17 @@ import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 
-import rootReducer from './reducers';
-import { rootSaga } from './sideEffect';
+import rootReducer from '../reducers';
+import { rootSaga } from '../sideEffect';
 
-export default function configureStore({
+export default function CoreConfigStore({
     initialState,
     history,
     dataProvider,
     authProvider = null,
     customSagas = [],
     customReducers = {},
-}) {
+}: any) {
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [routerMiddleware(history), sagaMiddleware];
     const enhancers = [applyMiddleware(...middlewares)];
