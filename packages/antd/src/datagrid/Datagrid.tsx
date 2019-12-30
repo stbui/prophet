@@ -22,10 +22,6 @@ export const Datagrid = props => {
         showQuickJumper,
         hideOnSinglePage,
         noData,
-        hasCreate,
-        hasEdit,
-        hasShow,
-        defaultOpera,
     } = props;
 
     const handlePageChange = (current, pageSize) => setPage(current);
@@ -47,44 +43,6 @@ export const Datagrid = props => {
             ...other,
         });
     });
-
-    if (defaultOpera) {
-        if (hasCreate === false && hasEdit === false && hasShow === false) {
-            // console.log(hasCreate, hasEdit, hasShow);
-        } else {
-            columns.push({
-                title: '操作',
-                width: 180,
-                render: record => (
-                    <React.Fragment>
-                        {hasEdit ? (
-                            <EditButton
-                                id={record.id}
-                                basePath={props.basePath}
-                            />
-                        ) : null}
-                        <span style={{ marginRight: 12 }}></span>
-                        {hasShow ? (
-                            <ShowButton
-                                id={record.id}
-                                resource={props.resource}
-                                basePath={props.basePath}
-                            />
-                        ) : null}
-                        <span style={{ marginRight: 12 }}></span>
-                        {hasCreate ? (
-                            <DeleteButton
-                                id={record.id}
-                                record={record}
-                                resource={props.resource}
-                                basePath={props.basePath}
-                            />
-                        ) : null}
-                    </React.Fragment>
-                ),
-            });
-        }
-    }
 
     const pagination = {
         showSizeChanger,
@@ -121,7 +79,6 @@ Datagrid.defaultProps = {
     hideOnSinglePage: true,
     data: [],
     page: 1,
-    defaultOpera: true,
 };
 
 export default Datagrid;
