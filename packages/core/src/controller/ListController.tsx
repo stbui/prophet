@@ -8,8 +8,19 @@ import useListController, { ListProps } from './useListController';
 import { useTranslate } from '../i18n';
 
 interface Props extends ListProps {
-    children(props): any;
+    children: (params) => JSX.Element;
 }
+
+/*
+import { ListController } from '@stbui/prophet-core';
+import ListView from './ListView';
+
+const pageComponent = props => (
+    <ListController {...props}>
+        {controllerProps => <ListView {...controllerProps} {...props} />}
+    </ListController>
+);
+*/
 
 export const ListController = ({ children, ...props }: Props) => {
     const controllerProps = useListController(props);

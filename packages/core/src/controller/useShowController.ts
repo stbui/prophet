@@ -13,14 +13,37 @@ export interface ShowProps {
     id: string | number;
 }
 
-export const useShowController = (props: ShowProps) => {
+export interface ShowControllerProps {
+    resource: string;
+    basePath: string;
+    record: any;
+    loading: boolean;
+    loaded: boolean;
+}
+
+/*
+import { useShowController } from '@stbui/prophet-core';
+import ShowView from './ShowView';
+
+const create = props => {
+    const controllerProps = useShowController(props);
+
+    return <ShowView { ...controllerProps } {...props } />;
+}
+*/
+
+export const useShowController = (props: ShowProps): ShowControllerProps => {
     const { resource, basePath, id } = props;
     const notify = useNotify();
 
-    const { data: record, loading } = useGetOne(resource, id, {
-        onFailure: (error) => notify(typeof error === 'string'
-            ? error
-            : error.message || 'prophet.notification.http_error', 'error'),
+    const { data: record, loading, loaded } = useGetOne(resource, id, {
+        onFailure: error =>
+            notify(
+                typeof error === 'string'
+                    ? error
+                    : error.message || 'prophet.notification.http_error',
+                'error'
+            ),
     });
 
     return {
@@ -28,6 +51,7 @@ export const useShowController = (props: ShowProps) => {
         basePath,
         record,
         loading,
+        loaded,
     };
 };
 

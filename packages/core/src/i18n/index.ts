@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import TranslationProvider from './TranslationProvider';
 import TranslationProviderContext from './TranslationProviderContext';
 import useLocale from './useLocale';

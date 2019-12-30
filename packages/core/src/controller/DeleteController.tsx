@@ -8,8 +8,19 @@ import useDeleteController, { DeleteProps } from './useDeleteController';
 import { useTranslate } from '../i18n';
 
 export interface Props extends DeleteProps {
-    children(props: any): JSX.Element;
+    children: (params) => JSX.Element;
 }
+
+/*
+import { DeleteController } from '@stbui/prophet-core';
+import DeleteView from './DeleteView';
+
+const pageComponent = props => (
+    <DeleteController {...props}>
+        {controllerProps => <DeleteView {...controllerProps} {...props} />}
+    </DeleteController>
+);
+*/
 
 const DeleteController = ({ children, ...props }: Props) => {
     const controllerProps = useDeleteController(props);

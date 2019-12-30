@@ -8,8 +8,19 @@ import useShowController, { ShowProps } from './useShowController';
 import { useTranslate } from '../i18n';
 
 export interface Props extends ShowProps {
-    children(props: any): JSX.Element;
+    children: (params) => JSX.Element;
 }
+
+/*
+import { ShowController } from '@stbui/prophet-core';
+import ShowView from './ShowView';
+
+const pageComponent = props => (
+    <ShowController {...props}>
+        {controllerProps => <ShowView {...controllerProps} {...props} />}
+    </ShowController>
+);
+*/
 
 const ShowController = ({ children, ...props }: Props) => {
     const controllerProps = useShowController(props);

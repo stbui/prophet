@@ -15,9 +15,9 @@ export interface CreateControllerProps {
     basePath: string;
     loading: boolean;
     loaded: boolean;
-    save: any;
+    save: (data, obj) => void;
     saving: boolean;
-    record?: any;
+    record?: object;
     redirect: any;
     version: number;
 }
@@ -31,6 +31,17 @@ export interface CreateProps {
     record?: object;
     successMessage?: string;
 }
+
+/*
+import { useCreateController } from '@stbui/prophet-core';
+import CreateView from './CreateView';
+
+const create = props => {
+    const controllerProps = useCreateController(props);
+
+    return <CreateView { ...controllerProps } {...props } />;
+}
+*/
 
 export const getDefaultRedirectRoute = (
     hasEdit?: boolean,
@@ -75,7 +86,7 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
     const save = useCallback(
         (
             data: any,
-            { onSuccess, onFailure, refresh, redirectTo = 'list' }: any = {}
+            { onSuccess, onFailure, refresh, redirectTo = 'list' } = {}
         ) => {
             create(
                 { data },
@@ -83,7 +94,7 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify('创建成功', 'success');
+                              notify(successMessage || '创建成功', 'success');
                               redirect(redirectTo, basePath, data.id);
                           },
                     onFailure: onFailure
@@ -100,7 +111,7 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                 }
             );
         },
-        [resource, basePath, create, notify, redirect]
+        [resource, basePath, create, notify, redirect, successMessage]
     );
 
     return {

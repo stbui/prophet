@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useContext, useCallback } from 'react';
 import TranslationProviderContext from './TranslationProviderContext';
 import { useUpdateLoading } from '../loading';

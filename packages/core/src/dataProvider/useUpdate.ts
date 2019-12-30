@@ -10,7 +10,7 @@ import useMuation from './useMutation';
 /**
 import { useUpdate } from '@stbui/prophet-core';
 const UserUpdate = ({ record }) => {
-    const [update, { loading, error }] = UserUpdate(
+    const [update, { loading, error }] = useUpdate(
         'user',
         record.id,
         { sex: new Date() },

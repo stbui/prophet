@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React, { FunctionComponent, ComponentType, Children } from 'react';
 import CoreContext from './CoreContext';
 import CoreUI from './CoreUI';

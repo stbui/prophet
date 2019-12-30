@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React, { ComponentType } from 'react';
 import useTranslate from './useTranslate';
 import useLocale from './useLocale';

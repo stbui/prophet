@@ -8,8 +8,19 @@ import useEditController, { EditProps } from './useEditController';
 import { useTranslate } from '../i18n';
 
 export interface Props extends EditProps {
-    children(props): any;
+    children: (params) => JSX.Element;
 }
+
+/*
+import { EditController } from '@stbui/prophet-core';
+import EditView from './EditView';
+
+const pageComponent = props => (
+    <EditController {...props}>
+        {controllerProps => <EditView {...controllerProps} {...props} />}
+    </EditController>
+);
+*/
 
 const EditController = ({ children, ...props }: Props) => {
     const controllerProps = useEditController(props);

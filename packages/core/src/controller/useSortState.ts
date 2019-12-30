@@ -6,6 +6,13 @@
 
 import { useReducer, useRef, useEffect, useCallback } from 'react';
 
+/*
+const { sort, setSort, setSortField, setSortOrder } = useSortState({
+    field: 'name',
+    order: 'ASC',
+});
+*/
+
 const sortReducer = (state, { type, payload }) => {
     switch (type) {
         case 'SET_SORT':

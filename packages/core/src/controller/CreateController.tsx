@@ -8,8 +8,19 @@ import useCreateController, { CreateProps } from './useCreateController';
 import { useTranslate } from '../i18n';
 
 export interface Props extends CreateProps {
-    children(props: any): JSX.Element;
+    children: (params) => JSX.Element;
 }
+
+/*
+import { CreateController } from '@stbui/prophet-core';
+import CreateView from './CreateView';
+
+const pageComponent = props => (
+    <CreateController {...props}>
+        {controllerProps => <CreateView {...controllerProps} {...props} />}
+    </CreateController>
+);
+*/
 
 const CreateController = ({ children, ...props }: Props) => {
     const controllerProps = useCreateController(props);

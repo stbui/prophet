@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React, { FunctionComponent, ComponentType } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import CoreRouter from './CoreRouter';

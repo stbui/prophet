@@ -12,17 +12,44 @@ export interface EditProps {
     resource: string;
     basePath: string;
     id: string | number;
+    successMessage?: string;
 }
 
-export const useEditController = (props: EditProps) => {
-    const { resource, basePath, id } = props;
+export interface EditControllerProps {
+    resource: string;
+    basePath: string;
+    record: any;
+    id: string | number;
+    loading: boolean;
+    loaded: boolean;
+    saving: any;
+    save: any;
+}
+
+/*
+import { useEditController } from '@stbui/prophet-core';
+import EditView from './EditView';
+
+const create = props => {
+    const controllerProps = useEditController(props);
+
+    return <EditView { ...controllerProps } {...props } />;
+}
+*/
+
+export const useEditController = (props: EditProps): EditControllerProps => {
+    const { resource, basePath, id, successMessage } = props;
     const notify = useNotify();
     const redirect = useRedirect();
 
-    const { data: record, loading } = useGetOne(resource, id, {
-        onFailure: (error) => notify(typeof error === 'string'
-            ? error
-            : error.message || 'prophet.notification.http_error', 'error')
+    const { data: record, loading, loaded } = useGetOne(resource, id, {
+        onFailure: error =>
+            notify(
+                typeof error === 'string'
+                    ? error
+                    : error.message || 'prophet.notification.http_error',
+                'error'
+            ),
     });
 
     const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
@@ -30,7 +57,7 @@ export const useEditController = (props: EditProps) => {
     const save = useCallback(
         (
             data: any,
-            { onSuccess, onFailure, refresh, redirectTo = 'list' }: any = {}
+            { onSuccess, onFailure, refresh, redirectTo = 'list' } = {}
         ) =>
             update(
                 { data },
@@ -38,18 +65,23 @@ export const useEditController = (props: EditProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                            notify('更新成功', 'success');
-                            redirect(redirectTo, basePath, data.id);
-                        },
+                              notify(successMessage || '更新成功', 'success');
+                              redirect(redirectTo, basePath, data.id);
+                          },
                     onFailure: onFailure
                         ? onFailure
-                        : (error) => notify(typeof error === 'string'
-                            ? error
-                            : error.message || 'prophet.notification.http_error', 'error'),
+                        : error =>
+                              notify(
+                                  typeof error === 'string'
+                                      ? error
+                                      : error.message ||
+                                            'prophet.notification.http_error',
+                                  'error'
+                              ),
                     refresh,
                 }
             ),
-        [resource, basePath, update]
+        [resource, basePath, update, successMessage]
     );
 
     return {
@@ -58,6 +90,7 @@ export const useEditController = (props: EditProps) => {
         record,
         id,
         loading,
+        loaded,
         saving,
         save,
     };

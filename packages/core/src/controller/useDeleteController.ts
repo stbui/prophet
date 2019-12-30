@@ -13,10 +13,22 @@ export interface DeleteProps {
     basePath: string;
     id: string | number;
     record: object;
+    successMessage?: string;
 }
 
+/*
+import { useDeleteController } from '@stbui/prophet-core';
+import DeleteView from './DeleteView';
+
+const create = props => {
+    const controllerProps = useDeleteController(props);
+
+    return <DeleteView { ...controllerProps } {...props } />;
+}
+*/
+
 export const useDeleteController = (props: DeleteProps) => {
-    const { resource, basePath, id, record } = props;
+    const { resource, basePath, id, record, successMessage } = props;
     const notify = useNotify();
     const [update, { loading: isDeleted }] = useDelete(resource, id, record);
 
@@ -28,18 +40,23 @@ export const useDeleteController = (props: DeleteProps) => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                            notify('删除成功', 'success');
-                        },
+                              notify(successMessage || '删除成功', 'success');
+                          },
                     onFailure: onFailure
                         ? onFailure
-                        : (error) => notify(typeof error === 'string'
-                            ? error
-                            : error.message || 'prophet.notification.http_error', 'error'),
+                        : error =>
+                              notify(
+                                  typeof error === 'string'
+                                      ? error
+                                      : error.message ||
+                                            'prophet.notification.http_error',
+                                  'error'
+                              ),
                     refresh,
                 }
             );
         },
-        [resource, basePath, update]
+        [resource, basePath, update, successMessage]
     );
 
     return {

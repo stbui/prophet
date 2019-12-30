@@ -22,6 +22,17 @@ export interface ListProps {
     debounce?: number;
 }
 
+/*
+import { useListController } from '@stbui/prophet-core';
+import ListView from './ListView';
+
+const create = props => {
+    const controllerProps = useListController(props);
+
+    return <ListView { ...controllerProps } {...props } />;
+}
+*/
+
 export const useListController = (props: ListProps) => {
     const {
         resource,
@@ -60,9 +71,14 @@ export const useListController = (props: ListProps) => {
         { ...query.filter, ...filter },
         { field: query.sort, order: query.order },
         {
-            version, onFailure: error => notify(typeof error === 'string'
-                ? error
-                : error.message || 'prophet.notification.http_error', 'error')
+            version,
+            onFailure: error =>
+                notify(
+                    typeof error === 'string'
+                        ? error
+                        : error.message || 'prophet.notification.http_error',
+                    'error'
+                ),
         }
     );
 
