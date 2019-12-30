@@ -4,15 +4,19 @@ import React, {
     cloneElement,
     isValidElement,
 } from 'react';
-import { useRouteMatch, useLocation, useHistory } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import {
+    useRouteMatch,
+    useLocation,
+    useHistory,
+    Route,
+} from 'react-router-dom';
 import { Tabs } from 'antd';
 
 /**
 const Tab = ({ children }) => children;
 
-const ShowTabbed = () => (
-    <ShowTabbed>
+export default props => (
+    <ShowTabbed {...props}>
         <Tab label="路由1" path="a">
             demo1
         </Tab>
@@ -24,6 +28,7 @@ const ShowTabbed = () => (
         </Tab>
         <Table label="Table" path="e">
             <Table.Column title="column"></Table.Column>
+            <Table.Column title="column2"></Table.Column>
         </Table>
     </ShowTabbed>
 );
