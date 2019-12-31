@@ -1,5 +1,13 @@
 import React from 'react';
-import { List, Datagrid, Column, useTranslate } from '@stbui/prophet';
+import {
+    List,
+    Datagrid,
+    Column,
+    useTranslate,
+    EditButton,
+    ShowButton,
+    DeleteButton,
+} from '@stbui/prophet';
 
 export default props => {
     const translate = useTranslate();
@@ -24,6 +32,30 @@ export default props => {
                 <Column dataIndex="store_count">库存</Column>
                 <Column dataIndex="is_on_sale">上架</Column>
                 <Column dataIndex="create_time">添加时间</Column>
+
+                <Column
+                    render={record => (
+                        <React.Fragment>
+                            <EditButton
+                                id={record.id}
+                                basePath={props.basePath}
+                            />
+                            <span style={{ marginRight: 12 }}></span>
+                            <ShowButton
+                                id={record.id}
+                                resource={props.resource}
+                                basePath={props.basePath}
+                            />
+                            <span style={{ marginRight: 12 }}></span>
+                            <DeleteButton
+                                id={record.id}
+                                record={record}
+                                resource={props.resource}
+                                basePath={props.basePath}
+                            />
+                        </React.Fragment>
+                    )}
+                ></Column>
             </Datagrid>
         </List>
     );
