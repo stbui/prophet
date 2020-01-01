@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import useAuthProvider from './useAuthProvider';

@@ -1,7 +1,37 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useCallback } from 'react';
 import useAuthProvider from './useAuthProvider';
 import useLogout from './useLogout';
 import { useNotify } from '../sideEffect';
+
+/*
+import { useEffect,useState } from 'react';
+import { useCheckAuth } from '@stbui/prophet-core';
+
+const Page = () => {
+    const checkAuth = useCheckAuth();
+    useEffect(() => {
+        checkAuth().catch(() => {});
+    }, []);
+
+    return <div>ok</div>;
+};
+
+const Page = () => {
+    const checkAuth = useCheckAuth();
+    const [authenticated, setAuthenticated] = useState(true);
+    useEffect(() => {
+        checkAuth({}, false).then() => setAuthenticated(true)).catch(() => setAuthenticated(false));
+    }, []);
+
+    return authenticated ? <div>ok</div> : <div>fail</div>;
+}; 
+*/
 
 const useCheckAuth = () => {
     const authProvider = useAuthProvider();

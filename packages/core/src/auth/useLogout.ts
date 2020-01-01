@@ -1,6 +1,21 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useCallback } from 'react';
 import { useHistory } from 'react-router';
 import useAuthProvider from './useAuthProvider';
+
+/**
+ * import { useLogout } from 'prophet-core';
+ * const LoginButton = () => {
+ *      const logout = useLogout();
+ *      const onClick = () => logout();
+ *      return <button onclick={onClick}>Logout</buton>
+ * }
+ */
 
 const useLogout = () => {
     const authProvider = useAuthProvider();
