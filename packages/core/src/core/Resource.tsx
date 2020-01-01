@@ -147,10 +147,10 @@ const ResourceRoutes: any = ({
     ]);
 };
 
-export default ({ context, ...other }) => {
+export default ({ context = 'route', ...props }) => {
     return context === 'registration' ? (
-        <ResourceRegister {...other} />
+        <ResourceRegister {...props} />
     ) : (
-        <ResourceRoutes {...other} />
+        <ResourceRoutes {...props} />
     );
 };

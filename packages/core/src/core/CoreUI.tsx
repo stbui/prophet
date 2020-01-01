@@ -12,7 +12,7 @@ export interface CoreUIProps {
     title?: string;
     dashboard?: ComponentType;
     layout: ComponentType;
-    loginPage?: ComponentType;
+    loginPage?: ComponentType<any>;
     catchAll: any;
     menu?: ComponentType;
     brand?: ComponentType;
@@ -32,12 +32,23 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
     customRoutes = [],
 }) => (
     <Switch>
-        <Route exact path="/login" component={loginPage} />
+        {loginPage ? (
+            <Route
+                exact
+                path="/login"
+                render={props =>
+                    React.createElement(loginPage, {
+                        ...props,
+                        title,
+                    })
+                }
+            />
+        ) : null}
         <Route
             path="/"
             render={props => (
                 <CoreRouter
-                    Layout={layout}
+                    layout={layout}
                     dashboard={dashboard}
                     customRoutes={customRoutes}
                     catchAll={catchAll}

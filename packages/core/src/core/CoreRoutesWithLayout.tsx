@@ -34,11 +34,15 @@ const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({
 
     return (
         <Switch>
+            {customRoutes &&
+                customRoutes.map((route, key) => cloneElement(route, { key }))}
             {Children.map(children, (child: any) => (
                 <Route
                     key={child.props.name}
                     path={`/${child.props.name}`}
-                    render={props => cloneElement(child, { ...props })}
+                    render={props =>
+                        cloneElement(child, { intent: 'route', ...props })
+                    }
                 />
             ))}
             {dashboard ? (
