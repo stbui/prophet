@@ -36,7 +36,7 @@ export default (
         changeLocale: (newLocale: string) =>
             new Promise(resolve =>
                 resolve(getMessages(newLocale as string))
-            ).then(messages => {
+            ).then((messages: any) => {
                 locale = newLocale;
                 const newPolyglot = new Polyglot({
                     locale: newLocale,
