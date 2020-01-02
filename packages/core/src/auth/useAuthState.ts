@@ -32,7 +32,7 @@ const useAuthState = (params = {}) => {
             .catch(() =>
                 setState({ loading: false, loaded: true, authenticated: false })
             );
-    }, [checkAuth, params, setState]);
+    }, [checkAuth, JSON.stringify(params), setState]);
 
     return state;
 };

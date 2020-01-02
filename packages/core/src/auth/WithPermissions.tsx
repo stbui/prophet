@@ -40,4 +40,4 @@ const WithPermissions: FunctionComponent<WithPermissionsProps> = ({
     return children({ permissions, ...props });
 };
 
-export default WithPermissions as any;
+export default WithPermissions;

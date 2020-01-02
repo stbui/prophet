@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import React, { FunctionComponent, ComponentType, Children } from 'react';
+import React, { FunctionComponent, ComponentType } from 'react';
 import CoreContext from './CoreContext';
 import CoreUI from './CoreUI';
 

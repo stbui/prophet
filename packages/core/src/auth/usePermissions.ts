@@ -38,7 +38,7 @@ const usePermissions = (params = {}) => {
                     error,
                 });
             });
-    }, [getPermissions, params, setState]);
+    }, [getPermissions, JSON.stringify(params), setState]);
 
     return state;
 };

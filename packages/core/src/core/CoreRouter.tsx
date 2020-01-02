@@ -13,7 +13,7 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import CoreRoutesWithLayout from './CoreRoutesWithLayout';
 import { useGetPermissions, useAuthState } from '../auth';
 
@@ -96,11 +96,11 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
         typeof children === 'function' ? computedChildren : children;
 
     return (
-        <div>
+        <React.Fragment>
             {Children.map(childrenToRender, (child: any) =>
                 cloneElement(child, {
                     key: child.props.name,
-                    context: 'registration',
+                    intent: 'registration',
                 })
             )}
             <Switch>
@@ -124,6 +124,7 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
                                 dashboard,
                                 menu,
                                 title,
+                                brand,
                             },
                             <CoreRoutesWithLayout
                                 catchAll={catchAll}
@@ -144,7 +145,7 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
                     }
                 />
             </Switch>
-        </div>
+        </React.Fragment>
     );
 };
 

@@ -4,13 +4,26 @@
  * https://github.com/stbui
  */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { WithPermissions } from '../auth';
 import { registerResource, unregisterResource } from '../actions';
 
-const ResourceRegister: any = ({
+export interface ResourceProps {
+    name: string;
+    label?: any;
+    match?: any;
+    list?: any;
+    create?: any;
+    edit?: any;
+    show?: any;
+    options?: any;
+    icon?: any;
+    intent?: 'route' | 'registration';
+}
+
+const ResourceRegister: FunctionComponent<ResourceProps> = ({
     label,
     name,
     list,
@@ -44,7 +57,7 @@ const ResourceRegister: any = ({
     return null;
 };
 
-const ResourceRoutes: any = ({
+const ResourceRoutes: FunctionComponent<ResourceProps> = ({
     label,
     name,
     match,
@@ -80,41 +93,45 @@ const ResourceRoutes: any = ({
                 {create && (
                     <Route
                         path={`${basePath}/create`}
-                        render={props => (
+                        render={routeProps => (
                             <WithPermissions
                                 component={create}
                                 basePath={basePath}
-                                {...props}
+                                {...routeProps}
                                 {...resource}
-                            ></WithPermissions>
+                            />
                         )}
                     />
                 )}
                 {show && (
                     <Route
                         path={`${basePath}/:id/show`}
-                        render={props => (
+                        render={routeProps => (
                             <WithPermissions
                                 component={show}
                                 basePath={basePath}
-                                id={decodeURIComponent(props.match.params.id)}
-                                {...props}
+                                id={decodeURIComponent(
+                                    routeProps.match.params.id
+                                )}
+                                {...routeProps}
                                 {...resource}
-                            ></WithPermissions>
+                            />
                         )}
                     />
                 )}
                 {edit && (
                     <Route
                         path={`${basePath}/:id`}
-                        render={props => (
+                        render={routeProps => (
                             <WithPermissions
                                 component={edit}
                                 basePath={basePath}
-                                id={decodeURIComponent(props.match.params.id)}
-                                {...props}
+                                id={decodeURIComponent(
+                                    routeProps.match.params.id
+                                )}
+                                {...routeProps}
                                 {...resource}
-                            ></WithPermissions>
+                            />
                         )}
                     />
                 )}
@@ -122,13 +139,13 @@ const ResourceRoutes: any = ({
                 {list && (
                     <Route
                         path={basePath}
-                        render={props => (
+                        render={routeProps => (
                             <WithPermissions
                                 component={list}
                                 basePath={basePath}
-                                {...props}
+                                {...routeProps}
                                 {...resource}
-                            ></WithPermissions>
+                            />
                         )}
                     />
                 )}
@@ -147,10 +164,15 @@ const ResourceRoutes: any = ({
     ]);
 };
 
-export default ({ context = 'route', ...props }) => {
-    return context === 'registration' ? (
+const Resource: FunctionComponent<ResourceProps> = ({
+    intent = 'route',
+    ...props
+}) => {
+    return intent === 'registration' ? (
         <ResourceRegister {...props} />
     ) : (
         <ResourceRoutes {...props} />
     );
 };
+
+export default Resource;
