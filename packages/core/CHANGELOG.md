@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/stbui/prophet/compare/v1.3.5...v1.4.0) (2020-01-02)
+
+
+### Bug Fixes
+
+* **core:** useListParams 修复已知问题 ([c2363d5](https://github.com/stbui/prophet/commit/c2363d57106bca4814d0116f6178c004eb5f1e69))
+* **core:** useQueryWidthStore中error状态改为null ([506a653](https://github.com/stbui/prophet/commit/506a653e938e5c789f1ff642e609bab7f176e836))
+
+
+### Features
+
+* **core:** useCreateController 返回更多属性值 ([d52974c](https://github.com/stbui/prophet/commit/d52974c07c6af6cc098bfc696b3618618b852bff))
+* **core:** 完善auth ([b9a4e94](https://github.com/stbui/prophet/commit/b9a4e949f41079b3fe03f0022089dc089005c5d8))
+* **core:** 更新router ([67ac87f](https://github.com/stbui/prophet/commit/67ac87f5ce4879c52cd2b633bfb3ee6b1f4564e8))
+* **core:** 调整router和权限 ([5f09c6f](https://github.com/stbui/prophet/commit/5f09c6f81ae7338f750f1a4a6ebc86a9c7808158))
+* **demo:** 更新demo ([8692b79](https://github.com/stbui/prophet/commit/8692b7902696d3fe6d5ffc1fb714071cd409e401))
+* 增加core目录 ([9e9d626](https://github.com/stbui/prophet/commit/9e9d62623f036572024fb8ac82f301755b677b9d))
+
+
+
+
+
 ## [1.3.5](https://github.com/stbui/prophet/compare/v1.3.4...v1.3.5) (2019-11-11)
 
 

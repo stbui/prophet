@@ -1,11 +1,11 @@
 {
     "name": "demo",
-    "version": "1.3.5",
+    "version": "1.4.0",
     "private": true,
     "dependencies": {
-        "@stbui/prophet": "1.3.5",
-        "@stbui/prophet-data-json-server": "1.3.5",
-        "@stbui/prophet-i18n-polyglot": "1.2.0",
+        "@stbui/prophet": "1.4.0",
+        "@stbui/prophet-data-json-server": "1.4.0",
+        "@stbui/prophet-i18n-polyglot": "1.4.0",
         "@stbui/prophet-language-chinese": "1.3.2",
         "@stbui/prophet-language-english": "1.2.0",
         "antd": "^3.26.0",

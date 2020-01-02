@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/stbui/prophet/compare/v1.3.5...v1.4.0) (2020-01-02)
+
+
+### Features
+
+* **demo:** update ([bf7d5f6](https://github.com/stbui/prophet/commit/bf7d5f6f85f60b1d8aa5d6000ba16bcd4730afc4))
+* **demo:** 更新demo ([8692b79](https://github.com/stbui/prophet/commit/8692b7902696d3fe6d5ffc1fb714071cd409e401))
+* 增加core目录 ([9e9d626](https://github.com/stbui/prophet/commit/9e9d62623f036572024fb8ac82f301755b677b9d))
+
+
+
+
+
 ## [1.3.5](https://github.com/stbui/prophet/compare/v1.3.4...v1.3.5) (2019-11-11)
 
 **Note:** Version bump only for package demo

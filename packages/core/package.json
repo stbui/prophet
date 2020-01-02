@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet-core",
-    "version": "1.3.5",
+    "version": "1.4.0",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",

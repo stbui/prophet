@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/stbui/propht/compare/v1.3.5...v1.4.0) (2020-01-02)
+
+**Note:** Version bump only for package @stbui/prophet-data-json-server
+
+
+
+
+
 ## [1.3.5](https://github.com/stbui/propht/compare/v1.3.4...v1.3.5) (2019-11-11)
 
 **Note:** Version bump only for package @stbui/prophet-data-json-server
