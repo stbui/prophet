@@ -117,10 +117,11 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
                         })
                     )}
                 <Route
-                    render={() =>
+                    render={routeProps =>
                         createElement<any>(
                             layout,
                             {
+                                ...routeProps,
                                 dashboard,
                                 menu,
                                 title,

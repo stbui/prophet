@@ -10,6 +10,10 @@ export default {
     },
 
     checkAuth: () => {
+        // return localStorage.getItem('username')
+        //     ? Promise.resolve()
+        //     : Promise.reject({redirectTo: '/configuration'});
+
         return localStorage.getItem('username')
             ? Promise.resolve()
             : Promise.reject();

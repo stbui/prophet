@@ -3,7 +3,14 @@
 
 // export default dataProvider;
 
-import { GET_LIST, GET_ONE, CREATE, UPDATE, DELETE } from '@stbui/prophet';
+import {
+    GET_LIST,
+    GET_ONE,
+    CREATE,
+    UPDATE,
+    DELETE,
+    fetchUtils,
+} from '@stbui/prophet';
 
 const list = {
     data: Array.from(Array(200).keys()).map(id => {
@@ -20,7 +27,7 @@ const list = {
     total: 200,
 };
 
-const dataProvider = (apiUrl = './api', httpClient = fetch) => {
+const dataProvider = (apiUrl = './api', httpClient = fetchUtils.fetchJson) => {
     return (type, resource, params) => {
         switch (type) {
             case GET_LIST:

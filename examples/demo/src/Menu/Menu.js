@@ -5,13 +5,63 @@ import { routes } from './routes';
 
 const CustomMenu = props => {
     const { hasDashboard, location } = props;
+    const renderMenu = () => {
+        const loop = data => {
+            return data.map(item => {
+                if (item.children) {
+                    return (
+                        <Menu.SubMenu
+                            key={item.id}
+                            title={
+                                <span>
+                                    <Icon type={item.icon} />
+                                    {item.name}
+                                </span>
+                            }
+                        >
+                            {item.children.map(chid => {
+                                if (chid.children) {
+                                    return (
+                                        <Menu.SubMenu
+                                            key={chid.id}
+                                            title={
+                                                <span>
+                                                    <Icon type={chid.icon} />
+                                                    <span>{chid.name}</span>
+                                                </span>
+                                            }
+                                        >
+                                            {loop(chid.children)}
+                                        </Menu.SubMenu>
+                                    );
+                                }
 
+                                return (
+                                    <Menu.Item key={chid.path}>
+                                        <Link to={chid.path}>{chid.name}</Link>
+                                    </Menu.Item>
+                                );
+                            })}
+                        </Menu.SubMenu>
+                    );
+                }
+
+                return (
+                    <Menu.Item key={item.path}>
+                        <Link to={item.path}>{item.name}</Link>
+                    </Menu.Item>
+                );
+            });
+        };
+
+        return loop(routes);
+    };
     return (
         <Menu
             theme="dark"
             mode="inline"
-            selectedKeys={[location.pathname]}
             defaultOpenKeys={[location.pathname.split('/')[1]]}
+            defaultSelectedKeys={[location.pathname]}
         >
             {hasDashboard && (
                 <Menu.Item>
@@ -21,36 +71,7 @@ const CustomMenu = props => {
                     </Link>
                 </Menu.Item>
             )}
-            {routes.map(route => {
-                if (route.children) {
-                    return (
-                        <Menu.SubMenu
-                            key={route.id}
-                            title={
-                                <span>
-                                    <Icon type={route.icon} />
-                                    {route.title}
-                                </span>
-                            }
-                        >
-                            {route.children.map(r => {
-                                return (
-                                    <Menu.Item key={r.id}>
-                                        <Link to={r.url}>{r.title}</Link>
-                                    </Menu.Item>
-                                );
-                            })}
-                        </Menu.SubMenu>
-                    );
-                } else {
-                    return (
-                        <Menu.Item key={route.id}>
-                            <Icon type={route.icon} />
-                            <span>{route.title}</span>
-                        </Menu.Item>
-                    );
-                }
-            })}
+            {renderMenu()}
         </Menu>
     );
 };
