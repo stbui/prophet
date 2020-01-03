@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/stbui/prophet/compare/v1.4.0...v1.4.1) (2020-01-03)
+
+
+### Bug Fixes
+
+* **core:** 修复usePermissions 循环更新 ([c8657e5](https://github.com/stbui/prophet/commit/c8657e56968beccdc66dc9ec8e40699b7ad530b7))
+
+
+
+
+
 # [1.4.0](https://github.com/stbui/prophet/compare/v1.3.5...v1.4.0) (2020-01-02)
 
 

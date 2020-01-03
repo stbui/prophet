@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/stbui/prophet/compare/v1.4.0...v1.4.1) (2020-01-03)
+
+**Note:** Version bump only for package @stbui/prophet-antd
+
+
+
+
+
 # [1.4.0](https://github.com/stbui/prophet/compare/v1.3.5...v1.4.0) (2020-01-02)
 
 
