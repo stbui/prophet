@@ -30,7 +30,7 @@ const Authenticated: FunctionComponent<AuthenticatedProps> = ({
     location,
     ...other
 }) => {
-    useAuthenticated();
+    useAuthenticated(authParams);
 
     return cloneElement(children, other);
 };
