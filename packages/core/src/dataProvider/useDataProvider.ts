@@ -12,25 +12,34 @@ import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
 
 /* 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useDataProvider } from '@stbui/prophet-core';
 
 const UserList = () => {
-    const [users, setUsers] = useState([]);
-    const dispatch = useDispatch();
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState();
     const dataProvider = useDataProvider();
 
     useEffect(() => {
-        dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
-            .then(({ data }) => setUsers(data))
-            .catch(error => error.message);
+        dataProvider('GET_ONE', 'user', { filter: { id: 1 } })
+            .then(({ data }) => {
+                setUser(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                setError(error);
+                setLoading(false);
+            });
     }, []);
+
+    if (loading) return 'loading';
+    if (error) return error.message;
+    if (!user) return null;
 
     return (
         <React.Fragment>
-            {users.map((user, key) => (
-                <UserDetail user={user} key={key} />
-            ))}
+            { user.name }
+            { user.id }
         </React.Fragment>
     );
 };
@@ -50,7 +59,7 @@ export const useDataProvider = () => {
                 onSuccess,
                 onFailure,
                 ...other
-            } = options;
+            } = options || {};
 
             dispatch({
                 type: action,
