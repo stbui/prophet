@@ -5,6 +5,7 @@
  */
 
 import { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
 import { useCreate } from '../dataProvider';
 import { useNotify, useRedirect } from '../sideEffect';
@@ -27,7 +28,6 @@ export interface CreateProps {
     hasCreate?: boolean;
     hasEdit?: boolean;
     hasShow?: boolean;
-    location?: any;
     record?: object;
     successMessage?: string;
 }
@@ -62,8 +62,8 @@ export const getRecord = ({ state, search }, record: any = {}) =>
     state && state.record
         ? state.record
         : search
-        ? JSON.parse(parse(search).source)
-        : record;
+            ? JSON.parse(parse(search).source)
+            : record;
 
 const useCreateController = (props: CreateProps): CreateControllerProps => {
     const {
@@ -71,11 +71,11 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
         basePath,
         hasEdit,
         hasShow,
-        location,
         record = {},
         successMessage,
     } = props;
 
+    const location = useLocation();
     const notify = useNotify();
     const redirect = useRedirect();
     const version = useVersion();
@@ -94,19 +94,19 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify(successMessage || '创建成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                          },
+                            notify(successMessage || '创建成功', 'success');
+                            redirect(redirectTo, basePath, data.id);
+                        },
                     onFailure: onFailure
                         ? onFailure
                         : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
+                            notify(
+                                typeof error === 'string'
+                                    ? error
+                                    : error.message ||
+                                    'prophet.notification.http_error',
+                                'error'
+                            ),
                     refresh,
                 }
             );

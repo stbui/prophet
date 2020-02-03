@@ -5,6 +5,7 @@
  */
 
 import { isValidElement, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
 import useVerison from './useVersion';
@@ -13,7 +14,6 @@ import { useNotify } from '../sideEffect';
 export interface ListProps {
     resource: string;
     basePath: string;
-    location: any;
     hasCreate?: boolean;
     filterDefaultValues?: object;
     sort?: any;
@@ -37,7 +37,6 @@ export const useListController = (props: ListProps) => {
     const {
         resource,
         basePath,
-        location,
         hasCreate,
         filterDefaultValues,
         filter,
@@ -50,6 +49,7 @@ export const useListController = (props: ListProps) => {
         throw new Error('<List filter={{}}>...</List>');
     }
 
+    const location = useLocation();
     const version = useVerison();
     const notify = useNotify();
 

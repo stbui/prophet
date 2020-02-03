@@ -16,7 +16,7 @@ import { pickBy, removeKey } from '../util';
 
 interface Options {
     resource: string;
-    location: Location;
+    location: any;
     filterDefaultValues?: object;
     sort?: object;
     perPage?: number;
