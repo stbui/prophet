@@ -35,8 +35,8 @@ export const useListParams = ({
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { params } = useSelector(
-        (state: any) => state.resources[resource].list,
+    const params = useSelector(
+        (state: any) => state.resources[resource] ? state.resources[resource].list.params : {},
         shallowEqual
     );
 
@@ -85,6 +85,7 @@ export const useListParams = ({
 
     const filterValues = query.filter || {};
 
+    // todo: filter 空对象移除
     const setFilters = useCallback(filter => {
         changeParams({ type: 'SET_FILTERS', payload: filter });
     }, requestSignature);
@@ -177,8 +178,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-            ? { ...params }
-            : { filter: filterDefaultValues || {} };
+                ? { ...params }
+                : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;

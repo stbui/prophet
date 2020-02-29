@@ -35,13 +35,13 @@ export interface EditProps {
 export const useEdit = (props: EditProps) => {
     const { resource, basePath, id, payload } = props;
 
-    const { data: record, loading } = useQuery({
+    const { data: record, loading, error } = useQuery({
         type: GET_ONE,
         resource,
         payload: { id, ...payload },
     });
 
-    const [update, { loading: isSaving }] = useMutation(
+    const [update, { loading: isSaving, saveError }] = useMutation(
         {
             type: UPDATE,
             resource,
@@ -64,6 +64,8 @@ export const useEdit = (props: EditProps) => {
         loading,
         isSaving,
         save,
+        error,
+        saveError
     };
 };
 
