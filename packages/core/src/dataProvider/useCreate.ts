@@ -27,7 +27,20 @@ const UserProfile = ({ record }) => {
 };
 */
 
-const useCreate = (resource: string, data: any = {}, options?: any) =>
+/**
+ * 
+ * @param {string} resource 
+ * @param {Object} data 
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @returns [create, { data, error, loading, loaded }]
+ * 
+ * @example
+ */
+const useCreate = (resource: string, data: object = {}, options?: object) =>
     useMuation(
         { type: CREATE, resource, payload: { data } },
         { ...options, action: CRUD_CREATE }

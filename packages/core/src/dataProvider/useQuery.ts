@@ -59,7 +59,36 @@ export interface Query {
     payload: object;
 }
 
-const useQuery = (query: Query, options = {}) => {
+export interface QueryOptions {
+    action?: string;
+    onSuccess?: (response: any) => any | Object;
+    onError?: (error?: any) => any | Object;
+}
+
+export interface UseQueryValue {
+    data?: any;
+    total?: number;
+    error?: any;
+    loading?: boolean;
+    loaded?: boolean;
+}
+
+/**
+ * 
+ * @param {Object} query
+ * @param {string} query.type
+ * @param {string} query.resource
+ * @param {Object} query.payload
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @returns { data, total, error, loading, loaded }
+ * 
+ * @example
+ */
+const useQuery = (query: Query, options: QueryOptions = {}): UseQueryValue => {
     const { type, resource, payload } = query;
     const [state, setState]: any = useState({
         data: undefined,

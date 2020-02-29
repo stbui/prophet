@@ -9,32 +9,6 @@ import { useSelector } from 'react-redux';
 import useDataProvider from './useDataProvider';
 import { isEqual } from '../util';
 
-/* 
-import { useQueryWithStore } from '@stbui/prophet-core';
-
-const UserProfile = record => {
-    const { data, loading, error } = useQueryWithStore(
-        {
-            type: 'GET_ONE',
-            resource: 'users',
-            payload: { id: record.id },
-        },
-        {},
-        state => state.resource.user.data[record.id]
-    );
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div>{data.username}</div>;
-};
- */
-
 export interface Query {
     type: string;
     resource: string;
@@ -42,16 +16,27 @@ export interface Query {
 }
 
 export interface QueryOptions {
-    meta?: any;
-    action?: any;
+    action?: string;
+    onSuccess?: (response: any) => any | Object;
+    onError?: (error?: any) => any | Object;
+    [key: string]: any;
+}
+
+
+export interface UseQueryValue {
+    data?: any;
+    total?: number;
+    error?: any;
+    loading?: boolean;
+    loaded?: boolean;
 }
 
 const isEmptyList = data =>
     Array.isArray(data)
         ? data.length === 0
         : data &&
-          Object.keys(data).length === 0 &&
-          data.hasOwnProperty('fetchedAt');
+        Object.keys(data).length === 0 &&
+        data.hasOwnProperty('fetchedAt');
 
 const defaultDataSelector = query => (state: any) => {
     return undefined;
@@ -59,12 +44,56 @@ const defaultDataSelector = query => (state: any) => {
 
 const defaultTotalSelector = () => null;
 
+
+/**
+ * 请求数据获取
+ * 
+ * @param {Object} query
+ * @param {string} query.type
+ * @param {string} query.resource
+ * @param {Object} query.payload
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * @param {function} dataSelector
+ * @param {function} totalSelector
+ * 
+ * @returns
+ * 
+ * @example
+ * 
+ * import { useQueryWithStore } from '@stbui/prophet-core';
+ * 
+ * const UserProfile = record => {
+ *   const { data, loading, error } = useQueryWithStore(
+ *      {
+ *          type: 'GET_ONE',
+ *           resource: 'users',
+ *          payload: { id: record.id },
+ *       },
+ *       {},
+ *       state => state.resource.user.data[record.id]
+ *   );
+ * 
+ *   if (loading) {
+ *       return 'loading';
+ *   }
+ * 
+ *   if (error) {
+ *       return error.message;
+ *  }
+ * 
+ *   return <div>{data.username}</div>;
+ * };
+ */
+
 const useQueryWithStore = (
     query: Query,
     options: QueryOptions = { action: 'CUSTOM_QUERY' },
     dataSelector: (state: any) => any = defaultDataSelector(query),
     totalSelector?: (state: any) => number
-) => {
+): UseQueryValue => {
     const { type, resource, payload } = query;
     const data = useSelector(dataSelector);
     const total = useSelector(totalSelector || defaultTotalSelector);

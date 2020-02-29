@@ -7,7 +7,7 @@
 import { useSelector, shallowEqual } from 'react-redux';
 import useQueryWithStore from './useQueryWithStore';
 import { GET_LIST, CRUD_GET_LIST } from '../actions';
-
+import { Pagination, Sort } from '../type'
 /* 
 import { useGetList } from '@stbui/prophet-core';
 
@@ -32,13 +32,37 @@ const UserList = () => {
 };
  */
 
+export interface UseQueryValue {
+    data?: any;
+    total?: number;
+    error?: any;
+    loading?: boolean;
+    loaded?: boolean;
+    ids?: any;
+}
+
+/**
+ * 
+ * @param {string} resource 
+ * @param {Object} pagination 
+ * @param {Object} filter 
+ * @param {Object} sort 
+ * @param {Object} options 
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @returns
+ * 
+ * @example
+ */
 export const useGetList = (
     resource: string,
-    pagination: Object,
+    pagination: Pagination,
     filter: Object,
-    sort: Object,
-    options?: any
-) => {
+    sort: Sort,
+    options?: object
+): UseQueryValue => {
     const { data: ids, total, loading, loaded, error } = useQueryWithStore(
         {
             type: GET_LIST,

@@ -7,8 +7,44 @@
 import { useCallback, useState } from 'react';
 import useDataProvider from './useDataProvider';
 
-/*
-import { useMutation } from '@stbui/prophet-core';
+export interface Query {
+    type: string;
+    resource: string;
+    payload: object;
+}
+
+export interface QueryOptions {
+    action?: string;
+    onSuccess?: (response: any) => any | Object;
+    onFailure?: (error?: any) => any | Object;
+}
+
+export type UseQueryValue = [
+    (query?: Partial<any>, options?: Partial<QueryOptions>) => void,
+    {
+        data?: any;
+        total?: number;
+        error?: any;
+        loading?: boolean;
+        loaded?: boolean;
+    }
+]
+
+
+/**
+ * 更新数据
+ * 
+ * @param query 
+ * @param options 
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @returns
+ * 
+ * @example
+
+ import { useMutation } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const [update, { data, loading, error }] = useMutation({
@@ -51,18 +87,7 @@ const UserProfile = record => {
 };
  */
 
-export interface Query {
-    type: string;
-    resource: string;
-    payload: object;
-}
-
-export interface QueryOptions {
-    meta?: any;
-    action?: any;
-}
-
-const useMutation = (query: Query, options: QueryOptions) => {
+const useMutation = (query: Query, options: QueryOptions): UseQueryValue => {
     const { type, resource, payload } = query;
     const [state, setState]: any = useState({
         data: null,

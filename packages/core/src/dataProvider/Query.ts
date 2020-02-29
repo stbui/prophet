@@ -4,8 +4,38 @@
  * https://github.com/stbui/prophet
  */
 
+import { FunctionComponent } from 'react';
 import useQuery from './useQuery';
 
+interface ChildrenFuncParams {
+    data?: any;
+    total?: number;
+    loading?: boolean;
+    loaded?: boolean;
+    error?: any;
+}
+
+export interface Props {
+    children(props: ChildrenFuncParams): JSX.Element;
+    type: string;
+    resource: string;
+    payload?: any;
+    options?: any;
+}
+
+/**
+ * 
+ * @param {Function} children
+ * @param {string} type
+ * @param {string} resource
+ * @param {Object} payload
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @example
+ */
 /* 
 import { Query } from 'prophet-core';
 
@@ -45,24 +75,7 @@ const UserList = () => (
     </Query>
 );
  */
-
-interface ChildrenFunParms {
-    data?: any;
-    total?: number;
-    loading?: boolean;
-    loaded?: boolean;
-    error?: any;
-}
-
-export interface Props {
-    children(props: ChildrenFunParms): JSX.Element;
-    type: string;
-    resource: string;
-    payload?: any;
-    options?: any;
-}
-
-const Query = ({ children, type, resource, payload, options }) =>
+const Query: FunctionComponent<Props> = ({ children, type, resource, payload, options }) =>
     children(useQuery({ type, resource, payload }, options));
 
 export default Query;

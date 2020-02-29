@@ -25,11 +25,25 @@ const UserProfile = ({ record }) => {
 };
 */
 
+/**
+ * 
+ * @param {string} resource 
+ * @param {string} id 
+ * @param {Object} previousData 
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @returns
+ * 
+ * @example
+ */
 export const useDelete = (
     resource: string,
     id: string | number,
-    previousData: any = {},
-    options?: any
+    previousData: object = {},
+    options?: object
 ) =>
     useMuation(
         { type: DELETE, resource, payload: { id, previousData } },

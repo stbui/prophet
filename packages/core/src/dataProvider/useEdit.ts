@@ -27,13 +27,31 @@ const UserEdit = () => {
 
 export interface EditProps {
     resource: string;
-    basePath: string;
-    payload: any;
     id: string | number;
+    payload?: object;
 }
 
-export const useEdit = (props: EditProps) => {
-    const { resource, basePath, id, payload } = props;
+export interface UseEditValue {
+    record: any;
+    id: string | number;
+    loading: any;
+    isSaving: any;
+    save: any
+    error: any,
+    updateError: any
+}
+
+/**
+ * 
+ * @param {string} resource 
+ * @param {string} id
+ * @param {Object} payload
+ * 
+ * @returns
+ * 
+ * @example
+ */
+export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
 
     const { data: record, loading, error } = useQuery({
         type: GET_ONE,
@@ -41,7 +59,7 @@ export const useEdit = (props: EditProps) => {
         payload: { id, ...payload },
     });
 
-    const [update, { loading: isSaving, saveError }] = useMutation(
+    const [update, { loading: isSaving, error: updateError }] = useMutation(
         {
             type: UPDATE,
             resource,
@@ -52,20 +70,19 @@ export const useEdit = (props: EditProps) => {
 
     const save = useCallback(
         (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
+            // @ts-ignore
             update({ data }, { onSuccess, onFailure, refresh }),
-        [resource, basePath, update]
+        [resource, update]
     );
 
     return {
-        resource,
-        basePath,
         record,
         id,
         loading,
         isSaving,
         save,
         error,
-        saveError
+        updateError
     };
 };
 

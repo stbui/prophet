@@ -4,6 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
+import { FunctionComponent } from 'react';
 import useMutation from './useMutation';
 
 /*
@@ -31,7 +32,7 @@ const UserProfile = ({ record }) => (
 );
  */
 
-interface ChildrenFunParms {
+interface ChildrenFuncParams {
     data?: any;
     total?: number;
     loading?: boolean;
@@ -40,14 +41,27 @@ interface ChildrenFunParms {
 }
 
 export interface Props {
-    children(props: ChildrenFunParms): JSX.Element;
+    children: any;
     type: string;
     resource: string;
     payload?: any;
     options?: any;
 }
 
-export const Mutation = ({ children, type, resource, payload, options }) =>
+/**
+ * 
+ * @param {Function} children
+ * @param {string} type
+ * @param {string} resource
+ * @param {Object} payload
+ * @param {Object} options
+ * @param {string} options.action
+ * @param {Function} options.onSuccess
+ * @param {Function} options.onFailure
+ * 
+ * @example
+ */
+export const Mutation: FunctionComponent<Props> = ({ children, type, resource, payload, options }) =>
     children(useMutation({ type, resource, payload }, options));
 
 export default Mutation;
