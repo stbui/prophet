@@ -20,7 +20,7 @@ export interface QueryOptions {
 }
 
 export type UseQueryValue = [
-    (query?: Partial<any>, options?: Partial<QueryOptions>) => void,
+    (query?: Partial<any>, options?: Partial<any>) => void,
     {
         data?: any;
         total?: number;
@@ -28,8 +28,7 @@ export type UseQueryValue = [
         loading?: boolean;
         loaded?: boolean;
     }
-]
-
+];
 
 /**
  * 更新数据
@@ -44,7 +43,7 @@ export type UseQueryValue = [
  * 
  * @example
 
- import { useMutation } from '@stbui/prophet-core';
+import { useMutation } from '@stbui/prophet-core';
 
 const UserProfile = record => {
     const [update, { data, loading, error }] = useMutation({

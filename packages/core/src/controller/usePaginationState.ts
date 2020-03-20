@@ -5,13 +5,21 @@
  */
 
 import { useEffect, useCallback, useRef, useReducer } from 'react';
+import { Pagination } from '../types';
 
-/**
- * 分页
- * const [page, perPage, setPage, setPerPage] = usePaginationState();
- */
+export interface PaginationProps {
+    page: number;
+    perPage: number;
+    pagination: Pagination;
+    setPage: (page: number) => void;
+    setPerPage: (perPage: number) => void;
+    setPagination: (pagination: Pagination) => void;
+}
 
-const paginationReducer = (prevState, nextState) => {
+const paginationReducer = (
+    prevState: Pagination,
+    nextState: Partial<Pagination>
+): Pagination => {
     return {
         ...prevState,
         ...nextState,
@@ -23,7 +31,22 @@ const defaultPagination = {
     perPage: 10,
 };
 
-export default (initialPagination: any = {}) => {
+/**
+ * 分页
+ *
+ * @param {Object} initialPagination
+ * @param {number} initialPagination.page
+ * @param {number} initialPagination.perPage
+ * @returns {PaginationProps}
+ *
+ * @example
+ *
+ * const { page, setpage, perPage, setPerPage } = usePagination(initialPerPage);
+ *
+ */
+export default (
+    initialPagination: { page?: number; perPage?: number } = {}
+): PaginationProps => {
     const [pagination, setPagination] = useReducer(paginationReducer, {
         ...defaultPagination,
         ...initialPagination,
@@ -45,9 +68,9 @@ export default (initialPagination: any = {}) => {
     return {
         page: pagination.page,
         perPage: pagination.perPage,
+        pagination,
         setPage,
         setPerPage,
-        pagination,
         setPagination,
     };
 };

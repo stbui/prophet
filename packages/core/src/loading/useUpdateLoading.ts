@@ -8,6 +8,22 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
 
+/**
+ * @example
+ *
+ * import { useUpdateLoading } from '@stbui/prophet-core'
+ *
+ * const MyComponent = () => {
+ *      const { startLoading, stopLoading } = useUpdateLoading();
+ *      useEffect(() => {
+ *          startLoading();
+ *          fetch('http://www.stbui.com/api')
+ *              .finally(() => stopLoading());
+ *      }, []);
+ *      return <span>stbui</span>;
+ * }
+ *
+ */
 export default () => {
     const dispath = useDispatch();
 

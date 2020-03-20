@@ -25,11 +25,11 @@
         "examples/*"
     ],
     "devDependencies": {
-        "gh-pages": "^2.1.1",
+        "gh-pages": "^2.2.0",
         "gitbook-cli": "^2.3.2",
-        "lerna": "^3.20.1",
+        "lerna": "^3.20.2",
         "prettier": "^1.19.1",
-        "typescript": "^3.7.4",
+        "typescript": "^3.8.3",
         "conventional-changelog-cli": "^2.0.31"
     }
 }

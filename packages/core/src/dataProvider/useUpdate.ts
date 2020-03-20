@@ -29,20 +29,20 @@ const UserUpdate = ({ record }) => {
 };
  */
 /**
- * 
- * @param {string} resource 
- * @param {string} id 
- * @param {Object} data 
- * @param {Object} previousData 
- * @param {Object} options 
+ *
+ * @param {string} resource
+ * @param {string} id
+ * @param {Object} data
+ * @param {Object} previousData
+ * @param {Object} options
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @returns [update, { data, error, loading, loaded }]
- * 
+ *
  * @example
- * 
+ *
  */
 const useUpdate = (
     resource: string,

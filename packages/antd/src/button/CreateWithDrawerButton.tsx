@@ -15,9 +15,7 @@ export interface CreateWithDrawerButtonProps {
     size?: 'small' | 'large';
 }
 
-const CreateWithDrawerButton: FunctionComponent<
-    CreateWithDrawerButtonProps
-> = props => {
+const CreateWithDrawerButton: FunctionComponent<CreateWithDrawerButtonProps> = props => {
     const { children, width, destroyOnClose } = props;
     const { label, type, ghost, icon, disabled, shape, size } = props;
 

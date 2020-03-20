@@ -4,11 +4,11 @@
  * https://github.com/stbui/prophet
  */
 
-import { isValidElement, useMemo } from 'react';
+import { isValidElement, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
-import useVerison from './useVersion';
+import useVersion from './useVersion';
 import { useNotify } from '../sideEffect';
 
 export interface ListProps {
@@ -20,27 +20,57 @@ export interface ListProps {
     perPage?: number;
     filter?: object;
     debounce?: number;
+    [key: string]: any;
 }
 
-/*
-import { useListController } from '@stbui/prophet-core';
-import ListView from './ListView';
-
-const create = props => {
-    const controllerProps = useListController(props);
-
-    return <ListView { ...controllerProps } {...props } />;
+export interface ListControllerProps {
+    resource: string;
+    basePath: string;
+    data: any;
+    ids: any;
+    currentSort: any;
+    total: number;
+    hasCreate: any;
+    page: number;
+    perPage: number;
+    filterValues: any;
+    displayedFilters: any;
+    setFilters: (filters: any, displayedFilters: any) => void;
+    hideFilter: (filterName: string) => void;
+    showFilter: (filterName: string, defaultValue: any) => void;
+    setPage: (page: number) => void;
+    setPerPage: (page: number) => void;
+    setSort: (sort: string) => void;
+    loading: any;
+    loaded: any;
+    version: number;
 }
-*/
 
-export const useListController = (props: ListProps) => {
+/**
+ *
+ * @param {object} props
+ *
+ * @return {Object}
+ *
+ * @example
+ *
+ * import { useListController } from '@stbui/prophet-core';
+ * import ListView from './ListView';
+ *
+ * const List = props => {
+ *     const controllerProps = useListController(props);
+ *     return <ListView { ...controllerProps } {...props } />;
+ * }
+ *
+ */
+export const useListController = (props: ListProps): ListControllerProps => {
     const {
         resource,
         basePath,
         hasCreate,
         filterDefaultValues,
         filter,
-        sort,
+        sort = { field: 'id', order: 'ASC' },
         perPage = 10,
         debounce = 500,
     } = props;
@@ -50,7 +80,7 @@ export const useListController = (props: ListProps) => {
     }
 
     const location = useLocation();
-    const version = useVerison();
+    const version = useVersion();
     const notify = useNotify();
 
     const [query, queryMethod] = useListParams({
@@ -82,9 +112,14 @@ export const useListController = (props: ListProps) => {
         }
     );
 
-    if (!query.page && !(ids || []).length && query.page > 1 && total > 0) {
-        queryMethod.setPage(query.page - 1);
-    }
+    useEffect(() => {
+        if (
+            query.page <= 0 ||
+            (!loading && query.page > 1 && (ids || []).length === 0)
+        ) {
+            queryMethod.setPage(1);
+        }
+    }, [loading, query.page, ids, queryMethod]);
 
     const currentSort = useMemo(
         () => ({
@@ -98,9 +133,9 @@ export const useListController = (props: ListProps) => {
         resource,
         basePath,
         data,
-        ids,
+        ids: ids || [],
         currentSort,
-        total,
+        total: total != undefined ? total : 0,
         hasCreate,
         page: query.page,
         perPage: query.perPage,

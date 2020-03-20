@@ -28,16 +28,16 @@ const UserProfile = ({ record }) => {
 */
 
 /**
- * 
- * @param {string} resource 
- * @param {Object} data 
+ *
+ * @param {string} resource
+ * @param {Object} data
  * @param {Object} options
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @returns [create, { data, error, loading, loaded }]
- * 
+ *
  * @example
  */
 const useCreate = (resource: string, data: object = {}, options?: object) =>

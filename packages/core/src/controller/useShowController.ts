@@ -17,8 +17,8 @@ export interface ShowControllerProps {
     resource: string;
     basePath: string;
     record: any;
-    loading: boolean;
-    loaded: boolean;
+    loading: any;
+    loaded: any;
 }
 
 /*

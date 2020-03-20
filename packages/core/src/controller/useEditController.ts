@@ -20,8 +20,8 @@ export interface EditControllerProps {
     basePath: string;
     record: any;
     id: string | number;
-    loading: boolean;
-    loaded: boolean;
+    loading: any;
+    loaded: any;
     saving: any;
     save: any;
 }

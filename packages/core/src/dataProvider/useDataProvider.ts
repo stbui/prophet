@@ -54,12 +54,8 @@ export const useDataProvider = () => {
 
     return useCallback(
         (type, resource, payload, options) => {
-            const {
-                action = 'CUSTOM_FETCH',
-                onSuccess,
-                onFailure,
-                ...other
-            } = options || {};
+            const { action = 'CUSTOM_FETCH', onSuccess, onFailure, ...other } =
+                options || {};
 
             dispatch({
                 type: action,

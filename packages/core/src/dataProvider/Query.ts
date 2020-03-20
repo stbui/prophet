@@ -24,7 +24,7 @@ export interface Props {
 }
 
 /**
- * 
+ *
  * @param {Function} children
  * @param {string} type
  * @param {string} resource
@@ -33,7 +33,7 @@ export interface Props {
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @example
  */
 /* 
@@ -75,7 +75,12 @@ const UserList = () => (
     </Query>
 );
  */
-const Query: FunctionComponent<Props> = ({ children, type, resource, payload, options }) =>
-    children(useQuery({ type, resource, payload }, options));
+const Query: FunctionComponent<Props> = ({
+    children,
+    type,
+    resource,
+    payload,
+    options,
+}) => children(useQuery({ type, resource, payload }, options));
 
 export default Query;

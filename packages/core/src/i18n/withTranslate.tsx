@@ -8,6 +8,19 @@ import React, { ComponentType } from 'react';
 import useTranslate from './useTranslate';
 import useLocale from './useLocale';
 
+/**
+ *
+ * @example
+ *
+ * import { withTranslate } from '@stbui/prophet-core'
+ *
+ * const Page = ({ translate }) => {
+ *     return <button>{translate('stbui.title')}</button>
+ * }
+ *
+ * export default withTranslate(Page);
+ *
+ */
 const withTranslate = (Component: ComponentType): ComponentType => {
     const TranslatedComponent = props => {
         const translate = useTranslate();

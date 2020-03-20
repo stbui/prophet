@@ -5,22 +5,38 @@
  */
 
 import { useState, useCallback } from 'react';
+import { Filter } from '../types';
 
-/*
-const { filter, setFilter } = useFilterState({
-    filterToQuery: v => ({ query: v }),
-    permanentFilter: { name: 'stbui' },
-    debounceTime: 500,
-});
-*/
+export interface FilterProps {
+    filter: Filter;
+    setFilter: (v: string) => void;
+}
 
 let timer;
 
+/**
+ * Filter
+ *
+ * @param {Object} options
+ * @param {Object} options.filterToQuery
+ * @param {Object} options.permanentFilter
+ * @param {number} options.debounceTime
+ * @returns {FilterProps}
+ *
+ * @example
+ *
+ * const { filter, setFilter } = useFilterState({
+ *      fieldfilterToQuery: v => ({ query: v }),
+ *      permanentFilter: { name: 'stbui' },
+ *      debounceTime: 500,
+ * });
+ *
+ */
 export default ({
     filterToQuery = v => ({ q: v }),
-    permanentFilter,
+    permanentFilter = {},
     debounceTime = 500,
-}) => {
+}): FilterProps => {
     const [filter, setFilterValue] = useState({
         ...permanentFilter,
         ...filterToQuery(''),

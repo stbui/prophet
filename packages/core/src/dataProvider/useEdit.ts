@@ -35,31 +35,30 @@ export interface UseEditValue {
     record: any;
     id: string | number;
     loading: any;
-    isSaving: any;
-    save: any
-    error: any,
-    updateError: any
+    saving: any;
+    save: any;
+    error: any;
+    saveError: any;
 }
 
 /**
- * 
- * @param {string} resource 
+ *
+ * @param {string} resource
  * @param {string} id
  * @param {Object} payload
- * 
+ *
  * @returns
- * 
+ *
  * @example
  */
 export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
-
     const { data: record, loading, error } = useQuery({
         type: GET_ONE,
         resource,
         payload: { id, ...payload },
     });
 
-    const [update, { loading: isSaving, error: updateError }] = useMutation(
+    const [update, { loading: saving, error: saveError }] = useMutation(
         {
             type: UPDATE,
             resource,
@@ -79,10 +78,10 @@ export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
         record,
         id,
         loading,
-        isSaving,
+        saving,
         save,
         error,
-        updateError
+        saveError,
     };
 };
 

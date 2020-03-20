@@ -9,7 +9,11 @@ import { useHistory, useLocation } from 'react-router';
 import useAuthProvider from './useAuthProvider';
 
 /**
- * import { useLogin } from 'prophet-core';
+ *
+ * @example
+ *
+ * import { useLogin } from '@stbui/prophet-core';
+ *
  * const LoginButton = () => {
  *      const login = useLogin();
  *      const onClick = () => {

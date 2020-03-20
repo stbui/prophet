@@ -49,7 +49,7 @@ export interface Props {
 }
 
 /**
- * 
+ *
  * @param {Function} children
  * @param {string} type
  * @param {string} resource
@@ -58,10 +58,15 @@ export interface Props {
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @example
  */
-export const Mutation: FunctionComponent<Props> = ({ children, type, resource, payload, options }) =>
-    children(useMutation({ type, resource, payload }, options));
+export const Mutation: FunctionComponent<Props> = ({
+    children,
+    type,
+    resource,
+    payload,
+    options,
+}) => children(useMutation({ type, resource, payload }, options));
 
 export default Mutation;

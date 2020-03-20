@@ -9,6 +9,13 @@ import TranslationProviderContext from './TranslationProviderContext';
 import { useUpdateLoading } from '../loading';
 import { useNotify } from '../sideEffect';
 
+/**
+ *
+ * @example
+ *
+ * import { useLocale } from '@stbui/prophet-core';
+ *
+ */
 const useSetLocale = () => {
     const { i18nProvider, setLocale } = useContext(TranslationProviderContext);
     const { startLoading, stopLoading } = useUpdateLoading();

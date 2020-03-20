@@ -27,7 +27,10 @@ export const addRecordIds = (newRecordIds, oldRecordIds) => {
 export const ids = (previousState = [], { type, payload }) => {
     switch (type) {
         case CRUD_GET_LIST_SUCCESS:
-            return addRecordIds(payload.data.map(({ id }) => id), []);
+            return addRecordIds(
+                payload.data.map(({ id }) => id),
+                []
+            );
         case CRUD_GET_ONE_SUCCESS:
         case CRUD_CREATE_SUCCESS:
             return addRecordIds([payload.data.id], previousState);

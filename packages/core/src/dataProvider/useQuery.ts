@@ -74,7 +74,7 @@ export interface UseQueryValue {
 }
 
 /**
- * 
+ *
  * @param {Object} query
  * @param {string} query.type
  * @param {string} query.resource
@@ -83,9 +83,9 @@ export interface UseQueryValue {
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @returns { data, total, error, loading, loaded }
- * 
+ *
  * @example
  */
 const useQuery = (query: Query, options: QueryOptions = {}): UseQueryValue => {

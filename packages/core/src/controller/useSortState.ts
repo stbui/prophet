@@ -5,15 +5,16 @@
  */
 
 import { useReducer, useRef, useEffect, useCallback } from 'react';
+import { Sort } from '../types';
 
-/*
-const { sort, setSort, setSortField, setSortOrder } = useSortState({
-    field: 'name',
-    order: 'ASC',
-});
-*/
+export interface SortProps {
+    sort: Sort;
+    setSort: (sort: Sort) => void;
+    setSortField: (field: string) => void;
+    setSortOrder: (order: string) => void;
+}
 
-const sortReducer = (state, { type, payload }) => {
+const sortReducer = (state: Sort, { type, payload }) => {
     switch (type) {
         case 'SET_SORT':
             return payload.sort;
@@ -39,7 +40,24 @@ const sortReducer = (state, { type, payload }) => {
     }
 };
 
-export default (initialSort = { field: 'id', order: 'ASC' }) => {
+/**
+ * sort
+ *
+ * @param {Object} initialSort
+ * @param {string} initialSort.field
+ * @param {string} initialSort.order
+ * @returns {SortProps}
+ *
+ * @example
+ *
+ * const { sort, setSort, setSortField, setSortOrder } = useSortState({
+ *      field: 'name',
+ *      order: 'ASC',
+ * });
+ */
+export default (
+    initialSort: Sort = { field: 'id', order: 'ASC' }
+): SortProps => {
     const [sort, dispatch] = useReducer(sortReducer, initialSort);
     const isFirstRender = useRef(true);
 
@@ -63,6 +81,7 @@ export default (initialSort = { field: 'id', order: 'ASC' }) => {
             isFirstRender.current = false;
             return;
         }
+        dispatch({ type: 'SET_SORT', payload: { sort: initialSort } });
     }, [initialSort.field, initialSort.order]);
 
     return { setSort, setSortField, setSortOrder, sort };
