@@ -8,6 +8,8 @@ export interface Sort {
     order: string;
 }
 
-export interface ReduxState {
-
+export interface Filter {
+    [k: string]: any;
 }
+
+export interface ReduxState {}

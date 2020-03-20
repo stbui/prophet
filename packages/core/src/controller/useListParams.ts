@@ -4,25 +4,73 @@
  * https://github.com/stbui/prophet
  */
 
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { parse, stringify } from 'query-string';
 import { useHistory } from 'react-router-dom';
 import { changeListParams } from '../actions/listActions';
 import queryReducer from '../reducers/resources/list/queryReducer';
-import { pickBy, removeKey } from '../util';
+import { pickBy, removeKey, removeEmpty } from '../util';
+import { Sort } from '../types';
+import { Location } from 'history';
 
-// const [query, queryMethod] = useListParams({ resource: 'users', location: {}, filterDefaultValues: { username: 'stbui' }, sort: { field: 'id', order: 'ASC' }, perPage: 20 })
-
-interface Options {
+interface ListParamsOptions {
     resource: string;
-    location: any;
+    location: Location;
     filterDefaultValues?: object;
-    sort?: object;
+    sort?: Sort;
     perPage?: number;
     debounce?: number;
 }
 
+export interface ListParams {
+    sort: string;
+    order: string;
+    page: number;
+    perPage: number;
+    filter: any;
+    filterValues: object;
+    displayedFilters: {
+        [key: string]: boolean;
+    };
+    requestSignature: any[];
+}
+
+interface Modifiers {
+    changeParams: (action: any) => void;
+    setPage: (page: number) => void;
+    setPerPage: (pageSize: number) => void;
+    setSort: (sort: string) => void;
+    setFilters: (filters: any, displayedFilters: any) => void;
+    hideFilter: (filterName: string) => void;
+    showFilter: (filterName: string, defaultValue: any) => void;
+}
+
+/**
+ * ListParams
+ *
+ * @param {Object} options
+ * @param {string} options.resource
+ * @param {Object} options.location
+ * @param {Object} options.filterDefaultValues
+ * @param {Object} options.sort
+ * @param {order} options.sort.field
+ * @param {order} options.sort.order
+ * @param {number} options.perPage
+ * @param {number} options.debounce
+ * @returns
+ *
+ * @example
+ *
+ * const [query, queryMethod] = useListParams({
+ *      resource: 'users',
+ *      location: {},
+ *      filterDefaultValues: { username: 'stbui' },
+ *      sort: { field: 'id', order: 'ASC' },
+ *      perPage: 20
+ * })
+ *
+ */
 export const useListParams = ({
     resource,
     location,
@@ -30,13 +78,15 @@ export const useListParams = ({
     sort = { field: 'id', order: 'ASC' },
     perPage = 10,
     debounce = 500,
-}: Options) => {
-    const [displayedFilters, setDisplayedFilters] = useState({});
+}: ListParamsOptions): [ListParams, Modifiers] => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const params = useSelector(
-        (state: any) => state.resources[resource] ? state.resources[resource].list.params : {},
+        (state: any) =>
+            state.resources[resource]
+                ? state.resources[resource].list.params
+                : {},
         shallowEqual
     );
 
@@ -62,6 +112,7 @@ export const useListParams = ({
             search: `?${stringify({
                 ...newParams,
                 filter: JSON.stringify(newParams.filter),
+                displayedFilters: JSON.stringify(newParams.displayedFilters),
             })}`,
         });
 
@@ -84,36 +135,54 @@ export const useListParams = ({
     );
 
     const filterValues = query.filter || {};
+    const displayedFilterValues = query.displayedFilters || {};
 
-    // todo: filter 空对象移除
-    const setFilters = useCallback(filter => {
-        changeParams({ type: 'SET_FILTERS', payload: filter });
+    const setFilters = useCallback((filters, displayedFilters) => {
+        let payload: any = {
+            filter: removeEmpty(filters),
+            displayedFilters: undefined,
+        };
+
+        if (displayedFilters) {
+            payload.displayedFilters = Object.keys(displayedFilters).reduce(
+                (filters, filter) => {
+                    return displayedFilters[filter]
+                        ? { ...filters, [filter]: true }
+                        : filters;
+                },
+                {}
+            );
+        }
+
+        changeParams({ type: 'SET_FILTERS', payload });
     }, requestSignature);
 
-    const hideFilter = useCallback(filterName => {
-        setDisplayedFilters(previousFilters => ({
-            ...previousFilters,
-            [filterName]: false,
-        }));
+    const hideFilter = useCallback((filterName: string) => {
         const newFilters = removeKey(filterValues, filterName);
-        setFilters(newFilters);
+        const newDisplayedFilters = removeKey(
+            displayedFilterValues,
+            filterName
+        );
+        setFilters(newFilters, newDisplayedFilters);
     }, requestSignature);
 
-    const showFilter = useCallback((filterName, defaultValue) => {
-        setDisplayedFilters(previousFilters => ({
-            ...previousFilters,
-            [filterName]: true,
-        }));
-        if (typeof defaultValue !== 'undefined') {
-            setFilters({
+    const showFilter = useCallback((filterName: string, defaultValue: any) => {
+        setFilters(
+            {
                 ...filterValues,
                 [filterName]: defaultValue,
-            });
-        }
+            },
+            { ...displayedFilterValues, [filterName]: true }
+        );
     }, requestSignature);
 
     return [
-        { displayedFilters, filterValues, requestSignature, ...query },
+        {
+            displayedFilters: displayedFilterValues,
+            filterValues,
+            requestSignature,
+            ...query,
+        },
         {
             changeParams,
             setPage,
@@ -127,9 +196,9 @@ export const useListParams = ({
 };
 
 /**
- * 将参数转换成对象
+ * 将url参数转换成对象
  * ?page=1&perPage=10&sort=stb&order=ASC&filter={}
- * @param param0
+ * @param {string} options.search
  */
 export const parseQueryFromLocation = ({ search }) => {
     const query: any = pickBy(
@@ -152,7 +221,7 @@ export const parseQueryFromLocation = ({ search }) => {
 /**
  *
  * { filter: {}, order: null, page: 1, perPage: null, sort: null }
- * @param params
+ * @param {object} params
  */
 export const hasCustomParams = params => {
     return (
@@ -166,6 +235,15 @@ export const hasCustomParams = params => {
     );
 };
 
+/**
+ *
+ * @param {Object} options
+ * @param {Object} options.location
+ * @param {Object} options.params
+ * @param {string} options.filterDefaultValues
+ * @param {Object} options.sort
+ * @param {number} options.perPage
+ */
 export const getQuery = ({
     location,
     params,
@@ -178,8 +256,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-                ? { ...params }
-                : { filter: filterDefaultValues || {} };
+            ? { ...params }
+            : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;
