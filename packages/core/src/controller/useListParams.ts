@@ -228,7 +228,7 @@ export const hasCustomParams = params => {
         params &&
         params.filter &&
         (Object.keys(params.filter).length > 0 ||
-            params.order !== 1 ||
+            params.order !== null ||
             params.page !== 1 ||
             params.perPage != null ||
             params.sort != null)
