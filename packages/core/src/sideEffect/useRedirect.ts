@@ -14,7 +14,7 @@ const resolveRedirectTo = (redirectTo, basePath: string, id?) => {
             return `${basePath}/create`;
         case 'edit':
             return `${basePath}/${id}`;
-        case 'edit':
+        case 'show':
             return `${basePath}/${id}/show`;
         default:
             redirectTo;
