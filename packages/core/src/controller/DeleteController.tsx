@@ -13,7 +13,8 @@ export interface Props extends DeleteProps {
 
 /*
 import { DeleteController } from '@stbui/prophet-core';
-import DeleteView from './DeleteView';
+
+const DeleteView = () => <div>...</div>
 
 const pageComponent = props => (
     <DeleteController {...props}>
@@ -21,7 +22,6 @@ const pageComponent = props => (
     </DeleteController>
 );
 */
-
 const DeleteController = ({ children, ...props }: Props) => {
     const controllerProps = useDeleteController(props);
     const translate = useTranslate();

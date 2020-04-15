@@ -5,6 +5,8 @@
  */
 
 import { useState, useCallback } from 'react';
+import debounce from 'lodash/debounce';
+import isEqual from 'lodash/isEqual';
 import { Filter } from '../types';
 
 export interface FilterProps {
@@ -33,7 +35,7 @@ let timer;
  *
  */
 export default ({
-    filterToQuery = v => ({ q: v }),
+    filterToQuery = (v: string) => ({ q: v }),
     permanentFilter = {},
     debounceTime = 500,
 }): FilterProps => {
@@ -42,23 +44,13 @@ export default ({
         ...filterToQuery(''),
     });
 
-    const setFilter = useCallback(value => {
-        if (timer) {
-            clearInterval(timer);
-        }
-
-        // timer = setTimeout(() => {
-        //     setFilterValue({
-        //         ...permanentFilter,
-        //         ...filterToQuery(value),
-        //     });
-        // }, debounceTime)
-
-        setFilterValue({
-            ...permanentFilter,
-            ...filterToQuery(value),
-        });
-    }, []);
+    const setFilter = useCallback(
+        debounce((value: string) => {
+            setFilterValue({
+                ...permanentFilter,
+                ...filterToQuery(value),
+            });
+        }, debounceTime), []);
 
     return { filter, setFilter };
 };

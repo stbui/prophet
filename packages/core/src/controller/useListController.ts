@@ -89,7 +89,7 @@ export const useListController = (props: ListProps): ListControllerProps => {
         filterDefaultValues,
         sort,
         perPage,
-        debounce,
+        debounceTime: debounce,
     });
 
     const { data, ids, total, loading, loaded } = useGetList(

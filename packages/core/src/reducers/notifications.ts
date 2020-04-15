@@ -4,9 +4,10 @@
  * https://github.com/stbui
  */
 
+import { Reducer } from 'redux';
 import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions';
 
-export const notification = (previousState = [], { type, payload }) => {
+const notificationReducer: Reducer<any> = (previousState = [], { type, payload }) => {
     switch (type) {
         case SHOW_NOTIFICATION:
             return previousState.concat(payload);
@@ -17,4 +18,4 @@ export const notification = (previousState = [], { type, payload }) => {
     }
 };
 
-export default notification;
+export default notificationReducer;

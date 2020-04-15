@@ -4,39 +4,34 @@
  * https://github.com/stbui
  */
 
+import { Reducer } from 'redux';
+import uniq from 'lodash/uniq';
+
 import {
     CRUD_GET_LIST_SUCCESS,
-    CRUD_GET_ONE_SUCCESS,
     CRUD_CREATE_SUCCESS,
 } from '../../../actions';
-import { getFetchedAt } from '../../../util';
 
-export const addRecordIds = (newRecordIds, oldRecordIds) => {
-    const newFetchedAt = getFetchedAt(newRecordIds, oldRecordIds.fetchedAt);
-    const recordIds: any = Array.from(
-        new Set(
-            oldRecordIds.filter(id => !!newFetchedAt[id]).concat(newRecordIds)
-        )
-    );
 
-    Object.defineProperty(recordIds, 'fetchedAt', { value: newFetchedAt });
+/**
+ * id列表
+ * @param previousState 
+ * @param param1 
+ */
+const idsReducer: Reducer<any> = (previousState = [], { meta, type, payload, }) => {
 
-    return recordIds;
-};
+    if (meta) {
+        // 删除id
+    }
 
-export const ids = (previousState = [], { type, payload }) => {
     switch (type) {
         case CRUD_GET_LIST_SUCCESS:
-            return addRecordIds(
-                payload.data.map(({ id }) => id),
-                []
-            );
-        case CRUD_GET_ONE_SUCCESS:
+            return payload.data.map(({ id }) => id);
         case CRUD_CREATE_SUCCESS:
-            return addRecordIds([payload.data.id], previousState);
+            return uniq([payload.data.id, ...previousState]);
         default:
             return previousState;
     }
 };
 
-export default ids;
+export default idsReducer

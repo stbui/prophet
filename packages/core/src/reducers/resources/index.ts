@@ -4,7 +4,7 @@
  * https://github.com/stbui
  */
 
-import { REGISTER_RESOURCE, UNREGISTER_RESOURCE } from '../../actions';
+import { REGISTER_RESOURCE, UNREGISTER_RESOURCE, REFRESH_VIEW } from '../../actions';
 import data from './data';
 import list from './list';
 
@@ -13,7 +13,7 @@ export default (previousState = {}, { type, payload, meta }) => {
         case REGISTER_RESOURCE:
             const resuorceState = {
                 props: payload,
-                data: data(undefined, { payload, meta }),
+                data: data(undefined, { type, payload, meta }),
                 list: list(undefined, { type, payload, meta }),
             };
             return { ...previousState, [payload.name]: resuorceState };
@@ -27,7 +27,7 @@ export default (previousState = {}, { type, payload, meta }) => {
             }, {});
     }
 
-    if (!meta || !meta.resource) {
+    if (type !== REFRESH_VIEW && (!meta || !meta.resource)) {
         return previousState;
     }
 
@@ -37,18 +37,20 @@ export default (previousState = {}, { type, payload, meta }) => {
         (acc, resource) => ({
             ...acc,
             [resource]:
-                meta.resource === resource
+                type === REFRESH_VIEW ||
+                    meta.resource === resource
                     ? {
-                          props: previousState[resource].props,
-                          data: data(previousState[resource].data, {
-                              payload,
-                              meta,
-                          }),
-                          list: list(previousState[resource].list, {
-                              type,
-                              payload,
-                          }),
-                      }
+                        props: previousState[resource].props,
+                        data: data(previousState[resource].data, {
+                            type,
+                            payload,
+                            meta,
+                        }),
+                        list: list(previousState[resource].list, {
+                            type,
+                            payload,
+                        }),
+                    }
                     : previousState[resource],
         }),
         {}

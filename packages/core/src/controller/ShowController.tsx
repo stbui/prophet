@@ -13,7 +13,8 @@ export interface Props extends ShowProps {
 
 /*
 import { ShowController } from '@stbui/prophet-core';
-import ShowView from './ShowView';
+
+const ShowView = () => <div>...</div>
 
 const pageComponent = props => (
     <ShowController {...props}>

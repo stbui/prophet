@@ -12,6 +12,7 @@ import notifications from './notifications';
 import refresh from './refresh';
 
 export const getResources = state => GetResources(state.resources);
+
 export default (history, customReducers) =>
     combineReducers({
         resources,

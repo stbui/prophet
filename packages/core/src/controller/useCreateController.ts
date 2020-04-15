@@ -34,9 +34,10 @@ export interface CreateProps {
 
 /*
 import { useCreateController } from '@stbui/prophet-core';
-import CreateView from './CreateView';
 
-const create = props => {
+const CreateView = () => <div>...</div>
+
+const pageComponent = props => {
     const controllerProps = useCreateController(props);
 
     return <CreateView { ...controllerProps } {...props } />;
@@ -62,8 +63,8 @@ export const getRecord = ({ state, search }, record: any = {}) =>
     state && state.record
         ? state.record
         : search
-        ? JSON.parse(parse(search).source)
-        : record;
+            ? JSON.parse(parse(search).source)
+            : record;
 
 const useCreateController = (props: CreateProps): CreateControllerProps => {
     const {
@@ -94,19 +95,19 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify(successMessage || '创建成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                          },
+                            notify(successMessage || '创建成功', 'success');
+                            redirect(redirectTo, basePath, data.id);
+                        },
                     onFailure: onFailure
                         ? onFailure
                         : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
+                            notify(
+                                typeof error === 'string'
+                                    ? error
+                                    : error.message ||
+                                    'prophet.notification.http_error',
+                                'error'
+                            ),
                     refresh,
                 }
             );

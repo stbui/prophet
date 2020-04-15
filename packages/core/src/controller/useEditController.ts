@@ -28,9 +28,10 @@ export interface EditControllerProps {
 
 /*
 import { useEditController } from '@stbui/prophet-core';
-import EditView from './EditView';
 
-const create = props => {
+const EditView = () => <div>...</div>
+
+const pageComponent = props => {
     const controllerProps = useEditController(props);
 
     return <EditView { ...controllerProps } {...props } />;

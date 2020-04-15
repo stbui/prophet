@@ -3,6 +3,8 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui
  */
+import { Reducer } from 'redux';
+import isEqual from 'lodash/isEqual';
 
 import {
     GET_LIST,
@@ -11,9 +13,26 @@ import {
     CREATE,
 } from '../../actions/dataFatchActions';
 import { FETCH_END } from '../../actions/fetchActions';
-import { getFetchedAt, isEqual } from '../../util';
+import { getFetchedAt, } from '../../util';
 
-export const hideFetchedAt = records => {
+export interface Record {
+    id: string | number;
+    [key: string]: any;
+}
+
+interface RecordSetWithDate {
+    [key: string]: Record | object;
+    [key: number]: Record;
+    fetchedAt: {
+        [key: string]: Date;
+        [key: number]: Date;
+    };
+}
+
+
+export const hideFetchedAt = (
+    records: RecordSetWithDate
+): RecordSetWithDate => {
     Object.defineProperty(records, 'fetchedAt', {
         enumerable: false,
         configurable: false,
@@ -22,12 +41,10 @@ export const hideFetchedAt = records => {
     return records;
 };
 
-/**
- * 添加新记录，在获取之前显示缓存的数据，并删除过期记录
- * @param newRecords [{id:1},{id:2}]
- * @param oldRecords {}
- */
-export const addRecords = (newRecords: any[] = [], oldRecords) => {
+export const addRecordsAndRemoveOutdated = (
+    newRecords: Record[] = [],
+    oldRecords: RecordSetWithDate
+): RecordSetWithDate => {
     const newRecordsById = {};
     newRecords.forEach(record => (newRecordsById[record.id] = record));
 
@@ -50,37 +67,95 @@ export const addRecords = (newRecords: any[] = [], oldRecords) => {
 };
 
 /**
+ * 添加新记录，并删除过期记录
+ * @param newRecords [{id:1},{id:2}]
+ * @param oldRecords {}
+ */
+export const addRecords = (
+    newRecords: Record[] = [],
+    oldRecords: RecordSetWithDate
+): RecordSetWithDate => {
+    const newRecordsById = { ...oldRecords };
+    newRecords.forEach(record => {
+        newRecordsById[record.id] = isEqual(record, oldRecords[record.id])
+            ? (oldRecords[record.id] as Record)
+            : record;
+    });
+
+    const updatedFetchedAt = getFetchedAt(
+        newRecords.map(({ id }) => id),
+        oldRecords.fetchedAt
+    );
+
+    Object.defineProperty(newRecordsById, 'fetchedAt', {
+        value: { ...oldRecords.fetchedAt, ...updatedFetchedAt },
+        enumerable: false,
+    });
+
+    return newRecordsById;
+};
+
+export const addOneRecord = (
+    newRecord: Record,
+    oldRecords: RecordSetWithDate,
+    date = new Date()
+): RecordSetWithDate => {
+    const newRecordsById = {
+        ...oldRecords,
+        [newRecord.id]: isEqual(newRecord, oldRecords[newRecord.id])
+            ? oldRecords[newRecord.id]
+            : newRecord,
+    };
+
+    return Object.defineProperty(newRecordsById, 'fetchedAt', {
+        value: { ...oldRecords.fetchedAt, [newRecord.id]: date },
+        enumerable: false,
+    });
+};
+
+const includesNotStrict = (items, element) =>
+    items.some(item => item == element);
+
+
+/**
  * 删除记录
  * @param removeRecords
  * @param oldRecords
  */
-export const removeRecords = (removeRecords: any[] = [], oldRecords) => {
+export const removeRecords = (
+    removedRecordIds: any[] = [],
+    oldRecords: RecordSetWithDate
+): RecordSetWithDate => {
     const records = Object.entries(oldRecords)
-        .filter(([key]) => !removeRecords.includes(key))
+        .filter(([key]) => !includesNotStrict(removedRecordIds, key))
         .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {
             fetchedAt: {},
         });
-
     records.fetchedAt = Object.entries(oldRecords.fetchedAt)
-        .filter(([key]) => !removeRecords.includes(key))
+        .filter(([key]) => !includesNotStrict(removedRecordIds, key))
         .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
 
     return hideFetchedAt(records);
 };
 
-export default (previousState = {}, { payload, meta }) => {
+const initialState = hideFetchedAt({ fetchedAt: {} });
+
+const dataReducer: Reducer<RecordSetWithDate> = (previousState = initialState, { payload, meta }) => {
     if (!meta || !meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
         return previousState;
     }
 
     switch (meta.fetchResponse) {
         case GET_LIST:
-            return addRecords(payload.data, previousState);
+            return addRecordsAndRemoveOutdated(payload.data, previousState);
         case GET_ONE:
         case CREATE:
         case UPDATE:
-            return addRecords([payload.data], previousState);
+            return addOneRecord(payload.data, previousState);
         default:
             return previousState;
     }
 };
+
+export default dataReducer
+

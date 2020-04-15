@@ -23,7 +23,8 @@ export interface ShowControllerProps {
 
 /*
 import { useShowController } from '@stbui/prophet-core';
-import ShowView from './ShowView';
+
+const ShowView = () => <div>...</div>
 
 const create = props => {
     const controllerProps = useShowController(props);

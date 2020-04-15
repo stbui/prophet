@@ -11,17 +11,20 @@ export interface Props extends CreateProps {
     children: (params) => JSX.Element;
 }
 
-/*
-import { CreateController } from '@stbui/prophet-core';
-import CreateView from './CreateView';
-
-const pageComponent = props => (
-    <CreateController {...props}>
-        {controllerProps => <CreateView {...controllerProps} {...props} />}
-    </CreateController>
-);
-*/
-
+/**
+ * 
+ * @examplez
+ * 
+ * import { CreateController } from '@stbui/prophet-core';
+ * 
+ * const CreateView = () => <div>...</div>
+ * 
+ * const pageComponent = props => (
+ *     <CreateController {...props}>
+ *         {controllerProps => <CreateView {...controllerProps} {...props} />}
+ *     </CreateController>
+ * );
+ */
 const CreateController = ({ children, ...props }: Props) => {
     const controllerProps = useCreateController(props);
     const translate = useTranslate();

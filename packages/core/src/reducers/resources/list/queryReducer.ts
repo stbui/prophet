@@ -4,17 +4,27 @@
  * https://github.com/stbui
  */
 
-import { SET_FILTERS, SET_PAGE, SET_PER_PAGE } from '../../../actions';
+import { Reducer } from 'redux';
+import { SET_FILTER, SET_PAGE, SET_PER_PAGE, SET_SORT } from '../../../actions';
 
-export default (previousState, { type, payload }) => {
+const queryReducer: Reducer<any> = (previousState, { type, payload }) => {
     switch (type) {
         case SET_PAGE:
             return { ...previousState, page: payload };
         case SET_PER_PAGE:
             return { ...previousState, page: 1, perPage: payload };
-        case SET_FILTERS:
-            return { ...previousState, page: 1, filter: payload };
-        case 'SET_SORT':
+
+        case SET_FILTER:
+            return {
+                ...previousState,
+                page: 1,
+                filter: payload,
+                displayedFilters: payload.displayedFilters
+                    ? payload.displayedFilters
+                    : previousState.displayedFilters,
+            };
+
+        case SET_SORT:
             if (payload.sort === previousState.sort) {
                 return {
                     ...previousState,
@@ -34,3 +44,6 @@ export default (previousState, { type, payload }) => {
             return previousState;
     }
 };
+
+
+export default queryReducer

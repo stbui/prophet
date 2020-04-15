@@ -13,7 +13,8 @@ interface Props extends ListProps {
 
 /*
 import { ListController } from '@stbui/prophet-core';
-import ListView from './ListView';
+
+const ListView = () => <div>...</div>
 
 const pageComponent = props => (
     <ListController {...props}>

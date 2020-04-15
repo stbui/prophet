@@ -4,9 +4,10 @@
  * https://github.com/stbui
  */
 
+import { Reducer } from 'redux';
 import { CRUD_GET_LIST_SUCCESS } from '../../../actions';
 
-const loaderOnce = (previousState = false, { type }) => {
+const loaderOnce: Reducer<any> = (previousState = false, { type }) => {
     if (previousState == true) {
         return previousState;
     }

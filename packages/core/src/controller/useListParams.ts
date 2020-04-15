@@ -6,11 +6,15 @@
 
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { parse, stringify } from 'query-string';
 import { useHistory } from 'react-router-dom';
-import { changeListParams } from '../actions/listActions';
+import { parse, stringify } from 'query-string';
+import debounce from 'lodash/debounce';
+import set from 'lodash/set';
+import pickBy from 'lodash/pickBy';
+
+import { changeListParams, SET_FILTER, SET_SORT, SET_PAGE, SET_PER_PAGE } from '../actions/listActions';
 import queryReducer from '../reducers/resources/list/queryReducer';
-import { pickBy, removeKey, removeEmpty } from '../util';
+import { removeKey, removeEmpty } from '../util';
 import { Sort } from '../types';
 import { Location } from 'history';
 
@@ -20,7 +24,7 @@ interface ListParamsOptions {
     filterDefaultValues?: object;
     sort?: Sort;
     perPage?: number;
-    debounce?: number;
+    debounceTime?: number;
 }
 
 export interface ListParams {
@@ -57,7 +61,7 @@ interface Modifiers {
  * @param {order} options.sort.field
  * @param {order} options.sort.order
  * @param {number} options.perPage
- * @param {number} options.debounce
+ * @param {number} options.debounceTime
  * @returns
  *
  * @example
@@ -77,7 +81,7 @@ export const useListParams = ({
     filterDefaultValues,
     sort = { field: 'id', order: 'ASC' },
     perPage = 10,
-    debounce = 500,
+    debounceTime = 500,
 }: ListParamsOptions): [ListParams, Modifiers] => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -120,33 +124,33 @@ export const useListParams = ({
     }, requestSignature);
 
     const setSort = useCallback(
-        sort => changeParams({ type: 'SET_SORT', payload: { sort } }),
+        sort => changeParams({ type: SET_SORT, payload: { sort } }),
         requestSignature
     );
 
     const setPage = useCallback(
-        page => changeParams({ type: 'SET_PAGE', payload: page }),
+        page => changeParams({ type: SET_PAGE, payload: page }),
         requestSignature
     );
 
     const setPerPage = useCallback(
-        perPage => changeParams({ type: 'SET_PER_PAGE', payload: perPage }),
+        perPage => changeParams({ type: SET_PER_PAGE, payload: perPage }),
         requestSignature
     );
 
     const filterValues = query.filter || {};
     const displayedFilterValues = query.displayedFilters || {};
 
-    const setFilters = useCallback((filters, displayedFilters) => {
+    const debouncedSetFilters = debounce((newFilters, newDisplayedFilters) => {
         let payload: any = {
-            filter: removeEmpty(filters),
+            filter: removeEmpty(newFilters),
             displayedFilters: undefined,
         };
 
-        if (displayedFilters) {
-            payload.displayedFilters = Object.keys(displayedFilters).reduce(
+        if (newDisplayedFilters) {
+            payload.displayedFilters = Object.keys(newDisplayedFilters).reduce(
                 (filters, filter) => {
-                    return displayedFilters[filter]
+                    return newDisplayedFilters[filter]
                         ? { ...filters, [filter]: true }
                         : filters;
                 },
@@ -154,26 +158,30 @@ export const useListParams = ({
             );
         }
 
-        changeParams({ type: 'SET_FILTERS', payload });
-    }, requestSignature);
+        changeParams({ type: SET_FILTER, payload });
+
+    }, debounceTime)
+
+    const setFilters = useCallback((filters, displayedFilters) => debouncedSetFilters(filters, displayedFilters), requestSignature);
 
     const hideFilter = useCallback((filterName: string) => {
         const newFilters = removeKey(filterValues, filterName);
-        const newDisplayedFilters = removeKey(
-            displayedFilterValues,
-            filterName
-        );
+        const newDisplayedFilters = {
+            ...displayedFilterValues,
+            [filterName]: undefined,
+        };
+
         setFilters(newFilters, newDisplayedFilters);
     }, requestSignature);
 
     const showFilter = useCallback((filterName: string, defaultValue: any) => {
-        setFilters(
-            {
-                ...filterValues,
-                [filterName]: defaultValue,
-            },
-            { ...displayedFilterValues, [filterName]: true }
-        );
+        const newFilters = set(filterValues, filterName, defaultValue);
+        const newDisplayedFilters = {
+            ...displayedFilterValues,
+            [filterName]: true,
+        };
+
+        setFilters(newFilters, newDisplayedFilters);
     }, requestSignature);
 
     return [
@@ -195,25 +203,29 @@ export const useListParams = ({
     ];
 };
 
+
+const parseObject = (query, field) => {
+    if (query[field] && typeof query[field] === 'string') {
+        try {
+            query[field] = JSON.parse(query[field]);
+        } catch (err) {
+            delete query[field];
+        }
+    }
+};
 /**
  * 将url参数转换成对象
  * ?page=1&perPage=10&sort=stb&order=ASC&filter={}
  * @param {string} options.search
  */
 export const parseQueryFromLocation = ({ search }) => {
-    const query: any = pickBy(
+    const query = pickBy(
         parse(search),
-        (v, k) =>
-            ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
+        (v, k) => ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
     );
 
-    if (query.filter && typeof query.filter === 'string') {
-        try {
-            query.filter = JSON.parse(query.filter);
-        } catch (err) {
-            delete query.filter;
-        }
-    }
+    parseObject(query, 'filter');
+    parseObject(query, 'displayedFilters');
 
     return query;
 };
@@ -256,8 +268,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-            ? { ...params }
-            : { filter: filterDefaultValues || {} };
+                ? { ...params }
+                : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;

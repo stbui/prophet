@@ -13,7 +13,8 @@ export interface Props extends EditProps {
 
 /*
 import { EditController } from '@stbui/prophet-core';
-import EditView from './EditView';
+
+const EditView = () => <div>...</div>
 
 const pageComponent = props => (
     <EditController {...props}>

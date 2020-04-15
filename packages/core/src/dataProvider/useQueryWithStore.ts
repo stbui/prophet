@@ -6,8 +6,8 @@
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import isEqual from 'lodash/isEqual';
 import useDataProvider from './useDataProvider';
-import { isEqual } from '../util';
 
 export interface Query {
     type: string;
@@ -34,8 +34,8 @@ const isEmptyList = data =>
     Array.isArray(data)
         ? data.length === 0
         : data &&
-          Object.keys(data).length === 0 &&
-          data.hasOwnProperty('fetchedAt');
+        Object.keys(data).length === 0 &&
+        data.hasOwnProperty('fetchedAt');
 
 const defaultDataSelector = query => (state: any) => {
     return undefined;
@@ -44,7 +44,7 @@ const defaultDataSelector = query => (state: any) => {
 const defaultTotalSelector = () => null;
 
 /**
- * 请求数据获取
+ * 从redux中获取数据
  *
  * @param {Object} query
  * @param {string} query.type
@@ -85,16 +85,16 @@ const defaultTotalSelector = () => null;
  *   return <div>{data.username}</div>;
  * };
  */
-
 const useQueryWithStore = (
     query: Query,
     options: QueryOptions = { action: 'CUSTOM_QUERY' },
     dataSelector: (state: any) => any = defaultDataSelector(query),
-    totalSelector?: (state: any) => number
+    // @ts-ignore
+    totalSelector: (state: any) => number = defaultTotalSelector
 ): UseQueryValue => {
     const { type, resource, payload } = query;
     const data = useSelector(dataSelector);
-    const total = useSelector(totalSelector || defaultTotalSelector);
+    const total = useSelector(totalSelector);
 
     const [state, setState]: any = useState({
         data,
@@ -105,12 +105,19 @@ const useQueryWithStore = (
     });
 
     if (!isEqual(state.data, data) || state.total !== total) {
-        setState({
-            ...state,
-            data,
-            total,
-            loaded: true,
-        });
+        if (typeof total !== 'undefined' && isNaN(total)) {
+            console.error(
+                '请求响应中total不是nubmer类型。'
+            );
+        } else {
+            setState({
+                ...state,
+                data,
+                total,
+                loaded: true,
+            });
+        }
+
     }
 
     const dataProvider = useDataProvider();

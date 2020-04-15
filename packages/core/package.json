@@ -32,7 +32,8 @@
         "react-router": "^5.1.2",
         "react-router-dom": "^5.1.2",
         "redux": "^4.0.5",
-        "redux-saga": "^1.1.3"
+        "redux-saga": "^1.1.3",
+        "lodash": "~4.17.15"
     },
     "devDependencies": {
         "@types/history": "^4.7.5",

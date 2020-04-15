@@ -4,9 +4,10 @@
  * https://github.com/stbui
  */
 
+import { Reducer } from 'redux';
 import { FETCH_CANCEL, FETCH_END, FETCH_ERROR, FETCH_START } from '../actions';
 
-export const loading = (previousState = 0, { type }) => {
+const loadingReducer: Reducer<any> = (previousState = 0, { type }) => {
     switch (type) {
         case FETCH_START:
             return previousState + 1;
@@ -19,4 +20,4 @@ export const loading = (previousState = 0, { type }) => {
     }
 };
 
-export default loading;
+export default loadingReducer;

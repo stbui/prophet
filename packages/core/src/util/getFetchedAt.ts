@@ -1,13 +1,16 @@
-import pickBy from './pickBy';
+import pickBy from 'lodash/pickBy';
 
 const defaultCacheDuration = 10 * 60 * 1000;
 
 /**
- *
- * @param newRecordIds [1,2,3,4,5,6,7,8,9]
- * @param oldRecordFetchedAt
- * @param now
- * @param cacheDuration
+ * 
+ * @param newRecordIds id的数组 [1,2,3,4,5,6,7,8,9]
+ * @param oldRecordFetchedAt 在旧记录获取日期
+ * @param now 当前时间
+ * @param cacheDuration 从列表中删除旧记录的时间
+ * 
+ * @example
+ * 
  */
 export const getFetchedAt = (
     newRecordIds: any[],
