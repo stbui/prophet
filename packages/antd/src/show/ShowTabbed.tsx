@@ -63,7 +63,7 @@ const ShowTabbedView = ({ children, basePath, resource, record, ...other }) => {
 
     return (
         <Tabs defaultActiveKey={tabValue} onChange={onTabChange} {...other}>
-            {childrenArray.map((tab, index) => (
+            {childrenArray.map((tab: any, index) => (
                 <Tabs.TabPane
                     key={getTabFullPath(tab, index, url)}
                     tab={tab.props.label}
