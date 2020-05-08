@@ -15,7 +15,10 @@ const initialState = {
     filter: {},
 };
 
-const paramsReducer: Reducer<any> = (previousState = initialState, { type, payload }) => {
+const paramsReducer: Reducer<any> = (
+    previousState = initialState,
+    { type, payload }
+) => {
     switch (type) {
         case CRUD_CHANGE_LIST_PARAMS:
             return payload;
@@ -24,4 +27,4 @@ const paramsReducer: Reducer<any> = (previousState = initialState, { type, paylo
     }
 };
 
-export default paramsReducer
+export default paramsReducer;

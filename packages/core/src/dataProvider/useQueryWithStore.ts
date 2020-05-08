@@ -34,8 +34,8 @@ const isEmptyList = data =>
     Array.isArray(data)
         ? data.length === 0
         : data &&
-        Object.keys(data).length === 0 &&
-        data.hasOwnProperty('fetchedAt');
+          Object.keys(data).length === 0 &&
+          data.hasOwnProperty('fetchedAt');
 
 const defaultDataSelector = query => (state: any) => {
     return undefined;
@@ -106,9 +106,7 @@ const useQueryWithStore = (
 
     if (!isEqual(state.data, data) || state.total !== total) {
         if (typeof total !== 'undefined' && isNaN(total)) {
-            console.error(
-                '请求响应中total不是nubmer类型。'
-            );
+            console.error('请求响应中total不是nubmer类型。');
         } else {
             setState({
                 ...state,
@@ -117,7 +115,6 @@ const useQueryWithStore = (
                 loaded: true,
             });
         }
-
     }
 
     const dataProvider = useDataProvider();

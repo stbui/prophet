@@ -7,52 +7,6 @@
 import { useEffect, useState } from 'react';
 import useDataProvider from './useDataProvider';
 
-/* 
-import { useQuery } from '@stbui/prophet-core';
-
-const UserProfile = record => {
-    const { data, loading, error } = useQuery({
-        type: 'GET_ONE',
-        resource: 'users',
-        payload: { id: record.id },
-    });
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div>{data.username}</div>;
-};
-
-const UserList = () => {
-    const { data, loading, error } = useQuery({
-        type: 'GET_ONE',
-        resource: 'users',
-        payload: {
-            pagination: { page: 1, perPage: 10 },
-            sort: { field: 'username', order: 'ASC' },
-        },
-    });
-    
-    if (loading) {
-        return 'loading';
-    }
-    if (error) {
-        return error.message;
-    }
-
-    return (
-        <div>
-            total:{total},{data.map(user => user.username)}
-        </div>
-    );
-};
- */
-
 export interface Query {
     type: string;
     resource: string;
@@ -87,6 +41,46 @@ export interface UseQueryValue {
  * @returns { data, total, error, loading, loaded }
  *
  * @example
+ *
+ * import { useQuery } from '@stbui/prophet-core';
+ *
+ * const UserProfile = record => {
+ *     const { data, loading, error } = useQuery({
+ *         type: 'GET_ONE',
+ *         resource: 'users',
+ *         payload: { id: record.id },
+ *     });
+ *
+ *     if (loading) {
+ *         return loading;
+ *     }
+ *
+ *     if (error) {
+ *         return error.message;
+ *     }
+ *
+ *     return <div>{data.username}</div>;
+ * };
+ *
+ * const UserList = record => {
+ *     const { data, loading, error } = useQuery({
+ *         type: 'GET_ONE',
+ *         resource: 'users',
+ *         payload: {
+ *             pagination: { page: 1, perPage: 10 },
+ *             sort: { field: 'username', order: 'ASC' },
+ *     });
+ *
+ *     if (loading) {
+ *         return loading;
+ *     }
+ *
+ *     if (error) {
+ *         return error.message;
+ *     }
+ *
+ *     return <div>total:{total},{data.map(user => user.username)}</div>;
+ * };
  */
 const useQuery = (query: Query, options: QueryOptions = {}): UseQueryValue => {
     const { type, resource, payload } = query;

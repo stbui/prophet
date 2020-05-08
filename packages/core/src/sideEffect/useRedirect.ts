@@ -23,9 +23,9 @@ const resolveRedirectTo = (redirectTo, basePath: string, id?) => {
 
 /**
  * 重定向
- * 
+ *
  * @example
- * 
+ *
  * const redirect = useRedirect();
  * redirect('list', '/users');
  * redirect('edit', '/users', 123);

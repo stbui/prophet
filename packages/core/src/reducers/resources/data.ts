@@ -13,7 +13,7 @@ import {
     CREATE,
 } from '../../actions/dataFatchActions';
 import { FETCH_END } from '../../actions/fetchActions';
-import { getFetchedAt, } from '../../util';
+import { getFetchedAt } from '../../util';
 
 export interface Record {
     id: string | number;
@@ -28,7 +28,6 @@ interface RecordSetWithDate {
         [key: number]: Date;
     };
 }
-
 
 export const hideFetchedAt = (
     records: RecordSetWithDate
@@ -116,7 +115,6 @@ export const addOneRecord = (
 const includesNotStrict = (items, element) =>
     items.some(item => item == element);
 
-
 /**
  * 删除记录
  * @param removeRecords
@@ -140,7 +138,10 @@ export const removeRecords = (
 
 const initialState = hideFetchedAt({ fetchedAt: {} });
 
-const dataReducer: Reducer<RecordSetWithDate> = (previousState = initialState, { payload, meta }) => {
+const dataReducer: Reducer<RecordSetWithDate> = (
+    previousState = initialState,
+    { payload, meta }
+) => {
     if (!meta || !meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
         return previousState;
     }
@@ -157,5 +158,4 @@ const dataReducer: Reducer<RecordSetWithDate> = (previousState = initialState, {
     }
 };
 
-export default dataReducer
-
+export default dataReducer;

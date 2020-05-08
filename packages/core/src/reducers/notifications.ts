@@ -7,7 +7,10 @@
 import { Reducer } from 'redux';
 import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from '../actions';
 
-const notificationReducer: Reducer<any> = (previousState = [], { type, payload }) => {
+const notificationReducer: Reducer<any> = (
+    previousState = [],
+    { type, payload }
+) => {
     switch (type) {
         case SHOW_NOTIFICATION:
             return previousState.concat(payload);

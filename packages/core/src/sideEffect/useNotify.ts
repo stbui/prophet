@@ -4,9 +4,9 @@ import { showNotification } from '../actions';
 
 /**
  * @example
- * 
+ *
  * import { useNotify } from '@stbui/prophet-core';
- * 
+ *
  * const notify = useNotify();
  * notify('通知');
  * notify('通知', 'warning');

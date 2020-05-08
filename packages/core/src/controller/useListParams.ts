@@ -12,7 +12,13 @@ import debounce from 'lodash/debounce';
 import set from 'lodash/set';
 import pickBy from 'lodash/pickBy';
 
-import { changeListParams, SET_FILTER, SET_SORT, SET_PAGE, SET_PER_PAGE } from '../actions/listActions';
+import {
+    changeListParams,
+    SET_FILTER,
+    SET_SORT,
+    SET_PAGE,
+    SET_PER_PAGE,
+} from '../actions/listActions';
 import queryReducer from '../reducers/resources/list/queryReducer';
 import { removeKey, removeEmpty } from '../util';
 import { Sort } from '../types';
@@ -159,10 +165,13 @@ export const useListParams = ({
         }
 
         changeParams({ type: SET_FILTER, payload });
+    }, debounceTime);
 
-    }, debounceTime)
-
-    const setFilters = useCallback((filters, displayedFilters) => debouncedSetFilters(filters, displayedFilters), requestSignature);
+    const setFilters = useCallback(
+        (filters, displayedFilters) =>
+            debouncedSetFilters(filters, displayedFilters),
+        requestSignature
+    );
 
     const hideFilter = useCallback((filterName: string) => {
         const newFilters = removeKey(filterValues, filterName);
@@ -203,7 +212,6 @@ export const useListParams = ({
     ];
 };
 
-
 const parseObject = (query, field) => {
     if (query[field] && typeof query[field] === 'string') {
         try {
@@ -221,7 +229,8 @@ const parseObject = (query, field) => {
 export const parseQueryFromLocation = ({ search }) => {
     const query = pickBy(
         parse(search),
-        (v, k) => ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
+        (v, k) =>
+            ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
     );
 
     parseObject(query, 'filter');
@@ -268,8 +277,8 @@ export const getQuery = ({
         Object.keys(queryFormLocation).length > 0
             ? queryFormLocation
             : hasCustomParams(params)
-                ? { ...params }
-                : { filter: filterDefaultValues || {} };
+            ? { ...params }
+            : { filter: filterDefaultValues || {} };
 
     if (!query.sort) {
         query.sort = sort.field;

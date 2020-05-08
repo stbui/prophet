@@ -10,9 +10,11 @@ import {
     CRUD_GET_ONE_SUCCESS,
 } from '../../../actions/dataActions';
 
-const totalReducer: Reducer<any> = (previousState = 0, { meta, type, payload }) => {
+const totalReducer: Reducer<any> = (
+    previousState = 0,
+    { meta, type, payload }
+) => {
     if (meta) {
-
     }
 
     switch (type) {
@@ -24,4 +26,4 @@ const totalReducer: Reducer<any> = (previousState = 0, { meta, type, payload }) 
     }
 };
 
-export default totalReducer
+export default totalReducer;

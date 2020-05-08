@@ -7,19 +7,17 @@
 import { Reducer } from 'redux';
 import uniq from 'lodash/uniq';
 
-import {
-    CRUD_GET_LIST_SUCCESS,
-    CRUD_CREATE_SUCCESS,
-} from '../../../actions';
-
+import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS } from '../../../actions';
 
 /**
  * id列表
- * @param previousState 
- * @param param1 
+ * @param previousState
+ * @param param1
  */
-const idsReducer: Reducer<any> = (previousState = [], { meta, type, payload, }) => {
-
+const idsReducer: Reducer<any> = (
+    previousState = [],
+    { meta, type, payload }
+) => {
     if (meta) {
         // 删除id
     }
@@ -34,4 +32,4 @@ const idsReducer: Reducer<any> = (previousState = [], { meta, type, payload, }) 
     }
 };
 
-export default idsReducer
+export default idsReducer;

@@ -54,6 +54,10 @@ const sortReducer = (state: Sort, { type, payload }) => {
  *      field: 'name',
  *      order: 'ASC',
  * });
+ *
+ * setSort({ field: 'name', order: 'ASC' });
+ * setSortField('name');
+ * setSortField('name');
  */
 export default (
     initialSort: Sort = { field: 'id', order: 'ASC' }

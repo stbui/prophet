@@ -12,13 +12,13 @@ export interface Props extends CreateProps {
 }
 
 /**
- * 
- * @examplez
- * 
+ *
+ * @example
+ *
  * import { CreateController } from '@stbui/prophet-core';
- * 
+ *
  * const CreateView = () => <div>...</div>
- * 
+ *
  * const pageComponent = props => (
  *     <CreateController {...props}>
  *         {controllerProps => <CreateView {...controllerProps} {...props} />}

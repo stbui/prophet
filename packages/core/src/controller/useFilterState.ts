@@ -50,7 +50,9 @@ export default ({
                 ...permanentFilter,
                 ...filterToQuery(value),
             });
-        }, debounceTime), []);
+        }, debounceTime),
+        []
+    );
 
     return { filter, setFilter };
 };

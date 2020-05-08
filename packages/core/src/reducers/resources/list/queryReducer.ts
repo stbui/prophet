@@ -45,5 +45,4 @@ const queryReducer: Reducer<any> = (previousState, { type, payload }) => {
     }
 };
 
-
-export default queryReducer
+export default queryReducer;
