@@ -6,7 +6,8 @@
 
 import React, { useEffect, useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
+
 import { WithPermissions } from '../auth';
 import { registerResource, unregisterResource } from '../actions';
 
@@ -60,13 +61,14 @@ const ResourceRegister: FunctionComponent<ResourceProps> = ({
 const ResourceRoutes: FunctionComponent<ResourceProps> = ({
     label,
     name,
-    match,
     list,
     create,
     edit,
     show,
     options = {},
 }) => {
+    const match = useRouteMatch();
+
     const isRegistered = useSelector((state: any) => {
         return state.resources[name] ? true : false;
     });
