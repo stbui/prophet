@@ -5,114 +5,185 @@
  */
 
 import { useContext, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 
 import DataProviderContext from './DataProviderContext';
 import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
+import { canReplyWithCache, answerWithCache } from './replyWithCache';
 
-/* 
-import React, { useState } from 'react';
-import { useDataProvider } from '@stbui/prophet-core';
+const performQuery = ({
+    type,
+    dataProvider,
+    resource,
+    payload,
+    action,
+    onSuccess,
+    onFailure,
+    dispatch,
+    rest,
+}) => {
+    dispatch({
+        type: action,
+        payload,
+        meta: { resource, ...rest },
+    });
 
-const UserList = () => {
-    const [user, setUser] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState();
-    const dataProvider = useDataProvider();
+    dispatch({
+        type: `${action}_LOADING`,
+        payload,
+        meta: { resource, ...rest },
+    });
 
-    useEffect(() => {
-        dataProvider('GET_ONE', 'user', { filter: { id: 1 } })
-            .then(({ data }) => {
-                setUser(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                setError(error);
-                setLoading(false);
+    dispatch({
+        type: FETCH_START,
+    });
+
+    return dataProvider(type, resource, payload)
+        .then(response => {
+            dispatch({
+                type: `${action}_SUCCESS`,
+                payload: response,
+                requestPayload: payload,
+                meta: {
+                    ...rest,
+                    resource,
+                    fetchResponse: type,
+                    fetchStatus: FETCH_END,
+                },
             });
-    }, []);
 
-    if (loading) return 'loading';
-    if (error) return error.message;
-    if (!user) return null;
+            dispatch({
+                type: FETCH_END,
+            });
 
-    return (
-        <React.Fragment>
-            { user.name }
-            { user.id }
-        </React.Fragment>
-    );
+            onSuccess && onSuccess(response);
+            return response;
+        })
+        .catch(error => {
+            dispatch({
+                type: `${action}_FAILURE`,
+                error: error.message ? error.message : error,
+                payload: error.body ? error.body : null,
+                requestPayload: payload,
+                meta: {
+                    ...rest,
+                    resource,
+                    fetchResponse: type,
+                    fetchStatus: FETCH_ERROR,
+                },
+            });
+            dispatch({ type: FETCH_ERROR, error });
+
+            onFailure && onFailure(error);
+
+            throw error;
+        });
 };
- */
+
+const query = ({
+    type,
+    dataProvider,
+    resource,
+    payload,
+    action,
+    onSuccess,
+    onFailure,
+    dispatch,
+    store,
+    rest,
+}) => {
+    const resourceState = store.getState().resources[resource];
+
+    if (canReplyWithCache(type, payload, resourceState)) {
+        return answerWithCache({
+            type,
+            payload,
+            resource,
+            action,
+            rest,
+            onSuccess,
+            resourceState,
+            dispatch,
+        });
+    }
+
+    return performQuery({
+        type,
+        dataProvider,
+        resource,
+        payload,
+        action,
+        onSuccess,
+        onFailure,
+        dispatch,
+        rest,
+    });
+};
 
 const defaultDataProvider = (type: string, resource: string, payload: any) =>
     Promise.resolve();
 
+/**
+ *
+ *
+ * @return
+ *
+ * @example
+ *
+ * import { useDataProvider } from '@stbui/prophet-core';
+ *
+ * const UserList = () => {
+ *     const [user, setUser] = useState([]);
+ *     const [loading, setLoading] = useState(true);
+ *     const [error, setError] = useState();
+ *     const dataProvider = useDataProvider();
+ *
+ *     useEffect(() => {
+ *         dataProvider('GET_ONE', 'user', { filter: { id: 1 } })
+ *             .then(({ data }) => {
+ *                 setUser(data);
+ *                 setLoading(false);
+ *             })
+ *             .catch(error => {
+ *                 setError(error);
+ *                 setLoading(false);
+ *             });
+ *     }, []);
+ *
+ *     if (loading) return loading;
+ *     if (error) return error.message;
+ *
+ *     return (
+ *         <React.Fragment>
+ *             { user.name }
+ *             { user.id }
+ *         </React.Fragment>
+ */
 export const useDataProvider = () => {
     const dispatch = useDispatch();
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
+    const store = useStore();
+
     return useCallback(
         (type, resource, payload, options) => {
-            const { action = 'CUSTOM_FETCH', onSuccess, onFailure, ...other } =
+            const { action = 'CUSTOM_FETCH', onSuccess, onFailure, ...rest } =
                 options || {};
 
-            dispatch({
-                type: action,
+            const params = {
+                type,
+                dataProvider,
+                resource,
                 payload,
-                meta: { resource, ...other },
-            });
+                action,
+                onSuccess,
+                onFailure,
+                dispatch,
+                store,
+                rest,
+            };
 
-            dispatch({
-                type: `${action}_LOADING`,
-                payload,
-                meta: { resource, ...other },
-            });
-
-            dispatch({
-                type: FETCH_START,
-            });
-
-            return dataProvider(type, resource, payload)
-                .then(response => {
-                    dispatch({
-                        type: `${action}_SUCCESS`,
-                        payload: response,
-                        requestPayload: payload,
-                        meta: {
-                            ...other,
-                            resource,
-                            fetchResponse: type,
-                            fetchStatus: FETCH_END,
-                        },
-                    });
-
-                    dispatch({
-                        type: FETCH_END,
-                    });
-
-                    onSuccess && onSuccess(response);
-                    return response;
-                })
-                .catch(error => {
-                    dispatch({
-                        type: `${action}_FAILURE`,
-                        error: error.message ? error.message : error,
-                        payload: error.body ? error.body : null,
-                        requestPayload: payload,
-                        meta: {
-                            ...other,
-                            resource,
-                            fetchResponse: type,
-                            fetchStatus: FETCH_ERROR,
-                        },
-                    });
-                    dispatch({ type: FETCH_ERROR, error });
-
-                    onFailure && onFailure(error);
-
-                    throw error;
-                });
+            return query(params);
         },
         [dataProvider, dispatch]
     );

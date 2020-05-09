@@ -11,16 +11,28 @@ import {
 } from '../../actions';
 import data from './data';
 import list from './list';
+import validity from './validity';
 
-export default (previousState = {}, { type, payload, meta }) => {
+export default (
+    previousState = {},
+    { type, payload, meta, requestPayload }
+) => {
     switch (type) {
         case REGISTER_RESOURCE:
             const resuorceState = {
                 props: payload,
                 data: data(undefined, { type, payload, meta }),
                 list: list(undefined, { type, payload, meta }),
+                validity: validity(undefined, {
+                    type,
+                    payload,
+                    meta,
+                    requestPayload,
+                }),
             };
+
             return { ...previousState, [payload.name]: resuorceState };
+
         case UNREGISTER_RESOURCE:
             return Object.keys(previousState).reduce((acc, key) => {
                 if (key === payload) {
@@ -52,6 +64,12 @@ export default (previousState = {}, { type, payload, meta }) => {
                           list: list(previousState[resource].list, {
                               type,
                               payload,
+                          }),
+                          validity: validity(previousState[resource].validity, {
+                              meta,
+                              type,
+                              payload,
+                              requestPayload,
                           }),
                       }
                     : previousState[resource],

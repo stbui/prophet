@@ -10,5 +10,12 @@ import total from './total';
 import params from './params';
 import ids from './ids';
 import loadedOnce from './loadedOnce';
+import cachedRequests from './cachedRequests';
 
-export default combineReducers({ ids, params, total, loadedOnce });
+export default combineReducers({
+    ids,
+    params,
+    total,
+    loadedOnce,
+    cachedRequests,
+});
