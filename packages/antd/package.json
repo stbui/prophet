@@ -26,12 +26,7 @@
         "redux": "^4.0.5"
     },
     "dependencies": {
-        "@stbui/prophet-core": "^1.4.1",
-        "connected-react-router": "^6.8.0",
-        "react-redux": "^7.2.0",
-        "react-router": "^5.1.2",
-        "react-router-dom": "^5.1.2",
-        "redux": "^4.0.5"
+        "@stbui/prophet-core": "^1.4.1"
     },
     "devDependencies": {
         "@types/react": "16.9.23",
@@ -40,8 +35,13 @@
         "@types/react-router": "^5.1.4",
         "@types/react-router-dom": "^5.1.3",
         "antd": "^3.26.13",
+        "connected-react-router": "^6.8.0",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
+        "react-redux": "^7.2.0",
+        "react-router": "^5.1.2",
+        "react-router-dom": "^5.1.2",
+        "redux": "^4.0.5",
         "rimraf": "^3.0.0"
     },
     "publishConfig": {
