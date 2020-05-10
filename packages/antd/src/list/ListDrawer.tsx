@@ -1,10 +1,23 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, FunctionComponent } from 'react';
 import { useListController } from '@stbui/prophet-core';
 import { Spin, Drawer } from 'antd';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import ListActions from './ListActions';
 
-export const ListView = props => {
+interface Props {
+    children?: any;
+    loading?: boolean;
+    title?: string;
+    actions?: any;
+    basePath?: any;
+    create?: any;
+    edit?: any;
+    show?: any;
+    destroyOnClose?: any;
+    drawer?: any;
+}
+
+export const ListView: FunctionComponent<Props> = props => {
     const {
         children,
         loading,
@@ -14,11 +27,7 @@ export const ListView = props => {
         edit,
         show,
         destroyOnClose,
-        maskClosable,
-        mask,
-        maskStyle,
-        bodyStyle,
-        placement,
+        drawer,
         ...other
     } = props;
     const history = useHistory();
@@ -52,12 +61,8 @@ export const ListView = props => {
                                 width={create.props.width}
                                 visible={!!match}
                                 onClose={handleClose}
-                                maskClosable={maskClosable}
-                                mask={mask}
-                                maskStyle={maskStyle}
-                                bodyStyle={bodyStyle}
-                                placement={placement}
                                 destroyOnClose={destroyOnClose}
+                                {...drawer}
                             >
                                 {cloneElement(create, {
                                     onCancel: handleClose,
@@ -80,12 +85,8 @@ export const ListView = props => {
                                 width={edit.props.width}
                                 visible={!!match}
                                 onClose={handleClose}
-                                maskClosable={maskClosable}
-                                mask={mask}
-                                maskStyle={maskStyle}
-                                bodyStyle={bodyStyle}
-                                placement={placement}
                                 destroyOnClose={destroyOnClose}
+                                {...drawer}
                             >
                                 {isMatch
                                     ? cloneElement(edit, {
@@ -111,12 +112,8 @@ export const ListView = props => {
                                 width={show.props.width}
                                 visible={!!match}
                                 onClose={handleClose}
-                                maskClosable={maskClosable}
-                                mask={mask}
-                                maskStyle={maskStyle}
-                                bodyStyle={bodyStyle}
-                                placement={placement}
                                 destroyOnClose={destroyOnClose}
+                                {...drawer}
                             >
                                 {isMatch
                                     ? cloneElement(show, {

@@ -1,14 +1,28 @@
-import React, { Children } from 'react';
+import React, { Children, FunctionComponent } from 'react';
 import { Table } from 'antd';
-import { EditButton, ShowButton, DeleteButton } from '../button';
+
+interface Props {
+    children?: any;
+    data?: any;
+    ids?: any;
+    page?: any;
+    perPage?: any;
+    total?: any;
+    setPage?: any;
+    setPerPage?: any;
+    showSizeChanger?: any;
+    showQuickJumper?: any;
+    hideOnSinglePage?: any;
+    noData?: any;
+}
+
 /**
  * <Datagrid>
  *  <Column dataIndex="name">姓名</Column>
  *  <Column dataIndex="age">年龄</Column>
  * </Datagrid>
  */
-
-export const Datagrid = props => {
+export const Datagrid: FunctionComponent<Props> = props => {
     const {
         children = [],
         data,

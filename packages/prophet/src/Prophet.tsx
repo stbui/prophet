@@ -1,13 +1,32 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ComponentType } from 'react';
 import { CoreContext, CoreUI } from '@stbui/prophet-core';
 
 import { Layout, CatchAll, Login } from '@stbui/prophet-antd';
 import defaultMessages from '@stbui/prophet-language-chinese';
 import polyglotI18nProvider from '@stbui/prophet-i18n-polyglot';
 
-const defaultI18nProvider = polyglotI18nProvider(() => defaultMessages);
+interface Props {
+    children?: any;
+    title?: any;
+    dashboard?: any;
+    menu?: ComponentType;
+    brand?: any;
+    login?: any;
+    layout?: any;
+    catchAll?: any;
+    initialState?: any;
+    authProvider?: any;
+    dataProvider?: any;
+    i18nProvider?: any;
+    customRoutes?: any[];
+    customSagas?: any;
+    customReducers?: any;
+    history?: any;
+}
 
-const Prophet: FunctionComponent<any> = ({
+export const defaultI18nProvider = polyglotI18nProvider(() => defaultMessages);
+
+const Prophet: FunctionComponent<Props> = ({
     children,
     title,
     dashboard,

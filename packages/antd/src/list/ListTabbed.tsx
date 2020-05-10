@@ -3,6 +3,7 @@ import React, {
     useCallback,
     cloneElement,
     isValidElement,
+    FunctionComponent,
 } from 'react';
 import {
     useRouteMatch,
@@ -15,12 +16,19 @@ import { Tabs, Card } from 'antd';
 import { useListController } from '@stbui/prophet-core';
 import ListActions from './ListActions';
 
+interface Props {
+    children?: any;
+    resource?: any;
+    basePath?: any;
+    Tab?: any;
+}
+
 /**
 import { ListTabbed } from '@stbui/prophet-antd'
 
 export default props => (
     <ListTabbed {...props}>
-        <ListTabbed.Tab label="路由1" path="a" actions={} >
+        <ListTabbed.Tab label="路由1" path="a" actions={null} >
             <Table>
                 <Table.Column title="column"></Table.Column>
                 <Table.Column title="column2"></Table.Column>
@@ -41,7 +49,6 @@ export default props => (
     </ListTabbed>
 );
  */
-
 const Tab = ({ children, basePath, resource, location, actions, ...other }) => {
     const controller = useListController({
         basePath,
@@ -68,7 +75,12 @@ export const getTabFullPath = (tab, index, baseUrl) =>
         tab.props.path ? `/${tab.props.path}` : index > 0 ? `/${index}` : ''
     }`;
 
-const ListTabbed = ({ children, basePath, resource, ...other }) => {
+const ListTabbed: FunctionComponent<Props> = ({
+    children,
+    basePath,
+    resource,
+    ...other
+}) => {
     const match = useRouteMatch();
     const location = useLocation();
     const history = useHistory();
@@ -115,6 +127,7 @@ const ListTabbed = ({ children, basePath, resource, ...other }) => {
     );
 };
 
+// @ts-ignore
 ListTabbed.Tab = Tab;
 
 export default ListTabbed;

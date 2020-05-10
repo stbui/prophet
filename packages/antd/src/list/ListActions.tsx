@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useTranslate } from '@stbui/prophet-core';
 import { CreateButton } from '../button';
 import { Form, Input, Button } from 'antd';
 
-export const ListActions = ({
+interface Props {
+    basePath?: string;
+    hasCreate?: boolean;
+    filterValues?: any;
+    setFilters?: any;
+    form?: any;
+    field?: any;
+}
+
+export const ListActions: FunctionComponent<Props> = ({
     basePath,
     hasCreate,
     filterValues,
