@@ -19,7 +19,16 @@
         "@stbui/prophet-antd": "^2.0.0",
         "@stbui/prophet-core": "^2.0.0",
         "@stbui/prophet-i18n-polyglot": "^2.0.0",
-        "@stbui/prophet-language-chinese": "^2.0.0"
+        "@stbui/prophet-language-chinese": "^2.0.0",
+        "antd": "^3.26.13",
+        "connected-react-router": "^6.8.0",
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0",
+        "react-redux": "^7.2.0",
+        "react-router": "^5.1.2",
+        "react-router-dom": "^5.1.2",
+        "redux": "^4.0.5",
+        "redux-saga": "^1.1.3"
     },
     "devDependencies": {
         "rimraf": "^3.0.0"
