@@ -14,6 +14,7 @@ interface Props {
     showQuickJumper?: any;
     hideOnSinglePage?: any;
     noData?: any;
+    allowLocalPage?: any;
 }
 
 /**
@@ -36,6 +37,7 @@ export const Datagrid: FunctionComponent<Props> = props => {
         showQuickJumper,
         hideOnSinglePage,
         noData,
+        allowLocalPage,
     } = props;
 
     const handlePageChange = (current, pageSize) => setPage(current);
@@ -58,16 +60,22 @@ export const Datagrid: FunctionComponent<Props> = props => {
         });
     });
 
+    const pg = allowLocalPage
+        ? { defaultCurrent: page }
+        : {
+              current: page,
+              onShowSizeChange: handleShowSizeChange,
+              onChange: handlePageChange,
+          };
+
     const pagination = {
         showSizeChanger,
         showQuickJumper,
         hideOnSinglePage,
         total,
-        current: page,
         defaultPageSize: perPage,
         showTotal: handleShowTotal,
-        onShowSizeChange: handleShowSizeChange,
-        onChange: handlePageChange,
+        ...pg,
     };
 
     const newData = Array.isArray(data) ? data : ids && ids.map(d => data[d]);
@@ -93,6 +101,7 @@ Datagrid.defaultProps = {
     hideOnSinglePage: true,
     data: [],
     page: 1,
+    allowLocalPage: false,
 };
 
 export default Datagrid;

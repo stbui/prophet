@@ -64,11 +64,13 @@ export default (
                           list: list(previousState[resource].list, {
                               type,
                               payload,
+                              meta,
+                              requestPayload,
                           }),
                           validity: validity(previousState[resource].validity, {
-                              meta,
                               type,
                               payload,
+                              meta,
                               requestPayload,
                           }),
                       }
