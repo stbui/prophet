@@ -18,7 +18,7 @@ const queryReducer: Reducer<any> = (previousState, { type, payload }) => {
             return {
                 ...previousState,
                 page: 1,
-                filter: payload,
+                filter: payload.filter,
                 displayedFilters: payload.displayedFilters
                     ? payload.displayedFilters
                     : previousState.displayedFilters,
