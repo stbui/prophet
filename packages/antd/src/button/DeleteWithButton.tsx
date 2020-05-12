@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useDeleteController } from '@stbui/prophet-core';
 import { message, Button } from 'antd';
 
-export const DeleteWithButtonView = props => {
-    const {
-        label,
-        disabled,
-        className,
-        style,
-        update,
-        record,
-        size,
-        type,
-    } = props;
+export interface DeleteButtonViewProps {
+    basePath?: string;
+    label?: string;
+    record?: any;
+    update?: any;
+    size?: any;
+    type?: any;
+}
 
+export const DeleteWithButtonView: FunctionComponent<DeleteButtonViewProps> = ({
+    label,
+    update,
+    record,
+    size,
+    type,
+    ...reset
+}) => {
     const onConfirm = () =>
         update(record.id, record, {
             onSuccess() {
@@ -26,14 +31,7 @@ export const DeleteWithButtonView = props => {
         });
 
     return (
-        <Button
-            type={type}
-            disabled={disabled}
-            className={className}
-            style={style}
-            onClick={onConfirm}
-            size={size}
-        >
+        <Button type={type} onClick={onConfirm} size={size} {...reset}>
             {label}
         </Button>
     );

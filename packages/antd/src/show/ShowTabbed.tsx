@@ -3,6 +3,7 @@ import React, {
     useCallback,
     cloneElement,
     isValidElement,
+    FunctionComponent,
 } from 'react';
 import {
     useRouteMatch,
@@ -11,6 +12,14 @@ import {
     Route,
 } from 'react-router-dom';
 import { Tabs } from 'antd';
+
+interface Props {
+    children?: any;
+    resource?: any;
+    basePath?: any;
+    Tab?: any;
+    record?: any;
+}
 
 /**
 const Tab = ({ children }) => children;
@@ -39,7 +48,13 @@ export const getTabFullPath = (tab, index, baseUrl) =>
         tab.props.path ? `/${tab.props.path}` : index > 0 ? `/${index}` : ''
     }`;
 
-const ShowTabbedView = ({ children, basePath, resource, record, ...other }) => {
+const ShowTabbedView: FunctionComponent<Props> = ({
+    children,
+    basePath,
+    resource,
+    record,
+    ...other
+}) => {
     const match = useRouteMatch();
     const location = useLocation();
     const history = useHistory();

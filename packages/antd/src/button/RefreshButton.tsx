@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
-const RefreshButton = props => {
-    const { label, type, onClick, ...other } = props;
+export interface RefreshButtonProps {
+    label?: any;
+    onClick?: any;
+}
+
+const RefreshButton: FunctionComponent<RefreshButtonProps> = ({
+    label,
+    onClick,
+    ...reset
+}) => {
     const refresh = useRefresh();
 
     const handleClick = () => {
@@ -12,7 +20,7 @@ const RefreshButton = props => {
     };
 
     return (
-        <Button type={type} onClick={handleClick} {...other}>
+        <Button type="primary" onClick={handleClick} {...reset}>
             {label}
         </Button>
     );
@@ -20,7 +28,6 @@ const RefreshButton = props => {
 
 RefreshButton.defaultProps = {
     label: '刷新',
-    type: 'primary',
 };
 
 export default RefreshButton;

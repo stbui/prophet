@@ -1,27 +1,31 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
-const EditButton: FunctionComponent<any> = ({
+export interface EditButtonProps {
+    basePath?: string;
+    label?: string;
+    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    id?: any;
+    size?: any;
+}
+
+const EditButton: FunctionComponent<EditButtonProps> = ({
     basePath,
     label,
     id,
-    className,
-    style,
     size,
     type,
+    ...rest
 }) => {
-    const history = useHistory();
-
-    const onClick = () => history.push(`${basePath}/${id}`);
+    const redirect = useRedirect();
 
     return (
         <Button
             type={type}
-            onClick={onClick}
-            className={className}
-            style={style}
             size={size}
+            onClick={() => redirect('edit', basePath, id)}
+            {...rest}
         >
             {label}
         </Button>

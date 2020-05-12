@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Button, Drawer } from 'antd';
 
-const ShowWithDrawerButton = props => {
-    const { children, width, destroyOnClose, label, type } = props;
+export interface ShowDrawerButtonProps {
+    children?: any;
+    width?: string | number;
+    destroyOnClose?: boolean;
+    label?: string;
+    drawer?: any;
+    button?: any;
+    size?: any;
+}
+
+const ShowWithDrawerButton: FunctionComponent<ShowDrawerButtonProps> = ({
+    children,
+    width,
+    destroyOnClose,
+    label,
+    drawer,
+    button,
+}) => {
     const [visible, setVisible] = useState(false);
 
     const handleDrawerClose = () => setVisible(false);
@@ -10,7 +26,7 @@ const ShowWithDrawerButton = props => {
 
     return (
         <React.Fragment>
-            <Button type={type} onClick={handleDrawerShow}>
+            <Button type="link" onClick={handleDrawerShow} {...button}>
                 {label}
             </Button>
             <Drawer
@@ -18,6 +34,7 @@ const ShowWithDrawerButton = props => {
                 visible={visible}
                 onClose={handleDrawerClose}
                 destroyOnClose={destroyOnClose}
+                {...drawer}
             >
                 {React.cloneElement(children, {
                     onOk: handleDrawerClose,
@@ -30,7 +47,6 @@ const ShowWithDrawerButton = props => {
 
 ShowWithDrawerButton.defaultProps = {
     label: '查看',
-    type: 'link',
 };
 
 export default ShowWithDrawerButton;

@@ -1,8 +1,20 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, FunctionComponent } from 'react';
 import { useShowController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
-export const ShowView = ({
+interface Props {
+    children?: any;
+    resource?: any;
+    basePath?: any;
+    title?: string;
+    loading?: any;
+    actions?: any;
+    record?: any;
+    save?: any;
+    id?: any;
+}
+
+export const ShowView: FunctionComponent<Props> = ({
     resource,
     basePath,
     children,

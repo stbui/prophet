@@ -1,33 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface CreateButtonProps {
     basePath?: string;
     label?: string;
     type?: 'primary' | 'dashed' | 'danger' | 'link';
-    ghost?: boolean;
-    icon?: string;
-    disabled?: boolean;
-    shape?: 'circle' | 'round';
-    size?: 'small' | 'large';
 }
 
-const CreateButton: FunctionComponent<CreateButtonProps> = props => {
-    const { basePath, label, type, ghost, icon, disabled, shape, size } = props;
-    const history = useHistory();
-
-    const handleClick = () => history.push(`${basePath}/create`);
+const CreateButton: FunctionComponent<CreateButtonProps> = ({
+    basePath,
+    label,
+    type,
+    ...rest
+}) => {
+    const redirect = useRedirect();
 
     return (
         <Button
             type={type}
-            ghost={ghost}
-            icon={icon}
-            disabled={disabled}
-            shape={shape}
-            size={size}
-            onClick={handleClick}
+            onClick={() => redirect('create', basePath)}
+            {...rest}
         >
             {label}
         </Button>

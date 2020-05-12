@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Icon } from 'antd';
 
-const RefreshIconButton = props => {
-    const { label, onClick, type, ...other } = props;
+export interface RefreshIconButtonProps {
+    onClick?: any;
+}
+
+const RefreshIconButton: FunctionComponent<RefreshIconButtonProps> = ({
+    onClick,
+    ...rest
+}) => {
     const refresh = useRefresh();
 
     const handleClick = () => {
@@ -11,11 +17,7 @@ const RefreshIconButton = props => {
         onClick && onClick();
     };
 
-    return <Icon type={type} onClick={handleClick} {...other}></Icon>;
-};
-
-RefreshIconButton.defaultProps = {
-    type: 'refresh',
+    return <Icon type="refresh" onClick={handleClick} {...rest}></Icon>;
 };
 
 export default RefreshIconButton;

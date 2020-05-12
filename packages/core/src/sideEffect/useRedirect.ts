@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import useRefresh from './useRefresh';
 
-const resolveRedirectTo = (redirectTo, basePath: string, id?) => {
+export const resolveRedirectTo = (redirectTo, basePath: string, id?: any) => {
     if (typeof redirectTo === 'function') {
         return resolveRedirectTo(basePath, id);
     }
@@ -37,7 +37,7 @@ const useRedirect = () => {
     const refresh = useRefresh();
 
     return useCallback(
-        (redirectTo, basePath = '', id) => {
+        (redirectTo, basePath: string = '', id?: string | boolean) => {
             if (!redirectTo) {
                 if (history.location.state || history.location.search) {
                     history.replace({

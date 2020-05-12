@@ -1,27 +1,31 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { FunctionComponent } from 'react';
+import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
-export const ShowButton: any = ({
+export interface ShowButtonProps {
+    basePath?: string;
+    label?: string;
+    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    id?: any;
+    size?: any;
+}
+
+export const ShowButton: FunctionComponent<ShowButtonProps> = ({
     basePath,
     label,
     id,
-    className,
-    style,
     size,
     type,
+    ...rest
 }) => {
-    const history = useHistory();
-
-    const onClick = () => history.push(`${basePath}/${id}/show`);
+    const redirect = useRedirect();
 
     return (
         <Button
             type={type}
-            onClick={onClick}
-            className={className}
-            style={style}
             size={size}
+            onClick={() => redirect('show', basePath, id)}
+            {...rest}
         >
             {label}
         </Button>

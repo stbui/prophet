@@ -1,8 +1,20 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, FunctionComponent } from 'react';
 import { useEditController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
-export const EditView = ({
+interface Props {
+    children?: any;
+    resource?: any;
+    basePath?: any;
+    title?: string;
+    loading?: any;
+    actions?: any;
+    record?: any;
+    save?: any;
+    id?: any;
+}
+
+export const EditView: FunctionComponent<Props> = ({
     basePath,
     resource,
     children,

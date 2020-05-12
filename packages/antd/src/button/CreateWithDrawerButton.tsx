@@ -2,22 +2,19 @@ import React, { cloneElement, useState, FunctionComponent } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
-export interface CreateWithDrawerButtonProps {
+export interface CreateDrawerButtonProps {
     children?: any;
     width?: string | number;
     destroyOnClose?: boolean;
     label?: string;
     type?: 'primary' | 'dashed' | 'danger' | 'link';
-    ghost?: boolean;
-    icon?: string;
-    disabled?: boolean;
-    shape?: 'circle' | 'round';
-    size?: 'small' | 'large';
+    drawer?: any;
+    button?: any;
 }
 
-const CreateWithDrawerButton: FunctionComponent<CreateWithDrawerButtonProps> = props => {
-    const { children, width, destroyOnClose } = props;
-    const { label, type, ghost, icon, disabled, shape, size } = props;
+const CreateWithDrawerButton: FunctionComponent<CreateDrawerButtonProps> = props => {
+    const { children, width, destroyOnClose, drawer } = props;
+    const { label, type, button } = props;
 
     const [visible, setVisible] = useState(false);
 
@@ -30,15 +27,7 @@ const CreateWithDrawerButton: FunctionComponent<CreateWithDrawerButtonProps> = p
 
     return (
         <React.Fragment>
-            <Button
-                type={type}
-                ghost={ghost}
-                icon={icon}
-                disabled={disabled}
-                shape={shape}
-                size={size}
-                onClick={handleDrawerShow}
-            >
+            <Button type={type} onClick={handleDrawerShow} {...button}>
                 {label}
             </Button>
             <Drawer
@@ -46,6 +35,7 @@ const CreateWithDrawerButton: FunctionComponent<CreateWithDrawerButtonProps> = p
                 visible={visible}
                 onClose={handleDrawerClose}
                 destroyOnClose={destroyOnClose}
+                {...drawer}
             >
                 {cloneElement(children, {
                     onOk: handleDrawerClose,

@@ -1,29 +1,25 @@
-import React, { useState, cloneElement } from 'react';
-import { useTranslate } from '@stbui/prophet-core';
+import React, { useState, cloneElement, FunctionComponent } from 'react';
 import { Popover, Button } from 'antd';
 
-export const EditWithPopoverButton = ({
+export interface EditPopoverButtonProps {
+    basePath?: string;
+    label?: string;
+    id?: any;
+    title?: any;
+    content?: any;
+    popover?: any;
+    button?: any;
+}
+
+export const EditWithPopoverButton: FunctionComponent<EditPopoverButtonProps> = ({
     basePath,
     label,
     id,
-    className,
-    style,
-    size,
-    type,
-    title,
     content,
-    placement,
-    trigger,
-    arrowPointAtCenter,
-    autoAdjustOverflow,
-    getPopupContainer,
-    mouseEnterDelay,
-    mouseLeaveDelay,
-    overlayClassName,
-    overlayStyle,
+    popover,
+    button,
 }) => {
     const [visible, setVisible] = useState(false);
-    const translate = useTranslate();
 
     const onShow = () => setVisible(true);
     const onClose = () => setVisible(false);
@@ -34,27 +30,15 @@ export const EditWithPopoverButton = ({
             content={cloneElement(content, {
                 onOk: onClose,
                 onCancel: onClose,
+                basePath,
+                id,
             })}
-            title={title}
             visible={visible}
-            placement={placement}
-            trigger={trigger}
             onVisibleChange={onVisibleChange}
-            arrowPointAtCenter={arrowPointAtCenter}
-            autoAdjustOverflow={autoAdjustOverflow}
-            getPopupContainer={getPopupContainer}
-            mouseEnterDelay={mouseEnterDelay}
-            mouseLeaveDelay={mouseLeaveDelay}
-            overlayClassName={overlayClassName}
-            overlayStyle={overlayStyle}
+            trigger="click"
+            {...popover}
         >
-            <Button
-                type={type}
-                onClick={onShow}
-                className={className}
-                style={style}
-                size={size}
-            >
+            <Button type="link" size="small" onClick={onShow} {...button}>
                 {label}
             </Button>
         </Popover>
@@ -63,9 +47,6 @@ export const EditWithPopoverButton = ({
 
 EditWithPopoverButton.defaultProps = {
     label: '编辑',
-    size: 'small',
-    type: 'link',
-    trigger: 'click',
 };
 
 export default EditWithPopoverButton;
