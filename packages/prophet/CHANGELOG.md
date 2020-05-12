@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/stbui/prophet/compare/v1.4.1...v2.0.0) (2020-05-12)
+
+
+### Features
+
+* **antd:** ts ([ba4cee5](https://github.com/stbui/prophet/commit/ba4cee5c13636ff56fa148e3b2907040c522f625))
+* **antd:** ts ([f2a4a0c](https://github.com/stbui/prophet/commit/f2a4a0c283454934a3cf84aa2d3bf7c80a04f537))
+
+
+
+
+
 ## [1.4.1](https://github.com/stbui/prophet/compare/v1.4.0...v1.4.1) (2020-01-03)
 
 **Note:** Version bump only for package @stbui/prophet

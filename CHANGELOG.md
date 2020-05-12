@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/stbui/prophet/compare/v1.4.1...v2.0.0) (2020-05-12)
+
+
+### Bug Fixes
+
+* **core:** options 指定默认值 ([fa5aaa1](https://github.com/stbui/prophet/commit/fa5aaa19572e46c6ba0295d254e87288db92d3ba))
+* **core:** 修复filterDefaultValues参数无效问题 ([8927ff7](https://github.com/stbui/prophet/commit/8927ff72bd0656062a40fedd77feb4c889d45707))
+* **core:** 修复redirectTo判断失误 ([fcbc749](https://github.com/stbui/prophet/commit/fcbc749acad4cb24b84ea07110c39a86f8be4c73))
+* **core:** 完善useRedirect ([a269d28](https://github.com/stbui/prophet/commit/a269d281ddcabbb04087fcf36b1715f962ef7dbf))
+* **core:** 没有传递参数 ([8adf1b4](https://github.com/stbui/prophet/commit/8adf1b43f10ddcf822b3b2586812733205309cc5))
+
+
+### Features
+
+* **antd:** ts ([ba4cee5](https://github.com/stbui/prophet/commit/ba4cee5c13636ff56fa148e3b2907040c522f625))
+* **antd:** ts ([f2a4a0c](https://github.com/stbui/prophet/commit/f2a4a0c283454934a3cf84aa2d3bf7c80a04f537))
+* **antd:** ts ([a51b09d](https://github.com/stbui/prophet/commit/a51b09df873e22bc80b4efa6a4dcab0c4919b780))
+* **core:** cachedRequests ([18d473e](https://github.com/stbui/prophet/commit/18d473e9db1be20baf01a64fd1c5d1a7fa691c8b))
+* **core:** 使用useRouteMatch ([8342846](https://github.com/stbui/prophet/commit/8342846dec521cd7c487674ec53fdbeb9f88d2cd))
+* wip ([8c8808b](https://github.com/stbui/prophet/commit/8c8808b88679fdbf551c22ed1444f2b096556c73))
+* wip ([598db42](https://github.com/stbui/prophet/commit/598db429c77d18a3bc488962c153ade2d28e2e23))
+* **antd:** wip ([a9d15b4](https://github.com/stbui/prophet/commit/a9d15b4229c6e4caa13c379341e43ea85fa9ee39))
+* **core:** useLocation ([b2c2510](https://github.com/stbui/prophet/commit/b2c251026502f6e25ea8abc5c339528b79cfb1a3))
+* **core:** wip ([006bb27](https://github.com/stbui/prophet/commit/006bb2761cd553d9e0ef643e33a33853a07a3a90))
+* **core:** 完善listparams ([297452c](https://github.com/stbui/prophet/commit/297452c84f2bc13f1e2fbf94eea5b93f6ef88ff7))
+* **core:** 更新ts类型 ([3d734f2](https://github.com/stbui/prophet/commit/3d734f2b85634f7c725d88e4b379cac5e04f6a0b))
+* **core:** 添加ts ([355f9a5](https://github.com/stbui/prophet/commit/355f9a58a4f0f2b029f9f3cfd2d0a73b4474f67c))
+
+
+
+
+
 ## [1.4.1](https://github.com/stbui/prophet/compare/v1.4.0...v1.4.1) (2020-01-03)
 
 

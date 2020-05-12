@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/stbui/prophet/compare/v1.4.1...v2.0.0) (2020-05-12)
+
+
+### Features
+
+* **antd:** ts ([ba4cee5](https://github.com/stbui/prophet/commit/ba4cee5c13636ff56fa148e3b2907040c522f625))
+
+
+
+
+
 # [1.4.0](https://github.com/stbui/prophet/compare/v1.3.5...v1.4.0) (2020-01-02)
 
 **Note:** Version bump only for package @stbui/prophet-i18n-polyglot

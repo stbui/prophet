@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/stbui/prophet/compare/v1.4.1...v2.0.0) (2020-05-12)
+
+**Note:** Version bump only for package @stbui/prophet-common
+
+
+
+
+
 # [1.1.0](https://github.com/stbui/prophet/compare/v0.4.6...v1.1.0) (2019-10-11)
 
 
