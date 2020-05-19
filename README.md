@@ -13,8 +13,8 @@ Prophet 可以快速帮你构建后台管理的中后台前端应用框架，能
 
 -   高生产效率: 10 分钟内做一个管理后台
 -   提炼 CRUD 容器组件，快速开始前端开发
--   提供大量一致的 Hook，处理数据变的简单
--   默认使用 Ant Design 组件布局
+-   提供大量一致的 Hook，UI与逻辑分离，处理数据变的简单
+-   默认集成 antd 组件布局，同时也支持第三方UI组件集成
 -   提炼后台应用的典型页面和场景
 -   提供 dataProvider 来处理各种数据规范
 
@@ -29,18 +29,25 @@ npm install @stbui/prophet@latest @stbui/prophet-data-json-server@latest
 ```
 
 ```js
+import React from 'react';
 import { Prophet, Resource } from '@stbui/prophet';
 import dataJsonServer from '@stbui/prophet-data-json-server';
 
-<Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
-    <Resource
-        name="users"
-        list={props => <div>list</div>}
-        edit={props => <div>edit</div>}
-        create={props => <div>create</div>}
-        show={props => <div>show</div>}
-    />
-</Prophet>;
+const App = () => {
+    return (
+        <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
+            <Resource
+                name="users"
+                list={props => <div>list</div>}
+                edit={props => <div>edit</div>}
+                create={props => <div>create</div>}
+                show={props => <div>show</div>}
+            />
+        </Prophet>
+    );
+};
+
+export default App;
 ```
 
 ## Packages
