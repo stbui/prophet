@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/stbui/prophet/compare/v2.0.0...v2.0.1) (2020-05-19)
+
+
+### Bug Fixes
+
+* **core:** 修复 store.list 参数缺失 ([b226c65](https://github.com/stbui/prophet/commit/b226c6520f970eda14371037ca714f9a66380f7d))
+* **core:** 修复queryReducer问题 ([91c8821](https://github.com/stbui/prophet/commit/91c882184fc94733920196d5a6ce8a4acea512d2))
+
+
+
+
+
 # [2.0.0](https://github.com/stbui/prophet/compare/v1.4.1...v2.0.0) (2020-05-12)
 
 
