@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/stbui/prophet/compare/v2.0.1...v2.1.0) (2020-05-22)
+
+
+### Features
+
+* **core:** useDelete 删除成功后刷新当前组件 ([4ab7f05](https://github.com/stbui/prophet/commit/4ab7f05ca1c5af309402f65f7281b7a492aacd34))
+* **core:** 成功刷新当前组件 ([c571c54](https://github.com/stbui/prophet/commit/c571c54a9635c9136537f573b0420e4c82c2004a))
+
+
+
+
+
 ## [2.0.1](https://github.com/stbui/prophet/compare/v2.0.0...v2.0.1) (2020-05-19)
 
 
