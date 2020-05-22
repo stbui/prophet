@@ -6,7 +6,8 @@
 
 import { useCallback } from 'react';
 import { useUpdate, useGetOne } from '../dataProvider';
-import { useNotify, useRedirect } from '../sideEffect';
+import { useNotify, useRedirect, useRefresh } from '../sideEffect';
+import useVersion from './useVersion';
 
 export interface EditProps {
     resource: string;
@@ -24,6 +25,7 @@ export interface EditControllerProps {
     loaded: any;
     saving: any;
     save: any;
+    version: number;
 }
 
 /*
@@ -42,6 +44,8 @@ export const useEditController = (props: EditProps): EditControllerProps => {
     const { resource, basePath, id, successMessage } = props;
     const notify = useNotify();
     const redirect = useRedirect();
+    const version = useVersion();
+    const refresh = useRefresh();
 
     const { data: record, loading, loaded } = useGetOne(resource, id, {
         onFailure: error =>
@@ -56,10 +60,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
     const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
 
     const save = useCallback(
-        (
-            data: any,
-            { onSuccess, onFailure, refresh, redirectTo = 'list' } = {}
-        ) =>
+        (data: any, { onSuccess, onFailure, redirectTo = 'list' } = {}) =>
             update(
                 { data },
                 {
@@ -68,6 +69,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
                         : () => {
                               notify(successMessage || '更新成功', 'success');
                               redirect(redirectTo, basePath, data.id);
+                              refresh();
                           },
                     onFailure: onFailure
                         ? onFailure
@@ -79,10 +81,9 @@ export const useEditController = (props: EditProps): EditControllerProps => {
                                             'prophet.notification.http_error',
                                   'error'
                               ),
-                    refresh,
                 }
             ),
-        [resource, basePath, update, successMessage]
+        [resource, basePath, update, notify, redirect, successMessage]
     );
 
     return {
@@ -94,6 +95,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         loaded,
         saving,
         save,
+        version,
     };
 };
 

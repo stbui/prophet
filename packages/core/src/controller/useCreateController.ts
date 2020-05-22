@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
 import { useCreate } from '../dataProvider';
-import { useNotify, useRedirect } from '../sideEffect';
+import { useNotify, useRedirect, useRefresh } from '../sideEffect';
 import useVersion from './useVersion';
 
 export interface CreateControllerProps {
@@ -80,15 +80,14 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
     const notify = useNotify();
     const redirect = useRedirect();
     const version = useVersion();
+    const refresh = useRefresh();
+
     const recordToUse = getRecord(location, record);
 
     const [create, { loading: saving }] = useCreate(resource);
 
     const save = useCallback(
-        (
-            data: any,
-            { onSuccess, onFailure, refresh, redirectTo = 'list' } = {}
-        ) => {
+        (data: any, { onSuccess, onFailure, redirectTo = 'list' } = {}) => {
             create(
                 { data },
                 {
@@ -97,6 +96,7 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                         : () => {
                               notify(successMessage || '创建成功', 'success');
                               redirect(redirectTo, basePath, data.id);
+                              refresh();
                           },
                     onFailure: onFailure
                         ? onFailure
@@ -108,7 +108,6 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
                                             'prophet.notification.http_error',
                                   'error'
                               ),
-                    refresh,
                 }
             );
         },
