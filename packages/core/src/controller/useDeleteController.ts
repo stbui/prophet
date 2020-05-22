@@ -6,7 +6,7 @@
 
 import { useCallback } from 'react';
 import { useDelete } from '../dataProvider';
-import { useNotify, useRedirect } from '../sideEffect';
+import { useNotify, useRedirect, useRefresh } from '../sideEffect';
 
 export interface DeleteProps {
     resource: string;
@@ -31,40 +31,43 @@ const pageComponent = props => {
 export const useDeleteController = (props: DeleteProps) => {
     const { resource, basePath, id, record, successMessage } = props;
     const notify = useNotify();
-    const [update, { loading: isDeleted }] = useDelete(resource, id, record);
+    const refresh = useRefresh();
 
-    const save = useCallback(
-        (id: any, data, { onSuccess, onFailure, refresh }: any = {}) => {
+    const [update, { loading: deleting }] = useDelete(resource, id, record);
+
+    const remove = useCallback(
+        (id: string | number, data, { onSuccess, onFailure }: any = {}) => {
             update(
                 { id, data },
                 {
                     onSuccess: onSuccess
                         ? onSuccess
                         : () => {
-                              notify(successMessage || '删除成功', 'success');
-                          },
+                            notify(successMessage || '删除成功', 'success');
+                            refresh();
+                        },
                     onFailure: onFailure
                         ? onFailure
                         : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
-                    refresh,
+                            notify(
+                                typeof error === 'string'
+                                    ? error
+                                    : error.message ||
+                                    'prophet.notification.http_error',
+                                'error'
+                            ),
                 }
             );
         },
-        [resource, basePath, update, successMessage]
+        [resource, basePath, update, notify, successMessage]
     );
 
     return {
         resource,
         basePath,
-        update: save,
-        isDeleted: isDeleted,
+        update: remove,
+        remove,
+        deleting: deleting,
     };
 };
 

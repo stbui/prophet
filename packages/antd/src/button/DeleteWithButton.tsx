@@ -1,37 +1,34 @@
 import React, { FunctionComponent } from 'react';
 import { useDeleteController } from '@stbui/prophet-core';
-import { message, Button } from 'antd';
+import { Button } from 'antd';
 
 export interface DeleteButtonViewProps {
     basePath?: string;
     label?: string;
     record?: any;
-    update?: any;
+    remove?: any;
+    deleting?: any;
     size?: any;
     type?: any;
 }
 
 export const DeleteWithButtonView: FunctionComponent<DeleteButtonViewProps> = ({
     label,
-    update,
+    remove,
     record,
+    deleting,
     size,
     type,
     ...reset
 }) => {
-    const onConfirm = () =>
-        update(record.id, record, {
-            onSuccess() {
-                message.success('删除成功');
-            },
-            onFailure(error) {
-                message.error(error.message);
-            },
-            refresh: true,
-        });
-
     return (
-        <Button type={type} onClick={onConfirm} size={size} {...reset}>
+        <Button
+            type={type}
+            size={size}
+            loading={deleting}
+            onClick={() => remove(record.id, record)}
+            {...reset}
+        >
             {label}
         </Button>
     );

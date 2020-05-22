@@ -1,47 +1,41 @@
 import React, { FunctionComponent } from 'react';
 import { useDeleteController, useTranslate } from '@stbui/prophet-core';
-import { Popconfirm, message, Button } from 'antd';
+import { Popconfirm, Button } from 'antd';
 
 export interface DeleteButtonConfirmProps {
     basePath?: string;
     label?: string;
     record?: any;
-    update?: any;
+    remove?: any;
+    deleting?: any;
     size?: any;
     type?: any;
     okText?: any;
+    popConfirm?: any;
 }
 
 const DeleteWithConfirmButton: FunctionComponent<DeleteButtonConfirmProps> = ({
     label,
-    update,
+    remove,
     record,
+    deleting,
     size,
     type,
     okText,
+    popConfirm,
     ...rest
 }) => {
     const translate = useTranslate();
-
-    const onConfirm = () =>
-        update(record.id, record, {
-            onSuccess() {
-                message.success('删除成功');
-            },
-            onFailure(error) {
-                message.error(error.message);
-            },
-            refresh: true,
-        });
 
     return (
         <Popconfirm
             title={translate('prophet.message.delete_content')}
             okText={okText}
             cancelText={translate('prophet.action.cancel')}
-            onConfirm={onConfirm}
+            onConfirm={() => remove(record.id, record)}
+            {...popConfirm}
         >
-            <Button type={type} size={size} {...rest}>
+            <Button type={type} size={size} loading={deleting} {...rest}>
                 {label}
             </Button>
         </Popconfirm>
