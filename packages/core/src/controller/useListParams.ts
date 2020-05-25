@@ -6,7 +6,7 @@
 
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { parse, stringify } from 'query-string';
 import debounce from 'lodash/debounce';
 import set from 'lodash/set';
@@ -22,11 +22,9 @@ import {
 import queryReducer from '../reducers/resources/list/queryReducer';
 import { removeKey, removeEmpty } from '../util';
 import { Sort } from '../types';
-import { Location } from 'history';
 
 interface ListParamsOptions {
     resource: string;
-    location: Location;
     filterDefaultValues?: object;
     sort?: Sort;
     perPage?: number;
@@ -61,7 +59,6 @@ interface Modifiers {
  *
  * @param {Object} options
  * @param {string} options.resource
- * @param {Object} options.location
  * @param {Object} options.filterDefaultValues
  * @param {Object} options.sort
  * @param {order} options.sort.field
@@ -74,7 +71,6 @@ interface Modifiers {
  *
  * const [query, queryMethod] = useListParams({
  *      resource: 'users',
- *      location: {},
  *      filterDefaultValues: { username: 'stbui' },
  *      sort: { field: 'id', order: 'ASC' },
  *      perPage: 20
@@ -83,7 +79,6 @@ interface Modifiers {
  */
 export const useListParams = ({
     resource,
-    location,
     filterDefaultValues,
     sort = { field: 'id', order: 'ASC' },
     perPage = 10,
@@ -91,6 +86,7 @@ export const useListParams = ({
 }: ListParamsOptions): [ListParams, Modifiers] => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
 
     const params = useSelector(
         (state: any) =>

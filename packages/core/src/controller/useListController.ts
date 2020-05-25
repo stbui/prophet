@@ -5,7 +5,6 @@
  */
 
 import { isValidElement, useMemo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
 import useVersion from './useVersion';
@@ -79,13 +78,11 @@ export const useListController = (props: ListProps): ListControllerProps => {
         throw new Error('<List filter={{}}>...</List>');
     }
 
-    const location = useLocation();
     const version = useVersion();
     const notify = useNotify();
 
     const [query, queryMethod] = useListParams({
         resource,
-        location,
         filterDefaultValues,
         sort,
         perPage,
