@@ -4,7 +4,7 @@ import useRefresh from './useRefresh';
 
 export const resolveRedirectTo = (redirectTo, basePath: string, id?: any) => {
     if (typeof redirectTo === 'function') {
-        return resolveRedirectTo(basePath, id);
+        return redirectTo(basePath, id);
     }
 
     switch (redirectTo) {
@@ -17,7 +17,7 @@ export const resolveRedirectTo = (redirectTo, basePath: string, id?: any) => {
         case 'show':
             return `${basePath}/${id}/show`;
         default:
-            redirectTo;
+            return redirectTo;
     }
 };
 
@@ -30,14 +30,14 @@ export const resolveRedirectTo = (redirectTo, basePath: string, id?: any) => {
  * redirect('list', '/users');
  * redirect('edit', '/users', 123);
  * redirect(false);
- * redirect((redirectTo, basePath, is, data) => ...)
+ * redirect((basePath, id, data) =>{ return '/users/:id?filter={}' }, '/users', 123)
  */
 const useRedirect = () => {
     const history = useHistory();
     const refresh = useRefresh();
 
     return useCallback(
-        (redirectTo, basePath: string = '', id?: string | boolean) => {
+        (redirectTo, basePath: string = '', id?: string | boolean, data?) => {
             if (!redirectTo) {
                 if (history.location.state || history.location.search) {
                     history.replace({
