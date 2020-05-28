@@ -3,14 +3,15 @@ import { useCreateController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 interface Props {
-    children?: any;
-    resource?: any;
-    basePath?: any;
+    children: any;
+    resource?: string;
+    basePath?: string;
     title?: string;
     loading?: any;
     actions?: any;
-    record?: any;
+    record?: object;
     save?: any;
+    card?: any;
 }
 
 export const CreateView: FunctionComponent<Props> = props => {
@@ -23,11 +24,12 @@ export const CreateView: FunctionComponent<Props> = props => {
         record = {},
         save,
         actions,
+        card,
         ...other
     } = props;
 
     return (
-        <Card bordered={false} title={title} loading={loading}>
+        <Card bordered={false} title={title} loading={loading} {...card}>
             {actions && cloneElement(actions, { ...other })}
             {cloneElement(children, {
                 resource,

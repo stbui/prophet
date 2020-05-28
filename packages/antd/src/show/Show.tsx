@@ -3,15 +3,16 @@ import { useShowController } from '@stbui/prophet-core';
 import { Card } from 'antd';
 
 interface Props {
-    children?: any;
-    resource?: any;
-    basePath?: any;
+    children: any;
+    resource?: string;
+    basePath?: string;
     title?: string;
     loading?: any;
     actions?: any;
     record?: any;
     save?: any;
     id?: any;
+    card?: any;
 }
 
 export const ShowView: FunctionComponent<Props> = ({
@@ -23,9 +24,10 @@ export const ShowView: FunctionComponent<Props> = ({
     loading,
     record,
     actions,
+    card,
     ...other
 }) => (
-    <Card bordered={false} title={title} loading={loading}>
+    <Card bordered={false} title={title} loading={loading} {...card}>
         {actions && cloneElement(actions, { ...other })}
         {record
             ? cloneElement(children, {

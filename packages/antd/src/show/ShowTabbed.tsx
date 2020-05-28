@@ -14,11 +14,12 @@ import {
 import { Tabs } from 'antd';
 
 interface Props {
-    children?: any;
+    children: any;
     resource?: any;
     basePath?: any;
     Tab?: any;
     record?: any;
+    tabPane?: any;
 }
 
 /**
@@ -53,6 +54,7 @@ const ShowTabbedView: FunctionComponent<Props> = ({
     basePath,
     resource,
     record,
+    tabPane,
     ...other
 }) => {
     const match = useRouteMatch();
@@ -83,6 +85,7 @@ const ShowTabbedView: FunctionComponent<Props> = ({
                     key={getTabFullPath(tab, index, url)}
                     tab={tab.props.label}
                     forceRender={tab.props.forceRender}
+                    {...tabPane}
                 >
                     <Route exact path={getTabFullPath(tab, index, url)}>
                         {props =>

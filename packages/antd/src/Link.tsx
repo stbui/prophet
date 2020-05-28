@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { Link as RRLink } from 'react-router-dom';
 
 interface Props {
-    to?: any;
+    to: string;
     children?: any;
-    className?: any;
 }
 
 export const Link: FunctionComponent<Props> = ({
@@ -13,7 +12,7 @@ export const Link: FunctionComponent<Props> = ({
     className,
     ...other
 }: any) => (
-    <RRLink to={to} className={className} {...other}>
+    <RRLink to={to} {...other}>
         {children}
     </RRLink>
 );
