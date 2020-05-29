@@ -36,7 +36,7 @@ const queryReducer: Reducer<any> = (previousState, { type, payload }) => {
             return {
                 ...previousState,
                 page: 1,
-                order: payload.sort || 'ASC',
+                order: payload.order || 'ASC',
                 sort: payload.sort,
             };
 
