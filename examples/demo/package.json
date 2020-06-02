@@ -1,10 +1,10 @@
 {
     "name": "demo",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "private": true,
     "dependencies": {
-        "@stbui/prophet": "2.1.1",
-        "@stbui/prophet-data-json-server": "2.1.1",
+        "@stbui/prophet": "2.1.2",
+        "@stbui/prophet-data-json-server": "2.1.2",
         "@stbui/prophet-i18n-polyglot": "^2.0.0",
         "@stbui/prophet-language-chinese": "^2.0.0",
         "@stbui/prophet-language-english": "^2.0.0",

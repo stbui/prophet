@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/stbui/prophet/compare/v2.1.0...v2.1.2) (2020-06-02)
+
+
+### Bug Fixes
+
+* **core:** order传值错误 ([6992681](https://github.com/stbui/prophet/commit/6992681e10f36f459f379375a2cffb4ef9b61058))
+* **core:** 修复useRedirect回调错误 ([d1065be](https://github.com/stbui/prophet/commit/d1065bee852818d3f9ff26761e19edced4798579))
+
+
+
+
+
 ## [2.1.1](https://github.com/stbui/prophet/compare/v2.1.0...v2.1.1) (2020-06-02)
 
 
