@@ -1,5 +1,7 @@
 # authProvider
 
+系统的权限控制，包括登录，登出，权限检查
+
 ```js
 const authProvider = {
     login: () => {

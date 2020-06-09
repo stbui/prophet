@@ -1,4 +1,4 @@
-## 前端接口规范
+# 前端接口规范
 
 ### 映射 RESTful 接口
 
@@ -22,7 +22,7 @@ http://127.0.0.1/users?sort=stbui&order=ASC
 
 #### 筛选
 
-http://127.0.0.1/users?name=stbui&id=1
+http://127.0.0.1/users?fitler={"name":"stbui"}
 
 ### response
 

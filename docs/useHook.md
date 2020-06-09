@@ -1,28 +1,28 @@
 # useHook
 
-### useCreateController
+### useCreateController 创建新数据组件
 
-### uesDeleteController
+### uesDeleteController 删除一条数据组件
 
-### uesEditController
+### uesEditController 编辑一条数据组件
 
-### uesListController
+### uesListController 显示列表数据组件
 
-### uesShowController
+### uesShowController 显示一条数据组件
 
 ```js
 // 获取 users 列表
 const { data, ids, loading, error } = useGetList('users',{ page: 1, perPage: 10 },{ username: 'stbui' },{ field: 'id', order: 'DESC' });
-// 获取一个单独的 users
-const { data, loading, error } = useGetOne('users', record.id);
+// 获取一条的 users
+const { data, loading, error } = useGetOne('users', 'id');
 // 创建一个新的 users
 const [create, { loading, error }] = useCreate('users', { username: 'stbui' });
 // 更新 users
-const { record, loading, save, isSaving } = useEdit({ resource, id payload: { data: { userId:1 } } });
+const { record, loading, save, isSaving } = useEdit({ 'users', 1, payload: { data: { userId:1 } } });
 // 删除 users
-const [delete, { loading, error }] = useDelete('users', record.id);
+const [deleteOne, { loading, error }] = useDelete('users', 'id');
 
-// 获取数据，参数可以自定义
+// 获取数据，自定义参数
 const { data, loading, error } = useQuery({
     type: 'GET_ONE',
     resource: 'users',
@@ -32,13 +32,13 @@ const { data, loading, error } = useQuery({
         filter: { id: 1 },
     },
 });
-// 更新数据，参数可以自定义
+// 更新数据，自定义参数
 const [update, { data, loading, error }] = useMutation({
     type: 'UPDATE',
     resource: 'users',
-    payload: { id: record.id, data: { username: 'stbui' } },
+    payload: { id: 'id', data: { username: 'stbui' } },
 });
-// 获取数据，从redux中出
+// 获取数据，在store中注册过
 const { data, loading, error } = useQueryWithStore(
     {
         type: 'GET_ONE',
@@ -48,5 +48,4 @@ const { data, loading, error } = useQueryWithStore(
     {},
     state => state.resource.user.data[record.id]
 );
-
 ```

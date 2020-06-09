@@ -1,16 +1,6 @@
-# dataProvider
+# dataProvider 获取数据源
 
-用于处理接口数据规范
-
-## RESTful 接口规范实现
-
-| 类型     | 方法   | url 示例                   | 说明 |
-| :------- | :----- | :------------------------- | :--- |
-| GET_LIST | GET    | http://127.0.0.1/users     |      |
-| GET_ONE  | GET    | http://127.0.0.1/users/:id |      |
-| CREATE   | POST   | http://127.0.0.1/users     |      |
-| UPDATE   | PUT    | http://127.0.0.1/users/:id |      |
-| DELETE   | DELETE | http://127.0.0.1/users/:id |      |
+在获取到数据之后，将数据分发给各个组件使用
 
 ## 示例
 
@@ -42,6 +32,16 @@ export default (apiUrl: string, httpClient = fetch) => {
 ```
 
 ### 基本用法
+
+### RESTful 接口规范实现
+
+| 类型     | 方法   | url 示例                   | 说明 |
+| :------- | :----- | :------------------------- | :--- |
+| GET_LIST | GET    | http://127.0.0.1/users     |      |
+| GET_ONE  | GET    | http://127.0.0.1/users/:id |      |
+| CREATE   | POST   | http://127.0.0.1/users     |      |
+| UPDATE   | PUT    | http://127.0.0.1/users/:id |      |
+| DELETE   | DELETE | http://127.0.0.1/users/:id |      |
 
 #### 列表
 

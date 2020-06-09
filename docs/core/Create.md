@@ -1,26 +1,26 @@
-# Create
+# Create 创建组件
 
-创建组件
+通过 Create 包装过的组件，将赋予了创建一条数据的功能
 
 ## 组件依赖关系
 
 ```
-CreateController -> useCreateController -> useCreate -> useMuation -> useDataProvider -> ajax
+Create -> CreateController -> useCreateController -> useCreate -> useMuation -> useDataProvider -> ajax
 ```
 
-## CreateController 示例
+## 使用方法
 
 ```js
-import { CreateController } from '@stbui/@stbui/prophet-core';
+import { Create } from '@stbui/prophet';
 
 const FormEdit = ({ save }) => {
-    return <button onClick={() => save({ name: stbui })}>submit</button>;
+    return <button onClick={() => save({ name: stbui })}>创建</button>;
 };
 
 export default props => (
-    <EditController {...props}>
+    <Create {...props}>
         <FormEdit />
-    </EditController>
+    </Create>
 );
 ```
 
@@ -28,25 +28,20 @@ export default props => (
 
 | 属性     | 类型   | 默认值 | 可选值／参数 | 说明 |
 | :------- | :----- | :----- | :----------- | :--- |
-| resource | string |        | 否           |      |
-| basePath | string |        | 否           |      |
-| id       | number |        | 否           |      |
+| resource | string |        | 是           |      |
+| basePath | string |        | 是           |      |
 
 ## useCreateController 示例
 
 ```js
 import { useCreateController } from '@stbui/prophet-core';
 
-const FormEdit = ({ save }) => {
-    return <button onClick={() => save({ name: stbui })}>form</button>;
-};
-
 export default props => {
-    const { save, isLoading, isSaving } = useCreateController(props);
+    const { save, loading, saving } = useCreateController(props);
 
     return (
-        <button disabled={isSaving} onClick={() => save({ name: stbui })}>
-            submit
+        <button disabled={saving} onClick={() => save({ name: stbui })}>
+            创建
         </button>
     );
 };
@@ -63,12 +58,12 @@ const UserProfile = ({ record }) => {
     });
 
     if (error) {
-        return <Error />;
+        return error.message;
     }
 
     return (
         <div loading={loading} onClick={create}>
-            create
+            创建
         </div>
     );
 };

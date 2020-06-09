@@ -11,16 +11,16 @@ ShowController -> useShowController -> useShow -> useGetOne -> useDataProvider -
 ## ShowController 示例
 
 ```js
-import { ShowController } from '@stbui/prophet-core';
+import { Show } from '@stbui/prophet';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>submit</button>;
 };
 
 export default props => (
-    <EditController {...props}>
+    <Show {...props}>
         <FormEdit />
-    </EditController>
+    </Show>
 );
 ```
 
@@ -37,18 +37,12 @@ export default props => (
 ```js
 import { useShowController } from '@stbui/prophet-core';
 
-const FormEdit = ({ save }) => {
-    return <button onClick={() => save({ name: stbui })}>form</button>;
-};
+const ShowView = ({ record }) => <div>{record.name}</div>;
 
-export default props => {
-    const { save, isLoading, isSaving } = useShowController(props);
+const create = props => {
+    const controllerProps = useShowController(props);
 
-    return (
-        <button disabled={isSaving} onClick={() => save({ name: stbui })}>
-            submit
-        </button>
-    );
+    return <ShowView {...controllerProps} {...props} />;
 };
 ```
 
