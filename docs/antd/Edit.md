@@ -1,6 +1,30 @@
 # Edit
 
-Edit 组件
+编辑组件
+
+## 示例
+
+```js
+import { Edit } from '@stbui/prophet-antd';
+
+const EditView = props => {
+    const { record, save } = props;
+    const onSubmit = params => save(params);
+
+    return (
+        <div>
+            <div>{record.username}</div>
+            <button onClick={onSubmit}>提交</button>
+        </div>
+    );
+};
+
+export default props => (
+    <Edit title="编辑" {...props}>
+        <EditView />
+    </Edit>
+);
+```
 
 ## 示例
 
@@ -17,8 +41,6 @@ const EditView = props => {
             onFailure: error => {
                 console.log(error);
             },
-            // 更新List数据
-            // refresh: true,
         });
 
     return (
