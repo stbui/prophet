@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
@@ -10,7 +10,7 @@ export interface EditButtonProps {
     size?: any;
 }
 
-const EditButton: FunctionComponent<EditButtonProps> = ({
+const EditButton: FC<EditButtonProps> = ({
     basePath,
     label,
     id,

@@ -1,44 +1,33 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FC } from 'react';
 import { Button, Drawer } from 'antd';
 
 export interface ShowDrawerButtonProps {
     children?: any;
-    width?: string | number;
-    destroyOnClose?: boolean;
     label?: string;
     drawer?: any;
     button?: any;
-    size?: any;
 }
 
-const ShowWithDrawerButton: FunctionComponent<ShowDrawerButtonProps> = ({
+const ShowWithDrawerButton: FC<ShowDrawerButtonProps> = ({
     children,
-    width,
-    destroyOnClose,
     label,
     drawer,
     button,
 }) => {
     const [visible, setVisible] = useState(false);
 
-    const handleDrawerClose = () => setVisible(false);
-    const handleDrawerShow = () => setVisible(true);
+    const onClose = () => setVisible(false);
+    const onShow = () => setVisible(true);
 
     return (
         <React.Fragment>
-            <Button type="link" onClick={handleDrawerShow} {...button}>
+            <Button type="link" onClick={onShow} {...button}>
                 {label}
             </Button>
-            <Drawer
-                width={width}
-                visible={visible}
-                onClose={handleDrawerClose}
-                destroyOnClose={destroyOnClose}
-                {...drawer}
-            >
+            <Drawer visible={visible} onClose={onClose} {...drawer}>
                 {React.cloneElement(children, {
-                    onOk: handleDrawerClose,
-                    onCancel: handleDrawerClose,
+                    onOk: onClose,
+                    onCancel: onClose,
                 })}
             </Drawer>
         </React.Fragment>

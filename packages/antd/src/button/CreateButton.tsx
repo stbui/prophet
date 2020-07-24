@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
@@ -8,7 +8,7 @@ export interface CreateButtonProps {
     type?: 'primary' | 'dashed' | 'danger' | 'link';
 }
 
-const CreateButton: FunctionComponent<CreateButtonProps> = ({
+const CreateButton: FC<CreateButtonProps> = ({
     basePath,
     label,
     type,

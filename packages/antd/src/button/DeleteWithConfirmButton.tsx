@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useDeleteController, useTranslate } from '@stbui/prophet-core';
 import { Popconfirm, Button } from 'antd';
 
@@ -12,9 +12,10 @@ export interface DeleteButtonConfirmProps {
     type?: any;
     okText?: any;
     popConfirm?: any;
+    button?: any;
 }
 
-const DeleteWithConfirmButton: FunctionComponent<DeleteButtonConfirmProps> = ({
+const DeleteWithConfirmButton: FC<DeleteButtonConfirmProps> = ({
     label,
     remove,
     record,
@@ -23,7 +24,7 @@ const DeleteWithConfirmButton: FunctionComponent<DeleteButtonConfirmProps> = ({
     type,
     okText,
     popConfirm,
-    ...rest
+    button,
 }) => {
     const translate = useTranslate();
 
@@ -35,7 +36,7 @@ const DeleteWithConfirmButton: FunctionComponent<DeleteButtonConfirmProps> = ({
             onConfirm={() => remove(record.id, record)}
             {...popConfirm}
         >
-            <Button type={type} size={size} loading={deleting} {...rest}>
+            <Button type={type} size={size} loading={deleting} {...button}>
                 {label}
             </Button>
         </Popconfirm>
@@ -43,6 +44,7 @@ const DeleteWithConfirmButton: FunctionComponent<DeleteButtonConfirmProps> = ({
 };
 
 DeleteWithConfirmButton.defaultProps = {
+    label: '删除',
     size: 'small',
     type: 'link',
     okText: '确定',

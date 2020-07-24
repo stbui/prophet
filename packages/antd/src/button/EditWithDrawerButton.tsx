@@ -1,58 +1,37 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export interface EditDrawerButtonProps {
     children?: any;
-    width?: string | number;
-    destroyOnClose?: boolean;
     label?: string;
     type?: 'primary' | 'dashed' | 'danger' | 'link';
     drawer?: any;
     button?: any;
     size?: any;
+    allowRefresh?: boolean;
 }
 
-const EditWithDrawerButton: FunctionComponent<EditDrawerButtonProps> = props => {
-    const {
-        children,
-        width,
-        destroyOnClose,
-        label,
-        type,
-        size,
-        drawer,
-        button,
-    } = props;
+const EditWithDrawerButton: FC<EditDrawerButtonProps> = props => {
+    const { children, label, type, size, drawer, button, allowRefresh } = props;
     const [visible, setVisible] = useState(false);
 
-    const handleDrawerClose = () => {
+    const onClose = () => {
         setVisible(false);
-        useRefresh();
+        allowRefresh && useRefresh();
     };
 
-    const handleDrawerShow = () => setVisible(true);
+    const onShow = () => setVisible(true);
 
     return (
         <React.Fragment>
-            <Button
-                type={type}
-                size={size}
-                onClick={handleDrawerShow}
-                {...button}
-            >
+            <Button type={type} size={size} onClick={onShow} {...button}>
                 {label}
             </Button>
-            <Drawer
-                width={width}
-                visible={visible}
-                onClose={handleDrawerClose}
-                destroyOnClose={destroyOnClose}
-                {...drawer}
-            >
+            <Drawer visible={visible} onClose={onClose} {...drawer}>
                 {React.cloneElement(children, {
-                    onOk: handleDrawerClose,
-                    onCancel: handleDrawerClose,
+                    onOk: onClose,
+                    onCancel: onClose,
                 })}
             </Drawer>
         </React.Fragment>

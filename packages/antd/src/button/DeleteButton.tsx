@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import DeleteWithButton from './DeleteWithButton';
 import DeleteWithConfirmButton from './DeleteWithConfirmButton';
 
@@ -8,10 +8,7 @@ export interface DeleteButtonProps {
     confirm?: any;
 }
 
-export const DeleteButton: FunctionComponent<DeleteButtonProps> = ({
-    confirm,
-    ...other
-}) =>
+export const DeleteButton: FC<DeleteButtonProps> = ({ confirm, ...other }) =>
     confirm ? (
         <DeleteWithConfirmButton {...other} />
     ) : (

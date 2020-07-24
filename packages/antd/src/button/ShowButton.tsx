@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
@@ -10,7 +10,7 @@ export interface ShowButtonProps {
     size?: any;
 }
 
-export const ShowButton: FunctionComponent<ShowButtonProps> = ({
+export const ShowButton: FC<ShowButtonProps> = ({
     basePath,
     label,
     id,

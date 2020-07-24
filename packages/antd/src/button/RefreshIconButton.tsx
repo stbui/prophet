@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Icon } from 'antd';
 
@@ -6,7 +6,7 @@ export interface RefreshIconButtonProps {
     onClick?: any;
 }
 
-const RefreshIconButton: FunctionComponent<RefreshIconButtonProps> = ({
+const RefreshIconButton: FC<RefreshIconButtonProps> = ({
     onClick,
     ...rest
 }) => {

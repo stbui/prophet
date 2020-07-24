@@ -1,45 +1,39 @@
-import React, { cloneElement, useState, FunctionComponent } from 'react';
+import React, { cloneElement, useState, FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
 import { Button, Drawer } from 'antd';
 
 export interface CreateDrawerButtonProps {
     children?: any;
-    width?: string | number;
-    destroyOnClose?: boolean;
     label?: string;
     type?: 'primary' | 'dashed' | 'danger' | 'link';
     drawer?: any;
     button?: any;
+    allowRefresh?: boolean;
 }
 
-const CreateWithDrawerButton: FunctionComponent<CreateDrawerButtonProps> = props => {
-    const { children, width, destroyOnClose, drawer } = props;
+const CreateWithDrawerButton: FC<CreateDrawerButtonProps> = props => {
+    const { children, drawer, allowRefresh } = props;
     const { label, type, button } = props;
 
     const [visible, setVisible] = useState(false);
+    const refresh = useRefresh();
 
-    const handleDrawerClose = () => {
+    const onClose = () => {
         setVisible(false);
-        useRefresh();
+        allowRefresh && refresh();
     };
 
-    const handleDrawerShow = () => setVisible(true);
+    const onShow = () => setVisible(true);
 
     return (
         <React.Fragment>
-            <Button type={type} onClick={handleDrawerShow} {...button}>
+            <Button type={type} onClick={onShow} {...button}>
                 {label}
             </Button>
-            <Drawer
-                width={width}
-                visible={visible}
-                onClose={handleDrawerClose}
-                destroyOnClose={destroyOnClose}
-                {...drawer}
-            >
+            <Drawer visible={visible} onClose={onClose} {...drawer}>
                 {cloneElement(children, {
-                    onOk: handleDrawerClose,
-                    onCancel: handleDrawerClose,
+                    onOk: onClose,
+                    onCancel: onClose,
                 })}
             </Drawer>
         </React.Fragment>

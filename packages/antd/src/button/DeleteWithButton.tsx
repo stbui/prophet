@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { useDeleteController } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
@@ -12,7 +12,7 @@ export interface DeleteButtonViewProps {
     type?: any;
 }
 
-export const DeleteWithButtonView: FunctionComponent<DeleteButtonViewProps> = ({
+export const DeleteWithButtonView: FC<DeleteButtonViewProps> = ({
     label,
     remove,
     record,
@@ -35,6 +35,7 @@ export const DeleteWithButtonView: FunctionComponent<DeleteButtonViewProps> = ({
 };
 
 DeleteWithButtonView.defaultProps = {
+    label: '删除',
     size: 'small',
     type: 'link',
 };

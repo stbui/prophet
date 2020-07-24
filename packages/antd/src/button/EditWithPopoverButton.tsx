@@ -1,4 +1,4 @@
-import React, { useState, cloneElement, FunctionComponent } from 'react';
+import React, { useState, cloneElement, FC } from 'react';
 import { Popover, Button } from 'antd';
 
 export interface EditPopoverButtonProps {
@@ -9,13 +9,17 @@ export interface EditPopoverButtonProps {
     content?: any;
     popover?: any;
     button?: any;
+    type?: any;
+    size?: any;
 }
 
-export const EditWithPopoverButton: FunctionComponent<EditPopoverButtonProps> = ({
+export const EditWithPopoverButton: FC<EditPopoverButtonProps> = ({
     basePath,
     label,
     id,
     content,
+    type,
+    size,
     popover,
     button,
 }) => {
@@ -38,7 +42,7 @@ export const EditWithPopoverButton: FunctionComponent<EditPopoverButtonProps> = 
             trigger="click"
             {...popover}
         >
-            <Button type="link" size="small" onClick={onShow} {...button}>
+            <Button type={type} size={size} onClick={onShow} {...button}>
                 {label}
             </Button>
         </Popover>
@@ -47,6 +51,8 @@ export const EditWithPopoverButton: FunctionComponent<EditPopoverButtonProps> = 
 
 EditWithPopoverButton.defaultProps = {
     label: '编辑',
+    type: 'link',
+    size: 'small',
 };
 
 export default EditWithPopoverButton;

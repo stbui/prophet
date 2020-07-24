@@ -9,6 +9,7 @@ import CreateWithDrawerButton from './CreateWithDrawerButton';
 import EditWithDrawerButton from './EditWithDrawerButton';
 import ShowWithDrawerButton from './ShowWithDrawerButton';
 import EditWithPopoverButton from './EditWithPopoverButton';
+import CopyWithCreateButton from './CopyWithCreateButton';
 
 export {
     CreateButton,
@@ -22,4 +23,5 @@ export {
     EditWithDrawerButton,
     ShowWithDrawerButton,
     EditWithPopoverButton,
+    CopyWithCreateButton,
 };
