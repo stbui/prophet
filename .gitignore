@@ -126,3 +126,5 @@ packages/*/yarn.lock
 esm
 lib
 *.tgz
+dist
+.umi

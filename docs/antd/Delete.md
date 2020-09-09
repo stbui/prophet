@@ -1,5 +1,7 @@
 # 删除
 
+向http发起delete请求组件。
+
 删除操作提供了不同交互方式组件
 
 -   DeleteButton

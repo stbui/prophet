@@ -14,10 +14,11 @@ npm install @stbui/prophet@latest @stbui/prophet-data-json-server@latest
 
 然后在 App.js 文件写入代码
 
-```js
+```tsx
 import React from 'react';
 import { Prophet, Resource } from '@stbui/prophet';
 import dataJsonServer from '@stbui/prophet-data-json-server';
+import 'antd/dist/antd.css';
 
 const App = () => {
     return (

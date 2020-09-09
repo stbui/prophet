@@ -1,6 +1,6 @@
 # Create
 
-创建数据组件
+创建一条记录组件。将要提交的数据传递给该组件，将会触发POST请求。
 
 ## 示例
 
@@ -9,15 +9,19 @@ import { Create } from '@stbui/prophet-antd';
 
 const CreateView = props => {
     const { save } = props;
+
+    // params 需求提交的数据
     const onSubmit = params =>
         save(params, {
             onSuccess: ({ data }) => {
+                // 请求返回的数据
                 console.log(data);
             },
             onFailure: error => {
+                // 请求出错
                 console.log(error);
             },
-            // 更新List数据
+            // 创建成功后，会立即更新List数据
             // refresh: true,
         });
 

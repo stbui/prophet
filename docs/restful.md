@@ -18,7 +18,7 @@ http://127.0.0.1/users?page=1&perPage=10
 
 #### 排序
 
-http://127.0.0.1/users?sort=stbui&order=ASC
+http://127.0.0.1/users?sort={field: 'id', order: 'ASC'}
 
 #### 筛选
 
