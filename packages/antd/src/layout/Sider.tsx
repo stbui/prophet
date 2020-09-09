@@ -16,8 +16,6 @@ export default ({ children, brand }) => {
             style={{
                 overflow: 'auto',
                 height: '100vh',
-                position: 'fixed',
-                left: 0,
             }}
         >
             {cloneElement(brand)}

@@ -9,10 +9,7 @@ export const Header = ({ brand }) => {
         <Layout.Header
             style={{
                 display: 'flex',
-                position: 'fixed',
-                zIndex: 1,
-                width: '100%',
-                padding: 0,
+                padding: '0 24px',
             }}
         >
             {cloneElement(brand)}
