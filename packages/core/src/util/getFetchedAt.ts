@@ -1,6 +1,17 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import pickBy from 'lodash/pickBy';
 
 const defaultCacheDuration = 10 * 60 * 1000;
+
+interface FetchedOutDates {
+    [key: string]: Date;
+    [key: number]: Date;
+}
 
 /**
  *
@@ -9,15 +20,18 @@ const defaultCacheDuration = 10 * 60 * 1000;
  * @param now 当前时间
  * @param cacheDuration 从列表中删除旧记录的时间
  *
- * @example
- *
+ * @return
+ * {
+ *      1: new Date('2020-11-11T11:11:11.000Z'),
+ *      2: new Date('2020-12-11T11:11:11.000Z'),
+ * }
  */
 export const getFetchedAt = (
     newRecordIds: any[],
-    oldRecordFetchedAt = {},
+    oldRecordFetchedAt: FetchedOutDates = {},
     now = new Date(),
     cacheDuration = defaultCacheDuration
-) => {
+): FetchedOutDates => {
     const newFetchedAt = {};
     newRecordIds.forEach(recordId => (newFetchedAt[recordId] = now));
 
@@ -26,7 +40,7 @@ export const getFetchedAt = (
 
     const stillValidFetchedAt = pickBy(
         oldRecordFetchedAt,
-        date => date > latestValidDate
+        date => (date: any) => latestValidDate
     );
 
     return { ...stillValidFetchedAt, ...newFetchedAt };

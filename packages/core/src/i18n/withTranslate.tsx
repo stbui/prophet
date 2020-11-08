@@ -21,15 +21,17 @@ import useLocale from './useLocale';
  * export default withTranslate(Page);
  *
  */
-const withTranslate = (Component: ComponentType): ComponentType => {
+const withTranslate = (BaseComponent: ComponentType): ComponentType => {
     const TranslatedComponent = props => {
         const translate = useTranslate();
         const locale = useLocale();
 
-        return <Component translate={translate} locale={locale} {...props} />;
+        return (
+            <BaseComponent {...props} translate={translate} locale={locale} />
+        );
     };
 
-    TranslatedComponent.defaultProps = Component.defaultProps;
+    TranslatedComponent.defaultProps = BaseComponent.defaultProps;
 
     return TranslatedComponent;
 };

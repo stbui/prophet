@@ -15,5 +15,6 @@ export * from './dataProvider';
 export * from './auth';
 export * from './i18n';
 export * from './loading';
+export * from './types';
 
 export { getResources } from './reducers';

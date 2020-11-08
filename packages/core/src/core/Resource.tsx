@@ -4,7 +4,12 @@
  * https://github.com/stbui
  */
 
-import React, { useEffect, useMemo, FunctionComponent } from 'react';
+import React, {
+    useEffect,
+    useMemo,
+    FunctionComponent,
+    ComponentType,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
@@ -13,12 +18,12 @@ import { registerResource, unregisterResource } from '../actions';
 
 export interface ResourceProps {
     name: string;
-    label?: any;
+    label?: string;
     match?: any;
-    list?: any;
-    create?: any;
-    edit?: any;
-    show?: any;
+    list?: ComponentType;
+    create?: ComponentType;
+    edit?: ComponentType;
+    show?: ComponentType;
     options?: any;
     icon?: any;
     intent?: 'route' | 'registration';

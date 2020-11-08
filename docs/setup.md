@@ -36,3 +36,9 @@ const App = () => {
 
 export default App;
 ```
+
+启动
+
+```
+npm run start
+```

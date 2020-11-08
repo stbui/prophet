@@ -17,6 +17,7 @@ export interface QueryOptions {
     action?: string;
     onSuccess?: (response: any) => any | Object;
     onError?: (error?: any) => any | Object;
+    [key: string]: any;
 }
 
 export interface UseQueryValue {
@@ -98,7 +99,7 @@ const useQuery = (query: Query, options: QueryOptions = {}): UseQueryValue => {
         setState(prevState => ({ ...prevState, loading: true }));
 
         dataProvider(type, resource, payload, options)
-            .then(({ data, total }: any) => {
+            .then(({ data, total }) => {
                 setState({
                     data,
                     total,

@@ -5,21 +5,38 @@
  */
 
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
-export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+
+export type NotificationType = 'info' | 'error' | 'success' | 'warning';
+
+export interface NotificationPayload {
+    readonly message: string;
+    readonly type: NotificationType;
+    readonly notificationOptions?: NotificationOptions;
+}
+export interface ShowNotificationAction {
+    readonly type: typeof SHOW_NOTIFICATION;
+    readonly payload: NotificationPayload;
+}
 
 export const showNotification = (
-    type: 'info' | 'error' | 'success' | 'warning' = 'info',
     message: string,
-    description?: string,
-    duration?: number
-) => ({
+    type: NotificationType = 'info',
+    options?: any
+): ShowNotificationAction => ({
     type: SHOW_NOTIFICATION,
     payload: {
         type,
         message,
-        description,
-        duration,
+        ...options,
     },
 });
 
-export const hideNotification = () => ({ type: HIDE_NOTIFICATION });
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+
+export interface HideNotificationAction {
+    readonly type: typeof HIDE_NOTIFICATION;
+}
+
+export const hideNotification = (): HideNotificationAction => ({
+    type: HIDE_NOTIFICATION,
+});

@@ -59,6 +59,7 @@ export const getDefaultRedirectRoute = (
     return 'list';
 };
 
+// todo: 如果路由参数存在fitelr={}，可以会报错
 export const getRecord = ({ state, search }, record: any = {}) =>
     state && state.record
         ? state.record

@@ -5,41 +5,55 @@
  */
 
 import { useCallback } from 'react';
-import useAuthProvider from './useAuthProvider';
+import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
 import useLogout from './useLogout';
 import { useNotify } from '../sideEffect';
 
-/*
-import { useEffect,useState } from 'react';
-import { useCheckAuth } from '@stbui/prophet-core';
+type CheckAuth = (
+    params?: any,
+    logoutOnFailure?: boolean,
+    redirectTo?: string,
+    disableNotification?: boolean
+) => Promise<any>;
 
-const Page = () => {
-    const checkAuth = useCheckAuth();
-    useEffect(() => {
-        checkAuth().catch(() => {});
-    }, []);
-
-    return <div>ok</div>;
-};
-
-const Page = () => {
-    const checkAuth = useCheckAuth();
-    const [authenticated, setAuthenticated] = useState(true);
-    useEffect(() => {
-        checkAuth({}, false).then() => setAuthenticated(true)).catch(() => setAuthenticated(false));
-    }, []);
-
-    return authenticated ? <div>ok</div> : <div>fail</div>;
-}; 
-*/
-
-const useCheckAuth = () => {
+/**
+ *
+ * @example
+ *
+ * import { useEffect,useState } from 'react';
+ * import { useCheckAuth } from '@stbui/prophet-core';
+ *
+ * const Page = () => {
+ *    const checkAuth = useCheckAuth();
+ *    useEffect(() => {
+ *        checkAuth().catch(() => {});
+ *    }, []);
+ *
+ *    return <div>ok</div>;
+ * };
+ *
+ * const MyApp = () => {
+ *    const checkAuth = useCheckAuth();
+ *    const [authenticated, setAuthenticated] = useState(true);
+ *    useEffect(() => {
+ *        checkAuth({}, false).then() => setAuthenticated(true)).catch(() => setAuthenticated(false));
+ *    }, []);
+ *
+ *    return authenticated ? <div>ok</div> : <div>fail</div>;
+ * };
+ */
+const useCheckAuth = (): CheckAuth => {
     const authProvider = useAuthProvider();
     const logout = useLogout();
     const notify = useNotify();
 
     const checkAuth = useCallback(
-        (params = {}, logoutOnFailure = true, redirectTo = '/login') =>
+        (
+            params = {},
+            logoutOnFailure = true,
+            redirectTo = defaultAuthParams.loginUrl,
+            disableNotification = false
+        ) =>
             authProvider.checkAuth(params).catch(error => {
                 if (logoutOnFailure) {
                     logout(
@@ -49,17 +63,20 @@ const useCheckAuth = () => {
                             : redirectTo
                     );
 
-                    notify('登陆失效', 'error');
+                    const shouldSkipNotify =
+                        disableNotification ||
+                        (error && error.message === false);
+
+                    !shouldSkipNotify &&
+                        notify('prophet.auth.auth_check_error', 'warning');
                 }
 
                 throw error;
             }),
-        [authProvider, logout]
+        [authProvider, logout, notify]
     );
 
-    const checkAuthWithoutAuthProvider = useCallback(() => {
-        return Promise.resolve();
-    }, [history]);
+    const checkAuthWithoutAuthProvider = () => Promise.resolve();
 
     return authProvider ? checkAuth : checkAuthWithoutAuthProvider;
 };

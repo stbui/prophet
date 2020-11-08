@@ -1,5 +1,10 @@
 import React, { FunctionComponent, ComponentType } from 'react';
-import { CoreContext, CoreUI } from '@stbui/prophet-core';
+import {
+    CoreContext,
+    CoreUI,
+    AuthProvider,
+    I18nProvider,
+} from '@stbui/prophet-core';
 
 import { Layout, CatchAll, Login } from '@stbui/prophet-antd';
 import defaultMessages from '@stbui/prophet-language-chinese';
@@ -7,17 +12,17 @@ import polyglotI18nProvider from '@stbui/prophet-i18n-polyglot';
 
 interface Props {
     children?: any;
-    title?: any;
-    dashboard?: any;
+    title?: string;
+    dashboard?: ComponentType;
     menu?: ComponentType;
-    brand?: any;
-    login?: any;
+    brand?: ComponentType;
+    login?: ComponentType;
     layout?: any;
     catchAll?: any;
-    initialState?: any;
-    authProvider?: any;
+    initialState?: object;
+    authProvider?: AuthProvider;
     dataProvider?: any;
-    i18nProvider?: any;
+    i18nProvider?: I18nProvider;
     customRoutes?: any[];
     customSagas?: any;
     customReducers?: any;

@@ -7,15 +7,19 @@
 import { useEffect } from 'react';
 import useCheckAuth from './useCheckAuth';
 
-/*
-import { useAuthenticated } from '@stbui/prophet-core';
-
-const Page = () => {
-    useAuthenticated();
-    return <div>ok</div>
-}
-*/
-
+/**
+ *
+ * @param params
+ *
+ * @example
+ *
+ * import { useAuthenticated } from '@stbui/prophet-core';
+ *
+ * const MyApp = () => {
+ *   useAuthenticated();
+ *   return <div>ok</div>
+ * }
+ */
 const useAuthenticated = (params = {}) => {
     const checkAuth = useCheckAuth();
     useEffect(() => {

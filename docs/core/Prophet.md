@@ -1,6 +1,6 @@
 # Prophet
 
-通过 dataProvider 把传递过来的数据,分发给内部组件
+通过 dataProvider 把传递过来的数据,分发对应的组件
 
 ## 示例
 

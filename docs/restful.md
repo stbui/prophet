@@ -2,25 +2,25 @@
 
 ### 映射 RESTful 接口
 
-| 类型     | 方法   | url 示例                   | 说明                 |
-| :------- | :----- | :------------------------- | :------------------- |
-| GET_LIST | GET    | http://127.0.0.1/users     | 获取 users 列表      |
-| GET_ONE  | GET    | http://127.0.0.1/users/:id | 获取一个单独的 users |
-| CREATE   | POST   | http://127.0.0.1/users     | 创建一个新的 users   |
-| UPDATE   | PUT    | http://127.0.0.1/users/:id | 更新 users           |
-| DELETE   | DELETE | http://127.0.0.1/users/:id | 删除 users           |
+| 类型     | 方法   | url 示例                   | 说明            |
+| :------- | :----- | :------------------------- | :-------------- |
+| GET_LIST | GET    | http://127.0.0.1/users     | 获取 users 列表 |
+| GET_ONE  | GET    | http://127.0.0.1/users/:id | 获取一条 users  |
+| CREATE   | POST   | http://127.0.0.1/users     | 创建一新 users  |
+| UPDATE   | PUT    | http://127.0.0.1/users/:id | 更新一新 users  |
+| DELETE   | DELETE | http://127.0.0.1/users/:id | 删除一新 users  |
 
 ### request
 
-#### 分页
+##### 分页
 
 http://127.0.0.1/users?page=1&perPage=10
 
-#### 排序
+##### 排序
 
 http://127.0.0.1/users?sort={field: 'id', order: 'ASC'}
 
-#### 筛选
+##### 筛选
 
 http://127.0.0.1/users?fitler={"name":"stbui"}
 
@@ -30,9 +30,9 @@ GET http://127.0.0.1/users
 
 ```json
 {
-    "code": "0",
+    "code": "0", // 状态码
     "message": "操作成功",
-    "total": 100,
+    "total": 100, // 总条数
     "result": [
         {
             "id": 1 // 必要字段
@@ -44,7 +44,7 @@ GET http://127.0.0.1/users
 }
 ```
 
-GET http://127.0.0.1/users/:id
+GET http://127.0.0.1/users/1
 
 ```json
 {
@@ -68,7 +68,7 @@ POST http://127.0.0.1/users
 }
 ```
 
-PUT http://127.0.0.1/users/:id
+PUT http://127.0.0.1/users/1
 
 ```json
 {
@@ -80,7 +80,7 @@ PUT http://127.0.0.1/users/:id
 }
 ```
 
-DELETE http://127.0.0.1/users/:id
+DELETE http://127.0.0.1/users/1
 
 ```json
 {
@@ -114,6 +114,14 @@ DELETE http://127.0.0.1/users/:id
 {
     "code": "404",
     "message": "请求不存在",
+    "result": null
+}
+```
+
+```json
+{
+    "code": "401",
+    "message": "未授权",
     "result": null
 }
 ```

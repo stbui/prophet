@@ -5,15 +5,16 @@
  */
 
 import { createContext } from 'react';
+import { AuthProvider } from '../types';
 
-const defaultProvider = {
-    login: params => Promise.resolve(),
-    logout: params => Promise.resolve(),
-    checkAuth: params => Promise.resolve(),
-    checkError: params => Promise.resolve(),
-    getPermissions: params => Promise.resolve(),
+const defaultProvider: AuthProvider = {
+    login: () => Promise.resolve(),
+    logout: () => Promise.resolve(),
+    checkAuth: () => Promise.resolve(),
+    checkError: () => Promise.resolve(),
+    getPermissions: () => Promise.resolve(),
 };
 
-const AuthProviderContext = createContext(defaultProvider);
+const AuthProviderContext = createContext<AuthProvider>(defaultProvider);
 
 export default AuthProviderContext;

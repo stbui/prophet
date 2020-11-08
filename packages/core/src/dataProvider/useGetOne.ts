@@ -7,25 +7,7 @@
 import useQueryWithStore from './useQueryWithStore';
 import { GET_ONE, CRUD_GET_ONE } from '../actions';
 
-/* 
-import { useGetOne } from '@stbui/prophet-core';
-
-cconst UserProfile = record => {
-    const { data, loading, error } = useGetOne('users', record.id);
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div>{data.username}</div>;
-};
- */
-
-export interface UseQueryValue {
+export interface UseGetOneValue {
     data?: any;
     error?: any;
     loading?: boolean;
@@ -33,39 +15,40 @@ export interface UseQueryValue {
 }
 
 /**
- * 
- * @param {string} resource 
- * @param {string} id 
- * @param {Object} options 
+ * useGetOne
+ *
+ * @param {string} resource
+ * @param {string} id
+ * @param {Object} options
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
- * @returns
- * 
+ *
+ * @returns { data, error, loading, loaded }
+ *
  * @example
- * 
-import { useGetOne } from '@stbui/prophet-core';
-
-cconst UserProfile = record => {
-    const { data, loading, error } = useGetOne('users', record.id);
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div>{data.username}</div>;
-};
+ *
+ * import { useGetOne } from '@stbui/prophet-core';
+ *
+ * cconst UserProfile = record => {
+ *    const { data, loading, error } = useGetOne('users', record.id);
+ *
+ *    if (loading) {
+ *        return 'loading';
+ *    }
+ *
+ *    if (error) {
+ *       return error.message;
+ *   }
+ *
+ *   return <div>{data.username}</div>;
+ * };
  */
 export const useGetOne = (
     resource: string,
     id: string | number,
     options?: any
-): UseQueryValue =>
+): UseGetOneValue =>
     useQueryWithStore(
         {
             type: GET_ONE,

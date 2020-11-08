@@ -7,15 +7,33 @@
 import { useState, useEffect } from 'react';
 import useCheckAuth from './useCheckAuth';
 
-/*
-import { useAuthState } from '@stbui/prophet-core';
-const Page = () => {
-    const { authenticated } = useAuthState({ name: 'stbui' });
-    return authenticated ? <div>ok</div> : <div>fail</div>;
-};
-*/
+interface AuthState {
+    loading: boolean;
+    loaded: boolean;
+    authenticated?: boolean;
+}
 
-const useAuthState = (params = {}) => {
+/**
+ *
+ * @param params
+ *
+ * @example
+ *
+ * import { useAuthState } from '@stbui/prophet-core';
+ *
+ *
+ * const MyApp = () => {
+ *     const { loading, authenticated } = useAuthState();
+ *     if (loading) {
+ *         return <Loading />;
+ *     }
+ *     if (authenticated) {
+ *        return <div>authenticated</div>;
+ *     }
+ *     return <div></div>;
+ * };
+ */
+const useAuthState = (params = {}): AuthState => {
     const [state, setState] = useState({
         loading: true,
         loaded: false,

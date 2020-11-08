@@ -41,7 +41,7 @@ const defaultPagination = {
  *
  * @example
  *
- * const { page, setpage, perPage, setPerPage } = usePagination(initialPerPage);
+ * const { page, setPage, perPage, setPerPage } = usePaginationState();
  *
  */
 export default (

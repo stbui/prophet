@@ -4,6 +4,12 @@
  * https://github.com/stbui
  */
 
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { all } from 'redux-saga/effects';
 import fetch from './fetch';
 import notification from './notification';

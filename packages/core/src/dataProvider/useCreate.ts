@@ -7,25 +7,16 @@
 import { CREATE, CRUD_CREATE } from '../actions';
 import useMuation from './useMutation';
 
-/*
-import { useCreate } from '@stbui/prophet-core';
-
-const UserProfile = ({ record }) => {
-    const [create, { loading, error }] = useCreate('users', {
-        username: 'stbui',
-    });
-
-    if (error) {
-        return error.message;
+export type UseCreateValue = [
+    (query?: Partial<any>, options?: Partial<any>) => void,
+    {
+        data?: any;
+        total?: number;
+        error?: any;
+        loading?: boolean;
+        loaded?: boolean;
     }
-
-    return (
-        <div loading={loading} onClick={create}>
-            create
-        </div>
-    );
-};
-*/
+];
 
 /**
  *
@@ -39,8 +30,26 @@ const UserProfile = ({ record }) => {
  * @returns [create, { data, error, loading, loaded }]
  *
  * @example
+ * import { useCreate } from '@stbui/prophet-core';
+ *
+ * const UserProfile = ({ record }) => {
+ *    const [create, { loading, error }] = useCreate('users', {
+ *        username: 'stbui',
+ *    });
+ *
+ *   if (error) {
+ *       return error.message;
+ *   }
+ *
+ *   return <div loading={loading} onClick={create}>create</div>
+ * };
  */
-const useCreate = (resource: string, data: object = {}, options?: object) =>
+
+const useCreate = (
+    resource: string,
+    data: object = {},
+    options?: object
+): UseCreateValue =>
     useMuation(
         { type: CREATE, resource, payload: { data } },
         { ...options, action: CRUD_CREATE }

@@ -1,19 +1,21 @@
-# customRoutes 自定义路由
+# customReducer
 
-在有些场景中不要页面的基本骨架，可以通过自定义路由来实现
+接收用户自定义reducer。
 
 ## 示例
 
 ```js
-import { Prophet, Resource } from '@stbui/prophet-core';
+import { Prophet, Resource } from '@stbui/prophet';
 import dataJsonServer from 'prophet-data-json-server';
-import { Route } from 'react-router-dom';
+
+const customReducers = payload => ({
+    type: 'custom',
+    payload: payload,
+});
 
 <Prophet
     dataProvider={dataJsonServer('http://127.0.0.1:3001')}
-    customRoutes={[
-        <Route path="custom" component={<div>custom router</div>} />,
-    ]}
+    customReducers={{ customReducers }}
 >
     <Resource
         name="users"

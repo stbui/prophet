@@ -12,6 +12,19 @@ import { all, fork } from 'redux-saga/effects';
 import rootReducer from '../reducers';
 import { rootSaga } from '../sideEffect';
 
+import { AuthProvider, I18nProvider } from '../types';
+
+interface ConfigStore {
+    dataProvider: any;
+    history: any;
+    authProvider?: AuthProvider | null;
+    customReducers?: any;
+    customSagas?: any[];
+    i18nProvider?: I18nProvider;
+    initialState?: any;
+    locale?: string;
+}
+
 export default function CoreConfigStore({
     initialState,
     history,
@@ -19,7 +32,7 @@ export default function CoreConfigStore({
     authProvider = null,
     customSagas = [],
     customReducers = {},
-}: any) {
+}: ConfigStore) {
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [routerMiddleware(history), sagaMiddleware];
     const enhancers = [applyMiddleware(...middlewares)];

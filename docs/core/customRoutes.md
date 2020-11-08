@@ -10,8 +10,6 @@ import { Prophet, Resource } from '@stbui/prophet';
 import dataJsonServer from '@stbui/prophet-data-json-server';
 import { Route } from 'react-router-dom';
 
-import 'antd/dist/antd.css';
-
 const App = () => {
     return (
         <Prophet

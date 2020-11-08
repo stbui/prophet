@@ -1,6 +1,6 @@
 # Create
 
-创建一条记录组件。将要提交的数据传递给该组件，将会触发POST请求。
+通过 Create 包装过的组件，将赋予了创建一条数据的功能。将要提交的数据传递给该组件，将会触发 dataProvider 对应 CREATE 类型。
 
 ## 示例
 
@@ -14,14 +14,15 @@ const CreateView = props => {
     const onSubmit = params =>
         save(params, {
             onSuccess: ({ data }) => {
-                // 请求返回的数据
+                // 请求成功，返回的数据
                 console.log(data);
             },
             onFailure: error => {
-                // 请求出错
+                // 请求失败，返回的数据
                 console.log(error);
             },
-            // 创建成功后，会立即更新List数据
+            // 创建成功后，会立即更新List数据，
+            // 可以使用userRefresh()替代
             // refresh: true,
         });
 
@@ -37,8 +38,8 @@ export default props => (
 
 ## API
 
-| 属性     | 类型   | 默认值 | 可选值／参数 | 说明 |
-| :------- | :----- | :----- | :----------- | :--- |
-| resource | string |        |              |      |
-| basePath | string |        |              |      |
-| title    | string |        |              |      |
+| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                         |
+| :------- | :----- | :----- | :----------- | :--------------------------- |
+| resource | string | -      | 否           | 用于映射到对于接口 path      |
+| basePath | string | -      | 否           | 用于页面路由拼接，路由跳转等 |
+| title    | string |        |              |                              |

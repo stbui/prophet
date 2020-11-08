@@ -5,13 +5,13 @@
 ## 组件依赖关系
 
 ```
-Create -> CreateController -> useCreateController -> useCreate -> useMuation -> useDataProvider -> ajax
+CreateController -> useCreateController -> useCreate -> useMuation -> useDataProvider -> ajax
 ```
 
 ## 使用方法
 
 ```js
-import { Create } from '@stbui/prophet';
+import { Create } from '@stbui/prophet-core';
 
 const FormEdit = ({ save }) => {
     return <button onClick={() => save({ name: stbui })}>创建</button>;
@@ -26,10 +26,10 @@ export default props => (
 
 ## API
 
-| 属性     | 类型   | 默认值 | 可选值／参数 | 说明 |
-| :------- | :----- | :----- | :----------- | :--- |
-| resource | string |        | 是           |      |
-| basePath | string |        | 是           |      |
+| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                         |
+| :------- | :----- | :----- | :----------- | :--------------------------- |
+| resource | string | -      | 否           | 用于映射到对于接口 path      |
+| basePath | string | -      | 否           | 用于页面路由拼接，路由跳转等 |
 
 ## useCreateController 示例
 
@@ -130,15 +130,9 @@ const UserList = () => {
     useEffect(() => {
         dataProvider('GET_LIST', 'posts', { filter: { status: 1 } })
             .then(({ data }) => setUsers(data))
-            .catch(error => dispatch(showNotification('error', error.message)));
+            .catch(error => dispatch(showNotification(error.message, 'error')));
     }, []);
 
-    return (
-        <React.Fragment>
-            {users.map((user, key) => (
-                <UserDetail user={user} key={key} />
-            ))}
-        </React.Fragment>
-    );
+    return users.map((user, key) => <div key={key}>{user.name}</div>);
 };
 ```

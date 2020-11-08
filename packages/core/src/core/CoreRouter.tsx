@@ -18,7 +18,7 @@ import CoreRoutesWithLayout from './CoreRoutesWithLayout';
 import { useGetPermissions, useAuthState } from '../auth';
 
 export interface CoreRouterProps {
-    children: any;
+    children?: any;
     title?: string;
     dashboard?: ComponentType;
     menu?: ComponentType;

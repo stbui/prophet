@@ -20,14 +20,15 @@ export default props => {
 
 ## API
 
-| 属性                | 类型   | 默认值                         | 可选值／参数 | 说明 |
-| :------------------ | :----- | :----------------------------- | :----------- | :--- |
-| resource            | string |                                | 否           |      |
-| basePath            | string |                                | 否           |      |
-| perPage             | number | 10                             | 否           |      |
-| sort                | object | { field: 'id', order: 'ASC' } | 否           |      |
-| filter              | any    |                                | 否           |      |
-| filterDefaultValues | object |                                | 否           |      |
+| 属性                | 类型   | 默认值                        | 可选值／参数 | 说明                         |
+| :------------------ | :----- | :---------------------------- | :----------- | :--------------------------- |
+| resource            | string | -                             | 否           | 用于映射到对于接口 path      |
+| basePath            | string | -                             | 否           | 用于页面路由拼接，路由跳转等 |
+| page                | number | 1                             | 是           |                              |
+| perPage             | number | 10                            | 是           |                              |
+| sort                | object | { field: 'id', order: 'ASC' } | 是           |                              |
+| filter              | object |                               | 是           |                              |
+| filterDefaultValues | object |                               | 是           |                              |
 
 ## useListController 示例
 

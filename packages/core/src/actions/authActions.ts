@@ -8,27 +8,51 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGIN_LOADING = 'USER_LOGIN_LOADING';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
-export const USER_CHECK = 'USER_CHECK';
-export const USER_CHECK_SUCCESS = 'USER_CHECK_SUCCESS';
-export const USER_LOGOUT = 'USER_LOGOUT';
 
-export const AUTH_LOGIN = 'AUTH_LOGIN';
-export const AUTH_CHECK = 'AUTH_CHECK';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const AUTH_LOGOUT = 'AUTH_LOGOUT';
-export const AUTH_GET_PERMISSIONS = 'AUTH_GET_PERMISSIONS';
+export interface UserLoginAction {
+    readonly type: typeof USER_LOGIN;
+    readonly payload: object;
+    readonly meta: { auth: boolean; pathName: string };
+}
 
-export const userLogin = (payload: object) => ({
+export const userLogin = (
+    payload: object,
+    pathName: string
+): UserLoginAction => ({
     type: USER_LOGIN,
     payload,
-    meta: { auth: true },
+    meta: { auth: true, pathName },
 });
 
-export const userCheck = (payload: object) => ({
+export const USER_CHECK = 'USER_CHECK';
+export const USER_CHECK_SUCCESS = 'USER_CHECK_SUCCESS';
+
+export interface UserCheckAction {
+    readonly type: typeof USER_CHECK;
+    readonly payload: object;
+    readonly meta: { auth: boolean; pathName: string };
+}
+
+export const userCheck = (
+    payload: object,
+    pathName: string,
+    routeParams: object = {}
+) => ({
     type: USER_CHECK,
-    payload,
-    meta: { auth: true },
+    payload: {
+        ...payload,
+        routeParams,
+    },
+    meta: { auth: true, pathName },
 });
+
+export const USER_LOGOUT = 'USER_LOGOUT';
+
+export interface UserLogoutAction {
+    readonly type: typeof USER_LOGOUT;
+    readonly payload: { redirectTo?: string };
+    readonly meta: { auth: boolean };
+}
 
 export const userLogout = (redirectTo?: string) => ({
     type: USER_LOGOUT,

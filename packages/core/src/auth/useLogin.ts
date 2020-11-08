@@ -6,7 +6,9 @@
 
 import { useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import useAuthProvider from './useAuthProvider';
+import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
+
+type Login = (params: any, pathName?: string) => Promise<any>;
 
 /**
  *
@@ -24,24 +26,27 @@ import useAuthProvider from './useAuthProvider';
  *      return <button onclick={onClick}>login</buton>
  * }
  */
-
-const useLogin = () => {
+const useLogin = (): Login => {
     const authProvider = useAuthProvider();
     const history = useHistory();
     const location = useLocation();
     const nextPathName = location.state && location.state.nextPathname;
 
     const login = useCallback(
-        (params = {}, redirectTo = '/') =>
+        (params = {}, pathName) =>
             authProvider.login(params).then(res => {
-                history.push(nextPathName || redirectTo);
+                const redirectUrl = pathName
+                    ? pathName
+                    : nextPathName || defaultAuthParams.afterLoginUrl;
+                history.push(redirectUrl);
+
                 return res;
             }),
-        [authProvider, history]
+        [authProvider, history, nextPathName]
     );
 
     const loginWithoutProvider = useCallback(() => {
-        history.push('/');
+        history.push(defaultAuthParams.afterLoginUrl);
         return Promise.resolve();
     }, [history]);
 

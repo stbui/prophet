@@ -5,5 +5,5 @@
 ## 组件依赖关系
 
 ```
-useCreateController
+useCreateController -> useDelete -> useMuation -> useDataProvider -> ajax
 ```

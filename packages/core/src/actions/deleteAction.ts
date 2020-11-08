@@ -5,41 +5,62 @@
  */
 
 import { DELETE } from './dataFatchActions';
-import { DataAction } from './interfaces';
+import { DataAction } from '../types';
 
 export const CRUD_DELETE = 'CRUD_DELETE';
 export const CRUD_DELETE_LOADING = 'CRUD_DELETE_LOADING';
 export const CRUD_DELETE_SUCCESS = 'CRUD_DELETE_SUCCESS';
 export const CRUD_DELETE_FAILURE = 'CRUD_DELETE_FAILURE';
 
+interface RequestPayload {
+    id: string | number;
+    previousData: any;
+}
+export interface CrudDeleteAction {
+    readonly type: typeof CRUD_DELETE;
+    readonly payload: RequestPayload;
+    readonly meta: {
+        resource: string;
+        fetch: typeof DELETE;
+        onSuccess: {
+            notification: any;
+            redirectTo: any;
+            refresh: any;
+            basePath: string;
+        };
+        onFailure: {
+            notification: any;
+        };
+    };
+}
+
 export const crudDelete = (
     resource: string,
-    basePath: string,
     id: string | number,
-    data: any,
-    refresh: boolean = true,
-    callback?: any
-): DataAction => ({
+    previousData: any,
+    basePath: string,
+    redirectTo: string = 'list',
+    refresh: boolean = true
+): CrudDeleteAction => ({
     type: CRUD_DELETE,
-    payload: { id, data },
+    payload: { id, previousData },
     meta: {
         resource,
         fetch: DELETE,
         onSuccess: {
             notification: {
-                type: 'success',
-                message: '删除成功',
+                message: 'ra.notification.deleted',
+                type: 'info',
             },
             refresh,
+            redirectTo,
             basePath,
-            callback,
         },
-        onFail: {
+        onFailure: {
             notification: {
+                message: 'ra.notification.http_error',
                 type: 'warning',
-                message: '删除失败',
             },
-            callback,
         },
     },
 });

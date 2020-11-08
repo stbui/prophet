@@ -5,7 +5,6 @@
  */
 
 import { GET_LIST, GET_ONE } from './dataFatchActions';
-import { DataAction } from './interfaces';
 
 export const CRUD_GET_LIST = 'CRUD_GET_LIST';
 export const CRUD_GET_LIST_LOADING = 'CRUD_GET_LIST_LOADING';
@@ -17,55 +16,76 @@ export const CRUD_GET_ONE_LOADING = 'CRUD_GET_ONE_LOADING';
 export const CRUD_GET_ONE_SUCCESS = 'CRUD_GET_ONE_SUCCESS';
 export const CRUD_GET_ONE_FAILURE = 'CRUD_GET_ONE_FAILURE';
 
+interface RequestPayload {
+    pagination: any;
+    sort: any;
+    filter: object;
+}
+export interface CrudGetListAction {
+    readonly type: typeof CRUD_GET_LIST;
+    readonly payload: RequestPayload;
+    readonly meta: {
+        resource: string;
+        fetch: typeof GET_LIST;
+        onFailure: {
+            notification: any;
+        };
+    };
+}
+
 export const crudGetList = (
     resource: string,
-    pagination: object,
-    filter: object,
+    pagination: any,
     sort: any,
-    callback?: any
-): DataAction => ({
+    filter: object
+): CrudGetListAction => ({
     type: CRUD_GET_LIST,
-    payload: { pagination, sort, ...filter },
+    payload: { pagination, sort, filter },
     meta: {
         resource,
         fetch: GET_LIST,
-        onSuccess: {
-            callback,
-        },
         onFailure: {
             notification: {
                 type: 'warning',
-                message: '获取失败',
+                message: 'prophet.notification.http_error',
             },
-            callback,
         },
     },
 });
 
+export interface CrudGetOneAction {
+    readonly type: typeof CRUD_GET_ONE;
+    readonly payload: any;
+    readonly meta: {
+        resource: string;
+        fetch: typeof GET_ONE;
+        basePath: string;
+        onFailure: {
+            notification: any;
+            redirectTo: any;
+            refresh: any;
+        };
+    };
+}
 export const crudGetOne = (
     resource: string,
-    basePath: string,
     id: string | number,
-    refresh: boolean = false,
-    callback?: any
-): DataAction => ({
+    basePath: string,
+    refresh: boolean = true
+): CrudGetOneAction => ({
     type: CRUD_GET_ONE,
     payload: { id },
     meta: {
         resource,
         fetch: GET_ONE,
         basePath,
-        onSuccess: {
-            refresh,
-            callback,
-        },
         onFailure: {
             notification: {
                 type: 'warning',
-                message: '获取失败',
+                message: 'prophet.notification.item_doesnt_exist',
             },
+            redirectTo: 'list',
             refresh,
-            callback,
         },
     },
 });

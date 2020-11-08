@@ -9,27 +9,45 @@ import TranslationProviderContext from './TranslationProviderContext';
 import { useUpdateLoading } from '../loading';
 import { useNotify } from '../sideEffect';
 
+type SetLocale = (locale: String) => Promise<void>;
+
 /**
  *
  * @example
  *
- * import { useLocale } from '@stbui/prophet-core';
+ * import { useSetLocale } from '@stbui/prophet-core';
  *
+ * const availableLanguages = {
+ *     fr: 'China',
+ *     en: 'English',
+ * }
+ * const LanguageSwitcher = () => {
+ *     const setLocale = useSetLocale();
+ *     return (
+ *         <ul>{
+ *             Object.keys(availableLanguages).map(locale => {
+ *                  <li key={locale} onClick={() => setLocale(locale)}>
+ *                      {availableLanguages[locale]}
+ *                  </li>
+ *              })
+ *         }</ul>
+ *     );
+ * }
  */
-const useSetLocale = () => {
+const useSetLocale = (): SetLocale => {
     const { i18nProvider, setLocale } = useContext(TranslationProviderContext);
     const { startLoading, stopLoading } = useUpdateLoading();
     const notify = useNotify();
 
     const translate = useCallback(
-        locale =>
+        newLocale =>
             new Promise(resovle => {
                 startLoading();
-                resovle(i18nProvider.changeLocale(locale));
+                resovle(i18nProvider.changeLocale(newLocale));
             })
                 .then(() => {
                     stopLoading();
-                    setLocale(locale);
+                    setLocale(newLocale);
                 })
                 .catch(error => {
                     stopLoading();
@@ -39,7 +57,7 @@ const useSetLocale = () => {
         [i18nProvider, setLocale, notify, startLoading, stopLoading]
     );
 
-    return i18nProvider ? translate : Promise.resolve();
+    return translate;
 };
 
 export default useSetLocale;

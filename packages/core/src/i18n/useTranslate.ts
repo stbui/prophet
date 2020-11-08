@@ -6,24 +6,28 @@
 
 import { useContext, useCallback } from 'react';
 import TranslationProviderContext from './TranslationProviderContext';
+import { Translate } from '../types';
 
-/* 
-import { useTranslate } from '@stbui/prophet';
-const User = () => {
-    const translate = useTranslate();
-    return <div>{translate('name')}</div>;
-};
-*/
-
-const useTranslate = () => {
+/**
+ *
+ * @example
+ *
+ * import { useTranslate } from '@stbui/prophet-core';
+ *
+ * const SettingsMenu = () => {
+ *   const translate = useTranslate();
+ *   return <div>{translate('settings')}</div>;
+ * };
+ */
+const useTranslate = (): Translate => {
     const { i18nProvider, locale } = useContext(TranslationProviderContext);
 
     const translate = useCallback(
-        (key, options?) => i18nProvider.translate(key, options),
+        (key: string, options?) => i18nProvider.translate(key, options),
         [i18nProvider, locale]
     );
 
-    return i18nProvider ? translate : (key: any) => key;
+    return i18nProvider ? translate : (key: string) => key;
 };
 
 export default useTranslate;

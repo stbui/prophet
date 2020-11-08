@@ -73,4 +73,4 @@ export default props => (
 | sort                | object    | {field: 'id', order: 'ASC'} |              | 排序          |
 | page                | number    | 1                           |              | 当前页数      |
 | perPage             | number    | 10                          |              | 分页大小      |
-| actions             | component |                    |              | 过滤条件组件  |
+| actions             | component |                             |              | 过滤条件组件  |

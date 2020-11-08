@@ -9,6 +9,7 @@ import React, {
     cloneElement,
     createElement,
     FunctionComponent,
+    ComponentType,
 } from 'react';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -16,10 +17,10 @@ import { WithPermissions } from '../auth';
 
 export interface CoreRoutesWithLayoutProps {
     catchAll?: any;
-    children?: any;
-    customRoutes?: any;
-    dashboard?: any;
-    title?: any;
+    children?: ComponentType;
+    customRoutes?: any[];
+    dashboard?: ComponentType;
+    title?: string;
 }
 
 const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({

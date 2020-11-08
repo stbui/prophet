@@ -1,10 +1,21 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import removeKey from './removeKey';
 import removeEmpty from './removeEmpty';
-import pickBy from './pickBy';
 import getFetchedAt from './getFetchedAt';
 import downloadCSV from './downloadCSV';
-import debounce from './debounce';
+import resolveRedirectTo from './resolveRedirectTo';
+import linkToRecord from './linkToRecord';
 
-export { removeKey, removeEmpty, pickBy, getFetchedAt, downloadCSV, debounce };
-
-export * from './isEqual';
+export {
+    removeKey,
+    removeEmpty,
+    getFetchedAt,
+    downloadCSV,
+    resolveRedirectTo,
+    linkToRecord,
+};

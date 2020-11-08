@@ -22,7 +22,7 @@ export interface QueryOptions {
     [key: string]: any;
 }
 
-export interface UseQueryValue {
+export interface UseQueryStoreValue {
     data?: any;
     total?: number;
     error?: any;
@@ -91,7 +91,7 @@ const useQueryWithStore = (
     dataSelector: (state: any) => any = defaultDataSelector(query),
     // @ts-ignore
     totalSelector: (state: any) => number = defaultTotalSelector
-): UseQueryValue => {
+): UseQueryStoreValue => {
     const { type, resource, payload } = query;
     const data = useSelector(dataSelector);
     const total = useSelector(totalSelector);

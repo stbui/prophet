@@ -15,15 +15,18 @@ export interface WithPermissionsProps {
     [key: string]: any;
 }
 /**
+ *
+ * @example
+ *
  * import { WithPermissions } from 'prophet-core';
+ *
  * const View = ({ permissions }) => {
  *  return <div>{permissions === 'admin' ? <p>admin</p> : null}</div>
  * }
  * const Page = () => {
- *      return <WithPermissions authParams={{ name: 'stbui' }} render={({ permissions, ...props }) => <View permissions={permissions} {...props} />}></WithPermissions>
+ *      return <WithPermissions authParams={{ name: 'stbui' }} component={<View permissions={permissions} />}></WithPermissions>
  * }
  */
-
 const WithPermissions: FunctionComponent<WithPermissionsProps> = ({
     authParams,
     component,

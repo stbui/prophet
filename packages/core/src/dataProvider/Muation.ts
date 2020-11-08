@@ -7,31 +7,6 @@
 import { FunctionComponent } from 'react';
 import useMutation from './useMutation';
 
-/*
-import { Mutation, UPDATE } from 'prophet-core';
-
-const UserProfile = ({ record }) => (
-    <Mutation
-        type={UPDATE}
-        resource="users"
-        payload={{ id: record.id, data: { username: 'stbui' } }}
-    >
-        {([update, { data, loading, error }]) => {
-            if (loading) {
-                return 'loading';
-            }
-
-            if (error) {
-                return error.message;
-            }
-
-
-            return <div onClick={update}>{data.username}</div>;
-        }}
-    </Mutation>
-);
- */
-
 interface ChildrenFuncParams {
     data?: any;
     total?: number;
@@ -40,8 +15,11 @@ interface ChildrenFuncParams {
     error?: any;
 }
 
-export interface Props {
-    children: any;
+export interface MutationProps {
+    children: (
+        mutate: (callTimeQuery, callTimeOptions) => void,
+        params: ChildrenFuncParams
+    ) => JSX.Element;
     type: string;
     resource: string;
     payload?: any;
@@ -60,13 +38,29 @@ export interface Props {
  * @param {Function} options.onFailure
  *
  * @example
+ *
+ * import { Mutation, UPDATE } from 'prophet-core';
+ *
+ * const UserProfile = ({ record }) => (
+ *     <Mutation
+ *         type={UPDATE}
+ *         resource="users"
+ *         payload={{ id: record.id, data: { username: 'stbui' } }}>
+ *         {([update, { data, loading, error }]) => {
+ *              if (loading) { return 'loading'; }
+ *              if (error) { return error.message; }
+ *
+ *              return <div onClick={update}>{data.username}</div>;
+ *         }}
+ *     </Mutation>
+ * );
  */
-export const Mutation: FunctionComponent<Props> = ({
+export const Mutation: FunctionComponent<MutationProps> = ({
     children,
     type,
     resource,
     payload,
     options,
-}) => children(useMutation({ type, resource, payload }, options));
+}) => children(...useMutation({ type, resource, payload }, options));
 
 export default Mutation;

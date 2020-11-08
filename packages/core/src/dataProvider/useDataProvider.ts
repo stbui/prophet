@@ -11,6 +11,13 @@ import DataProviderContext from './DataProviderContext';
 import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
 import { canReplyWithCache, answerWithCache } from './replyWithCache';
 
+export type UseDataProviderValue = (
+    type: string,
+    resource: string,
+    params: any,
+    options?: any
+) => Promise<{ data?: any; total?: any; error?: any }>;
+
 const performQuery = ({
     type,
     dataProvider,
@@ -159,7 +166,7 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
  *             { user.id }
  *         </React.Fragment>
  */
-export const useDataProvider = () => {
+export const useDataProvider = (): UseDataProviderValue => {
     const dispatch = useDispatch();
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 

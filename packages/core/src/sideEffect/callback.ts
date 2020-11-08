@@ -18,6 +18,6 @@ function* handleCallback({
 export const takeCallbackActions = action =>
     action.meta && action.meta.callback;
 
-export default function*() {
+export default function* () {
     yield takeEvery(takeCallbackActions, handleCallback);
 }

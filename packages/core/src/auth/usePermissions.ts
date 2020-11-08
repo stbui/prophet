@@ -7,19 +7,29 @@
 import { useState, useEffect } from 'react';
 import useGetPermissions from './useGetPermissions';
 
-/*
-import { usePermissions } from '@stbui/prophet-core';
-const Page = () => {
-    const { loaded, permissions } = usePermissions();
-    if (loaded && permissions === 'editor') {
-        return <div>eidtor</div>;
-    } else {
-        return <div>show</div>;
-    }
-};
-*/
-
-const usePermissions = (params = {}) => {
+interface Permissions {
+    loading: boolean;
+    loaded: boolean;
+    [key: string]: any;
+}
+/**
+ *
+ * @param params
+ *
+ * @example
+ *
+ * import { usePermissions } from '@stbui/prophet-core';
+ *
+ * const MyApp = () => {
+ *    const { loaded, permissions } = usePermissions();
+ *    if (loaded && permissions === 'editor') {
+ *        return <div>eidtor</div>;
+ *    } else {
+ *        return <div>show</div>;
+ *    }
+ * };
+ */
+const usePermissions = (params = {}): Permissions => {
     const [state, setState] = useState<any>({
         loading: true,
         loaded: false,

@@ -8,8 +8,53 @@ export interface Sort {
     order: string;
 }
 
-export interface Filter {
+export interface FilterPayload {
     [k: string]: any;
 }
 
+export interface DataAction {
+    readonly type: any;
+    readonly payload: object;
+    readonly meta: object;
+}
+
+export interface ResourceDefinition {
+    readonly name: string;
+    readonly label?: string;
+    readonly hasList?: boolean;
+    readonly hasEdit?: boolean;
+    readonly hasShow?: boolean;
+    readonly hasCreate?: boolean;
+}
+
+/**
+ * Redux
+ */
+
 export interface ReduxState {}
+
+/**
+ * i18nProvider
+ */
+
+export type Translate = (key: string, options?: any) => string;
+
+export type I18nProvider = {
+    translate: Translate;
+    changeLocale: (locale: string, options?: any) => Promise<void>;
+    getLocale: () => string;
+    [key: string]: any;
+};
+
+/**
+ * authProvider
+ */
+
+export type AuthProvider = {
+    login: (params: any) => Promise<any>;
+    logout: (params: any) => Promise<void | false | string>;
+    checkAuth: (params: any) => Promise<void>;
+    checkError: (error: any) => Promise<void>;
+    getPermissions: (params: any) => Promise<any>;
+    [key: string]: any;
+};

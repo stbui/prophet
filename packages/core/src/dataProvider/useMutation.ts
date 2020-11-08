@@ -19,7 +19,7 @@ export interface QueryOptions {
     onFailure?: (error?: any) => any | Object;
 }
 
-export type UseQueryValue = [
+export type UseMutationValue = [
     (query?: Partial<any>, options?: Partial<any>) => void,
     {
         data?: any;
@@ -32,61 +32,60 @@ export type UseQueryValue = [
 
 /**
  * 更新数据
- * 
- * @param query 
- * @param options 
+ *
+ * @param query
+ * @param options
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
- * 
+ *
  * @returns
- * 
+ *
  * @example
-
-import { useMutation } from '@stbui/prophet-core';
-
-const UserProfile = record => {
-    const [update, { data, loading, error }] = useMutation({
-        type: 'UPDATE',
-        resource: 'users',
-        payload: { id: record.id, data: { username: 'stbui' } },
-    });
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div onClick={update}>{data.username}</div>;
-};
-
-const UserProfile = record => {
-    const [update, { data, loading, error }] = useMutation({
-        type: 'UPDATE',
-        resource: 'users',
-        payload: { id: record.id, data: { username: 'stbui' } },
-    });
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return (
-        <div onClick={() => update(null, { data: { updateAt: new Date() } })}>
-            {data.username}
-        </div>
-    );
-};
+ *
+ * import { useMutation } from '@stbui/prophet-core';
+ *
+ * const UserProfile = record => {
+ *     const [update, { data, loading, error }] = useMutation({
+ *         type: 'UPDATE',
+ *         resource: 'users',
+ *         payload: { id: record.id, data: { username: 'stbui' } },
+ *     });
+ *
+ *     if (loading) {
+ *         return 'loading';
+ *     }
+ *
+ *     if (error) {
+ *         return error.message;
+ *     }
+ *
+ *     return <div onClick={update}>{data.username}</div>;
+ * };
+ *
+ * const UserProfile = record => {
+ *     const [update, { data, loading, error }] = useMutation({
+ *         type: 'UPDATE',
+ *         resource: 'users',
+ *         payload: { id: record.id, data: { username: 'stbui' } },
+ *     });
+ *
+ *     if (loading) {
+ *         return 'loading';
+ *     }
+ *
+ *     if (error) {
+ *         return error.message;
+ *     }
+ *
+ *     return (
+ *         <div onClick={() => update(null, { data: { updateAt: new Date() } })}>
+ *             {data.username}
+ *         </div>
+ *     );
+ * };
  */
-
-const useMutation = (query: Query, options: QueryOptions): UseQueryValue => {
+const useMutation = (query: Query, options: QueryOptions): UseMutationValue => {
     const { type, resource, payload } = query;
     const [state, setState]: any = useState({
         data: null,
@@ -111,7 +110,7 @@ const useMutation = (query: Query, options: QueryOptions): UseQueryValue => {
                     ...callTimeOptions,
                 }
             )
-                .then(({ data, total }: any) => {
+                .then(({ data, total }) => {
                     setState({
                         data,
                         total,

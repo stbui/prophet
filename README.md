@@ -1,8 +1,8 @@
 # 先知（Prophet）
 
-[![React](https://img.shields.io/badge/react-16.10.2-brightgreen.svg?style=square)](https://github.com/facebook/react)
-[![redux](https://img.shields.io/badge/redux-4.0.4-brightgreen.svg?style=square)](https://github.com/facebook/react)
-[![antd](https://img.shields.io/badge/antd-3.23.6-brightgreen.svg?style=square)](https://github.com/facebook/react)
+[![React](https://img.shields.io/badge/react-16.13.0-brightgreen.svg?style=square)](https://github.com/facebook/react)
+[![redux](https://img.shields.io/badge/redux-4.0.5-brightgreen.svg?style=square)](https://github.com/facebook/react)
+[![antd](https://img.shields.io/badge/antd-3.26.13-brightgreen.svg?style=square)](https://github.com/facebook/react)
 [![Downloads](https://img.shields.io/npm/dm/@stbui/prophet.svg)](https://npmcharts.com/compare/@stbui/prophet?minimal=true)
 [![npm](https://img.shields.io/badge/npm-1.1.0-green.svg?style=flat)](https://github.com/stbui/prophet)
 [![Powered_by](https://img.shields.io/badge/Powered_by-stbui-green.svg?style=flat)](https://github.com/stbui/prophet)

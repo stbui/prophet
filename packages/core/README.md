@@ -7,7 +7,7 @@ npm install @stbui/prophet@latest @stbui/prophet-data-json-server@latest
 ```
 
 ```js
-import { Prophet, Resource } from '@stbui/prophet-core';
+import { Prophet, Resource } from '@stbui/prophet';
 import dataJsonServer from '@stbui/prophet-data-json-server';
 
 <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>

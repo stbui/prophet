@@ -5,21 +5,38 @@
  */
 
 import { CREATE } from './dataFatchActions';
-import { DataAction } from './interfaces';
 
 export const CRUD_CREATE = 'CRUD_CREATE';
 export const CRUD_CREATE_LOADING = 'CRUD_CREATE_LOADING';
 export const CRUD_CREATE_SUCCESS = 'CRUD_CREATE_SUCCESS';
 export const CRUD_CREATE_FAILURE = 'CRUD_CREATE_FAILURE';
 
+interface RequestPayload {
+    data: any;
+}
+export interface CrudCreateAction {
+    readonly type: typeof CRUD_CREATE;
+    readonly payload: RequestPayload;
+    readonly meta: {
+        resource: string;
+        fetch: typeof CREATE;
+        onSuccess: {
+            notification: any;
+            redirectTo: any;
+            basePath: string;
+        };
+        onFailure: {
+            notification: any;
+        };
+    };
+}
+
 export const crudCreate = (
     resource: string,
-    basePath: string,
     data: any,
-    redirectTo: string,
-    refresh: boolean = false,
-    callback?: any
-): DataAction => ({
+    basePath: string,
+    redirectTo: string = 'edit'
+): CrudCreateAction => ({
     type: CRUD_CREATE,
     payload: { data },
     meta: {
@@ -27,22 +44,17 @@ export const crudCreate = (
         fetch: CREATE,
         onSuccess: {
             notification: {
+                message: 'prophet.notification.created',
                 type: 'success',
-                message: '创建成功',
-                // description: ''
             },
             redirectTo,
             basePath,
-            refresh,
-            callback,
         },
         onFailure: {
             notification: {
                 type: 'warning',
-                message: '创建失败',
-                // description: ''
+                message: 'prophet.notification.http_error',
             },
-            callback,
         },
     },
 });

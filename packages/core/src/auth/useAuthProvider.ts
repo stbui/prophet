@@ -6,7 +6,13 @@
 
 import { useContext } from 'react';
 import AuthProviderContext from './AuthProviderContext';
+import { AuthProvider } from '../types';
 
-const useAuthProvider = () => useContext(AuthProviderContext);
+export const defaultAuthParams = {
+    loginUrl: '/login',
+    afterLoginUrl: '/',
+};
+
+const useAuthProvider = (): AuthProvider => useContext(AuthProviderContext);
 
 export default useAuthProvider;

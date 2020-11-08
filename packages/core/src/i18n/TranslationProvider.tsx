@@ -17,9 +17,22 @@ import TranslationProviderContext from './TranslationProviderContext';
 interface Props {
     locale?: string;
     i18nProvider: any;
-    children: ReactElement<any>;
 }
 
+/**
+ *
+ * @param props.locale 默认zh
+ * @param props.i18nProvider
+ *
+ * @example
+ *
+ * import { TranslationProvider } from '@stbui/prophet-core';
+ *
+ * const View = () => <div></div>
+ *
+ * const MyApp = () => <TranslationProvider i18nProvider={i18nProvider}><View />/TranslationProvider>
+ *
+ */
 const TranslationProvider: FunctionComponent<Props> = props => {
     const { i18nProvider, children } = props;
 
@@ -29,12 +42,9 @@ const TranslationProvider: FunctionComponent<Props> = props => {
     });
 
     const setLocale = useCallback(
-        (locale: string) =>
-            setState({
-                locale: locale,
-                i18nProvider,
-            }),
-        [i18nProvider, setState]
+        (newLocale: string) =>
+            setState(state => ({ ...state, locale: newLocale })),
+        [setState]
     );
 
     const value = useMemo(

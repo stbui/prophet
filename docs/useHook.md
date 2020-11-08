@@ -1,6 +1,6 @@
 # useHook
 
-### useCreateController 创建新数据组件
+### useCreateController 创建一条数据组件
 
 ### uesDeleteController 删除一条数据组件
 

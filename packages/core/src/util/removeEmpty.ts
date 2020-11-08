@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 const isObject = obj =>
     obj && Object.prototype.toString.call(obj) === '[object Object]';
 

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { put, takeEvery } from 'redux-saga/effects';
 import { refreshView } from '../actions';
 
@@ -7,6 +13,6 @@ function* handleRefresh() {
 
 export const takeRefreshActions = action => action.meta && action.meta.refresh;
 
-export default function*() {
+export default function* () {
     yield takeEvery(takeRefreshActions, handleRefresh);
 }

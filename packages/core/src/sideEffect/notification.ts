@@ -1,7 +1,13 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { takeEvery, put } from 'redux-saga/effects';
 import { showNotification } from '../actions';
 
-interface NotificationSideEffect {
+export interface NotificationSideEffect {
     type: 'info' | 'error' | 'success' | 'warning';
     message: string;
     description: string;
@@ -22,12 +28,12 @@ export function* handleNotification({
     if (error) {
     }
 
-    yield put(showNotification(type, message, description));
+    yield put(showNotification(message, type, description));
 }
 
 export const takeNotificationAction = action =>
     action.meta && action.meta.notification;
 
-export default function*() {
+export default function* () {
     yield takeEvery(takeNotificationAction, handleNotification);
 }

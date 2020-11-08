@@ -6,15 +6,18 @@
 
 import { useState, useCallback } from 'react';
 import debounce from 'lodash/debounce';
-import isEqual from 'lodash/isEqual';
-import { Filter } from '../types';
+import { FilterPayload } from '../types';
 
-export interface FilterProps {
-    filter: Filter;
-    setFilter: (v: string) => void;
+export interface UseFilterStateOptions {
+    filterToQuery?: (v: string) => FilterPayload;
+    permanentFilter?: FilterPayload;
+    debounceTime?: number;
 }
 
-let timer;
+export interface FilterProps {
+    filter: FilterPayload;
+    setFilter: (v: string) => void;
+}
 
 /**
  * Filter
@@ -28,7 +31,7 @@ let timer;
  * @example
  *
  * const { filter, setFilter } = useFilterState({
- *      fieldfilterToQuery: v => ({ query: v }),
+ *      filterToQuery: v => ({ query: v }),
  *      permanentFilter: { name: 'stbui' },
  *      debounceTime: 500,
  * });
@@ -51,7 +54,7 @@ export default ({
                 ...filterToQuery(value),
             });
         }, debounceTime),
-        []
+        [JSON.stringify(permanentFilter)]
     );
 
     return { filter, setFilter };

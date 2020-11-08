@@ -8,31 +8,8 @@ import { useSelector, shallowEqual } from 'react-redux';
 import useQueryWithStore from './useQueryWithStore';
 import { GET_LIST, CRUD_GET_LIST } from '../actions';
 import { Pagination, Sort } from '../types';
-/* 
-import { useGetList } from '@stbui/prophet-core';
 
-const UserList = () => {
-    const { data, ids, loading, error } = useGetList(
-        'users',
-        { page: 1, perPage: 10 },
-        { username: 'stbui' },
-        { field: 'id', order: 'DESC' }
-    );
-
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-
-    return <div>{ids.map(id => data[id].username)}</div>;
-};
- */
-
-export interface UseQueryValue {
+export interface UseGetListValue {
     data?: any;
     total?: number;
     error?: any;
@@ -42,6 +19,7 @@ export interface UseQueryValue {
 }
 
 /**
+ * useGetList
  *
  * @param {string} resource
  * @param {Object} pagination
@@ -52,9 +30,25 @@ export interface UseQueryValue {
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure
  *
- * @returns
+ * @returns { data, ids, total, loading, loaded, error }
  *
  * @example
+ *
+ * import { useGetList } from '@stbui/prophet-core';
+ *
+ * const UserList = () => {
+ *     const { data, ids, loading, error } = useGetList(
+ *         'users',
+ *         { page: 1, perPage: 10 },
+ *         { username: 'stbui' },
+ *         { field: 'id', order: 'DESC' }
+ *     );
+ *
+ *     if (loading) { return 'loading'; }
+ *     if (error) { return error.message; }
+ *
+ *     return <div>{ids.map(id => data[id].username)}</div>;
+ * };
  */
 export const useGetList = (
     resource: string,
@@ -62,7 +56,7 @@ export const useGetList = (
     filter: Object,
     sort: Sort,
     options?: object
-): UseQueryValue => {
+): UseGetListValue => {
     const { data: ids, total, loading, loaded, error } = useQueryWithStore(
         {
             type: GET_LIST,

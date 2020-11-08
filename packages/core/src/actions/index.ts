@@ -15,5 +15,4 @@ export * from './fetchActions';
 export * from './notifications';
 export * from './refreshAction';
 export * from './authActions';
-
-export * from './interfaces';
+export * from './clearActions';

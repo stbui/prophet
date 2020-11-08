@@ -8,23 +8,6 @@ import { useCallback } from 'react';
 import { useMutation, useQuery } from '../dataProvider';
 import { GET_ONE, UPDATE } from '../actions';
 
-/**
-import { useEdit } from '@atbui/prophet-core';
-
-const UserEdit = () => {
-    const { record, loading, save, isSaving } = useEdit({ resource, id payload: { data: { userId:1 } } });
-    if (loading) {
-        return 'loading';
-    }
-
-    if (error) {
-        return error.message;
-    }
-
-    return <div onclick={save}>{record.username}</div>;
-}
- */
-
 export interface EditProps {
     resource: string;
     id: string | number;
@@ -50,6 +33,21 @@ export interface UseEditValue {
  * @returns
  *
  * @example
+ *
+ * import { useEdit } from '@atbui/prophet-core';
+ *
+ * const UserEdit = () => {
+ *   const { record, loading, save, isSaving } = useEdit({ resource, id payload: { data: { userId:1 } } });
+ *   if (loading) {
+ *       return 'loading';
+ *   }
+ *
+ *   if (error) {
+ *       return error.message;
+ *   }
+ *
+ *   return <div onclick={save}>{record.username}</div>;
+ * }
  */
 export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
     const { data: record, loading, error } = useQuery({
@@ -68,9 +66,8 @@ export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
     );
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
-            // @ts-ignore
-            update({ data }, { onSuccess, onFailure, refresh }),
+        (data: any, { onSuccess, onFailure, refresh } = {}) =>
+            update({ payload: { data } }, { onSuccess, onFailure, refresh }),
         [resource, update]
     );
 

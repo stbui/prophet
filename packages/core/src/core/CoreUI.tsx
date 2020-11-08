@@ -13,7 +13,7 @@ export interface CoreUIProps {
     dashboard?: ComponentType;
     layout: ComponentType;
     loginPage?: ComponentType<any>;
-    catchAll: any;
+    catchAll: ComponentType<any>;
     menu?: ComponentType;
     brand?: ComponentType;
     customRoutes?: any[];

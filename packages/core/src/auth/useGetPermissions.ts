@@ -7,25 +7,33 @@
 import { useCallback } from 'react';
 import useAuthProvider from './useAuthProvider';
 
-/*
-import { useEffect,useState } from 'react';
-import { useGetPermissions } from '@stbui/prophet-core';
-import View from './View';
+type GetPermissions = (params?: any) => Promise<any>;
 
-const Page = () => {
-    const [permissions, setPermissions] = useState([]);
-    const getPermissions = useGetPermissions();
-    useEffect(() => {
-        getPermissions().then(permissions => setPermissions(permissions))
-    }, []);
-
-    return <div>{
-        permissions.map((permission, key) => (<div key={key}>{permission}</div>))
-    }</div>;
-};
-*/
-
-const useGetPermissions = (): any => {
+/**
+ *
+ * @example
+ *
+ * import { useEffect, useState } from 'react';
+ * import { useGetPermissions } from '@stbui/prophet-core';
+ *
+ * const Roles = () => {
+ *     const [permissions, setPermissions] = useState([]);
+ *     const getPermissions = useGetPermissions();
+ *
+ *     useEffect(() => {
+ *         getPermissions().then(permissions => setPermissions(permissions))
+ *     }, [])
+ *
+ *     return (
+ *         <ul>
+ *             {permissions.map((permission, key) => (
+ *                 <li key={key}>{permission}</li>
+ *             ))}
+ *         </ul>
+ *     );
+ * }
+ */
+const useGetPermissions = (): GetPermissions => {
     const authProvider = useAuthProvider();
 
     const getPermissions = useCallback(

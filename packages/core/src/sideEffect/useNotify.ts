@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { showNotification } from '../actions';
@@ -17,8 +23,8 @@ const useNotify = () => {
     const dispatch = useDispatch();
 
     return useCallback(
-        (message, type = 'info', description?, duration?) =>
-            dispatch(showNotification(type, message, description, duration)),
+        (message: string, type = 'info', options?) =>
+            dispatch(showNotification(message, type, options)),
         [dispatch]
     );
 };

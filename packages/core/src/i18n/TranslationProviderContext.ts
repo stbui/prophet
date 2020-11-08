@@ -5,24 +5,25 @@
  */
 
 import { createContext } from 'react';
+import { I18nProvider } from '../types';
 
 interface TranslationProviderContextProps {
     locale: string;
-    setLocale: (locale: string) => Promise<void>;
-    i18nProvider: any;
+    setLocale: (locale: string) => void;
+    i18nProvider: I18nProvider;
 }
 
 const defaultProvider = {
     locale: 'zh',
-    setLocale: (locale: string) => Promise.resolve(),
+    setLocale: () => {},
     i18nProvider: {
-        translate: (x, options?) => x,
-        changeLocale: (locale: string, options?: any) => Promise.resolve(),
-        getTranslate: () => 'zh',
+        translate: x => x,
+        changeLocale: () => Promise.resolve(),
+        getLocale: () => 'zh',
     },
 };
 
-const TranslationProviderContext: any = createContext<
+const TranslationProviderContext = createContext<
     TranslationProviderContextProps
 >(defaultProvider);
 

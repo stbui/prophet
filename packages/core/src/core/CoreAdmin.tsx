@@ -7,6 +7,7 @@
 import React, { FunctionComponent, ComponentType } from 'react';
 import CoreContext from './CoreContext';
 import CoreUI from './CoreUI';
+import { AuthProvider, I18nProvider } from '../types';
 
 export interface CoreAdminProps {
     dashboard?: ComponentType;
@@ -15,13 +16,13 @@ export interface CoreAdminProps {
     login?: ComponentType;
     layout: ComponentType;
     catchAll?: any;
-    initialState?: any;
-    authProvider?: any;
+    initialState?: object;
+    authProvider?: AuthProvider;
     dataProvider: any;
-    i18nProvider?: any;
-    customRoutes?: any;
-    customSagas?: any;
-    customReducers?: any;
+    i18nProvider?: I18nProvider;
+    customRoutes?: any[];
+    customSagas?: any[];
+    customReducers?: object;
     history?: any;
     title?: string;
 }

@@ -15,8 +15,8 @@ interface ChildrenFuncParams {
     error?: any;
 }
 
-export interface Props {
-    children(props: ChildrenFuncParams): JSX.Element;
+export interface QueryValue {
+    children: (props: ChildrenFuncParams) => JSX.Element;
     type: string;
     resource: string;
     payload?: any;
@@ -35,47 +35,44 @@ export interface Props {
  * @param {Function} options.onFailure
  *
  * @example
+ * import { Query } from 'prophet-core';
+ *
+ * const UserProfile = ({ record }) => (
+ *   <Query type="GET_ONE" resource="users" payload={{ id: record.id }}>
+ *       {({ data, loading, error }) => {
+ *           if (loading) {
+ *               return 'loading';
+ *           }
+ *
+ *           if (error) {
+ *               return error.message;
+ *           }
+ *
+ *           return <div>{data.username}</div>;
+ *       }}
+ *   </Query>
+ * );
+ *
+ * const payload = {
+ *   pagination: { page: 1, perPage: 10 },
+ *   sort: { field: 'username', order: 'ASC' },
+ * };
+ * const UserList = () => (
+ *   <Query type="GET_LIST" resource="users" payload={payload}>
+ *       {({ data, total, loading, error }) => {
+ *           if (loading) {
+ *               return <Loading />;
+ *           }
+ *           if (error) {
+ *               return <Error />;
+ *           }
+ *
+ *           return <div>total:{total},{data.map(user => user.username)}</div>;
+ *       }}
+ *   </Query>
+ * );
  */
-/* 
-import { Query } from 'prophet-core';
-
-const UserProfile = ({ record }) => (
-    <Query type="GET_ONE" resource="users" payload={{ id: record.id }}>
-        {({ data, loading, error }) => {
-            if (loading) {
-                return 'loading';
-            }
-
-            if (error) {
-                return error.message;
-            }
-
-
-            return <div>{data.username}</div>;
-        }}
-    </Query>
-);
-
-const payload = {
-    pagination: { page: 1, perPage: 10 },
-    sort: { field: 'username', order: 'ASC' },
-};
-const UserList = () => (
-    <Query type="GET_LIST" resource="users" payload={payload}>
-        {({ data, total, loading, error }) => {
-            if (loading) {
-                return <Loading />;
-            }
-            if (error) {
-                return <Error />;
-            }
-
-            return <div>total:{total},{data.map(user => user.username)}</div>;
-        }}
-    </Query>
-);
- */
-const Query: FunctionComponent<Props> = ({
+const Query: FunctionComponent<QueryValue> = ({
     children,
     type,
     resource,

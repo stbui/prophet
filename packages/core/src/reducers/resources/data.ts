@@ -94,6 +94,14 @@ export const addRecords = (
     return newRecordsById;
 };
 
+/**
+ * 直接替换成的数据
+ * @param newRecord
+ * @param oldRecords
+ * @param date
+ *
+ * @returns {object}
+ */
 export const addOneRecord = (
     newRecord: Record,
     oldRecords: RecordSetWithDate,

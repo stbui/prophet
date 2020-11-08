@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 const removeKey = (target, path) =>
     Object.keys(target).reduce((acc, key) => {
         if (key !== path) {

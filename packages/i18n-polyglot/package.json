@@ -12,6 +12,7 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "dependencies": {
+        "@stbui/prophet-core": "2.1.2",
         "node-polyglot": "^2.4.0"
     },
     "devDependencies": {
