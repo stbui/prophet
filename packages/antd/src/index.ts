@@ -7,5 +7,4 @@ export * from './edit';
 export * from './show';
 export * from './auth';
 export * from './field';
-export * from './form';
 export * from './button';

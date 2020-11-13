@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { Layout, Menu, Dropdown } from 'antd';
 import { useLogout } from '@stbui/prophet-core';
 
 export const Header = ({ brand }) => {
@@ -25,7 +25,7 @@ export const Header = ({ brand }) => {
                     className="ant-dropdown-link"
                     style={{ paddingRight: 20, color: '#fff' }}
                 >
-                    我的用户 <Icon type="down" />
+                    我的用户
                 </div>
             </Dropdown>
         </Layout.Header>

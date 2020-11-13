@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getResources } from '@stbui/prophet-core';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { Link } from '../Link';
 
 export const CustomMenu = props => {
@@ -23,7 +23,6 @@ export const CustomMenu = props => {
                 return (
                     <Menu.Item key={`/${resource.name}`}>
                         <Link to={`/${resource.name}`}>
-                            {resource.icon && <Icon type={resource.icon} />}
                             {resource.label ? resource.label : resource.name}
                         </Link>
                     </Menu.Item>

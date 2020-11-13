@@ -17,17 +17,13 @@ export const ListActions: FunctionComponent<Props> = ({
     hasCreate,
     filterValues,
     setFilters,
-    form: { getFieldDecorator, validateFields },
     field,
 }) => {
     const translate = useTranslate();
 
-    const handleSearch = () =>
-        validateFields((err, values) => {
-            if (!err) {
-                setFilters(values);
-            }
-        });
+    const onFinish = values => {
+        setFilters(values);
+    };
 
     const handleInputChange = ({ target: { value } }) => {
         if (value === '') {
@@ -39,21 +35,17 @@ export const ListActions: FunctionComponent<Props> = ({
         <div
             style={{ display: 'flex', alignItems: 'center', marginBottom: 24 }}
         >
-            <Form layout="inline">
-                <Form.Item>
-                    {getFieldDecorator(field, {
-                        initialValue: filterValues[field],
-                    })(
-                        <Input
-                            placeholder="请输入"
-                            style={{ width: 300 }}
-                            allowClear
-                            onChange={handleInputChange}
-                        />
-                    )}
+            <Form onFinish={onFinish} layout="inline">
+                <Form.Item name={field} initialValue={filterValues[field]}>
+                    <Input
+                        placeholder="请输入"
+                        style={{ width: 300 }}
+                        allowClear
+                        onChange={handleInputChange}
+                    />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" onClick={handleSearch}>
+                    <Button type="primary" htmlType="submit">
                         {translate('prophet.action.search')}
                     </Button>
                 </Form.Item>
@@ -68,4 +60,4 @@ ListActions.defaultProps = {
     field: 'q',
 };
 
-export default Form.create()(ListActions);
+export default ListActions;

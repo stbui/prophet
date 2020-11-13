@@ -1,75 +1,51 @@
 import React from 'react';
 import { useLogin } from '@stbui/prophet-core';
-import { Form, Icon, Input, Button } from 'antd';
-const FormItem = Form.Item;
+import { Form, Input, Button } from 'antd';
 
-const Login = props => {
-    const { getFieldDecorator, validateFields } = props.form;
+const Login = () => {
     const login = useLogin();
 
-    const handleSubmit = () =>
-        validateFields((err, values) => {
-            if (!err) {
-                login(values).catch(error => {
-                    console.log(error);
-                });
-            }
+    const onFinish = values => {
+        login(values).catch(error => {
+            console.log(error);
         });
+    };
 
     return (
-        <Form className="login-form">
-            <FormItem>
-                {getFieldDecorator('username', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请输入用户名',
-                        },
-                    ],
-                })(
-                    <Input
-                        prefix={
-                            <Icon
-                                type="user"
-                                style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                        }
-                        placeholder="Username"
-                    />
-                )}
-            </FormItem>
-            <FormItem>
-                {getFieldDecorator('password', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请输入密码',
-                        },
-                    ],
-                })(
-                    <Input
-                        prefix={
-                            <Icon
-                                type="lock"
-                                style={{ color: 'rgba(0,0,0,.25)' }}
-                            />
-                        }
-                        type="password"
-                        placeholder="Password"
-                    />
-                )}
-            </FormItem>
-            <FormItem>
+        <Form onFinish={onFinish} className="login-form">
+            <Form.Item
+                name="username"
+                rules={[
+                    {
+                        required: true,
+                        message: '请输入用户名',
+                    },
+                ]}
+            >
+                <Input placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+                name="password"
+                rules={[
+                    {
+                        required: true,
+                        message: '请输入密码',
+                    },
+                ]}
+            >
+                <Input type="password" placeholder="Password" />
+            </Form.Item>
+            <Form.Item>
                 <Button
                     type="primary"
                     className="login-form-button"
-                    onClick={handleSubmit}
+                    htmlType="submit"
                 >
                     登陆
                 </Button>
-            </FormItem>
+            </Form.Item>
         </Form>
     );
 };
 
-export default Form.create()(Login);
+export default Login;

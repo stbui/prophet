@@ -5,7 +5,7 @@ import { Button } from 'antd';
 export interface EditButtonProps {
     basePath?: string;
     label?: string;
-    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    type?: any;
     id?: any;
     size?: any;
 }

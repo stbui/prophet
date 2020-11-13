@@ -5,7 +5,7 @@ import { Button } from 'antd';
 export interface CreateButtonProps {
     basePath?: string;
     label?: string;
-    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    type?: any;
 }
 
 const CreateButton: FC<CreateButtonProps> = ({
