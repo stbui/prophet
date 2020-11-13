@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/stbui/prophet/compare/v2.1.2...v2.2.0) (2020-11-13)
+
+
+### Bug Fixes
+
+* **antd:** type ([1ec06a2](https://github.com/stbui/prophet/commit/1ec06a2e7ae58b985b67f09094416baaf1ead931))
+* **core:** 修复排序order不生效问题 ([fc415bd](https://github.com/stbui/prophet/commit/fc415bdc87b171f2fe26fb0b0e43cadc6b7cbb5c))
+
+
+### Features
+
+* **antd:** header 样式修改 ([d559f41](https://github.com/stbui/prophet/commit/d559f4126149a77a8e0c76c765535047791fae25))
+* **core:** update ([c2506ce](https://github.com/stbui/prophet/commit/c2506ced665719d78932063095daaee21e2388ac))
+* doc ([f856622](https://github.com/stbui/prophet/commit/f85662243aa1857aee4dbacd10113efc9863bf22))
+
+
+
+
+
 ## [2.1.2](https://github.com/stbui/prophet/compare/v2.1.0...v2.1.2) (2020-06-02)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/stbui/prophet/compare/v2.1.2...v2.2.0) (2020-11-13)
+
+
+### Features
+
+* **core:** update ([c2506ce](https://github.com/stbui/prophet/commit/c2506ced665719d78932063095daaee21e2388ac))
+
+
+
+
+
 ## [2.1.2](https://github.com/stbui/prophet/compare/v2.1.0...v2.1.2) (2020-06-02)
 
 **Note:** Version bump only for package @stbui/prophet
