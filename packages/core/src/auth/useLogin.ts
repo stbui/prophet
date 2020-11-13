@@ -30,6 +30,7 @@ const useLogin = (): Login => {
     const authProvider = useAuthProvider();
     const history = useHistory();
     const location = useLocation();
+    // @ts-ignore
     const nextPathName = location.state && location.state.nextPathname;
 
     const login = useCallback(
