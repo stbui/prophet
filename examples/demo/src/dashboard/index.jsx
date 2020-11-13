@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Tooltip, Icon, Tabs, Card } from 'antd';
+import { Row, Col, Tooltip, Tabs, Card } from 'antd';
 import {
     ChartCard,
     Field,
@@ -38,11 +38,11 @@ export default () => {
                     <ChartCard
                         bordered={false}
                         title="总销售额"
-                        action={
-                            <Tooltip title="指标说明">
-                                <Icon type="info-circle-o" />
-                            </Tooltip>
-                        }
+                        // action={
+                        //     <Tooltip title="指标说明">
+                        //         <Icon type="info-circle-o" />
+                        //     </Tooltip>
+                        // }
                         total="￥126,560"
                         footer={<Field label="日销售额" value={` ￥12,423`} />}
                         contentHeight={46}
@@ -61,11 +61,11 @@ export default () => {
                     <ChartCard
                         bordered={false}
                         title="访问量"
-                        action={
-                            <Tooltip title="指标说明">
-                                <Icon type="info-circle-o" />
-                            </Tooltip>
-                        }
+                        // action={
+                        //     <Tooltip title="指标说明">
+                        //         <Icon type="info-circle-o" />
+                        //     </Tooltip>
+                        // }
                         total="8,846"
                         footer={<Field label="日访问量" value={`1,234`} />}
                         contentHeight={46}
@@ -81,11 +81,11 @@ export default () => {
                     <ChartCard
                         bordered={false}
                         title="支付笔数"
-                        action={
-                            <Tooltip title="指标说明">
-                                <Icon type="info-circle-o" />
-                            </Tooltip>
-                        }
+                        // action={
+                        //     <Tooltip title="指标说明">
+                        //         <Icon type="info-circle-o" />
+                        //     </Tooltip>
+                        // }
                         total="6,560"
                         footer={<Field label="转化率" value={`60%`} />}
                         contentHeight={46}
@@ -98,11 +98,11 @@ export default () => {
                     <ChartCard
                         bordered={false}
                         title="运营活动效果"
-                        action={
-                            <Tooltip title="指标说明">
-                                <Icon type="info-circle-o" />
-                            </Tooltip>
-                        }
+                        // action={
+                        //     <Tooltip title="指标说明">
+                        //         <Icon type="info-circle-o" />
+                        //     </Tooltip>
+                        // }
                         total="78%"
                         footer={
                             <div

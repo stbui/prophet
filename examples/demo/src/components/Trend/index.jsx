@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icon } from 'antd';
 import classNames from 'classnames';
 import './index.scss';
 
@@ -28,7 +27,7 @@ const Trend = ({
       <span className="value">{children}</span>
       {flag && (
         <span className={flag}>
-          <Icon type={`caret-${flag}`} />
+          {/* <Icon type={`caret-${flag}`} /> */}
         </span>
       )}
     </div>

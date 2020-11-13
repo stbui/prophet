@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@stbui/prophet-antd';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { routes } from './routes';
 
 const CustomMenu = props => {
@@ -12,12 +12,7 @@ const CustomMenu = props => {
                     return (
                         <Menu.SubMenu
                             key={item.id}
-                            title={
-                                <span>
-                                    <Icon type={item.icon} />
-                                    {item.name}
-                                </span>
-                            }
+                            title={<span>{item.name}</span>}
                         >
                             {item.children.map(chid => {
                                 if (chid.children) {
@@ -26,7 +21,6 @@ const CustomMenu = props => {
                                             key={chid.id}
                                             title={
                                                 <span>
-                                                    <Icon type={chid.icon} />
                                                     <span>{chid.name}</span>
                                                 </span>
                                             }
@@ -65,7 +59,6 @@ const CustomMenu = props => {
         >
             {hasDashboard && (
                 <Menu.Item>
-                    <Icon type="home" />
                     <Link to="/" style={{ display: 'inline-block' }}>
                         主页
                     </Link>
