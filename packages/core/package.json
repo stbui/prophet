@@ -16,8 +16,8 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "peerDependencies": {
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "react-redux": "^7.2.2",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
@@ -37,8 +37,8 @@
         "@types/react-router-dom": "^5.1.3",
         "connected-react-router": "^6.8.0",
         "history": "^5.0.0",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "react-redux": "^7.2.2",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",

@@ -12,8 +12,8 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "peerDependencies": {
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0"
     },
     "dependencies": {
         "@stbui/prophet-antd": "2.2.0",
@@ -22,8 +22,8 @@
         "@stbui/prophet-language-chinese": "^2.0.0",
         "antd": "^4.8.2",
         "connected-react-router": "^6.8.0",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "react-redux": "^7.2.2",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
