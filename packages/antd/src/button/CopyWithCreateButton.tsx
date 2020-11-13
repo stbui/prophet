@@ -4,7 +4,7 @@ import { Button } from 'antd';
 
 export interface CopyButtonProps {
     basePath?: string;
-    resource?: string;
+    resource: string;
     id?: string | number;
     label?: string;
     type?: any;
