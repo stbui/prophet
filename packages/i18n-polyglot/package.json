@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet-i18n-polyglot",
-    "version": "2.2.0",
+    "version": "3.0.0",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -12,7 +12,7 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "dependencies": {
-        "@stbui/prophet-core": "2.2.0",
+        "@stbui/prophet-core": "3.0.0",
         "node-polyglot": "^2.4.0"
     },
     "devDependencies": {

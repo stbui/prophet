@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/stbui/prophet/compare/v2.2.0...v3.0.0) (2020-11-14)
+
+
+### Bug Fixes
+
+* rervert react.16.14.0 ([f462938](https://github.com/stbui/prophet/commit/f4629388587334089db2a70cc5c6daa7876a7920))
+
+
+### Features
+
+* **antd:** upgrade antd.4.0.0 ([c32df25](https://github.com/stbui/prophet/commit/c32df25d5331950c165b0460d310b118db172c59))
+* **core:**  upgrade react.17.0.0 ([f38ad81](https://github.com/stbui/prophet/commit/f38ad81c2b3b3d346906132cc9d4849f05124043))
+* **core:** feature ([c5a0920](https://github.com/stbui/prophet/commit/c5a09205670aba390857f478a02b015cbc08611b))
+* **core:** feature ([845371d](https://github.com/stbui/prophet/commit/845371df23e03c0ea8d490110c46a129a5d4b431))
+
+
+
+
+
 # [2.2.0](https://github.com/stbui/prophet/compare/v2.1.2...v2.2.0) (2020-11-13)
 
 
