@@ -4,6 +4,12 @@
  * https://github.com/stbui/prophet
  */
 
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import useCreateController, { CreateProps } from './useCreateController';
 import { useTranslate } from '../i18n';
 
@@ -19,7 +25,7 @@ export interface Props extends CreateProps {
  *
  * const CreateView = () => <div>...</div>
  *
- * const pageComponent = props => (
+ * const App = props => (
  *     <CreateController {...props}>
  *         {controllerProps => <CreateView {...controllerProps} {...props} />}
  *     </CreateController>

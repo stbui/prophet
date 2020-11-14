@@ -16,18 +16,22 @@ export interface DeleteProps {
     successMessage?: string;
 }
 
-/*
-import { useDeleteController } from '@stbui/prophet-core';
-
-const DeleteView = () => <div>...</div>
-
-const pageComponent = props => {
-    const controllerProps = useDeleteController(props);
-
-    return <DeleteView { ...controllerProps } {...props } />;
-}
-*/
-
+/**
+ *
+ * @param props
+ *
+ * @example
+ *
+ * import { useDeleteController } from '@stbui/prophet-core';
+ *
+ * const DeleteView = () => <div>...</div>
+ *
+ * const App = props => {
+ *     const controllerProps = useDeleteController(props);
+ *
+ *     return <DeleteView { ...controllerProps } {...props } />;
+ * }
+ */
 export const useDeleteController = (props: DeleteProps) => {
     const { resource, basePath, id, record, successMessage } = props;
     const notify = useNotify();

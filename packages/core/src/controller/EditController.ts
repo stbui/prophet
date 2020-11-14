@@ -11,18 +11,22 @@ export interface Props extends EditProps {
     children: (params) => JSX.Element;
 }
 
-/*
-import { EditController } from '@stbui/prophet-core';
-
-const EditView = () => <div>...</div>
-
-const pageComponent = props => (
-    <EditController {...props}>
-        {controllerProps => <EditView {...controllerProps} {...props} />}
-    </EditController>
-);
-*/
-
+/**
+ *
+ * @param param0
+ *
+ * @example
+ *
+ * import { EditController } from '@stbui/prophet-core';
+ *
+ * const EditView = () => <div>...</div>
+ *
+ * const App = props => (
+ *    <EditController {...props}>
+ *        {controllerProps => <EditView {...controllerProps} {...props} />}
+ *    </EditController>
+ * );
+ */
 const EditController = ({ children, ...props }: Props) => {
     const controllerProps = useEditController(props);
     const translate = useTranslate();

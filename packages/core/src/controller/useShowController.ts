@@ -21,18 +21,20 @@ export interface ShowControllerProps {
     loaded: any;
 }
 
-/*
-import { useShowController } from '@stbui/prophet-core';
-
-const ShowView = () => <div>...</div>
-
-const create = props => {
-    const controllerProps = useShowController(props);
-
-    return <ShowView { ...controllerProps } {...props } />;
-}
-*/
-
+/**
+ *
+ * @example
+ *
+ * import { useShowController } from '@stbui/prophet-core';
+ *
+ * const ShowView = () => <div>...</div>
+ *
+ * const App = props => {
+ *     const controllerProps = useShowController(props);
+ *
+ *     return <ShowView { ...controllerProps } {...props } />;
+ * }
+ */
 export const useShowController = (props: ShowProps): ShowControllerProps => {
     const { resource, basePath, id } = props;
     const notify = useNotify();

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { createContext, useContext } from 'react';
 
 /**
@@ -21,6 +27,12 @@ export const ListSortContext = createContext({
     resource: null,
 });
 
+/**
+ *
+ * @example
+ *
+ * const { currenntSort, setSort } = useListSortContext();
+ */
 export const useListSortContext = () => {
     const context = useContext(ListSortContext);
 

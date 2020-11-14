@@ -1,7 +1,18 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React, { createContext, useContext } from 'react';
 
 export const RecordContext = createContext(undefined);
 
+/**
+ * @example
+ *
+ * const { record }  = useRecordContext()
+ */
 export const useRecordContext = () => {
     const context = useContext(RecordContext);
 

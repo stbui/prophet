@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { createContext, useContext } from 'react';
 
 /**
@@ -24,6 +30,12 @@ export const ListFilterContext = createContext({
     resource: null,
 });
 
+/**
+ *
+ * @example
+ *
+ * const { filterValues, setFilters } = useListFilterContext();
+ */
 export const useListFilterContext = () => {
     const context = useContext(ListFilterContext);
 
