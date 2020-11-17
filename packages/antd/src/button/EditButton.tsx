@@ -3,10 +3,10 @@ import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface EditButtonProps {
-    basePath?: string;
+    basePath: string;
+    id: string | number;
     label?: string;
     type?: any;
-    id?: any;
     size?: any;
 }
 

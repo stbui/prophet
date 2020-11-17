@@ -66,10 +66,6 @@ const Tab = ({ children, basePath, resource, location, actions, ...other }) => {
     );
 };
 
-Tab.defaultProps = {
-    actions: <ListActions />,
-};
-
 export const getTabFullPath = (tab, index, baseUrl) =>
     `${baseUrl}${
         tab.props.path ? `/${tab.props.path}` : index > 0 ? `/${index}` : ''

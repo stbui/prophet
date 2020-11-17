@@ -4,11 +4,10 @@ import { CreateButton } from '../button';
 import { Form, Input, Button } from 'antd';
 
 interface Props {
-    basePath?: string;
+    basePath: string;
     hasCreate?: boolean;
     filterValues?: any;
     setFilters?: any;
-    form?: any;
     field?: any;
 }
 
