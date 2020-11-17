@@ -25,6 +25,7 @@ export interface CoreAdminProps {
     customReducers?: object;
     history?: any;
     title?: string;
+    defalutRedirect?: string;
 }
 
 const CoreAdmin: FunctionComponent<CoreAdminProps> = ({
@@ -44,6 +45,7 @@ const CoreAdmin: FunctionComponent<CoreAdminProps> = ({
     customSagas,
     customReducers,
     history,
+    defalutRedirect,
 }) => {
     return (
         <CoreContext
@@ -64,6 +66,7 @@ const CoreAdmin: FunctionComponent<CoreAdminProps> = ({
                 catchAll={catchAll}
                 title={title}
                 loginPage={login}
+                defalutRedirect={defalutRedirect}
             >
                 {children}
             </CoreUI>

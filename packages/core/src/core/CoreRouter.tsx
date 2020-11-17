@@ -26,6 +26,7 @@ export interface CoreRouterProps {
     catchAll: ComponentType;
     layout: ComponentType;
     customRoutes: any[];
+    defalutRedirect?: string;
 }
 
 const CoreRouter: FunctionComponent<CoreRouterProps> = ({
@@ -37,6 +38,7 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
     menu,
     brand,
     title,
+    defalutRedirect,
 }) => {
     const getPermissions = useGetPermissions();
     const { authenticated } = useAuthState();
@@ -134,6 +136,7 @@ const CoreRouter: FunctionComponent<CoreRouterProps> = ({
                                 )}
                                 dashboard={dashboard}
                                 title={title}
+                                defalutRedirect={defalutRedirect}
                             >
                                 {Children.map(childrenToRender, child =>
                                     cloneElement(child, {
