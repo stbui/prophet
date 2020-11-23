@@ -41,18 +41,18 @@ const ResourceRegister: FunctionComponent<ResourceProps> = ({
 }) => {
     const dispatch = useDispatch();
 
-    const resource = {
-        name,
-        label,
-        options,
-        icon,
-        hasList: !!list,
-        hasEdit: !!edit,
-        hasCreate: !!create,
-        hasShow: !!show,
-    };
-
     useEffect(() => {
+        const resource = {
+            name,
+            label,
+            options,
+            icon,
+            hasList: !!list,
+            hasEdit: !!edit,
+            hasCreate: !!create,
+            hasShow: !!show,
+        };
+
         dispatch(registerResource(resource));
 
         return () => {
@@ -74,9 +74,7 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
 }) => {
     const match = useRouteMatch();
 
-    const isRegistered = useSelector((state: any) => {
-        return state.resources[name] ? true : false;
-    });
+    const isRegistered = useSelector((state: any) => !!state.resources[name]);
 
     const basePath = match ? match.url : '';
 

@@ -28,18 +28,20 @@ export interface EditControllerProps {
     version: number;
 }
 
-/*
-import { useEditController } from '@stbui/prophet-core';
-
-const EditView = () => <div>...</div>
-
-const pageComponent = props => {
-    const controllerProps = useEditController(props);
-
-    return <EditView { ...controllerProps } {...props } />;
-}
-*/
-
+/**
+ *
+ * @example
+ *
+ * import { useEditController } from '@stbui/prophet-core';
+ *
+ * const EditView = () => <div>...</div>
+ *
+ * const App = props => {
+ *     const controllerProps = useEditController(props);
+ *
+ *     return <EditView { ...controllerProps } {...props } />;
+ * }
+ */
 export const useEditController = (props: EditProps): EditControllerProps => {
     const { resource, basePath, id, successMessage } = props;
     const notify = useNotify();

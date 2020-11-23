@@ -32,18 +32,17 @@ export interface CreateProps {
     successMessage?: string;
 }
 
-/*
-import { useCreateController } from '@stbui/prophet-core';
-
-const CreateView = () => <div>...</div>
-
-const pageComponent = props => {
-    const controllerProps = useCreateController(props);
-
-    return <CreateView { ...controllerProps } {...props } />;
-}
-*/
-
+/**
+ * import { useCreateController } from '@stbui/prophet-core';
+ *
+ * const CreateView = () => <div>...</div>
+ *
+ * const pageComponent = props => {
+ *    const controllerProps = useCreateController(props);
+ *
+ *    return <CreateView { ...controllerProps } {...props } />;
+ * }
+ */
 export const getDefaultRedirectRoute = (
     hasEdit?: boolean,
     hasShow?: boolean

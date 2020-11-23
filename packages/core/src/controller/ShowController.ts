@@ -11,18 +11,20 @@ export interface Props extends ShowProps {
     children: (params) => JSX.Element;
 }
 
-/*
-import { ShowController } from '@stbui/prophet-core';
-
-const ShowView = () => <div>...</div>
-
-const pageComponent = props => (
-    <ShowController {...props}>
-        {controllerProps => <ShowView {...controllerProps} {...props} />}
-    </ShowController>
-);
-*/
-
+/**
+ *
+ * @example
+ *
+ * import { ShowController } from '@stbui/prophet-core';
+ *
+ * const ShowView = () => <div>...</div>
+ *
+ * const App = props => (
+ *    <ShowController {...props}>
+ *        {controllerProps => <ShowView {...controllerProps} {...props} />}
+ *    </ShowController>
+ * );
+ */
 const ShowController = ({ children, ...props }: Props) => {
     const controllerProps = useShowController(props);
     const translate = useTranslate();
