@@ -5,8 +5,8 @@ import { Popconfirm, Button } from 'antd';
 export interface DeleteButtonConfirmProps {
     basePath?: string;
     label?: string;
-    record?: any;
-    remove?: any;
+    record: any;
+    remove: any;
     deleting?: any;
     size?: any;
     type?: any;

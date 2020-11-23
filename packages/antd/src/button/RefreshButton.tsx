@@ -3,9 +3,9 @@ import { useRefresh } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface RefreshButtonProps {
-    label?: any;
-    onClick?: any;
+    label?: string;
     type?: any;
+    onClick?: any;
 }
 
 const RefreshButton: FC<RefreshButtonProps> = ({

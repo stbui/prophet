@@ -1,18 +1,17 @@
 import React, { cloneElement, FunctionComponent } from 'react';
 import { useShowController } from '@stbui/prophet-core';
-import { Card } from 'antd';
+import { Spin } from 'antd';
 
 interface Props {
     children: any;
+    actions?: any;
     resource?: string;
     basePath?: string;
     title?: string;
-    loading?: any;
-    actions?: any;
-    record?: any;
+    loading?: boolean;
+    record?: object;
     save?: any;
-    id?: any;
-    card?: any;
+    id?: string | number;
 }
 
 export const ShowView: FunctionComponent<Props> = ({
@@ -20,14 +19,12 @@ export const ShowView: FunctionComponent<Props> = ({
     basePath,
     children,
     id,
-    title,
     loading,
     record,
     actions,
-    card,
     ...other
 }) => (
-    <Card bordered={false} title={title} loading={loading} {...card}>
+    <Spin spinning={loading}>
         {actions && cloneElement(actions, { ...other })}
         {record
             ? cloneElement(children, {
@@ -38,7 +35,7 @@ export const ShowView: FunctionComponent<Props> = ({
                   ...other,
               })
             : null}
-    </Card>
+    </Spin>
 );
 
 const Show = props => <ShowView {...props} {...useShowController(props)} />;

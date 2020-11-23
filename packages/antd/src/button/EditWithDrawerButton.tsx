@@ -5,10 +5,10 @@ import { Button, Drawer } from 'antd';
 export interface EditDrawerButtonProps {
     children?: any;
     label?: string;
-    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    type?: string;
     drawer?: any;
     button?: any;
-    size?: any;
+    size?: string;
     allowRefresh?: boolean;
 }
 

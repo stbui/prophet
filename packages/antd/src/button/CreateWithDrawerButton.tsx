@@ -5,7 +5,7 @@ import { Button, Drawer } from 'antd';
 export interface CreateDrawerButtonProps {
     children?: any;
     label?: string;
-    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    type?: any;
     drawer?: any;
     button?: any;
     allowRefresh?: boolean;

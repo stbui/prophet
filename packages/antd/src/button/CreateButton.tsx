@@ -3,9 +3,9 @@ import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface CreateButtonProps {
-    basePath?: string;
+    basePath: string;
     label?: string;
-    type?: 'primary' | 'dashed' | 'danger' | 'link';
+    type?: any;
 }
 
 const CreateButton: FC<CreateButtonProps> = ({
