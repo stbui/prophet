@@ -27,6 +27,7 @@ interface Props {
     customSagas?: any;
     customReducers?: any;
     history?: any;
+    defaultRedirect?: string;
 }
 
 export const defaultI18nProvider = polyglotI18nProvider(() => defaultMessages);
@@ -48,6 +49,7 @@ const Prophet: FunctionComponent<Props> = ({
     customSagas,
     customReducers,
     history,
+    defaultRedirect,
 }) => {
     return (
         <CoreContext
@@ -68,6 +70,7 @@ const Prophet: FunctionComponent<Props> = ({
                 catchAll={catchAll}
                 title={title}
                 loginPage={login}
+                defaultRedirect={defaultRedirect}
             >
                 {children}
             </CoreUI>

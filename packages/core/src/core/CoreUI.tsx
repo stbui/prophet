@@ -18,6 +18,7 @@ export interface CoreUIProps {
     brand?: ComponentType;
     customRoutes?: any[];
     children?: any;
+    defaultRedirect?: string;
 }
 
 const CoreUI: FunctionComponent<CoreUIProps> = ({
@@ -30,6 +31,7 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
     menu,
     brand,
     customRoutes = [],
+    defaultRedirect,
 }) => (
     <Switch>
         {loginPage ? (
@@ -55,6 +57,7 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
                     menu={menu}
                     brand={brand}
                     title={title}
+                    defaultRedirect={defaultRedirect}
                     {...props}
                 >
                     {children}

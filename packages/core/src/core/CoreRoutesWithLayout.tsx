@@ -21,6 +21,7 @@ export interface CoreRoutesWithLayoutProps {
     customRoutes?: any[];
     dashboard?: ComponentType;
     title?: string;
+    defaultRedirect?: string;
 }
 
 const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({
@@ -29,6 +30,7 @@ const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({
     customRoutes,
     dashboard,
     title,
+    defaultRedirect,
 }) => {
     const childrenArray = Children.toArray(children);
     const firstChild: any = childrenArray.length > 0 ? childrenArray[0] : null;
@@ -59,6 +61,12 @@ const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({
                             {...routeProps}
                         />
                     )}
+                />
+            ) : defaultRedirect ? (
+                <Route
+                    exact
+                    path="/"
+                    render={() => <Redirect to={`/${defaultRedirect}`} />}
                 />
             ) : firstChild ? (
                 <Route
