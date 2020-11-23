@@ -25,7 +25,6 @@ export default () => (
         customRoutes={routes}
         dashboard={Dashboard}
         menu={Menu}
-        brand={Brand}
     >
         <Resource name="store" {...goodsList} />
         <Resource name="goods/category" {...goodsCategory} />

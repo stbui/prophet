@@ -1,7 +1,7 @@
 import React, { cloneElement, useState } from 'react';
 import { Layout } from 'antd';
 
-export default ({ children, brand }) => {
+export default ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);
 
     const onCollapse = state => {
@@ -18,7 +18,6 @@ export default ({ children, brand }) => {
                 height: '100vh',
             }}
         >
-            {cloneElement(brand)}
             {cloneElement(children)}
         </Layout.Sider>
     );

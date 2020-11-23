@@ -3,10 +3,10 @@ import { Popover, Button } from 'antd';
 
 export interface EditPopoverButtonProps {
     basePath?: string;
-    label?: string;
+    label: string;
     id?: any;
     title?: any;
-    content?: any;
+    content: any;
     popover?: any;
     button?: any;
     type?: any;

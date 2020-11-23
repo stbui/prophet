@@ -5,8 +5,8 @@ import { Button } from 'antd';
 export interface DeleteButtonViewProps {
     basePath?: string;
     label?: string;
-    record?: any;
-    remove?: any;
+    record: any;
+    remove: any;
     deleting?: any;
     size?: any;
     type?: any;

@@ -16,7 +16,6 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "peerDependencies": {
-        "@stbui/prophet-core": "2.2.0",
         "antd": "^4.8.2",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",

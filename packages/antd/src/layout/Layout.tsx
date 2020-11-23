@@ -38,8 +38,8 @@ export const Layout = ({
                     <DefaultLayout.Content
                         style={{
                             margin: 24,
-                            marginLeft: 224,
-                            marginTop: 84,
+                            marginLeft: 24,
+                            marginTop: 24,
                             backgroundColor: color,
                         }}
                     >

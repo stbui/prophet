@@ -1,6 +1,5 @@
 import React, { cloneElement, Children, FunctionComponent } from 'react';
 import { useListController } from '@stbui/prophet-core';
-import ListActions from './ListActions';
 import { Spin } from 'antd';
 
 interface Props {
@@ -23,9 +22,6 @@ const ListView: FunctionComponent<Props> = ({
         {children && cloneElement(Children.only(children), { ...other })}
     </Spin>
 );
-ListView.defaultProps = {
-    actions: <ListActions />,
-};
 
 const List = props => <ListView {...props} {...useListController(props)} />;
 

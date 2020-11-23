@@ -10,6 +10,7 @@ import EditWithDrawerButton from './EditWithDrawerButton';
 import ShowWithDrawerButton from './ShowWithDrawerButton';
 import EditWithPopoverButton from './EditWithPopoverButton';
 import CopyWithCreateButton from './CopyWithCreateButton';
+import EnabledButton from './EnabledButton';
 
 export {
     CreateButton,
@@ -24,4 +25,5 @@ export {
     ShowWithDrawerButton,
     EditWithPopoverButton,
     CopyWithCreateButton,
+    EnabledButton,
 };

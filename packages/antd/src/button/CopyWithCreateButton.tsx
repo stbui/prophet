@@ -3,9 +3,9 @@ import { useDataProvider, useRedirect, GET_ONE } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface CopyButtonProps {
-    basePath?: string;
+    basePath: string;
     resource: string;
-    id?: string | number;
+    id: string | number;
     label?: string;
     type?: any;
     size?: any;

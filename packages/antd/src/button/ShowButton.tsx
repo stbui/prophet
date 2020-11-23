@@ -3,11 +3,11 @@ import { useRedirect } from '@stbui/prophet-core';
 import { Button } from 'antd';
 
 export interface ShowButtonProps {
-    basePath?: string;
+    basePath: string;
     label?: string;
     type?: any;
-    id?: any;
     size?: any;
+    id: any;
 }
 
 export const ShowButton: FC<ShowButtonProps> = ({
