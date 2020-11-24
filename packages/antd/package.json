@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet-antd",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -26,7 +26,7 @@
         "redux": "^4.0.5"
     },
     "dependencies": {
-        "@stbui/prophet-core": "2.2.0"
+        "@stbui/prophet-core": "^2.2.1"
     },
     "devDependencies": {
         "@types/react": "16.9.23",
