@@ -50,7 +50,7 @@ const useAuthState = (params = {}): AuthState => {
             .catch(() =>
                 setState({ loading: false, loaded: true, authenticated: false })
             );
-    }, [checkAuth, JSON.stringify(params), setState]);
+    }, [JSON.stringify(params), setState]);
 
     return state;
 };
