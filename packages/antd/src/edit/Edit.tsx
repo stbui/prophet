@@ -12,6 +12,7 @@ interface Props {
     record?: object;
     save?: any;
     id?: string | number;
+    [key: string]: any;
 }
 
 export const EditView: FunctionComponent<Props> = ({

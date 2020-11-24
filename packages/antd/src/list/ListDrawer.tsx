@@ -133,6 +133,7 @@ export const ListView: FunctionComponent<Props> = props => {
 };
 
 ListView.defaultProps = {
+    actions: <ListActions />,
     destroyOnClose: true,
 };
 

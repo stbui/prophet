@@ -9,7 +9,7 @@ export interface CopyButtonProps {
     label?: string;
     type?: any;
     size?: any;
-    button?: string;
+    [key: string]: any;
 }
 
 const CopyWithCreateButton: FC<CopyButtonProps> = ({

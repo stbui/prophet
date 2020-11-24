@@ -11,6 +11,7 @@ interface Props {
     actions?: any;
     record?: object;
     save?: any;
+    [key: string]: any;
 }
 
 export const CreateView: FunctionComponent<Props> = ({
