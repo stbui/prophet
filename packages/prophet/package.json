@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
@@ -16,9 +16,9 @@
         "react-dom": "^16.14.0"
     },
     "dependencies": {
-        "@stbui/prophet-antd": "3.0.0",
-        "@stbui/prophet-core": "3.0.0",
-        "@stbui/prophet-i18n-polyglot": "3.0.0",
+        "@stbui/prophet-antd": "^3.0.1",
+        "@stbui/prophet-core": "^3.0.1",
+        "@stbui/prophet-i18n-polyglot": "^3.0.1",
         "@stbui/prophet-language-chinese": "3.0.0",
         "antd": "^4.8.2",
         "connected-react-router": "^6.8.0",

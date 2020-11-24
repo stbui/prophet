@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/stbui/prophet/compare/v3.0.0...v3.0.1) (2020-11-24)
+
+
+### Features
+
+* **antd:** 调整加载ui ([7f383d0](https://github.com/stbui/prophet/commit/7f383d0d7f5195d35c682ce2a9f0367427f572f3))
+
+
+
+
+
 # [3.0.0](https://github.com/stbui/prophet/compare/v2.2.0...v3.0.0) (2020-11-14)
 
 
