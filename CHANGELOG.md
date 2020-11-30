@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/stbui/prophet/compare/v2.2.2...v2.2.3) (2020-11-30)
+
+
+### Bug Fixes
+
+* **antd:** decode id ([e203591](https://github.com/stbui/prophet/commit/e203591afbf4ad1b7cc5f8887af4707ea0efea65))
+
+
+
+
+
 # [2.2.0](https://github.com/stbui/prophet/compare/v2.1.2...v2.2.0) (2020-11-13)
 
 

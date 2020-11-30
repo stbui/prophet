@@ -1,6 +1,6 @@
 {
     "name": "@stbui/prophet-antd",
-    "version": "2.2.2",
+    "version": "2.2.3",
     "description": "用于构建中后台前端应用框架",
     "main": "lib/index",
     "module": "esm/index.js",
