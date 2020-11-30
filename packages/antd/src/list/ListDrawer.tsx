@@ -90,7 +90,9 @@ export const ListView: FunctionComponent<Props> = props => {
                             >
                                 {isMatch
                                     ? cloneElement(edit, {
-                                          id: match.params.id,
+                                          id: decodeURIComponent(
+                                              match.params.id
+                                          ),
                                           onCancel: handleClose,
                                           onOk: handleClose,
                                           ...props,
@@ -117,7 +119,9 @@ export const ListView: FunctionComponent<Props> = props => {
                             >
                                 {isMatch
                                     ? cloneElement(show, {
-                                          id: match.params.id,
+                                          id: decodeURIComponent(
+                                              match.params.id
+                                          ),
                                           onCancel: handleClose,
                                           onOk: handleClose,
                                           ...props,
