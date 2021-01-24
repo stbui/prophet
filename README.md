@@ -1,10 +1,10 @@
 # 先知（Prophet）
 
-[![React](https://img.shields.io/badge/react-16.13.0-brightgreen.svg?style=square)](https://github.com/facebook/react)
+[![React](https://img.shields.io/badge/react-16.14.0-brightgreen.svg?style=square)](https://github.com/facebook/react)
 [![redux](https://img.shields.io/badge/redux-4.0.5-brightgreen.svg?style=square)](https://github.com/facebook/react)
-[![antd](https://img.shields.io/badge/antd-3.26.13-brightgreen.svg?style=square)](https://github.com/facebook/react)
+[![antd](https://img.shields.io/badge/antd-4.8.2-brightgreen.svg?style=square)](https://github.com/facebook/react)
 [![Downloads](https://img.shields.io/npm/dm/@stbui/prophet.svg)](https://npmcharts.com/compare/@stbui/prophet?minimal=true)
-[![npm](https://img.shields.io/badge/npm-1.1.0-green.svg?style=flat)](https://github.com/stbui/prophet)
+[![npm](https://img.shields.io/badge/prophet-3.0.1-green.svg?style=flat)](https://github.com/stbui/prophet)
 [![Powered_by](https://img.shields.io/badge/Powered_by-stbui-green.svg?style=flat)](https://github.com/stbui/prophet)
 
 Prophet 可以快速帮你构建后台管理的中后台前端应用框架，能帮助你使用很少的代码就实现功能完善的后台管理功能。
