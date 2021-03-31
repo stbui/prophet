@@ -1,29 +1,21 @@
 {
-    "name": "demo",
-    "version": "3.0.1",
+    "name": "starter",
+    "version": "0.1.0",
     "private": true,
     "dependencies": {
         "@stbui/prophet": "^3.0.1",
-        "@stbui/prophet-data-json-server": "^3.0.1",
-        "@stbui/prophet-i18n-polyglot": "^3.0.1",
-        "@stbui/prophet-language-chinese": "3.0.0",
-        "@stbui/prophet-language-english": "3.0.0",
-        "bizcharts": "^4.0.14",
-        "node-sass": "^5.0.0",
+        "@stbui/prophet-data-json-server": "3.0.1",
+        "@testing-library/jest-dom": "^5.11.10",
+        "@testing-library/react": "^11.2.6",
+        "@testing-library/user-event": "^12.8.3",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-scripts": "4.0.3",
         "web-vitals": "^1.1.1"
     },
-    "devDependencies": {
-        "@types/node": "^14.14.37",
-        "@types/react": "^17.0.3",
-        "@types/react-dom": "^17.0.3",
-        "@types/jest": "^26.0.22",
-        "typescript": "^4.2.3"
-    },
     "scripts": {
         "start": "react-scripts start",
+        "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },

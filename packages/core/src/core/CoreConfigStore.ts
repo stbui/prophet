@@ -36,7 +36,7 @@ export default function CoreConfigStore({
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [routerMiddleware(history), sagaMiddleware];
     const enhancers = [applyMiddleware(...middlewares)];
-    const store = createStore(
+    const store: any = createStore(
         rootReducer(history, customReducers),
         initialState,
         compose(...enhancers)

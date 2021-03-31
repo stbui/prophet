@@ -15,7 +15,7 @@ import useCreateController from './useCreateController';
  *
  * @example
  *
- * const App = (props) => <BaseCreate {...props}>create</BaseCreate>
+ * const App = (props) => <CreateBase {...props}>create</CreateBase>
  */
 const CreateBase = ({ children, ...props }) => (
     <CreateContextProvider value={useCreateController(props)}>

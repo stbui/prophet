@@ -15,7 +15,7 @@ export const ShowRouter = ({ basePath, resource, children }) => {
     return (
         <Route
             path={`${basePath}/:id/show`}
-            render={props =>
+            render={(props: any) =>
                 createElement(children, {
                     basePath,
                     id: decodeURIComponent(props.match.params.id),

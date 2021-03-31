@@ -111,7 +111,7 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
                 {show && (
                     <Route
                         path={`${basePath}/:id/show`}
-                        render={routeProps => (
+                        render={(routeProps: any) => (
                             <WithPermissions
                                 component={show}
                                 basePath={basePath}
@@ -127,7 +127,7 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
                 {edit && (
                     <Route
                         path={`${basePath}/:id`}
-                        render={routeProps => (
+                        render={(routeProps: any) => (
                             <WithPermissions
                                 component={edit}
                                 basePath={basePath}

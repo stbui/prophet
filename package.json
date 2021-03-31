@@ -22,10 +22,12 @@
         "examples/*"
     ],
     "devDependencies": {
+        "@types/react": "17.0.3",
+        "@types/react-dom": "17.0.3",
         "gh-pages": "^3.1.0",
-        "lerna": "^3.22.1",
-        "prettier": "^2.1.1",
-        "typescript": "^4.0.2",
-        "conventional-changelog-cli": "^2.1.0"
+        "lerna": "^4.0.0",
+        "prettier": "^2.2.1",
+        "typescript": "^4.2.3",
+        "rimraf": "^3.0.2"
     }
 }
