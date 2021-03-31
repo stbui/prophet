@@ -1,0 +1,28 @@
+
+.dynamic-tabs {
+  .ant-tabs-nav-wrap {
+    background: #f0f2f5;
+  }
+
+  .icon-add {
+    transition: transform 0.3s;
+  }
+
+  &.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+
+    &-active {
+      border-color: #fff;
+      background: #fff;
+
+      .icon-add {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .ant-tabs-tabpane {
+    padding: 24px;
+  }
+}
