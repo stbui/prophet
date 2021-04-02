@@ -6,14 +6,14 @@ import i18nProvider from './i18n';
 import Dashboard from './dashboard';
 import Menu from './Menu/Menu';
 import Brand from './Menu/Brand';
-import routes from './routes';
-
-import users from './setting/users';
-import goodsCategory from './goods/category';
-import goodsList from './goods/list';
-import gatewayConfig from './gateway/config';
-
 import { createBrowserHistory } from 'history';
+
+import users from './pages/setting/users';
+import gatewayConfig from './pages/gateway/config';
+// import proxyConfig from './pages/proxy/config';
+import client from './pages/client';
+import tunnel from './pages/tunnel';
+import server from './pages/server';
 
 import './App.scss';
 
@@ -23,14 +23,15 @@ export default () => (
         authProvider={authProvider}
         i18nProvider={i18nProvider}
         history={createBrowserHistory()}
-        customRoutes={routes}
         dashboard={Dashboard}
         brand={Brand}
         menu={Menu}
     >
-        <Resource name="store" {...goodsList} />
-        <Resource name="goods/category" {...goodsCategory} />
         <Resource name="user/list" {...users} />
         <Resource name="gateway/list" {...gatewayConfig} />
+        {/* <Resource name="proxy/list" {...proxyConfig} /> */}
+        <Resource name="client" {...client} />
+        <Resource name="tunnel" {...tunnel} />
+        <Resource name="server" {...server} />
     </Prophet>
 );

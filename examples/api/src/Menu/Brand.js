@@ -12,7 +12,7 @@ export const Brand = () => (
         }}
     >
         <a href="/" style={{ color: '#fff' }}>
-            前端网关配置系统
+            前端网关系统
         </a>
     </div>
 );

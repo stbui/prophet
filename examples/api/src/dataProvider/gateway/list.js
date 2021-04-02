@@ -29,7 +29,7 @@ const api = [
         serviceType: 'HTTP',
         serviceTimeout: 60,
         serviceConfig: {
-            url: 'seraph-metadata.test.za-tech.net',
+            url: 'api.stbui.com',
             path: '/v1/app/getMyApprovedApp',
             method: 'GET',
         },
@@ -96,7 +96,7 @@ const api = [
         serviceType: 'HTTP',
         serviceTimeout: 60,
         serviceConfig: {
-            url: 'seraph-alarm-center.test.za-tech.net',
+            url: 'api.stbui.com',
             path: '/kpi/rule/queryKpiRuleByParam',
             method: 'POST',
         },
@@ -163,7 +163,7 @@ const api = [
         serviceType: 'HTTP',
         serviceTimeout: 60,
         serviceConfig: {
-            url: 'za-jonsnow.test.za-tech.net',
+            url: 'api.stbui.com',
             path: '/v1/api/getRoles',
             method: 'GET',
         },
