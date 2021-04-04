@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
 import { useRedirect } from '@stbui/prophet-core';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-export interface ShowButtonProps {
+export interface ShowButtonProps extends ButtonProps {
     basePath: string;
     label?: string;
-    type?: any;
-    size?: any;
-    id: any;
 }
 
 export const ShowButton: FC<ShowButtonProps> = ({

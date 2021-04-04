@@ -5,7 +5,9 @@
  */
 
 import { createContext } from 'react';
-import { AuthProvider } from '../types';
+import { AuthProvider, UserIdentity } from '../types';
+
+const defaultIdentity: UserIdentity = { id: '' };
 
 const defaultProvider: AuthProvider = {
     login: () => Promise.resolve(),
@@ -13,6 +15,7 @@ const defaultProvider: AuthProvider = {
     checkAuth: () => Promise.resolve(),
     checkError: () => Promise.resolve(),
     getPermissions: () => Promise.resolve(),
+    getIdentity: () => Promise.resolve(defaultIdentity),
 };
 
 const AuthProviderContext = createContext<AuthProvider>(defaultProvider);

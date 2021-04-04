@@ -1,6 +1,6 @@
 import React, { cloneElement, FunctionComponent } from 'react';
 import { useListController } from '@stbui/prophet-core';
-import { Spin, Drawer } from 'antd';
+import { Spin, Drawer, DrawerProps } from 'antd';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import ListActions from './ListActions';
 
@@ -14,7 +14,7 @@ interface Props {
     edit?: any;
     show?: any;
     destroyOnClose?: any;
-    drawer?: any;
+    drawer?: DrawerProps;
 }
 
 export const ListView: FunctionComponent<Props> = props => {

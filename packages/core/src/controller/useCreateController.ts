@@ -10,6 +10,7 @@ import { parse } from 'query-string';
 import { useCreate } from '../dataProvider';
 import { useNotify, useRedirect, useRefresh } from '../sideEffect';
 import useVersion from './useVersion';
+import { useResourceContext } from '../core';
 
 export interface CreateControllerProps {
     resource: string;
@@ -67,15 +68,8 @@ export const getRecord = ({ state, search }, record: any = {}) =>
         : record;
 
 const useCreateController = (props: CreateProps): CreateControllerProps => {
-    const {
-        resource,
-        basePath,
-        hasEdit,
-        hasShow,
-        record = {},
-        successMessage,
-    } = props;
-
+    const { basePath, hasEdit, hasShow, record = {}, successMessage } = props;
+    const resource = useResourceContext(props);
     const location = useLocation();
     const notify = useNotify();
     const redirect = useRedirect();

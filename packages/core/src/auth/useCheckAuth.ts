@@ -49,7 +49,7 @@ const useCheckAuth = (): CheckAuth => {
 
     const checkAuth = useCallback(
         (
-            params = {},
+            params: any = {},
             logoutOnFailure = true,
             redirectTo = defaultAuthParams.loginUrl,
             disableNotification = false

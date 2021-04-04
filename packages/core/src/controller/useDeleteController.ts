@@ -7,6 +7,7 @@
 import { useCallback } from 'react';
 import { useDelete } from '../dataProvider';
 import { useNotify, useRedirect, useRefresh } from '../sideEffect';
+import { useResourceContext } from '../core';
 
 export interface DeleteProps {
     resource: string;
@@ -33,7 +34,8 @@ export interface DeleteProps {
  * }
  */
 export const useDeleteController = (props: DeleteProps) => {
-    const { resource, basePath, id, record, successMessage } = props;
+    const { basePath, id, record, successMessage } = props;
+    const resource = useResourceContext(props);
     const notify = useNotify();
     const refresh = useRefresh();
 

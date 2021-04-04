@@ -1,13 +1,13 @@
 import React, { cloneElement, useState, FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, ButtonProps, DrawerProps } from 'antd';
 
 export interface CreateDrawerButtonProps {
     children?: any;
     label?: string;
     type?: any;
-    drawer?: any;
-    button?: any;
+    drawer?: DrawerProps;
+    button?: ButtonProps;
     allowRefresh?: boolean;
 }
 

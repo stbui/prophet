@@ -5,6 +5,7 @@
  */
 
 import { useSelector, shallowEqual } from 'react-redux';
+import get from 'lodash/get';
 import useQueryWithStore from './useQueryWithStore';
 import { GET_LIST, CRUD_GET_LIST } from '../actions';
 import { Pagination, Sort } from '../types';
@@ -17,6 +18,11 @@ export interface UseGetListValue {
     loaded?: boolean;
     ids?: any;
 }
+
+const defautlPagination = { page: 1, perPage: 10 };
+const defaultSort = { field: 'id', order: 'DESC' };
+const defaultFilter = {};
+const defaultIds = [];
 
 /**
  * useGetList
@@ -52,11 +58,13 @@ export interface UseGetListValue {
  */
 export const useGetList = (
     resource: string,
-    pagination: Pagination,
-    filter: Object,
-    sort: Sort,
+    pagination: Pagination = defautlPagination,
+    filter: Object = defaultFilter,
+    sort: Sort = defaultSort,
     options?: object
 ): UseGetListValue => {
+    const requestSignature = JSON.stringify({ pagination, sort, filter });
+
     const { data: ids, total, loading, loaded, error } = useQueryWithStore(
         {
             type: GET_LIST,
@@ -65,22 +73,39 @@ export const useGetList = (
         },
         { ...options, action: CRUD_GET_LIST },
         state =>
-            state.resources[resource]
-                ? state.resources[resource].list.ids
-                : null,
+            get(
+                state.resources,
+                [resource, 'list', 'cachedRequests', requestSignature, 'ids'],
+                null
+            ),
         state =>
-            state.resources[resource]
-                ? state.resources[resource].list.total
-                : null
+            get(state.resources, [
+                resource,
+                'list',
+                'cachedRequests',
+                requestSignature,
+                'total',
+            ])
     );
 
     const data = useSelector(
         (state: any) =>
-            state.resources[resource] ? state.resources[resource].data : null,
+            get(
+                state.resources,
+                [resource, 'list', 'cachedRequests', requestSignature, 'data'],
+                null
+            ),
         shallowEqual
     );
 
-    return { data, ids, total, loading, loaded, error };
+    return {
+        data,
+        ids: ids === null ? defaultIds : ids,
+        total,
+        loading,
+        loaded,
+        error,
+    };
 };
 
 export default useGetList;

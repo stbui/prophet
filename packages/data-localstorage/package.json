@@ -1,31 +1,31 @@
 {
-    "name": "@stbui/prophet-i18n-polyglot",
+    "name": "@stbui/prophet-data-localstorage",
+    "private": true,
     "version": "3.0.1",
     "description": "用于构建中后台前端应用框架",
+    "author": "stbui <w431106@163.com>",
+    "homepage": "https://github.com/stbui/propht#readme",
+    "license": "ISC",
     "main": "lib/index",
     "module": "esm/index.js",
     "types": "esm/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stbui/propht.git"
+    },
     "scripts": {
         "build": "yarn run build-cjs && yarn run build-esm",
         "build-cjs": "rimraf ./lib && tsc",
         "build-esm": "rimraf ./esm && tsc --outDir esm --module es2015",
         "watch": "rimraf ./lib && tsc --watch"
     },
+    "bugs": {
+        "url": "https://github.com/stbui/propht/issues"
+    },
     "dependencies": {
-        "@stbui/prophet-core": "^3.0.1",
-        "node-polyglot": "^2.4.0"
+        "@stbui/prophet-core": "^3.0.1"
     },
     "publishConfig": {
         "access": "public"
-    },
-    "author": "stbui",
-    "homepage": "https://github.com/stbui/prophet#readme",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/stbui/prophet.git"
-    },
-    "bugs": {
-        "url": "https://github.com/stbui/prophet/issues"
     }
 }

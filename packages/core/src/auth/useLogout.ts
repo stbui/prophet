@@ -35,7 +35,7 @@ const useLogout = (): Logout => {
 
     const logout = useCallback(
         (
-            params = {},
+            params: any = {},
             redirectTo = defaultAuthParams.loginUrl,
             redirectToCurrentLocationAfterLogin = true
         ) =>

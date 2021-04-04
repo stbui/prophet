@@ -19,3 +19,8 @@ export {
     CoreUI,
     Resource,
 };
+
+export * from './ResourceContext';
+export * from './ResourceContextProvider';
+export * from './useResourceContext';
+export * from './useGetResourceLabel';

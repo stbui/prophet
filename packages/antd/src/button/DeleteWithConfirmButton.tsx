@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useDeleteController, useTranslate } from '@stbui/prophet-core';
-import { Popconfirm, Button } from 'antd';
+import { Popconfirm, Button, PopconfirmProps, ButtonProps } from 'antd';
 
 export interface DeleteButtonConfirmProps {
     basePath?: string;
@@ -11,8 +11,8 @@ export interface DeleteButtonConfirmProps {
     size?: any;
     type?: any;
     okText?: any;
-    popConfirm?: any;
-    button?: any;
+    popConfirm?: PopconfirmProps;
+    button?: ButtonProps;
 }
 
 const DeleteWithConfirmButton: FC<DeleteButtonConfirmProps> = ({

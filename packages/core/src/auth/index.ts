@@ -15,6 +15,8 @@ import usePermissions from './usePermissions';
 import useAuthState from './useAuthState';
 import Authenticated from './Authenticated';
 import WithPermissions from './WithPermissions';
+import useGetIdentity from './useGetIdentity';
+import useLogoutIfAccessDenied from './useLogoutIfAccessDenied';
 
 export {
     AuthProviderContext,
@@ -28,4 +30,6 @@ export {
     WithPermissions,
     usePermissions,
     useAuthState,
+    useGetIdentity,
+    useLogoutIfAccessDenied,
 };

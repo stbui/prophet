@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-export interface RefreshButtonProps {
+export interface RefreshButtonProps extends ButtonProps {
     label?: string;
-    type?: any;
-    onClick?: any;
 }
 
 const RefreshButton: FC<RefreshButtonProps> = ({
@@ -16,9 +14,9 @@ const RefreshButton: FC<RefreshButtonProps> = ({
 }) => {
     const refresh = useRefresh();
 
-    const handleClick = () => {
+    const handleClick = event => {
         refresh();
-        onClick && onClick();
+        onClick && onClick(event);
     };
 
     return (

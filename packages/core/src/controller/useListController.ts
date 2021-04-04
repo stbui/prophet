@@ -9,6 +9,7 @@ import { useListParams } from './useListParams';
 import { useGetList } from '../dataProvider';
 import useVersion from './useVersion';
 import { useNotify } from '../sideEffect';
+import { useResourceContext } from '../core';
 
 export interface ListProps {
     resource: string;
@@ -64,7 +65,6 @@ export interface ListControllerProps {
  */
 export const useListController = (props: ListProps): ListControllerProps => {
     const {
-        resource,
         basePath,
         hasCreate,
         filterDefaultValues,
@@ -73,6 +73,7 @@ export const useListController = (props: ListProps): ListControllerProps => {
         perPage = 10,
         debounce = 500,
     } = props;
+    const resource = useResourceContext(props);
 
     if (filter && isValidElement(filter)) {
         throw new Error('<List filter={{}}>...</List>');

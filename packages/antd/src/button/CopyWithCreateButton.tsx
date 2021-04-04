@@ -1,15 +1,11 @@
 import React, { FC } from 'react';
 import { useDataProvider, useRedirect, GET_ONE } from '@stbui/prophet-core';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-export interface CopyButtonProps {
+export interface CopyButtonProps extends ButtonProps {
     basePath: string;
     resource: string;
-    id: string | number;
     label?: string;
-    type?: any;
-    size?: any;
-    [key: string]: any;
 }
 
 const CopyWithCreateButton: FC<CopyButtonProps> = ({

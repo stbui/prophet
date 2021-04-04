@@ -1,14 +1,12 @@
 import React, { useState, FC } from 'react';
 import { useRefresh } from '@stbui/prophet-core';
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, ButtonProps, DrawerProps } from 'antd';
 
-export interface EditDrawerButtonProps {
+export interface EditDrawerButtonProps extends ButtonProps {
     children?: any;
     label?: string;
-    type?: string;
-    drawer?: any;
-    button?: any;
-    size?: string;
+    drawer?: DrawerProps;
+    button?: ButtonProps;
     allowRefresh?: boolean;
 }
 

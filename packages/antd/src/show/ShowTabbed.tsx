@@ -11,15 +11,15 @@ import {
     useHistory,
     Route,
 } from 'react-router-dom';
-import { Tabs } from 'antd';
+import { Tabs, TabsProps, TabPaneProps } from 'antd';
 
-interface Props {
+interface Props extends TabsProps {
     children: any;
     resource?: string;
     basePath?: string;
     Tab?: any;
     record?: any;
-    tabPane?: any;
+    tabPane?: TabPaneProps;
 }
 
 export const getTabFullPath = (tab, index, baseUrl) =>

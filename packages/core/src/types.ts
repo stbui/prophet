@@ -56,5 +56,13 @@ export type AuthProvider = {
     checkAuth: (params: any) => Promise<void>;
     checkError: (error: any) => Promise<void>;
     getPermissions: (params: any) => Promise<any>;
+    getIdentity?: () => Promise<any>;
     [key: string]: any;
 };
+
+export interface UserIdentity {
+    id: number | string;
+    fullName?: string;
+    avatar?: string;
+    [key: string]: any;
+}

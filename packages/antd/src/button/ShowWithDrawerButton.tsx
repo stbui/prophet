@@ -1,11 +1,11 @@
 import React, { useState, FC } from 'react';
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, ButtonProps, DrawerProps } from 'antd';
 
 export interface ShowDrawerButtonProps {
     children?: any;
     label?: string;
-    drawer?: any;
-    button?: any;
+    drawer?: DrawerProps;
+    button?: ButtonProps;
 }
 
 const ShowWithDrawerButton: FC<ShowDrawerButtonProps> = ({

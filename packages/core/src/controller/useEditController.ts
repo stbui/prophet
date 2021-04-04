@@ -8,6 +8,7 @@ import { useCallback } from 'react';
 import { useUpdate, useGetOne } from '../dataProvider';
 import { useNotify, useRedirect, useRefresh } from '../sideEffect';
 import useVersion from './useVersion';
+import { useResourceContext } from '../core';
 
 export interface EditProps {
     resource: string;
@@ -43,7 +44,8 @@ export interface EditControllerProps {
  * }
  */
 export const useEditController = (props: EditProps): EditControllerProps => {
-    const { resource, basePath, id, successMessage } = props;
+    const { basePath, id, successMessage } = props;
+    const resource = useResourceContext(props);
     const notify = useNotify();
     const redirect = useRedirect();
     const version = useVersion();

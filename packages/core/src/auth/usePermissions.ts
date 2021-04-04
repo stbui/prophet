@@ -12,6 +12,14 @@ interface Permissions {
     loaded: boolean;
     [key: string]: any;
 }
+
+interface State {
+    loading: boolean;
+    loaded: boolean;
+    permissions?: any;
+    error?: any;
+}
+
 /**
  *
  * @param params
@@ -30,7 +38,7 @@ interface Permissions {
  * };
  */
 const usePermissions = (params = {}): Permissions => {
-    const [state, setState] = useState<any>({
+    const [state, setState] = useState<State>({
         loading: true,
         loaded: false,
     });
@@ -48,7 +56,7 @@ const usePermissions = (params = {}): Permissions => {
                     error,
                 });
             });
-    }, [JSON.stringify(params), setState]);
+    }, [getPermissions, JSON.stringify(params), setState]);
 
     return state;
 };

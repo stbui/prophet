@@ -1,5 +1,5 @@
 import React, { useState, cloneElement, FC } from 'react';
-import { Popover, Button } from 'antd';
+import { Popover, Button, PopoverProps, ButtonProps } from 'antd';
 
 export interface EditPopoverButtonProps {
     basePath?: string;
@@ -7,8 +7,8 @@ export interface EditPopoverButtonProps {
     id?: any;
     title?: any;
     content: any;
-    popover?: any;
-    button?: any;
+    popover?: PopoverProps;
+    button?: ButtonProps;
     type?: any;
     size?: any;
 }

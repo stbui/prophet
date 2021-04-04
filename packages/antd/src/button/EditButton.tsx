@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
 import { useRedirect } from '@stbui/prophet-core';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-export interface EditButtonProps {
+export interface EditButtonProps extends ButtonProps {
     basePath: string;
-    id: string | number;
     label?: string;
-    type?: any;
-    size?: any;
 }
 
 const EditButton: FC<EditButtonProps> = ({

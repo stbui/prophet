@@ -1,16 +1,13 @@
 import React from 'react';
 import { useMutation, useNotify, useRefresh } from '@stbui/prophet-core';
 
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, ButtonProps, PopconfirmProps } from 'antd';
 
-export interface EnableButtonProps {
+export interface EnableButtonProps extends ButtonProps {
     resource: string;
-    id: string | number;
-    is: boolean;
-    type?: string;
     record?: any;
-    button?: any;
-    popconfirm?: any;
+    button?: ButtonProps;
+    popconfirm?: PopconfirmProps;
 }
 
 export const EnabledButton: React.FC<EnableButtonProps> = props => {
@@ -31,6 +28,7 @@ export const EnabledButton: React.FC<EnableButtonProps> = props => {
 
     const onClick = () =>
         update(
+            // @ts-ignore
             { data: record },
             {
                 onSuccess: () => {

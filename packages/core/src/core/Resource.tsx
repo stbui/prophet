@@ -4,17 +4,13 @@
  * https://github.com/stbui
  */
 
-import React, {
-    useEffect,
-    useMemo,
-    FunctionComponent,
-    ComponentType,
-} from 'react';
+import React, { useEffect, useMemo, FC, ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 
 import { WithPermissions } from '../auth';
 import { registerResource, unregisterResource } from '../actions';
+import { ResourceContextProvider } from './ResourceContextProvider';
 
 export interface ResourceProps {
     name: string;
@@ -29,7 +25,7 @@ export interface ResourceProps {
     intent?: 'route' | 'registration';
 }
 
-const ResourceRegister: FunctionComponent<ResourceProps> = ({
+const ResourceRegister: FC<ResourceProps> = ({
     label,
     name,
     list,
@@ -63,7 +59,7 @@ const ResourceRegister: FunctionComponent<ResourceProps> = ({
     return null;
 };
 
-const ResourceRoutes: FunctionComponent<ResourceProps> = ({
+const ResourceRoutes: FC<ResourceProps> = ({
     label,
     name,
     list,
@@ -94,67 +90,69 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
         };
 
         return (
-            <Switch>
-                {create && (
-                    <Route
-                        path={`${basePath}/create`}
-                        render={routeProps => (
-                            <WithPermissions
-                                component={create}
-                                basePath={basePath}
-                                {...routeProps}
-                                {...resource}
-                            />
-                        )}
-                    />
-                )}
-                {show && (
-                    <Route
-                        path={`${basePath}/:id/show`}
-                        render={(routeProps: any) => (
-                            <WithPermissions
-                                component={show}
-                                basePath={basePath}
-                                id={decodeURIComponent(
-                                    routeProps.match.params.id
-                                )}
-                                {...routeProps}
-                                {...resource}
-                            />
-                        )}
-                    />
-                )}
-                {edit && (
-                    <Route
-                        path={`${basePath}/:id`}
-                        render={(routeProps: any) => (
-                            <WithPermissions
-                                component={edit}
-                                basePath={basePath}
-                                id={decodeURIComponent(
-                                    routeProps.match.params.id
-                                )}
-                                {...routeProps}
-                                {...resource}
-                            />
-                        )}
-                    />
-                )}
+            <ResourceContextProvider value={name}>
+                <Switch>
+                    {create && (
+                        <Route
+                            path={`${basePath}/create`}
+                            render={routeProps => (
+                                <WithPermissions
+                                    component={create}
+                                    basePath={basePath}
+                                    {...routeProps}
+                                    {...resource}
+                                />
+                            )}
+                        />
+                    )}
+                    {show && (
+                        <Route
+                            path={`${basePath}/:id/show`}
+                            render={(routeProps: any) => (
+                                <WithPermissions
+                                    component={show}
+                                    basePath={basePath}
+                                    id={decodeURIComponent(
+                                        routeProps.match.params.id
+                                    )}
+                                    {...routeProps}
+                                    {...resource}
+                                />
+                            )}
+                        />
+                    )}
+                    {edit && (
+                        <Route
+                            path={`${basePath}/:id`}
+                            render={(routeProps: any) => (
+                                <WithPermissions
+                                    component={edit}
+                                    basePath={basePath}
+                                    id={decodeURIComponent(
+                                        routeProps.match.params.id
+                                    )}
+                                    {...routeProps}
+                                    {...resource}
+                                />
+                            )}
+                        />
+                    )}
 
-                {list && (
-                    <Route
-                        path={basePath}
-                        render={routeProps => (
-                            <WithPermissions
-                                component={list}
-                                basePath={basePath}
-                                {...routeProps}
-                                {...resource}
-                            />
-                        )}
-                    />
-                )}
-            </Switch>
+                    {list && (
+                        <Route
+                            path={basePath}
+                            render={routeProps => (
+                                <WithPermissions
+                                    component={list}
+                                    basePath={basePath}
+                                    {...routeProps}
+                                    {...resource}
+                                />
+                            )}
+                        />
+                    )}
+                </Switch>
+            </ResourceContextProvider>
         );
     }, [
         basePath,
@@ -169,10 +167,7 @@ const ResourceRoutes: FunctionComponent<ResourceProps> = ({
     ]);
 };
 
-const Resource: FunctionComponent<ResourceProps> = ({
-    intent = 'route',
-    ...props
-}) => {
+const Resource: FC<ResourceProps> = ({ intent = 'route', ...props }) => {
     return intent === 'registration' ? (
         <ResourceRegister {...props} />
     ) : (

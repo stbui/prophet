@@ -13,7 +13,7 @@ const downloadCSV = (content: string, filename: string) => {
     const link = document.createElement('a');
     link.style.display = 'none';
     document.appendChild(link);
-    const blob = new Blob([content], { type: 'text/csv' });
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8' });
     link.setAttribute('href', URL.createObjectURL(blob));
     link.setAttribute('download', `${filename}.csv`);
     link.click();

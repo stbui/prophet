@@ -20,7 +20,7 @@ import useCheckAuth from './useCheckAuth';
  *   return <div>ok</div>
  * }
  */
-const useAuthenticated = (params = {}) => {
+const useAuthenticated = (params: any = {}) => {
     const checkAuth = useCheckAuth();
     useEffect(() => {
         checkAuth(params).catch(() => {});

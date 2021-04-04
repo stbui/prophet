@@ -6,6 +6,8 @@
 
 import { useGetOne } from '../dataProvider';
 import { useNotify } from '../sideEffect';
+import useVersion from './useVersion';
+import { useResourceContext } from '../core';
 
 export interface ShowProps {
     resource: string;
@@ -19,6 +21,7 @@ export interface ShowControllerProps {
     record: any;
     loading: any;
     loaded: any;
+    version: number;
 }
 
 /**
@@ -36,8 +39,10 @@ export interface ShowControllerProps {
  * }
  */
 export const useShowController = (props: ShowProps): ShowControllerProps => {
-    const { resource, basePath, id } = props;
+    const { basePath, id } = props;
+    const resource = useResourceContext(props);
     const notify = useNotify();
+    const version = useVersion();
 
     const { data: record, loading, loaded } = useGetOne(resource, id, {
         onFailure: error =>
@@ -55,6 +60,7 @@ export const useShowController = (props: ShowProps): ShowControllerProps => {
         record,
         loading,
         loaded,
+        version,
     };
 };
 

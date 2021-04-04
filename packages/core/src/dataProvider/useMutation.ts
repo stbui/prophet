@@ -7,20 +7,24 @@
 import { useCallback, useState } from 'react';
 import useDataProvider from './useDataProvider';
 
-export interface Query {
+export interface Mutation {
     type: string;
     resource: string;
     payload: object;
 }
 
-export interface QueryOptions {
+export interface MutationOptions {
     action?: string;
     onSuccess?: (response: any) => any | Object;
     onFailure?: (error?: any) => any | Object;
+    [key: string]: any;
 }
 
 export type UseMutationValue = [
-    (query?: Partial<any>, options?: Partial<any>) => void,
+    (
+        query?: Partial<Mutation>,
+        options?: Partial<MutationOptions>
+    ) => void | Promise<any>,
     {
         data?: any;
         total?: number;
@@ -85,7 +89,10 @@ export type UseMutationValue = [
  *     );
  * };
  */
-const useMutation = (query: Query, options: QueryOptions): UseMutationValue => {
+const useMutation = (
+    query: Mutation,
+    options: MutationOptions
+): UseMutationValue => {
     const { type, resource, payload } = query;
     const [state, setState]: any = useState({
         data: null,
@@ -98,7 +105,7 @@ const useMutation = (query: Query, options: QueryOptions): UseMutationValue => {
     const dataProvider = useDataProvider();
 
     const mutate = useCallback(
-        (callTimeQuery, callTimeOptions = {}) => {
+        (callTimeQuery: any, callTimeOptions: any = {}) => {
             setState(prevState => ({ ...prevState, loading: true }));
 
             dataProvider(

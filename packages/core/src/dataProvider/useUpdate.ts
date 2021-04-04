@@ -5,7 +5,7 @@
  */
 
 import { UPDATE, CRUD_UPDATE } from '../actions';
-import useMuation from './useMutation';
+import useMuation, { MutationOptions } from './useMutation';
 
 export type UseUpdateValue = [
     (query?: Partial<any>, options?: Partial<any>) => void,
@@ -54,7 +54,7 @@ const useUpdate = (
     id: string | number,
     data?: any,
     previousData?: any,
-    options?: any
+    options?: MutationOptions
 ): UseUpdateValue =>
     useMuation(
         { type: UPDATE, resource, payload: { id, data, previousData } },

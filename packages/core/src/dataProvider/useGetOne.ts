@@ -4,6 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
+import get from 'lodash/get';
 import useQueryWithStore from './useQueryWithStore';
 import { GET_ONE, CRUD_GET_ONE } from '../actions';
 
@@ -56,10 +57,15 @@ export const useGetOne = (
             payload: { id },
         },
         { ...options, action: CRUD_GET_ONE },
-        state =>
-            state.resources[resource]
-                ? state.resources[resource].data[id]
-                : null
+        state => {
+            if (
+                Object.keys(state.resources).length > 0 &&
+                !state.resources[resource]
+            ) {
+                throw new Error(`"${resource}" 在 <Resource> 中没有定义。`);
+            }
+            return get(state, ['resources', resource, 'data', id]);
+        }
     );
 
 export default useGetOne;

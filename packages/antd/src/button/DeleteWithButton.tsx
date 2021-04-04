@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 import { useDeleteController } from '@stbui/prophet-core';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
 
-export interface DeleteButtonViewProps {
+export interface DeleteButtonViewProps extends ButtonProps {
     basePath?: string;
     label?: string;
     record: any;
     remove: any;
     deleting?: any;
-    size?: any;
-    type?: any;
 }
 
 export const DeleteWithButtonView: FC<DeleteButtonViewProps> = ({
