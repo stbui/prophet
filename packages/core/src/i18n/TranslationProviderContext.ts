@@ -23,8 +23,8 @@ const defaultProvider = {
     },
 };
 
-const TranslationProviderContext = createContext<
-    TranslationProviderContextProps
->(defaultProvider);
+const TranslationProviderContext = createContext<TranslationProviderContextProps>(
+    defaultProvider
+);
 
 export default TranslationProviderContext;

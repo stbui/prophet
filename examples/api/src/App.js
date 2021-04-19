@@ -29,6 +29,35 @@ export default () => (
     >
         <Resource name="user/list" {...users} />
         <Resource name="gateway/list" {...gatewayConfig} />
+        <Resource
+            name="gateway/api"
+            {...require('./pages/gateway/api').default}
+        />
+        <Resource
+            name="gateway/group"
+            {...require('./pages/gateway/group').default}
+        />
+        <Resource
+            name="gateway/plugin"
+            {...require('./pages/gateway/plugin').default}
+        />
+        <Resource
+            name="gateway/appid"
+            {...require('./pages/gateway/appid').default}
+        />
+        <Resource
+            name="gateway/ip"
+            {...require('./pages/gateway/ip').default}
+        />
+        <Resource
+            name="gateway/flow"
+            {...require('./pages/gateway/flow').default}
+        />
+        <Resource
+            name="gateway/log"
+            {...require('./pages/gateway/log').default}
+        />
+
         {/* <Resource name="proxy/list" {...proxyConfig} /> */}
         <Resource name="client" {...client} />
         <Resource name="tunnel" {...tunnel} />
