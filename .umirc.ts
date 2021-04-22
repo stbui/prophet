@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
     title: '先知',
-    logo: false,
+    logo: ' ',
     outputPath: 'docs-dist',
     mode: 'site',
     hash: true,

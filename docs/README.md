@@ -1,7 +1,7 @@
 ---
-title: Prophet - 中后台前端应用框
+title: 先知
 hero:
-    title: prophet - 先知
+    title: 中后台前端应用框
     desc: 可以快速帮你构建后台管理的中后台前端应用框架，能帮助你使用很少的代码就实现功能完善的后台管理功能。
     actions:
         - text: 快速上手 →
