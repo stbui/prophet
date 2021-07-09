@@ -7,15 +7,23 @@
 import { Reducer } from 'redux';
 import { CRUD_CHANGE_LIST_PARAMS } from '../../../actions/listActions';
 
+export interface ParamsState {
+    sort: string;
+    order: string;
+    page: number;
+    perPage: number;
+    filter: any;
+}
+
 const initialState = {
-    sort: null,
-    order: null,
+    sort: 'DESC',
+    order: 'id',
     page: 1,
-    perPage: null,
+    perPage: 10,
     filter: {},
 };
 
-const paramsReducer: Reducer<any> = (
+const paramsReducer: Reducer<ParamsState> = (
     previousState = initialState,
     { type, payload }
 ) => {

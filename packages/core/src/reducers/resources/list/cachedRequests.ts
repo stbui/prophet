@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { Reducer } from 'redux';
 import {
     REFRESH_VIEW,

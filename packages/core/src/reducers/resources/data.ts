@@ -11,6 +11,7 @@ import {
     GET_ONE,
     UPDATE,
     CREATE,
+    DELETE,
 } from '../../actions/dataFatchActions';
 import { FETCH_END } from '../../actions/fetchActions';
 import { getFetchedAt } from '../../util';
@@ -44,7 +45,7 @@ export const addRecordsAndRemoveOutdated = (
     newRecords: Record[] = [],
     oldRecords: RecordSetWithDate
 ): RecordSetWithDate => {
-    const newRecordsById = {};
+    const newRecordsById: any = {};
     newRecords.forEach(record => (newRecordsById[record.id] = record));
 
     const newFetchedAt = getFetchedAt(
@@ -52,7 +53,7 @@ export const addRecordsAndRemoveOutdated = (
         oldRecords.fetchedAt
     );
 
-    const records = { fetchedAt: newFetchedAt };
+    const records: any = { fetchedAt: newFetchedAt };
     Object.keys(newFetchedAt).forEach(
         id =>
             (records[id] = newRecordsById[id]
@@ -74,7 +75,7 @@ export const addRecords = (
     newRecords: Record[] = [],
     oldRecords: RecordSetWithDate
 ): RecordSetWithDate => {
-    const newRecordsById = { ...oldRecords };
+    const newRecordsById: any = { ...oldRecords };
     newRecords.forEach(record => {
         newRecordsById[record.id] = isEqual(record, oldRecords[record.id])
             ? (oldRecords[record.id] as Record)
@@ -95,19 +96,24 @@ export const addRecords = (
 };
 
 /**
- * 直接替换成的数据
- * @param newRecord
- * @param oldRecords
- * @param date
+ * 更新相同id中的数据
+ * @param {Record} newRecord
+ * @param {RecordSetWithDate}  oldRecords
+ * @param {date} date
  *
- * @returns {object}
+ * @returns {RecordSetWithDate}
+ *
+ * @example
+ * const newRecord = [{id:1, name: 'prophet'}];
+ * const oldRecords = [{id:1, name: 'stbui'}]
+ * const record = addOneRecord(newRecord, oldRecords)
  */
 export const addOneRecord = (
     newRecord: Record,
     oldRecords: RecordSetWithDate,
     date = new Date()
 ): RecordSetWithDate => {
-    const newRecordsById = {
+    const newRecordsById: any = {
         ...oldRecords,
         [newRecord.id]: isEqual(newRecord, oldRecords[newRecord.id])
             ? oldRecords[newRecord.id]
@@ -120,8 +126,8 @@ export const addOneRecord = (
     });
 };
 
-const includesNotStrict = (items, element) =>
-    items.some(item => item == element);
+const includesNotStrict = (items: any, element: any) =>
+    items.some((item: any) => item == element);
 
 /**
  * 删除记录
@@ -150,6 +156,22 @@ const dataReducer: Reducer<RecordSetWithDate> = (
     previousState = initialState,
     { payload, meta }
 ) => {
+    if (meta && meta.optimistic) {
+        // 更新状态数据
+
+        if (meta.fetch === UPDATE) {
+            const updatedRecord = {
+                ...previousState[payload.id],
+                ...payload.data,
+            };
+            return addOneRecord(updatedRecord, previousState);
+        }
+
+        if (meta.fetch === DELETE) {
+            return removeRecords([payload.id], previousState);
+        }
+    }
+
     if (!meta || !meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
         return previousState;
     }

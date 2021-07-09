@@ -7,11 +7,12 @@
     "scripts": {
         "build": "lerna run build",
         "release": "yarn run build && lerna publish --exact --conventional-commits",
+        "release:lerna": "lerna publish --exact --conventional-commits",
         "demo": "cd examples/demo && yarn run start",
         "start": "cd examples/starter && yarn run start",
         "docs": "dumi dev",
         "docs:build": "dumi build",
-        "docs:github": "dumi build && gh-pages -d dist",
+        "docs:github": "yarn docs:build && gh-pages -d dist",
         "prettier": "prettier --config ./.prettierrc.js --write --list-different \"packages/*/src/**/*.{js,json,ts,tsx}\""
     },
     "author": "stbui",

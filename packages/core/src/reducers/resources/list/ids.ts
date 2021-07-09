@@ -7,10 +7,14 @@
 import { Reducer } from 'redux';
 import uniq from 'lodash/uniq';
 
-import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS } from '../../../actions';
+import {
+    CRUD_GET_LIST_SUCCESS,
+    CRUD_CREATE_SUCCESS,
+    DELETE,
+} from '../../../actions';
 
 /**
- * id列表
+ * 数据字典，将id作为键值
  * @param previousState
  * @param param1
  */
@@ -18,8 +22,20 @@ const idsReducer: Reducer<any> = (
     previousState = [],
     { meta, type, payload }
 ) => {
-    if (meta) {
+    if (meta && meta.optimistic) {
         // 删除id
+        if (meta.fetch === DELETE) {
+            const index = previousState
+                .map(el => el === payload.id)
+                .indexOf(true);
+            if (index === -1) {
+                return previousState;
+            }
+            return [
+                ...previousState.slice(0, index),
+                ...previousState.slice(index + 1),
+            ];
+        }
     }
 
     switch (type) {
@@ -33,3 +49,5 @@ const idsReducer: Reducer<any> = (
 };
 
 export default idsReducer;
+
+export const getIds = state => state;

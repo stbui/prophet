@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui
+ */
+
 import { Reducer } from 'redux';
 import {
     GET_LIST,
@@ -9,11 +15,16 @@ import {
     FETCH_END,
 } from '../../actions';
 
+interface ValidityRegistry {
+    [key: string]: Date;
+    [key: number]: Date;
+}
+
 const addIds = (
     ids: any[] = [],
     validUntil: Date,
-    oldValidityRegistry: any
-): any => {
+    oldValidityRegistry: ValidityRegistry
+): ValidityRegistry => {
     const validityRegistry = { ...oldValidityRegistry };
     ids.forEach(id => {
         validityRegistry[id] = validUntil;
@@ -21,7 +32,10 @@ const addIds = (
     return validityRegistry;
 };
 
-const removeIds = (ids: any[] = [], oldValidityRegistry: any): any => {
+const removeIds = (
+    ids: any[] = [],
+    oldValidityRegistry: ValidityRegistry
+): ValidityRegistry => {
     const validityRegistry = { ...oldValidityRegistry };
     ids.forEach(id => {
         delete validityRegistry[id];
@@ -29,12 +43,14 @@ const removeIds = (ids: any[] = [], oldValidityRegistry: any): any => {
     return validityRegistry;
 };
 
-const validityReducer: Reducer<any> = (
-    previousState = {},
+const initialState = {};
+
+const validityReducer: Reducer<ValidityRegistry> = (
+    previousState = initialState,
     { meta, type, payload, requestPayload }
 ) => {
     if (type === REFRESH_VIEW) {
-        return {};
+        return initialState;
     }
 
     if (

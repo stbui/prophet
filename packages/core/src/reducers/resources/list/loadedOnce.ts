@@ -7,7 +7,7 @@
 import { Reducer } from 'redux';
 import { CRUD_GET_LIST_SUCCESS } from '../../../actions';
 
-const loaderOnce: Reducer<any> = (previousState = false, { type }) => {
+const loaderOnce: Reducer<Boolean> = (previousState = false, { type }) => {
     if (previousState == true) {
         return previousState;
     }

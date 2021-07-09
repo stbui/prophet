@@ -5,16 +5,16 @@
  */
 
 import { Reducer } from 'redux';
-import {
-    CRUD_GET_LIST_SUCCESS,
-    CRUD_GET_ONE_SUCCESS,
-} from '../../../actions/dataActions';
+import { CRUD_GET_LIST_SUCCESS, DELETE } from '../../../actions';
 
 const totalReducer: Reducer<any> = (
     previousState = 0,
     { meta, type, payload }
 ) => {
-    if (meta) {
+    if (meta && meta.optimistic) {
+        if (meta.fetch === DELETE) {
+            return previousState === null ? null : previousState - 1;
+        }
     }
 
     switch (type) {

@@ -32,7 +32,7 @@ export const getFetchedAt = (
     now = new Date(),
     cacheDuration = defaultCacheDuration
 ): FetchedOutDates => {
-    const newFetchedAt = {};
+    const newFetchedAt: any = {};
     newRecordIds.forEach(recordId => (newFetchedAt[recordId] = now));
 
     const latestValidDate = new Date();

@@ -3,9 +3,10 @@ import { defineConfig } from 'dumi';
 export default defineConfig({
     title: '先知',
     logo: ' ',
-    outputPath: 'docs-dist',
+    outputPath: 'dist',
     mode: 'site',
     hash: true,
+    publicPath: '/prophet/',
     navs: [
         null,
         {
