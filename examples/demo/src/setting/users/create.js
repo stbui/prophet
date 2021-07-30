@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-export default class Create extends Component {
-  static propTypes = {};
-
-  render() {
+const CreatePage = () => {
     return <div>Create</div>;
-  }
-}
+};
+
+export default CreatePage;

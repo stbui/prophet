@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-export default class Edit extends Component {
-  static propTypes = {};
+const EditPage = () => {
+    return <div>edit</div>;
+};
 
-  render() {
-    return <div>Edit</div>;
-  }
-}
+export default EditPage;
