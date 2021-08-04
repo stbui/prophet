@@ -61,7 +61,7 @@ export const ListContext = createContext({
     total: null,
 });
 
-export const useListContext = () => {
+export const useListContext = (props?) => {
     const context = useContext(ListContext);
     return context;
 };

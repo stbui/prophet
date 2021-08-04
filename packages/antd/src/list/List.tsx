@@ -1,35 +1,26 @@
-import React, { cloneElement, Children, FunctionComponent } from 'react';
-import { useListController } from '@stbui/prophet-core';
-import { Spin } from 'antd';
-import ListActions from './ListActions';
+import React, { ReactElement } from 'react';
+import { useListController, ListContextProvider } from '@stbui/prophet-core';
+import ListView from './ListView';
 
-interface Props {
-    children?: any;
-    actions?: any;
-    loading?: boolean;
-    label?: string;
+interface ListProps {
+    resource: string;
+    basePath: string;
+    perPage?: number;
+    filter?: object;
 }
 
-const ListView: FunctionComponent<Props> = ({
-    children,
-    actions,
-    loading,
-    label,
-    ...other
-}) => (
-    <React.Fragment>
-        {label}
-        <Spin spinning={loading}>
-            {actions && cloneElement(actions, { ...other })}
-            {children && cloneElement(Children.only(children), { ...other })}
-        </Spin>
-    </React.Fragment>
-);
-
-ListView.defaultProps = {
-    actions: <ListActions />,
+const List = (props: ListProps): ReactElement => {
+    const controllerProps = useListController(props);
+    return (
+        <ListContextProvider value={controllerProps}>
+            <ListView {...props} {...controllerProps} />
+        </ListContextProvider>
+    );
 };
 
-const List = props => <ListView {...props} {...useListController(props)} />;
+List.defaultProps = {
+    filter: {},
+    perPage: 10,
+};
 
 export default List;
