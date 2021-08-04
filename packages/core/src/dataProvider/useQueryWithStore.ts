@@ -26,8 +26,8 @@ export interface UseQueryStoreValue {
     data?: any;
     total?: number;
     error?: any;
-    loading?: boolean;
-    loaded?: boolean;
+    loading: boolean;
+    loaded: boolean;
 }
 
 const isEmptyList = data =>

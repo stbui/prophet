@@ -22,10 +22,10 @@ export interface EditControllerProps {
     basePath: string;
     record: any;
     id: string | number;
-    loading: any;
-    loaded: any;
-    saving: any;
-    save: any;
+    loading: boolean;
+    loaded: boolean;
+    saving: boolean;
+    save: (data: any, option: any) => void;
     version: number;
 }
 

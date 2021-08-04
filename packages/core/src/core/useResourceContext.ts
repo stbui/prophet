@@ -19,6 +19,17 @@ import { ResourceContext } from './ResourceContext';
  *
  *   return getResourceLabel(resource);
  * }
+ *
+ * const App = () => {
+ *   <ResourceContextProvider value="users">
+ *      <ResourceName />
+ *   </ResourceContextProvider>
+ * }
+ *
+ * const Page = () => {
+ *   return <ResourceName resource="users"/>
+ * }
+ *
  */
 export const useResourceContext = props => {
     const context = useContext(ResourceContext);

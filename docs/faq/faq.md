@@ -37,3 +37,46 @@ export default () => (
 ### 定义的路由如何扩展
 
 参考 [packages/core/src/core/Resource.tsx](https://github.com/stbui/prophet/blob/master/packages/core/src/core/Resource.tsx)，添加新的路由
+
+### umi 中如何使用 prophet
+
+1. 添加 prophet 依赖
+
+```js
+  "dependencies": {
+    "@stbui/prophet": "^3.0.1",
+  },
+```
+
+2. 修改 umi 入口文件 `/src/app.ts`, 不使用框架预设的路由配置
+
+```js
+import Index from './pages/index.tsx';
+
+export function rootContainer() {
+    return React.createElement(Index);
+}
+```
+
+3. `./pages/index.tsx`自定义入口文件，使用 proheht 框架
+
+```js
+import React from 'react';
+import { Prophet, Resource } from '@stbui/prophet';
+import dataJsonServer from '@stbui/prophet-data-json-server';
+import 'antd/dist/antd.css';
+
+const App = () => {
+    return (
+        <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
+            <Resource
+                name="users"
+                list={props => <div>list</div>}
+                edit={props => <div>edit</div>}
+                create={props => <div>create</div>}
+                show={props => <div>show</div>}
+            />
+        </Prophet>
+    );
+};
+```

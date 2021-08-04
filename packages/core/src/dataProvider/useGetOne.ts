@@ -11,8 +11,8 @@ import { GET_ONE, CRUD_GET_ONE } from '../actions';
 export interface UseGetOneValue {
     data?: any;
     error?: any;
-    loading?: boolean;
-    loaded?: boolean;
+    loading: boolean;
+    loaded: boolean;
 }
 
 /**

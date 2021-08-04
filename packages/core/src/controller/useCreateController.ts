@@ -14,18 +14,18 @@ import { useResourceContext } from '../core';
 
 export interface CreateControllerProps {
     resource: string;
-    basePath: string;
+    basePath?: string;
     loading: boolean;
     loaded: boolean;
     save: (data: any, option: any) => void;
-    saving: any;
+    saving: boolean;
     record?: object;
     redirect: any;
     version: number;
 }
 export interface CreateProps {
-    resource: string;
-    basePath: string;
+    resource?: string;
+    basePath?: string;
     hasCreate?: boolean;
     hasEdit?: boolean;
     hasShow?: boolean;
@@ -59,13 +59,27 @@ export const getDefaultRedirectRoute = (
     return 'list';
 };
 
-// todo: 如果路由参数存在fitelr={}，可以会报错
-export const getRecord = ({ state, search }, record: any = {}) =>
-    state && state.record
-        ? state.record
-        : search
-        ? JSON.parse(parse(search).source)
-        : record;
+export const getRecord = ({ state, search }, record: any = {}) => {
+    if (state && state.record) {
+        return state.record;
+    }
+
+    if (search) {
+        try {
+            const searchParams = parse(search);
+            if (searchParams.source) {
+                if (Array.isArray(searchParams.source)) {
+                    return;
+                }
+                return JSON.parse(searchParams.source);
+            }
+        } catch (err) {
+            console.error(`解析错误${search}，例如：?source={"title":"stbui"}`);
+        }
+    }
+
+    return record;
+};
 
 const useCreateController = (props: CreateProps): CreateControllerProps => {
     const { basePath, hasEdit, hasShow, record = {}, successMessage } = props;

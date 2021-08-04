@@ -4,7 +4,6 @@
  * https://github.com/stbui/prophet
  */
 
-// @ts-nocheck
 import React from 'react';
 import CreateContextProvider from './CreateContextProvider';
 import useCreateController from './useCreateController';
