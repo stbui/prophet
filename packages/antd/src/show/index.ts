@@ -1,4 +1,4 @@
-import Show from './Show';
+import { Show, ShowView } from './Show';
 import ShowTabbed from './ShowTabbed';
 
-export { Show, ShowTabbed };
+export { Show, ShowView, ShowTabbed };

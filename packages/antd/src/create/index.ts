@@ -1,3 +1,4 @@
-import Create from './Create';
+import { Create } from './Create';
+import { CreateView } from './CreateView';
 
-export { Create };
+export { Create, CreateView };

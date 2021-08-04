@@ -9,7 +9,7 @@ interface ListProps {
     filter?: object;
 }
 
-const List = (props: ListProps): ReactElement => {
+export const List = (props: ListProps): ReactElement => {
     const controllerProps = useListController(props);
     return (
         <ListContextProvider value={controllerProps}>

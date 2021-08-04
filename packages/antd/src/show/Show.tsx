@@ -1,5 +1,5 @@
 import React, { cloneElement, FunctionComponent } from 'react';
-import { useShowController } from '@stbui/prophet-core';
+import { useShowController, ShowContextProvider } from '@stbui/prophet-core';
 import { Spin } from 'antd';
 
 interface Props {
@@ -39,6 +39,13 @@ export const ShowView: FunctionComponent<Props> = ({
     </Spin>
 );
 
-const Show = props => <ShowView {...props} {...useShowController(props)} />;
+export const Show = props => {
+    const controllerProps = useShowController(props);
+    return (
+        <ShowContextProvider value={controllerProps}>
+            <ShowView {...props} {...controllerProps} />
+        </ShowContextProvider>
+    );
+};
 
 export default Show;

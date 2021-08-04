@@ -1,48 +1,19 @@
-import React, { cloneElement, FunctionComponent } from 'react';
-import { useEditController } from '@stbui/prophet-core';
-import { Spin } from 'antd';
-
-interface Props {
-    children: any;
-    actions?: any;
-    resource?: string;
-    basePath?: string;
-    title?: string;
-    loading?: boolean;
-    record?: object;
-    save?: any;
-    id?: string | number;
+import React from 'react';
+import { useEditController, CreateContextProvider } from '@stbui/prophet-core';
+import { EditView } from './EditView';
+interface EditProps {
+    resource: string;
+    basePath: string;
+    id: string | number;
     [key: string]: any;
 }
 
-export const EditView: FunctionComponent<Props> = ({
-    basePath,
-    resource,
-    children,
-    id,
-    loading,
-    record,
-    save,
-    actions,
-    ...other
-}) => (
-    <Spin spinning={loading}>
-        {actions && cloneElement(actions, { ...other })}
-        {!loading && record
-            ? cloneElement(children, {
-                  basePath,
-                  resource,
-                  save,
-                  record,
-                  id,
-                  ...other,
-              })
-            : null}
-    </Spin>
-);
-
-export const Edit = props => (
-    <EditView {...props} {...useEditController(props)} />
-);
-
+export const Edit = (props: EditProps) => {
+    const controllerProps = useEditController(props);
+    return (
+        <CreateContextProvider value={controllerProps}>
+            <EditView {...props} {...controllerProps} />
+        </CreateContextProvider>
+    );
+};
 export default Edit;

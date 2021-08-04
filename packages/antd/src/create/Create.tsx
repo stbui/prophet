@@ -1,44 +1,23 @@
-import React, { cloneElement, FunctionComponent } from 'react';
-import { useCreateController } from '@stbui/prophet-core';
-import { Spin } from 'antd';
+import React from 'react';
+import {
+    useCreateController,
+    CreateContextProvider,
+} from '@stbui/prophet-core';
+import { CreateView } from './CreateView';
 
-interface Props {
-    children: any;
-    resource?: string;
-    basePath?: string;
-    title?: string;
-    loading?: any;
-    actions?: any;
-    record?: object;
-    save?: any;
+interface CreateProps {
+    resource: string;
+    basePath: string;
     [key: string]: any;
 }
 
-export const CreateView: FunctionComponent<Props> = ({
-    resource,
-    basePath,
-    children,
-    title,
-    loading,
-    record = {},
-    save,
-    actions,
-    ...other
-}) => (
-    <Spin spinning={loading}>
-        {actions && cloneElement(actions, { ...other })}
-        {cloneElement(children, {
-            resource,
-            basePath,
-            record,
-            save,
-            ...other,
-        })}
-    </Spin>
-);
-
-const Create = props => (
-    <CreateView {...props} {...useCreateController(props)} />
-);
+export const Create = (props: CreateProps) => {
+    const controllerProps = useCreateController(props);
+    return (
+        <CreateContextProvider value={controllerProps}>
+            <CreateView {...props} {...controllerProps} />
+        </CreateContextProvider>
+    );
+};
 
 export default Create;

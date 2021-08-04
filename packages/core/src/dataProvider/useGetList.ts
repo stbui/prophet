@@ -89,12 +89,7 @@ export const useGetList = (
     );
 
     const data = useSelector(
-        (state: any) =>
-            get(
-                state.resources,
-                [resource, 'list', 'cachedRequests', requestSignature, 'data'],
-                null
-            ),
+        (state: any) => get(state.resources, [resource, 'data'], null),
         shallowEqual
     );
 

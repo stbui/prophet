@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import useDataProvider from './useDataProvider';
+import useVersion from '../controller/useVersion';
 
 export interface Query {
     type: string;
@@ -93,6 +94,13 @@ const useQueryWithStore = (
     totalSelector: (state: any) => number = defaultTotalSelector
 ): UseQueryStoreValue => {
     const { type, resource, payload } = query;
+    const version = useVersion();
+    const requestSignature = JSON.stringify({
+        query,
+        options,
+        version,
+    });
+
     const data = useSelector(dataSelector);
     const total = useSelector(totalSelector);
 
@@ -104,18 +112,20 @@ const useQueryWithStore = (
         loaded: data !== undefined && !isEmptyList(data),
     });
 
-    if (!isEqual(state.data, data) || state.total !== total) {
-        if (typeof total !== 'undefined' && isNaN(total)) {
-            console.error('请求响应中total不是nubmer类型。');
-        } else {
-            setState({
-                ...state,
-                data,
-                total,
-                loaded: true,
-            });
+    useEffect(() => {
+        if (!isEqual(state.data, data) || state.total !== total) {
+            if (typeof total !== 'undefined' && isNaN(total)) {
+                console.error('请求响应中total不是nubmer类型。');
+            } else {
+                setState({
+                    ...state,
+                    data,
+                    total,
+                    loaded: true,
+                });
+            }
         }
-    }
+    }, [data, requestSignature, setState, state.data, state.total, total]);
 
     const dataProvider = useDataProvider();
     useEffect(() => {
@@ -137,7 +147,7 @@ const useQueryWithStore = (
                     loaded: false,
                 });
             });
-    }, [JSON.stringify({ query, options })]);
+    }, [requestSignature]);
 
     return state;
 };
