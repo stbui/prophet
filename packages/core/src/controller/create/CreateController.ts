@@ -11,7 +11,6 @@
  */
 
 import useCreateController, { CreateProps } from './useCreateController';
-import { useTranslate } from '../i18n';
 
 export interface Props extends CreateProps {
     children: (params) => JSX.Element;
@@ -33,9 +32,8 @@ export interface Props extends CreateProps {
  */
 const CreateController = ({ children, ...props }: Props) => {
     const controllerProps = useCreateController(props);
-    const translate = useTranslate();
 
-    return children({ translate, ...controllerProps });
+    return children(controllerProps);
 };
 
 export default CreateController;

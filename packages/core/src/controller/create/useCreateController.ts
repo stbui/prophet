@@ -7,10 +7,10 @@
 import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
-import { useCreate } from '../dataProvider';
-import { useNotify, useRedirect, useRefresh } from '../sideEffect';
-import useVersion from './useVersion';
-import { useResourceContext } from '../core';
+import { useCreate } from '../../dataProvider';
+import { useNotify, useRedirect, useRefresh } from '../../sideEffect';
+import useVersion from '../useVersion';
+import { useResourceContext } from '../../core';
 
 export interface CreateControllerProps {
     resource: string;
