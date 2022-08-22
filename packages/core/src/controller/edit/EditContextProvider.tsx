@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { EditContext } from './EditContext';
-import { RecordContextProvider } from './RecordContext';
-import { SaveContextProvider } from './SaveContext';
+import { RecordContextProvider } from '../RecordContext';
+import { SaveContextProvider } from '../SaveContext';
 
 /**
  *

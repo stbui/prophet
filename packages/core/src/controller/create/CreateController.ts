@@ -12,7 +12,7 @@
 
 import useCreateController, { CreateProps } from './useCreateController';
 
-export interface Props extends CreateProps {
+interface Props extends CreateProps {
     children: (params) => JSX.Element;
 }
 

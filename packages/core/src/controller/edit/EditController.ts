@@ -5,9 +5,8 @@
  */
 
 import useEditController, { EditProps } from './useEditController';
-import { useTranslate } from '../i18n';
 
-export interface Props extends EditProps {
+interface Props extends EditProps {
     children: (params) => JSX.Element;
 }
 
@@ -29,9 +28,8 @@ export interface Props extends EditProps {
  */
 const EditController = ({ children, ...props }: Props) => {
     const controllerProps = useEditController(props);
-    const translate = useTranslate();
 
-    return children({ translate, ...controllerProps });
+    return children(controllerProps);
 };
 
 export default EditController;

@@ -5,10 +5,10 @@
  */
 
 import { useCallback } from 'react';
-import { useUpdate, useGetOne } from '../dataProvider';
-import { useNotify, useRedirect, useRefresh } from '../sideEffect';
-import useVersion from './useVersion';
-import { useResourceContext } from '../core';
+import { useUpdate, useGetOne } from '../../dataProvider';
+import { useNotify, useRedirect, useRefresh } from '../../sideEffect';
+import useVersion from '../useVersion';
+import { useResourceContext } from '../../core';
 
 export interface EditProps {
     resource: string;
