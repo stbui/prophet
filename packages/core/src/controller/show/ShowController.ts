@@ -5,9 +5,8 @@
  */
 
 import useShowController, { ShowProps } from './useShowController';
-import { useTranslate } from '../i18n';
 
-export interface Props extends ShowProps {
+interface Props extends ShowProps {
     children: (params) => JSX.Element;
 }
 
@@ -27,9 +26,8 @@ export interface Props extends ShowProps {
  */
 const ShowController = ({ children, ...props }: Props) => {
     const controllerProps = useShowController(props);
-    const translate = useTranslate();
 
-    return children({ translate, ...controllerProps });
+    return children(controllerProps);
 };
 
 export default ShowController;

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { ShowContext } from './ShowContext';
-import { RecordContextProvider } from './RecordContext';
+import { RecordContextProvider } from '../RecordContext';
 
 /**
  *

@@ -4,10 +4,10 @@
  * https://github.com/stbui/prophet
  */
 
-import { useGetOne } from '../dataProvider';
-import { useNotify } from '../sideEffect';
-import useVersion from './useVersion';
-import { useResourceContext } from '../core';
+import { useGetOne } from '../../dataProvider';
+import { useNotify } from '../../sideEffect';
+import useVersion from '../useVersion';
+import { useResourceContext } from '../../core';
 
 export interface ShowProps {
     resource: string;
