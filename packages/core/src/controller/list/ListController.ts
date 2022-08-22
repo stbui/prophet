@@ -5,7 +5,6 @@
  */
 
 import useListController, { ListProps } from './useListController';
-import { useTranslate } from '../i18n';
 
 interface Props extends ListProps {
     children: (params) => JSX.Element;
@@ -29,9 +28,8 @@ interface Props extends ListProps {
  */
 export const ListController = ({ children, ...props }: Props) => {
     const controllerProps = useListController(props);
-    const translate = useTranslate();
 
-    return children({ translate, ...controllerProps });
+    return children(controllerProps);
 };
 
 export default ListController;

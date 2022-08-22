@@ -18,10 +18,10 @@ import {
     SET_SORT,
     SET_PAGE,
     SET_PER_PAGE,
-} from '../actions/listActions';
-import queryReducer from '../reducers/resources/list/queryReducer';
-import { removeKey, removeEmpty } from '../util';
-import { Sort } from '../types';
+} from '../../actions/listActions';
+import queryReducer from '../../reducers/resources/list/queryReducer';
+import { removeKey, removeEmpty } from '../../util';
+import { Sort } from '../../types';
 
 interface ListParamsOptions {
     resource: string;

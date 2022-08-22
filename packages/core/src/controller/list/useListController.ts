@@ -6,10 +6,10 @@
 
 import { isValidElement, useMemo, useEffect } from 'react';
 import { useListParams } from './useListParams';
-import { useGetList } from '../dataProvider';
-import useVersion from './useVersion';
-import { useNotify } from '../sideEffect';
-import { useResourceContext } from '../core';
+import { useGetList } from '../../dataProvider';
+import useVersion from '../useVersion';
+import { useNotify } from '../../sideEffect';
+import { useResourceContext } from '../../core';
 
 export interface ListProps {
     resource: string;
