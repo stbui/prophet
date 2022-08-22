@@ -15,7 +15,7 @@ export const SORT_DESC = 'DESC';
 
 export const CRUD_CHANGE_LIST_PARAMS = 'CRUD_CHANGE_LIST_PARAMS';
 
-export interface ListParams {
+interface ListParams {
     sort: string;
     order: string;
     page: number;

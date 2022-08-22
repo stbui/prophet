@@ -33,5 +33,3 @@ export const EditContextProvider = ({ value, children }) => (
         </SaveContextProvider>
     </EditContext.Provider>
 );
-
-export default EditContextProvider;

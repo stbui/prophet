@@ -10,13 +10,14 @@ import React, {
     useState,
     useMemo,
     ReactElement,
-    FunctionComponent,
+    FC,
 } from 'react';
 import TranslationProviderContext from './TranslationProviderContext';
 
 interface Props {
     locale?: string;
     i18nProvider: any;
+    children?: any;
 }
 
 /**
@@ -33,7 +34,7 @@ interface Props {
  * const MyApp = () => <TranslationProvider i18nProvider={i18nProvider}><View />/TranslationProvider>
  *
  */
-const TranslationProvider: FunctionComponent<Props> = props => {
+const TranslationProvider: FC<Props> = props => {
     const { i18nProvider, children } = props;
 
     const [state, setState] = useState({

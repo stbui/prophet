@@ -81,7 +81,9 @@ export const getRecord = ({ state, search }, record: any = {}) => {
     return record;
 };
 
-const useCreateController = (props: CreateProps): CreateControllerProps => {
+export const useCreateController = (
+    props: CreateProps
+): CreateControllerProps => {
     const { basePath, hasEdit, hasShow, record = {}, successMessage } = props;
     const resource = useResourceContext(props);
     const location = useLocation();
@@ -95,7 +97,10 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
     const [create, { loading: saving }] = useCreate(resource);
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, redirectTo = 'list' } = {}) => {
+        (
+            data: any,
+            { onSuccess, onFailure, redirectTo = 'list' }: any = {}
+        ) => {
             create(
                 { data },
                 {
@@ -134,5 +139,3 @@ const useCreateController = (props: CreateProps): CreateControllerProps => {
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };
 };
-
-export default useCreateController;

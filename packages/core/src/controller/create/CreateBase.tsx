@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import CreateContextProvider from './CreateContextProvider';
-import useCreateController from './useCreateController';
+import { CreateContextProvider } from './CreateContextProvider';
+import { useCreateController } from './useCreateController';
 
 /**
  *
@@ -16,10 +16,8 @@ import useCreateController from './useCreateController';
  *
  * const App = (props) => <CreateBase {...props}>create</CreateBase>
  */
-const CreateBase = ({ children, ...props }) => (
+export const CreateBase = ({ children, ...props }) => (
     <CreateContextProvider value={useCreateController(props)}>
         {children}
     </CreateContextProvider>
 );
-
-export default CreateBase;

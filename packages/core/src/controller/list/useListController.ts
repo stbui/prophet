@@ -150,5 +150,3 @@ export const useListController = (props: ListProps): ListControllerProps => {
         version,
     };
 };
-
-export default useListController;

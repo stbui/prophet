@@ -73,7 +73,7 @@ const handleCheck = (authProvider: AuthProvider) =>
         const { payload, meta } = action;
         try {
             yield call([authProvider, 'checkAuth'], payload);
-        } catch (error) {
+        } catch (error: any) {
             const redirectTo = yield call([authProvider, 'logout'], undefined);
             yield put(
                 replace({

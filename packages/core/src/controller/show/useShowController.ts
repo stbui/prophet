@@ -63,5 +63,3 @@ export const useShowController = (props: ShowProps): ShowControllerProps => {
         version,
     };
 };
-
-export default useShowController;

@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import useDeleteController, { DeleteProps } from './useDeleteController';
+import { useDeleteController, DeleteProps } from './useDeleteController';
 import { useTranslate } from '../i18n';
 
 export interface Props extends DeleteProps {
@@ -25,11 +25,9 @@ export interface Props extends DeleteProps {
  *    </DeleteController>
  * );
  */
-const DeleteController = ({ children, ...props }: Props) => {
+export const DeleteController = ({ children, ...props }: Props) => {
     const controllerProps = useDeleteController(props);
     const translate = useTranslate();
 
     return children({ translate, ...controllerProps });
 };
-
-export default DeleteController;

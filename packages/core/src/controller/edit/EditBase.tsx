@@ -6,8 +6,8 @@
 
 // @ts-nocheck
 import React from 'react';
-import EditContextProvider from './EditContextProvider';
-import useEditController from './useEditController';
+import { EditContextProvider } from './EditContextProvider';
+import { useEditController } from './useEditController';
 
 /**
  *
@@ -17,10 +17,8 @@ import useEditController from './useEditController';
  *
  * const App = (props) => <EditBase {...props}>edit</EditBase>
  */
-const EditBase = ({ children, ...props }) => (
+export const EditBase = ({ children, ...props }) => (
     <EditContextProvider value={useEditController(props)}>
         {children}
     </EditContextProvider>
 );
-
-export default EditBase;

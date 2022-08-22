@@ -77,7 +77,7 @@ export function* handleFetch(dataProvider: any, action: any) {
         });
 
         yield put({ type: FETCH_END });
-    } catch (error) {
+    } catch (error: any) {
         yield put({
             type: `${type}_FAILURE`,
             error: error.message ? error.message : error,

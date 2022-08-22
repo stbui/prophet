@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import useListController, { ListProps } from './useListController';
+import { useListController, ListProps } from './useListController';
 
 interface Props extends ListProps {
     children: (params) => JSX.Element;
@@ -31,5 +31,3 @@ export const ListController = ({ children, ...props }: Props) => {
 
     return children(controllerProps);
 };
-
-export default ListController;

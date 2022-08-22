@@ -66,7 +66,7 @@ export const useEdit = ({ resource, id, payload }: EditProps): UseEditValue => {
     );
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, refresh } = {}) =>
+        (data: any, { onSuccess, onFailure, refresh }: any = {}) =>
             update({ payload: { data } }, { onSuccess, onFailure, refresh }),
         [resource, update]
     );

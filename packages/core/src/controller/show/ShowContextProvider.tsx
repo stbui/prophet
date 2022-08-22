@@ -28,5 +28,3 @@ export const ShowContextProvider = ({ value, children }) => (
         <RecordContextProvider value={value}>{children}</RecordContextProvider>
     </ShowContext.Provider>
 );
-
-export default ShowContextProvider;

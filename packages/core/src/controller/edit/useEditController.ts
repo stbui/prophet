@@ -64,7 +64,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
     const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, redirectTo = 'list' } = {}) =>
+        (data: any, { onSuccess, onFailure, redirectTo = 'list' }: any = {}) =>
             update(
                 { data },
                 {
@@ -102,5 +102,3 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         version,
     };
 };
-
-export default useEditController;

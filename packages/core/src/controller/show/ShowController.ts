@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import useShowController, { ShowProps } from './useShowController';
+import { useShowController, ShowProps } from './useShowController';
 
 interface Props extends ShowProps {
     children: (params) => JSX.Element;
@@ -24,10 +24,8 @@ interface Props extends ShowProps {
  *    </ShowController>
  * );
  */
-const ShowController = ({ children, ...props }: Props) => {
+export const ShowController = ({ children, ...props }: Props) => {
     const controllerProps = useShowController(props);
 
     return children(controllerProps);
 };
-
-export default ShowController;

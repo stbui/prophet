@@ -6,8 +6,8 @@
 
 // @ts-nocheck
 import React from 'react';
-import ShowContextProvider from './ShowContextProvider';
-import useShowController from './useShowController';
+import { ShowContextProvider } from './ShowContextProvider';
+import { useShowController } from './useShowController';
 
 /**
  *
@@ -17,10 +17,8 @@ import useShowController from './useShowController';
  *
  * const App = (props) => <ShowBase {...props}>show</ShowBase>
  */
-const ShowBase = ({ children, ...props }) => (
+export const ShowBase = ({ children, ...props }) => (
     <ShowContextProvider value={useShowController(props)}>
         {children}
     </ShowContextProvider>
 );
-
-export default ShowBase;

@@ -30,7 +30,7 @@ import { ListContext } from './ListContext';
  *      retrun <ListContextProvider value={controllerProps}><View /></ListContextProvider>
  * }
  */
-const ListContextProvider = ({ value, children }) => {
+export const ListContextProvider = ({ value, children }) => {
     return (
         <ListContext.Provider value={value}>
             <ListFilterContext.Provider value={value}>
@@ -43,5 +43,3 @@ const ListContextProvider = ({ value, children }) => {
         </ListContext.Provider>
     );
 };
-
-export default ListContextProvider;

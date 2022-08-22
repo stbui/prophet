@@ -6,8 +6,8 @@
 
 // @ts-nocheck
 import React from 'react';
-import useListController from './useListController';
-import ListContextProvider from './ListContextProvider';
+import { useListController } from './useListController';
+import { ListContextProvider } from './ListContextProvider';
 
 /**
  *
@@ -17,10 +17,8 @@ import ListContextProvider from './ListContextProvider';
  *
  * const App = (props) => <ListBase {...props}>list</ListBase>
  */
-const ListBase = ({ children, ...props }) => (
+export const ListBase = ({ children, ...props }) => (
     <ListContextProvider value={useListController(props)}>
         {children}
     </ListContextProvider>
 );
-
-export default ListBase;

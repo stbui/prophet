@@ -4,9 +4,8 @@
  * https://github.com/stbui/prophet
  */
 
-import DeleteController from './DeleteController';
-
-import useDeleteController from './useDeleteController';
+export * from './DeleteController';
+export * from './useDeleteController';
 
 import useVersion from './useVersion';
 import usePaginationState from './usePaginationState';
@@ -21,11 +20,4 @@ export * from './show';
 export * from './RecordContext';
 export * from './SaveContext';
 
-export {
-    DeleteController,
-    useDeleteController,
-    usePaginationState,
-    useFilterState,
-    useSortState,
-    useVersion,
-};
+export { usePaginationState, useFilterState, useSortState, useVersion };

@@ -8,7 +8,7 @@ import React, {
     Children,
     cloneElement,
     createElement,
-    FunctionComponent,
+    FC,
     ComponentType,
 } from 'react';
 
@@ -17,13 +17,13 @@ import { WithPermissions } from '../auth';
 
 export interface CoreRoutesWithLayoutProps {
     catchAll?: any;
-    children?: ComponentType;
+    children?: any;
     customRoutes?: any[];
     dashboard?: ComponentType;
     title?: string;
 }
 
-const CoreRoutesWithLayout: FunctionComponent<CoreRoutesWithLayoutProps> = ({
+const CoreRoutesWithLayout: FC<CoreRoutesWithLayoutProps> = ({
     catchAll,
     children,
     customRoutes,

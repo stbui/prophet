@@ -33,5 +33,3 @@ export const CreateContextProvider = ({ value, children }) => (
         </SaveContextProvider>
     </CreateContext.Provider>
 );
-
-export default CreateContextProvider;

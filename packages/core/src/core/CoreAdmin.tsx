@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import React, { FunctionComponent, ComponentType } from 'react';
+import React, { FC, ComponentType } from 'react';
 import CoreContext from './CoreContext';
 import CoreUI from './CoreUI';
 import { AuthProvider, I18nProvider } from '../types';
@@ -25,9 +25,10 @@ export interface CoreAdminProps {
     customReducers?: object;
     history?: any;
     title?: string;
+    children?: any;
 }
 
-const CoreAdmin: FunctionComponent<CoreAdminProps> = ({
+const CoreAdmin: FC<CoreAdminProps> = ({
     children,
     title,
     dashboard,

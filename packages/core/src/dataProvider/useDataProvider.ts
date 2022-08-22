@@ -8,8 +8,6 @@ import { useContext, useCallback } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 
 import DataProviderContext from './DataProviderContext';
-import { FETCH_START, FETCH_END, FETCH_ERROR } from '../actions';
-import { canReplyWithCache, answerWithCache } from './replyWithCache';
 
 export type UseDataProviderValue = (
     type: string,
@@ -17,115 +15,6 @@ export type UseDataProviderValue = (
     params: any,
     options?: any
 ) => Promise<{ data?: any; total?: any; error?: any }>;
-
-const performQuery = ({
-    type,
-    dataProvider,
-    resource,
-    payload,
-    action,
-    onSuccess,
-    onFailure,
-    dispatch,
-    rest,
-}) => {
-    dispatch({
-        type: action,
-        payload,
-        meta: { resource, ...rest },
-    });
-
-    dispatch({
-        type: `${action}_LOADING`,
-        payload,
-        meta: { resource, ...rest },
-    });
-
-    dispatch({
-        type: FETCH_START,
-    });
-
-    return dataProvider(type, resource, payload)
-        .then(response => {
-            dispatch({
-                type: `${action}_SUCCESS`,
-                payload: response,
-                requestPayload: payload,
-                meta: {
-                    ...rest,
-                    resource,
-                    fetchResponse: type,
-                    fetchStatus: FETCH_END,
-                },
-            });
-
-            dispatch({
-                type: FETCH_END,
-            });
-
-            onSuccess && onSuccess(response);
-            return response;
-        })
-        .catch(error => {
-            dispatch({
-                type: `${action}_FAILURE`,
-                error: error.message ? error.message : error,
-                payload: error.body ? error.body : null,
-                requestPayload: payload,
-                meta: {
-                    ...rest,
-                    resource,
-                    fetchResponse: type,
-                    fetchStatus: FETCH_ERROR,
-                },
-            });
-            dispatch({ type: FETCH_ERROR, error });
-
-            onFailure && onFailure(error);
-
-            throw error;
-        });
-};
-
-const query = ({
-    type,
-    dataProvider,
-    resource,
-    payload,
-    action,
-    onSuccess,
-    onFailure,
-    dispatch,
-    store,
-    rest,
-}) => {
-    const resourceState = store.getState().resources[resource];
-
-    if (canReplyWithCache(type, payload, resourceState)) {
-        return answerWithCache({
-            type,
-            payload,
-            resource,
-            action,
-            rest,
-            onSuccess,
-            resourceState,
-            dispatch,
-        });
-    }
-
-    return performQuery({
-        type,
-        dataProvider,
-        resource,
-        payload,
-        action,
-        onSuccess,
-        onFailure,
-        dispatch,
-        rest,
-    });
-};
 
 const defaultDataProvider = (type: string, resource: string, payload: any) =>
     Promise.resolve();
@@ -146,7 +35,7 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
  *     const dataProvider = useDataProvider();
  *
  *     useEffect(() => {
- *         dataProvider('GET_ONE', 'user', { filter: { id: 1 } })
+ *         dataProvider.getOne('user', { filter: { id: 1 } })
  *             .then(({ data }) => {
  *                 setUser(data);
  *                 setLoading(false);
@@ -166,34 +55,19 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
  *             { user.id }
  *         </React.Fragment>
  */
-export const useDataProvider = (): UseDataProviderValue => {
-    const dispatch = useDispatch();
+export const useDataProvider = (): any => {
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
-    const store = useStore();
+    // dataProvider(type, resource, payload)
+    //     .then(response => {
+    //         onSuccess && onSuccess(response);
+    //         return response;
+    //     })
+    //     .catch(error => {
+    //         onFailure && onFailure(error);
 
-    return useCallback(
-        (type, resource, payload, options) => {
-            const { action = 'CUSTOM_FETCH', onSuccess, onFailure, ...rest } =
-                options || {};
-
-            const params = {
-                type,
-                dataProvider,
-                resource,
-                payload,
-                action,
-                onSuccess,
-                onFailure,
-                dispatch,
-                store,
-                rest,
-            };
-
-            return query(params);
-        },
-        [dataProvider, dispatch]
-    );
+    //         throw error;
+    //     });
 };
 
 export default useDataProvider;

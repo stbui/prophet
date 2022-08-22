@@ -76,5 +76,3 @@ export const useDeleteController = (props: DeleteProps) => {
         deleting: deleting,
     };
 };
-
-export default useDeleteController;

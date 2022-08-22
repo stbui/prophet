@@ -10,7 +10,7 @@
  * https://github.com/stbui/prophet
  */
 
-import useCreateController, { CreateProps } from './useCreateController';
+import { useCreateController, CreateProps } from './useCreateController';
 
 interface Props extends CreateProps {
     children: (params) => JSX.Element;
@@ -30,10 +30,8 @@ interface Props extends CreateProps {
  *     </CreateController>
  * );
  */
-const CreateController = ({ children, ...props }: Props) => {
+export const CreateController = ({ children, ...props }: Props) => {
     const controllerProps = useCreateController(props);
 
     return children(controllerProps);
 };
-
-export default CreateController;
