@@ -13,7 +13,7 @@ const removeKey = (target, path) =>
         return acc;
     }, {});
 
-const deepRemoveKey = (target, path) => {
+export const deepRemoveKey = (target, path) => {
     const paths = path.split('.');
 
     if (paths.length === 1) {
@@ -32,5 +32,3 @@ const deepRemoveKey = (target, path) => {
 
     return Object.assign({}, target, { [deepKey]: deep });
 };
-
-export default deepRemoveKey;

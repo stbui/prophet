@@ -4,62 +4,60 @@
  * https://github.com/stbui
  */
 
-import React, { FunctionComponent, ReactNode } from 'react';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
+import React, { ReactNode, useMemo } from 'react';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { createHashHistory } from 'history';
 
-import { DataProviderContext } from '../dataProvider';
+import {
+    DataProviderContext,
+    defaultDataProvider,
+    DataProvider,
+} from '../dataProvider';
 import { AuthProviderContext } from '../auth';
 import { TranslationProvider } from '../i18n';
-import CoreConfigStore from './CoreConfigStore';
+import { StoreContextProvider, memoryStore, Store } from '../store';
+import { NotificationContextProvider } from '../notification';
 import { AuthProvider, I18nProvider } from '../types';
 
 interface CoreContextProps {
-    initialState?: object;
-    authProvider?: any;
-    dataProvider: any;
+    authProvider?: AuthProvider;
+    dataProvider: DataProvider;
     i18nProvider?: I18nProvider;
-    customSagas?: any[];
-    customReducers?: object;
-    history?: any;
     children?: ReactNode;
+    store?: Store;
+    queryClient?: QueryClient;
 }
 
-const CoreContext: FunctionComponent<CoreContextProps> = ({
+export const CoreContext = ({
     children,
-    initialState,
     authProvider,
     dataProvider,
     i18nProvider,
-    customSagas,
-    customReducers,
-    history,
-}) => {
-    const _history = history || createHashHistory();
+    store,
+    queryClient,
+}: CoreContextProps) => {
+    const finalQueryClient = useMemo(() => queryClient || new QueryClient(), [
+        queryClient,
+    ]);
 
     return (
-        <Provider
-            store={CoreConfigStore({
-                initialState,
-                history: _history,
-                dataProvider,
-                authProvider,
-                customSagas,
-                customReducers,
-            })}
-        >
-            <AuthProviderContext.Provider value={authProvider}>
-                <DataProviderContext.Provider value={dataProvider}>
-                    <TranslationProvider i18nProvider={i18nProvider}>
-                        <ConnectedRouter history={_history}>
-                            {children}
-                        </ConnectedRouter>
-                    </TranslationProvider>
-                </DataProviderContext.Provider>
-            </AuthProviderContext.Provider>
-        </Provider>
+        <AuthProviderContext.Provider value={authProvider}>
+            <DataProviderContext.Provider value={dataProvider}>
+                <StoreContextProvider value={store}>
+                    <QueryClientProvider client={finalQueryClient}>
+                        <TranslationProvider i18nProvider={i18nProvider}>
+                            <NotificationContextProvider>
+                                {children}
+                            </NotificationContextProvider>
+                        </TranslationProvider>
+                    </QueryClientProvider>
+                </StoreContextProvider>
+            </DataProviderContext.Provider>
+        </AuthProviderContext.Provider>
     );
 };
 
-export default CoreContext;
+CoreContext.defaultProps = {
+    dataProvider: defaultDataProvider,
+    store: memoryStore(),
+};

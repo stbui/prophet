@@ -3,17 +3,8 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui/prophet
  */
-
-import get from 'lodash/get';
-import useQueryWithStore from './useQueryWithStore';
-import { GET_ONE, CRUD_GET_ONE } from '../actions';
-
-export interface UseGetOneValue {
-    data?: any;
-    error?: any;
-    loading: boolean;
-    loaded: boolean;
-}
+import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query';
+import { useDataProvider } from './useDataProvider';
 
 /**
  * useGetOne
@@ -32,9 +23,9 @@ export interface UseGetOneValue {
  * import { useGetOne } from '@stbui/prophet-core';
  *
  * cconst UserProfile = record => {
- *    const { data, loading, error } = useGetOne('users', record.id);
+ *    const { data, isLoading, error } = useGetOne('users', {id: record.id});
  *
- *    if (loading) {
+ *    if (isLoading) {
  *        return 'loading';
  *    }
  *
@@ -47,25 +38,17 @@ export interface UseGetOneValue {
  */
 export const useGetOne = (
     resource: string,
-    id: string | number,
-    options?: any
-): UseGetOneValue =>
-    useQueryWithStore(
-        {
-            type: GET_ONE,
-            resource,
-            payload: { id },
-        },
-        { ...options, action: CRUD_GET_ONE },
-        state => {
-            if (
-                Object.keys(state.resources).length > 0 &&
-                !state.resources[resource]
-            ) {
-                throw new Error(`"${resource}" 在 <Resource> 中没有定义。`);
-            }
-            return get(state, ['resources', resource, 'data', id]);
-        }
-    );
+    { id, meta }: any,
+    options?: UseQueryOptions
+): UseQueryResult => {
+    const dataProvider = useDataProvider();
 
-export default useGetOne;
+    return useQuery(
+        [resource, 'getOne', { id: String(id), meta }],
+        () =>
+            dataProvider
+                .getOne(resource, { id, meta })
+                .then(({ data }) => data),
+        options
+    );
+};

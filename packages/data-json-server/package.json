@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@stbui/prophet-core": "^3.0.1",
-        "query-string": "~5.1.1"
+        "query-string": "^7.1.1"
     },
     "publishConfig": {
         "access": "public"

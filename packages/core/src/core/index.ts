@@ -4,22 +4,11 @@
  * https://github.com/stbui/prophet
  */
 
-import CoreAdmin from './CoreAdmin';
-import CoreConfigStore from './CoreConfigStore';
-import CoreContext from './CoreContext';
-import CoreRouter from './CoreRouter';
-import CoreUI from './CoreUI';
-import Resource from './Resource';
-
-export {
-    CoreAdmin,
-    CoreConfigStore,
-    CoreContext,
-    CoreRouter,
-    CoreUI,
-    Resource,
-};
-
+export * from './CoreAdmin';
+export * from './CoreContext';
+export * from './CoreRouter';
+export * from './CoreUI';
+export * from './Resource';
 export * from './ResourceContext';
 export * from './ResourceContextProvider';
 export * from './useResourceContext';

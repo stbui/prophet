@@ -3,12 +3,18 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui/prophet
  */
-
-import { CREATE, CRUD_CREATE } from '../actions';
-import useMuation from './useMutation';
+import { useRef } from 'react';
+import {
+    useMutation,
+    UseMutationOptions,
+    UseMutationResult,
+    useQueryClient,
+    MutateOptions,
+} from 'react-query';
+import { useDataProvider } from './useDataProvider';
 
 export type UseCreateValue = [
-    (query?: Partial<any>, options?: Partial<any>) => void,
+    (query?: Partial<any>, params?: any, options?: Partial<any>) => void,
     {
         data?: any;
         total?: number;
@@ -17,6 +23,11 @@ export type UseCreateValue = [
         loaded: boolean;
     }
 ];
+
+interface CreateParams<T = any> {
+    data: T;
+    meta?: any;
+}
 
 /**
  *
@@ -33,26 +44,78 @@ export type UseCreateValue = [
  * import { useCreate } from '@stbui/prophet-core';
  *
  * const UserProfile = ({ record }) => {
- *    const [create, { loading, error }] = useCreate('users', {
- *        username: 'stbui',
+ *    const [create, { isLoading, error }] = useCreate('users', {
+ *        data: 'stbui',
  *    });
  *
  *   if (error) {
  *       return error.message;
  *   }
  *
- *   return <div loading={loading} onClick={create}>create</div>
+ *   return <div loading={isLoading} onClick={create}>create</div>
  * };
  */
 
-const useCreate = (
+ export const useCreate = (
     resource: string,
-    data: object = {},
-    options?: object
-): UseCreateValue =>
-    useMuation(
-        { type: CREATE, resource, payload: { data } },
-        { ...options, action: CRUD_CREATE }
+    params: Partial<CreateParams> = {},
+    options: {
+        onSuccess?: any;
+        [key: string]: any;
+    } = {}
+) => {
+    const dataProvider = useDataProvider();
+    const queryClient = useQueryClient();
+    const paramsRef = useRef<Partial<CreateParams>>(params);
+
+    const mutation = useMutation(
+        ({
+            resource: callTimeResource = resource,
+            data: callTimeData = paramsRef.current.data,
+            meta: callTimeMeta = paramsRef.current.meta,
+        } = {}) => {
+            dataProvider
+                .create(callTimeResource, {
+                    data: callTimeData,
+                    meta: callTimeMeta,
+                })
+                .then(({ data }) => data);
+        },
+        {
+            ...options,
+            onSuccess: (data, variables, context) => {
+                const { resource: callTimeResource = resource } = variables;
+                queryClient.setQueryData(
+                    [callTimeResource, 'getOne', { id: String(data.id) }],
+                    data
+                );
+                if (options.onSuccess) {
+                    options.onSuccess(data, variables, context);
+                }
+            },
+        }
     );
 
-export default useCreate;
+    const create = (
+        callTimeResource: string = resource,
+        callTimeParams = {},
+        createOptions: any = {}
+    ) => {
+        const { returnPromise, ...reactCreateOptions } = createOptions;
+
+        if (returnPromise) {
+            return mutation.mutateAsync(
+                { resource: callTimeResource, ...callTimeParams },
+                createOptions
+            );
+        }
+
+        mutation.mutate(
+            { resource: callTimeResource, ...callTimeParams },
+            reactCreateOptions
+        );
+    };
+
+    return [create, mutation];
+};
+

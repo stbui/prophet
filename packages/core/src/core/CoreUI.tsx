@@ -4,15 +4,15 @@
  * https://github.com/stbui/prophet
  */
 
-import React, { FunctionComponent, ComponentType } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import CoreRouter from './CoreRouter';
+import React, { FunctionComponent, ComponentType, isValidElement } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { CoreRouter } from './CoreRouter';
 
 export interface CoreUIProps {
     title?: string;
     dashboard?: ComponentType;
     layout: ComponentType;
-    loginPage?: ComponentType<any>;
+    loginPage?: any;
     catchAll: ComponentType<any>;
     menu?: ComponentType;
     brand?: ComponentType;
@@ -25,28 +25,22 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
     title = 'Stbui',
     dashboard,
     layout,
-    loginPage,
+    loginPage: LoginPage,
     catchAll = () => null,
     menu,
     brand,
     customRoutes = [],
 }) => (
-    <Switch>
-        {loginPage ? (
+    <Routes>
+        {LoginPage ? (
             <Route
-                exact
                 path="/login"
-                render={props =>
-                    React.createElement(loginPage, {
-                        ...props,
-                        title,
-                    })
-                }
+                element={isValidElement(LoginPage) ? LoginPage : <LoginPage />}
             />
         ) : null}
         <Route
-            path="/"
-            render={props => (
+            path="/*"
+            element={
                 <CoreRouter
                     layout={layout}
                     dashboard={dashboard}
@@ -55,13 +49,12 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
                     menu={menu}
                     brand={brand}
                     title={title}
-                    {...props}
                 >
                     {children}
                 </CoreRouter>
-            )}
+            }
         />
-    </Switch>
+    </Routes>
 );
 
 export default CoreUI;

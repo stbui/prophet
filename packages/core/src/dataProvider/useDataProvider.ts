@@ -4,8 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-import { useContext, useCallback } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useContext } from 'react';
 
 import DataProviderContext from './DataProviderContext';
 
@@ -55,7 +54,7 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
  *             { user.id }
  *         </React.Fragment>
  */
-export const useDataProvider = (): any => {
+export const useDataProvider = () => {
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
     // dataProvider(type, resource, payload)
@@ -68,6 +67,8 @@ export const useDataProvider = (): any => {
 
     //         throw error;
     //     });
+
+    return dataProvider;
 };
 
 export default useDataProvider;

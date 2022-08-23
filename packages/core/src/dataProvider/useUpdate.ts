@@ -4,8 +4,17 @@
  * https://github.com/stbui/prophet
  */
 
-import { UPDATE, CRUD_UPDATE } from '../actions';
-import useMuation, { MutationOptions } from './useMutation';
+import { useRef } from 'react';
+import {
+    useMutation,
+    useQueryClient,
+    UseMutationOptions,
+    UseMutationResult,
+    MutateOptions,
+    QueryKey,
+} from 'react-query';
+
+import { useDataProvider } from './useDataProvider';
 
 export type UseUpdateValue = [
     (query?: Partial<any>, options?: Partial<any>) => void,
@@ -37,28 +46,18 @@ export type UseUpdateValue = [
  * import { useUpdate } from '@stbui/prophet-core';
  *
  * const UserUpdate = ({ record }) => {
- *     const [update, { loading, error }] = useUpdate(
- *     'user',
- *      record.id,
- *      { sex: new Date() },
- *      record
- *     );
+ *     const [update, { isLoading, error }] = useUpdate('user', { id: record.id, data: { sex: new Date() }, previousData: record });
  *
- *      if (error) { return error.message; }
+ *     if (error) { return error.message; }
  *
- *      return <button disabled={loading} onClick={update}>update</button>
+ *     return <button disabled={isLoading} onClick={update}>update</button>
  * };
  */
-const useUpdate = (
+export const useUpdate = (
     resource: string,
-    id: string | number,
-    data?: any,
-    previousData?: any,
-    options?: MutationOptions
-): UseUpdateValue =>
-    useMuation(
-        { type: UPDATE, resource, payload: { id, data, previousData } },
-        { ...options, action: CRUD_UPDATE }
-    );
-
-export default useUpdate;
+    params: any = {},
+    options: any = {}
+) => {
+    const dataProvider = useDataProvider();
+    const queryClient = useQueryClient();
+};

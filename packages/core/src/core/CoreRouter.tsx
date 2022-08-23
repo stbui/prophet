@@ -12,10 +12,11 @@ import React, {
     ComponentType,
     useState,
     useEffect,
+    ReactNode,
 } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import CoreRoutesWithLayout from './CoreRoutesWithLayout';
-import { useGetPermissions, useAuthState } from '../auth';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { WithPermissions } from '../auth';
+import { useCreatePath } from '../routing';
 
 export interface CoreRouterProps {
     children?: any;
@@ -24,130 +25,65 @@ export interface CoreRouterProps {
     menu?: ComponentType;
     brand?: ComponentType;
     catchAll: ComponentType;
-    layout: ComponentType;
+    layout: any;
     customRoutes: any[];
 }
 
-const CoreRouter: FunctionComponent<CoreRouterProps> = ({
+const defaultAuthParams = { route: 'dashboard' };
+
+export const CoreRouter = ({
     children,
     dashboard,
     customRoutes = [],
-    catchAll,
-    layout,
+    catchAll: CatchAll,
+    layout: Layout,
     menu,
     brand,
     title,
-}) => {
-    const getPermissions = useGetPermissions();
-    const { authenticated } = useAuthState();
-    const [computedChildren, setComputedChildren] = useState([]);
-
-    useEffect(() => {
-        if (typeof children === 'function') {
-            initializeResources();
-        }
-    }, [authenticated]);
-
-    const initializeResources = async () => {
-        try {
-            const permissions = await getPermissions();
-            const resolveChildren = children;
-            const childrenFuncResult = resolveChildren(permissions);
-            if (childrenFuncResult.then) {
-                childrenFuncResult.then(resolvedChildren =>
-                    setComputedChildren(
-                        resolvedChildren
-                            .filter(child => child)
-                            .map(child => ({
-                                ...child,
-                                props: {
-                                    ...child.props,
-                                    key: child.props.name,
-                                },
-                            }))
-                    )
-                );
-            } else {
-                setComputedChildren(childrenFuncResult.filter(child => child));
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const renderCustomRoutesWithoutLayout = (route, routeProps) => {
-        if (route.props.render) {
-            return route.props.render({ ...routeProps, title });
-        }
-
-        if (route.props.component) {
-            return createElement(route.props.component, {
-                ...routeProps,
-                title,
-            });
-        }
-    };
-
-    if (typeof children !== 'function' && !children) {
-        return <div>缺失组件 &lt;Resource&gt;</div>;
-    }
-
-    const childrenToRender =
-        typeof children === 'function' ? computedChildren : children;
+}: CoreRouterProps) => {
+    const createPath = useCreatePath();
 
     return (
-        <React.Fragment>
-            {Children.map(childrenToRender, (child: any) =>
-                cloneElement(child, {
-                    key: child.props.name,
-                    intent: 'registration',
-                })
-            )}
-            <Switch>
-                {customRoutes
-                    .filter(route => route.props.noLayout)
-                    .map((route, key) =>
-                        cloneElement(route, {
-                            key,
-                            render: routeProps =>
-                                renderCustomRoutesWithoutLayout(
-                                    route,
-                                    routeProps
-                                ),
-                        })
-                    )}
-                <Route
-                    render={routeProps =>
-                        createElement<any>(
-                            layout,
-                            {
-                                ...routeProps,
-                                dashboard,
-                                menu,
-                                title,
-                                brand,
-                            },
-                            <CoreRoutesWithLayout
-                                catchAll={catchAll}
-                                customRoutes={customRoutes.filter(
-                                    route => !route.props.noLayout
-                                )}
-                                dashboard={dashboard}
-                                title={title}
-                            >
-                                {Children.map(childrenToRender, child =>
-                                    cloneElement(child, {
-                                        key: child.props.name,
-                                        intent: 'route',
-                                    })
-                                )}
-                            </CoreRoutesWithLayout>
-                        )
-                    }
-                />
-            </Switch>
-        </React.Fragment>
+        <Routes>
+            <Route
+                path="/*"
+                element={
+                    <Layout dashboard={dashboard} menu={menu} title={title}>
+                        <Routes>
+                            {Children.map(resources, resource => (
+                                <Route
+                                    key={resource.props.name}
+                                    path={`${resource.props.name}/*`}
+                                    element={resource}
+                                />
+                            ))}
+                            <Route
+                                path="/"
+                                element={
+                                    dashboard ? (
+                                        <WithPermissions
+                                            authParams={defaultAuthParams}
+                                            component={dashboard}
+                                        />
+                                    ) : resources.length > 0 ? (
+                                        <Navigate
+                                            to={createPath({
+                                                resource:
+                                                    resources[0].props.name,
+                                                type: 'list',
+                                            })}
+                                        />
+                                    ) : null
+                                }
+                            />
+                            <Route
+                                path="*"
+                                element={<CatchAll title={title} />}
+                            />
+                        </Routes>
+                    </Layout>
+                }
+            />
+        </Routes>
     );
 };
-
-export default CoreRouter;

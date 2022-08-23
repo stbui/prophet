@@ -9,7 +9,7 @@
  * @param content 文件内容
  * @param filename 文件名
  */
-const downloadCSV = (content: string, filename: string) => {
+export const downloadCSV = (content: string, filename: string) => {
     const link = document.createElement('a');
     link.style.display = 'none';
     document.appendChild(link);
@@ -18,5 +18,3 @@ const downloadCSV = (content: string, filename: string) => {
     link.setAttribute('download', `${filename}.csv`);
     link.click();
 };
-
-export default downloadCSV;

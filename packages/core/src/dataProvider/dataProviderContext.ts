@@ -6,6 +6,15 @@
 
 import { createContext } from 'react';
 
-const DataProviderContext = createContext(null);
+export type DataProvider<ResourceType extends string = string> = {
+    getList: (resource: ResourceType, params: any) => Promise<any>;
+    getOne: (resource: ResourceType, params: any) => Promise<any>;
+    update: (resource: ResourceType, params: any) => Promise<any>;
+    create: (resource: ResourceType, params: any) => Promise<any>;
+    delete: (resource: ResourceType, params: any) => Promise<any>;
 
-export default DataProviderContext;
+    [key: string]: any;
+};
+
+// @ts-ignore
+export const DataProviderContext = createContext<DataProvider>(null);

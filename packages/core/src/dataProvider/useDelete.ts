@@ -3,9 +3,17 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui/prophet
  */
+import { useRef } from 'react';
+import {
+    useMutation,
+    useQueryClient,
+    UseMutationOptions,
+    UseMutationResult,
+    MutateOptions,
+    QueryKey,
+} from 'react-query';
 
-import { DELETE, CRUD_DELETE } from '../actions';
-import useMuation from './useMutation';
+import { useDataProvider } from './useDataProvider';
 
 export type UseDeleteValue = [
     (query?: Partial<any>, options?: Partial<any>) => void,
@@ -50,13 +58,40 @@ export type UseDeleteValue = [
  */
 export const useDelete = (
     resource: string,
-    id: string | number,
-    previousData: object = {},
-    options?: object
-): UseDeleteValue =>
-    useMuation(
-        { type: DELETE, resource, payload: { id, previousData } },
-        { ...options, action: CRUD_DELETE }
-    );
+    params: any = {},
+    options: object = {}
+) => {
+    const dataProvider = useDataProvider();
+    const queryClient = useQueryClient();
 
-export default useDelete;
+    const { id, previousData } = params;
+
+    const paramsRef = useRef<any>(params);
+
+    const mutation = useMutation(() => {});
+
+    const mutate = (
+        callTimeResource: string = resource,
+        callTimeParams: any = {},
+        updateOptions: any = {}
+    ) => {
+        const { mutationMode, onSuccess, onSettled, onError } = updateOptions;
+        paramsRef.current = params;
+
+        const {
+            id: callTimeId = id,
+            previousData: callTimePreviousData = previousData,
+        } = callTimeParams;
+
+        const queryKeys = [[callTimeResource, 'getList']];
+        // 取消所有请求
+        // queryClient.cancelQueries();
+
+        return mutation.mutate(
+            { resource: callTimeResource, ...callTimeParams },
+            { onSettled, onError }
+        );
+    };
+
+    return [mutate, mutation];
+};

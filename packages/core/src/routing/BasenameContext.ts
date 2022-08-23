@@ -4,5 +4,6 @@
  * https://github.com/stbui/prophet
  */
 
-export * from './useLoading';
-export * from './useRefresh';
+import { createContext } from 'react';
+
+export const BasenameContext = createContext('');

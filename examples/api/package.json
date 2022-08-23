@@ -9,18 +9,18 @@
         "@stbui/prophet-language-chinese": "3.0.0",
         "@stbui/prophet-language-english": "3.0.0",
         "bizcharts": "^4.0.14",
-        "node-sass": "^5.0.0",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-scripts": "4.0.3",
-        "web-vitals": "^1.1.1"
+        "node-sass": "^7.0.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "web-vitals": "^3.0.0"
     },
     "devDependencies": {
-        "@types/node": "^14.14.37",
-        "@types/react": "^17.0.3",
-        "@types/react-dom": "^17.0.3",
-        "@types/jest": "^26.0.22",
-        "typescript": "^4.2.3"
+        "@types/node": "^18.7.9",
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
+        "@types/jest": "^28.1.7",
+        "typescript": "^4.7.4"
     },
     "scripts": {
         "start": "react-scripts start",

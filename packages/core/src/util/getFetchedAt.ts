@@ -45,5 +45,3 @@ export const getFetchedAt = (
 
     return { ...stillValidFetchedAt, ...newFetchedAt };
 };
-
-export default getFetchedAt;

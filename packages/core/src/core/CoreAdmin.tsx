@@ -28,7 +28,7 @@ export interface CoreAdminProps {
     children?: any;
 }
 
-const CoreAdmin: FC<CoreAdminProps> = ({
+export const CoreAdmin: FC<CoreAdminProps> = ({
     children,
     title,
     dashboard,
@@ -71,5 +71,3 @@ const CoreAdmin: FC<CoreAdminProps> = ({
         </CoreContext>
     );
 };
-
-export default CoreAdmin;

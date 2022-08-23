@@ -5,10 +5,10 @@
  */
 
 import { useCallback } from 'react';
-import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate, Path } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+
 import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
-import { clearState } from '../actions';
 
 type Logout = (
     params?: any,
@@ -29,9 +29,10 @@ type Logout = (
  * }
  */
 const useLogout = (): Logout => {
-    const dispatch = useDispatch();
     const authProvider = useAuthProvider();
-    const history = useHistory();
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const logout = useCallback(
         (
@@ -40,7 +41,6 @@ const useLogout = (): Logout => {
             redirectToCurrentLocationAfterLogin = true
         ) =>
             authProvider.logout(params).then(redirectToFromProvider => {
-                dispatch(clearState());
                 const redirectToParts = (
                     redirectToFromProvider || redirectTo
                 ).split('?');
@@ -50,33 +50,36 @@ const useLogout = (): Logout => {
 
                 if (
                     redirectToCurrentLocationAfterLogin &&
-                    history.location &&
-                    history.location.pathname
+                    location &&
+                    location.pathname
                 ) {
                     newLocation.state = {
-                        nextPathname: history.location.pathname,
+                        nextPathname: location.pathname,
                     };
                 }
 
                 if (redirectToParts[1]) {
                     newLocation.search = redirectToParts[1];
                 }
-                history.push(newLocation);
+                navigate(newLocation);
                 return redirectToFromProvider;
             }),
-        [authProvider, history, dispatch]
+        [authProvider, history]
     );
 
     const logoutWithoutProvider = useCallback(() => {
-        history.push({
-            pathname: defaultAuthParams.loginUrl,
-            state: {
-                nextPathname: history.location && history.location.pathname,
-            },
-        });
-        dispatch(clearState());
+        // navigate({
+        //     pathname: defaultAuthParams.loginUrl,
+        //     {
+        //         state: {
+        //             nextPathname: location && location.pathname,
+        //         },
+        //     }
+        // });
+
+        // clear store
         return Promise.resolve();
-    }, [history]);
+    }, [navigate]);
 
     return authProvider ? logout : logoutWithoutProvider;
 };

@@ -4,10 +4,14 @@
  * https://github.com/stbui/prophet
  */
 
-import { useSelector, shallowEqual } from 'react-redux';
-import get from 'lodash/get';
-import useQueryWithStore from './useQueryWithStore';
-import { GET_LIST, CRUD_GET_LIST } from '../actions';
+import {
+    useQuery,
+    UseQueryOptions,
+    UseQueryResult,
+    useQueryClient,
+} from 'react-query';
+import { useDataProvider } from './useDataProvider';
+
 import { Pagination, Sort } from '../types';
 
 export interface UseGetListValue {
@@ -18,11 +22,6 @@ export interface UseGetListValue {
     loaded?: boolean;
     ids?: any;
 }
-
-const defautlPagination = { page: 1, perPage: 10 };
-const defaultSort = { field: 'id', order: 'DESC' };
-const defaultFilter = {};
-const defaultIds = [];
 
 /**
  * useGetList
@@ -58,49 +57,54 @@ const defaultIds = [];
  */
 export const useGetList = (
     resource: string,
-    pagination: Pagination = defautlPagination,
-    filter: Object = defaultFilter,
-    sort: Sort = defaultSort,
+    params: any = {},
     options?: object
-): UseGetListValue => {
-    const requestSignature = JSON.stringify({ pagination, sort, filter });
+) => {
+    const {
+        pagination = { page: 1, perPage: 25 },
+        sort = { field: 'id', order: 'DESC' },
+        filter = {},
+        meta,
+    } = params;
 
-    const { data: ids, total, loading, loaded, error } = useQueryWithStore(
-        {
-            type: GET_LIST,
-            resource,
-            payload: { pagination, filter, sort },
+    const dataProvider = useDataProvider();
+    const queryClient = useQueryClient();
+
+    const result = useQuery(
+        [resource, 'getList', { pagination, sort, filter, meta }],
+        () => {
+            dataProvider
+                .getList(resource, {
+                    pagination,
+                    sort,
+                    filter,
+                    meta,
+                })
+                .then(({ data, total, pageInfo }) => ({
+                    data,
+                    total,
+                    pageInfo,
+                }));
         },
-        { ...options, action: CRUD_GET_LIST },
-        state =>
-            get(
-                state.resources,
-                [resource, 'list', 'cachedRequests', requestSignature, 'ids'],
-                null
-            ),
-        state =>
-            get(state.resources, [
-                resource,
-                'list',
-                'cachedRequests',
-                requestSignature,
-                'total',
-            ])
+        {
+            onSuccess: ({ data }) => {
+                data.forEach(record => {
+                    queryClient.setQueryData(
+                        [resource, 'getOne', { id: String(record.id), meta }],
+                        oldRecord => oldRecord ?? record
+                    );
+                });
+            },
+            ...options,
+        }
     );
 
-    const data = useSelector(
-        (state: any) => get(state.resources, [resource, 'data'], null),
-        shallowEqual
-    );
-
-    return {
-        data,
-        ids: ids === null ? defaultIds : ids,
-        total,
-        loading,
-        loaded,
-        error,
-    };
+    return result.data
+        ? {
+              ...result,
+              data: result.data?.data,
+              total: result.data?.total,
+              pageInfo: result.data?.pageInfo,
+          }
+        : result;
 };
-
-export default useGetList;
