@@ -5,8 +5,8 @@
  */
 
 import React, { FC, ComponentType } from 'react';
-import CoreContext from './CoreContext';
-import CoreUI from './CoreUI';
+import { CoreContext } from './CoreContext';
+import { CoreUI } from './CoreUI';
 import { AuthProvider, I18nProvider } from '../types';
 
 export interface CoreAdminProps {
@@ -20,15 +20,12 @@ export interface CoreAdminProps {
     authProvider?: AuthProvider;
     dataProvider: any;
     i18nProvider?: I18nProvider;
-    customRoutes?: any[];
-    customSagas?: any[];
-    customReducers?: object;
     history?: any;
     title?: string;
     children?: any;
 }
 
-export const CoreAdmin: FC<CoreAdminProps> = ({
+export const CoreAdmin = ({
     children,
     title,
     dashboard,
@@ -37,37 +34,9 @@ export const CoreAdmin: FC<CoreAdminProps> = ({
     login,
     layout,
     catchAll,
-    initialState,
     authProvider,
     dataProvider,
     i18nProvider,
-    customRoutes = [],
-    customSagas,
-    customReducers,
-    history,
 }) => {
-    return (
-        <CoreContext
-            authProvider={authProvider}
-            dataProvider={dataProvider}
-            i18nProvider={i18nProvider}
-            history={history}
-            customReducers={customReducers}
-            customSagas={customSagas}
-            initialState={initialState}
-        >
-            <CoreUI
-                layout={layout}
-                customRoutes={customRoutes}
-                dashboard={dashboard}
-                menu={menu}
-                brand={brand}
-                catchAll={catchAll}
-                title={title}
-                loginPage={login}
-            >
-                {children}
-            </CoreUI>
-        </CoreContext>
-    );
+    return 2;
 };

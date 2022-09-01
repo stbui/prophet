@@ -5,10 +5,10 @@
  */
 
 import { useGetOne } from '../../dataProvider';
-import { useNotify } from '../../sideEffect';
-import useVersion from '../useVersion';
 import { useResourceContext } from '../../core';
-
+import { useNotify } from '../../notification';
+import { useRedirect } from '../../routing';
+import { useRefresh } from '../../loading';
 export interface ShowProps {
     resource: string;
     basePath: string;
@@ -21,7 +21,6 @@ export interface ShowControllerProps {
     record: any;
     loading: boolean;
     loaded: boolean;
-    version: number;
 }
 
 /**
@@ -42,17 +41,8 @@ export const useShowController = (props: ShowProps): ShowControllerProps => {
     const { basePath, id } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
-    const version = useVersion();
 
-    const { data: record, loading, loaded } = useGetOne(resource, id, {
-        onFailure: error =>
-            notify(
-                typeof error === 'string'
-                    ? error
-                    : error.message || 'prophet.notification.http_error',
-                'error'
-            ),
-    });
+    const { data: record, loading, loaded } = useGetOne(resource, id);
 
     return {
         resource,
@@ -60,6 +50,5 @@ export const useShowController = (props: ShowProps): ShowControllerProps => {
         record,
         loading,
         loaded,
-        version,
     };
 };

@@ -8,6 +8,11 @@ export interface Sort {
     order: string;
 }
 
+export interface SortPayload {
+    field: string;
+    order: string;
+}
+
 export interface FilterPayload {
     [k: string]: any;
 }

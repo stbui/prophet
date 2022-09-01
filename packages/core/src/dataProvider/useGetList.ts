@@ -27,10 +27,9 @@ export interface UseGetListValue {
  * useGetList
  *
  * @param {string} resource
- * @param {Object} pagination
- * @param {Object} filter
- * @param {Object} sort
- * @param {Object} options
+ * @param {Object} params.pagination
+ * @param {Object} params.filter
+ * @param {Object} params.sort
  * @param {string} options.action
  * @param {Function} options.onSuccess
  * @param {Function} options.onFailure

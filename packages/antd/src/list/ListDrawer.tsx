@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import { useListController, ListContextProvider } from '@stbui/prophet-core';
 import { Drawer } from 'antd';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import ListView from './ListView';
 
 export interface ListDrawerViewProps {
@@ -15,83 +15,11 @@ export interface ListDrawerViewProps {
 
 export const ListDrawerView = (props: ListDrawerViewProps) => {
     const { basePath, create, edit, show, destroyOnClose, drawer } = props;
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const handleClose = () => history.push(basePath);
+    const handleClose = () => navigate(basePath);
 
-    return (
-        <Switch>
-            <Route exact path={`${basePath}/create`}>
-                {({ match }) => {
-                    return create ? (
-                        <Drawer
-                            width={create.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
-                            {...drawer}
-                        >
-                            {cloneElement(create, {
-                                onCancel: handleClose,
-                                onOk: handleClose,
-                                ...props,
-                            })}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
-
-            <Route exact path={`${basePath}/:id`}>
-                {({ match }: any) => {
-                    const isMatch =
-                        match && match.params && match.params.id !== 'create';
-                    return edit ? (
-                        <Drawer
-                            width={edit.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
-                            {...drawer}
-                        >
-                            {isMatch
-                                ? cloneElement(edit, {
-                                      id: decodeURIComponent(match.params.id),
-                                      onCancel: handleClose,
-                                      onOk: handleClose,
-                                      ...props,
-                                  })
-                                : null}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
-
-            <Route exact path={`${basePath}/:id/show`}>
-                {({ match }: any) => {
-                    const isMatch =
-                        match && match.params && match.params.id !== 'create';
-                    return show ? (
-                        <Drawer
-                            width={show.props.width}
-                            visible={!!match}
-                            onClose={handleClose}
-                            destroyOnClose={destroyOnClose}
-                            {...drawer}
-                        >
-                            {isMatch
-                                ? cloneElement(show, {
-                                      id: decodeURIComponent(match.params.id),
-                                      onCancel: handleClose,
-                                      onOk: handleClose,
-                                      ...props,
-                                  })
-                                : null}
-                        </Drawer>
-                    ) : null;
-                }}
-            </Route>
-        </Switch>
-    );
+    return null;
 };
 
 ListDrawerView.defaultProps = {

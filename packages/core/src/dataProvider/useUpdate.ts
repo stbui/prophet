@@ -57,7 +57,15 @@ export const useUpdate = (
     resource: string,
     params: any = {},
     options: any = {}
-) => {
+): any => {
     const dataProvider = useDataProvider();
     const queryClient = useQueryClient();
+
+    const update = () => {};
+
+    const mutation = () => {
+        return { isLoading: true };
+    };
+
+    return [update, mutation];
 };

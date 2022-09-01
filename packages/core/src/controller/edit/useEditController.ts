@@ -6,15 +6,18 @@
 
 import { useCallback } from 'react';
 import { useUpdate, useGetOne } from '../../dataProvider';
-import { useNotify, useRedirect, useRefresh } from '../../sideEffect';
-import useVersion from '../useVersion';
 import { useResourceContext } from '../../core';
+import { useNotify } from '../../notification';
+import { useRedirect } from '../../routing';
+import { useRefresh } from '../../loading';
 
 export interface EditProps {
     resource: string;
     basePath: string;
     id: string | number;
     successMessage?: string;
+    queryOptions?: any;
+    mutationOptions?: any;
 }
 
 export interface EditControllerProps {
@@ -26,7 +29,6 @@ export interface EditControllerProps {
     loaded: boolean;
     saving: boolean;
     save: (data: any, option: any) => void;
-    version: number;
 }
 
 /**
@@ -44,50 +46,41 @@ export interface EditControllerProps {
  * }
  */
 export const useEditController = (props: EditProps): EditControllerProps => {
-    const { basePath, id, successMessage } = props;
+    const {
+        basePath,
+        id,
+        successMessage,
+        queryOptions = {},
+        mutationOptions = {},
+    } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
     const redirect = useRedirect();
-    const version = useVersion();
     const refresh = useRefresh();
 
-    const { data: record, loading, loaded } = useGetOne(resource, id, {
-        onFailure: error =>
-            notify(
-                typeof error === 'string'
-                    ? error
-                    : error.message || 'prophet.notification.http_error',
-                'error'
-            ),
-    });
+    const { meta: queryMeta, ...otherQueryOptions } = queryOptions;
+    const {
+        onSuccess,
+        onError,
+        meta: mutationMeta,
+        ...otherMutationOptions
+    } = mutationOptions;
 
-    const [update, { loading: saving }] = useUpdate(resource, id, {}, record);
+    const {
+        data: record,
+        loading,
+        loaded,
+    } = useGetOne(resource, { id, meta: queryMeta }, { ...otherQueryOptions });
+
+    const [update, { isLoading: saving }] = useUpdate(
+        resource,
+        { id, previousData: record },
+        { ...otherMutationOptions }
+    );
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure, redirectTo = 'list' }: any = {}) =>
-            update(
-                { data },
-                {
-                    onSuccess: onSuccess
-                        ? onSuccess
-                        : () => {
-                              notify(successMessage || '更新成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                              refresh();
-                          },
-                    onFailure: onFailure
-                        ? onFailure
-                        : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
-                }
-            ),
-        [resource, basePath, update, notify, redirect, successMessage]
+        (data: any, { onSuccess, onFailure }: any = {}) => {},
+        [resource, basePath, update, notify, redirect]
     );
 
     return {
@@ -99,6 +92,5 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         loaded,
         saving,
         save,
-        version,
     };
 };

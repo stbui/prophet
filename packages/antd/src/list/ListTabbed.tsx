@@ -5,12 +5,7 @@ import React, {
     isValidElement,
     FunctionComponent,
 } from 'react';
-import {
-    useRouteMatch,
-    useLocation,
-    useHistory,
-    Route,
-} from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Route } from 'react-router-dom';
 import { Tabs, Card } from 'antd';
 
 import { useListController } from '@stbui/prophet-core';
@@ -81,12 +76,12 @@ const ListTabbed: FunctionComponent<Props> = ({
     resource,
     ...other
 }) => {
-    const match = useRouteMatch();
+    const match = useParams();
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const url = match ? match.url : location.pathname;
 
-    const onTabChange = useCallback(path => history.push(path), [history]);
+    const onTabChange = useCallback(path => navigate(path), [history]);
 
     if (!children) {
         return <div>缺失子组件 &lt;Tab&gt;</div>;
@@ -110,17 +105,7 @@ const ListTabbed: FunctionComponent<Props> = ({
                     tab={tab.props.label}
                     forceRender={tab.props.forceRender}
                 >
-                    <Route exact path={getTabFullPath(tab, index, url)}>
-                        {props =>
-                            isValidElement(tab)
-                                ? cloneElement(tab, {
-                                      basePath,
-                                      resource,
-                                      ...other,
-                                  } as any)
-                                : null
-                        }
-                    </Route>
+                    1
                 </Tabs.TabPane>
             ))}
         </Tabs>

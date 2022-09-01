@@ -1,35 +1,22 @@
-/**
- * @license
- * Copyright Stbui All Rights Reserved.
- * https://github.com/stbui/prophet
- */
-
-import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useCallback, useMemo, useEffect, useState, useRef } from 'react';
 import { parse, stringify } from 'query-string';
-import debounce from 'lodash/debounce';
-import set from 'lodash/set';
+import lodashDebounce from 'lodash/debounce';
 import pickBy from 'lodash/pickBy';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import {
-    changeListParams,
+import { useStore } from '../../store';
+import queryReducer, {
     SET_FILTER,
-    SET_SORT,
+    HIDE_FILTER,
+    SHOW_FILTER,
     SET_PAGE,
     SET_PER_PAGE,
-} from '../../actions/listActions';
-import queryReducer from '../../reducers/resources/list/queryReducer';
-import { removeKey, removeEmpty } from '../../util';
-import { Sort } from '../../types';
-
-interface ListParamsOptions {
-    resource: string;
-    filterDefaultValues?: object;
-    sort?: Sort;
-    perPage?: number;
-    debounceTime?: number;
-}
+    SET_SORT,
+    SORT_ASC,
+} from './queryReducer';
+import { SortPayload, FilterPayload } from '../../types';
+import { removeEmpty } from '../../util';
+import { useIsMounted } from '../../util/hooks';
 
 export interface ListParams {
     sort: string;
@@ -37,161 +24,171 @@ export interface ListParams {
     page: number;
     perPage: number;
     filter: any;
-    filterValues: object;
-    displayedFilters: {
-        [key: string]: boolean;
-    };
-    requestSignature: any[];
+    displayedFilters: any;
 }
 
-interface Modifiers {
-    changeParams: (action: any) => void;
-    setPage: (page: number) => void;
-    setPerPage: (pageSize: number) => void;
-    setSort: (sort: string, order?: string) => void;
-    setFilters: (filters: any, displayedFilters: any) => void;
-    hideFilter: (filterName: string) => void;
-    showFilter: (filterName: string, defaultValue: any) => void;
-}
-
-/**
- * ListParams
- *
- * @param {Object} options
- * @param {string} options.resource
- * @param {Object} options.filterDefaultValues
- * @param {Object} options.sort
- * @param {order} options.sort.field
- * @param {order} options.sort.order
- * @param {number} options.perPage
- * @param {number} options.debounceTime
- * @returns
- *
- * @example
- *
- * const [query, queryMethod] = useListParams({
- *      resource: 'users',
- *      filterDefaultValues: { username: 'stbui' },
- *      sort: { field: 'id', order: 'ASC' },
- *      perPage: 20
- * })
- *
- */
 export const useListParams = ({
     resource,
     filterDefaultValues,
-    sort = { field: 'id', order: 'ASC' },
+    sort = defaultSort,
     perPage = 10,
-    debounceTime = 500,
-}: ListParamsOptions): [ListParams, Modifiers] => {
-    const dispatch = useDispatch();
-    const history = useHistory();
+    debounce = 500,
+    disableSyncWithLocation = false,
+}: ListParamsOptions): [Parameters, Modifiers] => {
     const location = useLocation();
-
-    const params = useSelector(
-        (state: any) =>
-            state.resources[resource]
-                ? state.resources[resource].list.params
-                : {},
-        shallowEqual
-    );
+    const navigate = useNavigate();
+    const [localParams, setLocalParams] = useState(defaultParams);
+    const storeKey = `${resource}.listParams`;
+    const [params, setParams] = useStore(storeKey, defaultParams);
+    const tempParams = useRef<ListParams>();
+    const isMounted = useIsMounted();
 
     const requestSignature = [
         location.search,
         resource,
-        params,
-        filterDefaultValues,
+        JSON.stringify(disableSyncWithLocation ? localParams : params),
+        JSON.stringify(filterDefaultValues),
         JSON.stringify(sort),
         perPage,
+        disableSyncWithLocation,
     ];
+
+    const queryFromLocation = disableSyncWithLocation
+        ? {}
+        : parseQueryFromLocation(location);
 
     const query = useMemo(
         () =>
-            getQuery({ location, params, filterDefaultValues, sort, perPage }),
+            getQuery({
+                queryFromLocation,
+                params: disableSyncWithLocation ? localParams : params,
+                filterDefaultValues,
+                sort,
+                perPage,
+            }),
         requestSignature
     );
 
-    const changeParams = useCallback(action => {
-        const newParams = queryReducer(query, action);
+    useEffect(() => {
+        if (Object.keys(queryFromLocation).length > 0) {
+            setParams(query);
+        }
+    }, [location.search]);
 
-        history.push({
-            search: `?${stringify({
-                ...newParams,
-                filter: JSON.stringify(newParams.filter),
-                displayedFilters: JSON.stringify(newParams.displayedFilters),
-            })}`,
-        });
+    const changeParams = useCallback(
+        action => {
+            if (!isMounted.current) return;
 
-        dispatch(changeListParams(resource, newParams));
-    }, requestSignature);
+            if (!tempParams.current) {
+                tempParams.current = queryReducer(query, action);
+                setTimeout(() => {
+                    if (disableSyncWithLocation) {
+                        // @ts-ignore
+                        setLocalParams(tempParams.current);
+                    } else {
+                        navigate(
+                            {
+                                search: `?${stringify({
+                                    ...tempParams.current,
+                                    filter: JSON.stringify(
+                                        // @ts-ignore
+                                        tempParams.current.filter
+                                    ),
+                                    displayedFilters: JSON.stringify(
+                                        // @ts-ignore
+                                        tempParams.current.displayedFilters
+                                    ),
+                                })}`,
+                            },
+                            {
+                                state: {
+                                    _scrollToTop: action.type === SET_PAGE,
+                                },
+                            }
+                        );
+                    }
+                    tempParams.current = undefined;
+                }, 0);
+            } else {
+                tempParams.current = queryReducer(tempParams.current, action);
+            }
+        },
+        [...requestSignature, navigate]
+    );
 
     const setSort = useCallback(
-        (sort: string, order?: string) =>
-            changeParams({ type: SET_SORT, payload: { sort, order } }),
-        requestSignature
+        (sort: SortPayload) =>
+            changeParams({
+                type: SET_SORT,
+                payload: sort,
+            }),
+        [changeParams]
     );
 
     const setPage = useCallback(
-        page => changeParams({ type: SET_PAGE, payload: page }),
-        requestSignature
+        (newPage: number) => changeParams({ type: SET_PAGE, payload: newPage }),
+        [changeParams]
     );
 
     const setPerPage = useCallback(
-        perPage => changeParams({ type: SET_PER_PAGE, payload: perPage }),
-        requestSignature
+        (newPerPage: number) =>
+            changeParams({ type: SET_PER_PAGE, payload: newPerPage }),
+        [changeParams]
     );
 
-    const filterValues = query.filter || {};
-    const displayedFilterValues = query.displayedFilters || {};
+    const filterValues = query.filter || emptyObject;
+    const displayedFilterValues = query.displayedFilters || emptyObject;
 
-    const debouncedSetFilters = debounce((newFilters, newDisplayedFilters) => {
-        let payload: any = {
-            filter: removeEmpty(newFilters),
-            displayedFilters: undefined,
-        };
-
-        if (newDisplayedFilters) {
-            payload.displayedFilters = Object.keys(newDisplayedFilters).reduce(
-                (filters, filter) => {
-                    return newDisplayedFilters[filter]
-                        ? { ...filters, [filter]: true }
-                        : filters;
-                },
-                {}
-            );
-        }
-
-        changeParams({ type: SET_FILTER, payload });
-    }, debounceTime);
+    const debouncedSetFilters = lodashDebounce((filter, displayedFilters) => {
+        changeParams({
+            type: SET_FILTER,
+            payload: {
+                filter: removeEmpty(filter),
+                displayedFilters,
+            },
+        });
+    }, debounce);
 
     const setFilters = useCallback(
-        (filters, displayedFilters) =>
-            debouncedSetFilters(filters, displayedFilters),
-        requestSignature
+        (filter, displayedFilters, debounce = true) =>
+            debounce
+                ? debouncedSetFilters(filter, displayedFilters)
+                : changeParams({
+                      type: SET_FILTER,
+                      payload: {
+                          filter: removeEmpty(filter),
+                          displayedFilters,
+                      },
+                  }),
+        [changeParams]
     );
 
-    const hideFilter = useCallback((filterName: string) => {
-        const newFilters = removeKey(filterValues, filterName);
-        const newDisplayedFilters = {
-            ...displayedFilterValues,
-            [filterName]: undefined,
-        };
+    const hideFilter = useCallback(
+        (filterName: string) => {
+            changeParams({
+                type: HIDE_FILTER,
+                payload: filterName,
+            });
+        },
+        [changeParams]
+    );
 
-        setFilters(newFilters, newDisplayedFilters);
-    }, requestSignature);
-
-    const showFilter = useCallback((filterName: string, defaultValue: any) => {
-        const newFilters = set(filterValues, filterName, defaultValue);
-        const newDisplayedFilters = {
-            ...displayedFilterValues,
-            [filterName]: true,
-        };
-
-        setFilters(newFilters, newDisplayedFilters);
-    }, requestSignature);
+    const showFilter = useCallback(
+        (filterName: string, defaultValue: any) => {
+            changeParams({
+                type: SHOW_FILTER,
+                payload: {
+                    filterName,
+                    defaultValue,
+                },
+            });
+        },
+        [changeParams]
+    );
 
     return [
         {
+            // @ts-ignore
             displayedFilters: displayedFilterValues,
             filterValues,
             requestSignature,
@@ -209,6 +206,15 @@ export const useListParams = ({
     ];
 };
 
+export const validQueryParams = [
+    'page',
+    'perPage',
+    'sort',
+    'order',
+    'filter',
+    'displayedFilters',
+];
+
 const parseObject = (query, field) => {
     if (query[field] && typeof query[field] === 'string') {
         try {
@@ -218,61 +224,39 @@ const parseObject = (query, field) => {
         }
     }
 };
-/**
- * 将url参数转换成对象
- * ?page=1&perPage=10&sort=stb&order=ASC&filter={}
- * @param {string} options.search
- */
-export const parseQueryFromLocation = ({ search }) => {
+
+export const parseQueryFromLocation = ({ search }): Partial<ListParams> => {
     const query = pickBy(
         parse(search),
-        (v, k) =>
-            ['page', 'perPage', 'sort', 'order', 'filter'].indexOf(k) !== -1
+        (v, k) => validQueryParams.indexOf(k) !== -1
     );
-
     parseObject(query, 'filter');
     parseObject(query, 'displayedFilters');
-
     return query;
 };
 
-/**
- *
- * { filter: {}, order: null, page: 1, perPage: null, sort: null }
- * @param {object} params
- */
-export const hasCustomParams = params => {
+export const hasCustomParams = (params: ListParams) => {
     return (
         params &&
         params.filter &&
         (Object.keys(params.filter).length > 0 ||
-            params.order !== null ||
+            params.order != null ||
             params.page !== 1 ||
             params.perPage != null ||
             params.sort != null)
     );
 };
 
-/**
- *
- * @param {Object} options
- * @param {Object} options.location
- * @param {Object} options.params
- * @param {string} options.filterDefaultValues
- * @param {Object} options.sort
- * @param {number} options.perPage
- */
 export const getQuery = ({
-    location,
+    queryFromLocation,
     params,
     filterDefaultValues,
     sort,
     perPage,
 }) => {
-    const queryFormLocation = parseQueryFromLocation(location);
-    const query =
-        Object.keys(queryFormLocation).length > 0
-            ? queryFormLocation
+    const query: Partial<ListParams> =
+        Object.keys(queryFromLocation).length > 0
+            ? queryFromLocation
             : hasCustomParams(params)
             ? { ...params }
             : { filter: filterDefaultValues || {} };
@@ -281,24 +265,65 @@ export const getQuery = ({
         query.sort = sort.field;
         query.order = sort.order;
     }
-
-    if (!query.perPage) {
+    if (query.perPage == null) {
         query.perPage = perPage;
     }
-
-    if (!query.page) {
+    if (query.page == null) {
         query.page = 1;
     }
 
     return {
         ...query,
-        page:
-            (typeof query.page === 'string'
-                ? parseInt(query.page, 10)
-                : query.page) || 1,
-        perPage:
-            (typeof query.perPage === 'string'
-                ? parseInt(query.perPage, 10)
-                : query.perPage) || 10,
-    };
+        page: getNumberOrDefault(query.page, 1),
+        perPage: getNumberOrDefault(query.perPage, 10),
+    } as ListParams;
 };
+
+export const getNumberOrDefault = (
+    possibleNumber: string | number | undefined,
+    defaultValue: number
+) => {
+    const parsedNumber =
+        typeof possibleNumber === 'string'
+            ? parseInt(possibleNumber, 10)
+            : possibleNumber;
+
+    // @ts-ignore
+    return isNaN(parsedNumber) ? defaultValue : parsedNumber;
+};
+
+export interface ListParamsOptions {
+    resource: string;
+    perPage?: number;
+    sort?: SortPayload;
+    filterDefaultValues?: FilterPayload;
+    debounce?: number;
+    disableSyncWithLocation?: boolean;
+}
+
+interface Parameters extends ListParams {
+    filterValues: object;
+    displayedFilters: {
+        [key: string]: boolean;
+    };
+    requestSignature: any[];
+}
+
+interface Modifiers {
+    changeParams: (action: any) => void;
+    setPage: (page: number) => void;
+    setPerPage: (pageSize: number) => void;
+    setSort: (sort: SortPayload) => void;
+    setFilters: (filters: any, displayedFilters: any) => void;
+    hideFilter: (filterName: string) => void;
+    showFilter: (filterName: string, defaultValue: any) => void;
+}
+
+const emptyObject = {};
+
+const defaultSort = {
+    field: 'id',
+    order: SORT_ASC,
+};
+
+const defaultParams = {};

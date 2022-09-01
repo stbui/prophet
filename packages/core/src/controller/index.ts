@@ -7,7 +7,6 @@
 export * from './DeleteController';
 export * from './useDeleteController';
 
-import useVersion from './useVersion';
 import usePaginationState from './usePaginationState';
 import useFilterState from './useFilterState';
 import useSortState from './useSortState';
@@ -20,4 +19,4 @@ export * from './show';
 export * from './RecordContext';
 export * from './SaveContext';
 
-export { usePaginationState, useFilterState, useSortState, useVersion };
+export { usePaginationState, useFilterState, useSortState };

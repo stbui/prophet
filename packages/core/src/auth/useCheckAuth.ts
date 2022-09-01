@@ -7,7 +7,7 @@
 import { useCallback } from 'react';
 import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
 import useLogout from './useLogout';
-import { useNotify } from '../sideEffect';
+import { useNotify } from '../notification';
 
 type CheckAuth = (
     params?: any,
@@ -68,7 +68,9 @@ const useCheckAuth = (): CheckAuth => {
                         (error && error.message === false);
 
                     !shouldSkipNotify &&
-                        notify('prophet.auth.auth_check_error', 'warning');
+                        notify('prophet.auth.auth_check_error', {
+                            type: 'warning',
+                        });
                 }
 
                 throw error;

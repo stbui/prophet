@@ -22,9 +22,7 @@ import TranslationProviderContext from './TranslationProviderContext';
  *     return <span>{availableLanguages[locale]}</span>;
  * }
  */
-const useLocale = () => {
+export const useLocale = () => {
     const { locale } = useContext(TranslationProviderContext);
     return locale;
 };
-
-export default useLocale;

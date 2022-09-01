@@ -5,8 +5,8 @@
  */
 
 import React, { ComponentType } from 'react';
-import useTranslate from './useTranslate';
-import useLocale from './useLocale';
+import { useTranslate } from './useTranslate';
+import { useLocale } from './useLocale';
 
 /**
  *

@@ -1,9 +1,10 @@
-import React, { FunctionComponent, ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import {
     CoreContext,
     CoreUI,
     AuthProvider,
     I18nProvider,
+    localStorageStore,
 } from '@stbui/prophet-core';
 
 import { Layout, CatchAll, Login } from '@stbui/prophet-antd';
@@ -23,15 +24,13 @@ interface Props {
     authProvider?: AuthProvider;
     dataProvider?: any;
     i18nProvider?: I18nProvider;
-    customRoutes?: any[];
-    customSagas?: any;
-    customReducers?: any;
-    history?: any;
+    store: any;
+    queryClient?: any;
 }
 
 export const defaultI18nProvider = polyglotI18nProvider(() => defaultMessages);
 
-const Prophet: FunctionComponent<Props> = ({
+export const Prophet = ({
     children,
     title,
     dashboard,
@@ -40,28 +39,22 @@ const Prophet: FunctionComponent<Props> = ({
     login,
     layout,
     catchAll,
-    initialState,
     authProvider,
     dataProvider,
     i18nProvider,
-    customRoutes = [],
-    customSagas,
-    customReducers,
-    history,
-}) => {
+    store,
+    queryClient,
+}: Props) => {
     return (
         <CoreContext
             authProvider={authProvider}
             dataProvider={dataProvider}
             i18nProvider={i18nProvider}
-            history={history}
-            customReducers={customReducers}
-            customSagas={customSagas}
-            initialState={initialState}
+            store={store}
+            queryClient={queryClient}
         >
             <CoreUI
                 layout={layout}
-                customRoutes={customRoutes}
                 dashboard={dashboard}
                 menu={menu}
                 brand={brand}
@@ -79,7 +72,6 @@ Prophet.defaultProps = {
     layout: Layout,
     catchAll: CatchAll,
     login: Login,
+    store: localStorageStore(),
     i18nProvider: defaultI18nProvider,
 };
-
-export default Prophet;

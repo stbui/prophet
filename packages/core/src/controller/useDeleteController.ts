@@ -6,8 +6,9 @@
 
 import { useCallback } from 'react';
 import { useDelete } from '../dataProvider';
-import { useNotify, useRedirect, useRefresh } from '../sideEffect';
 import { useResourceContext } from '../core';
+import { useNotify } from '../notification';
+import { useRefresh } from '../loading';
 
 export interface DeleteProps {
     resource: string;
@@ -43,27 +44,7 @@ export const useDeleteController = (props: DeleteProps) => {
 
     const remove = useCallback(
         (id: string | number, data, { onSuccess, onFailure }: any = {}) => {
-            update(
-                { id, data },
-                {
-                    onSuccess: onSuccess
-                        ? onSuccess
-                        : () => {
-                              notify(successMessage || '删除成功', 'success');
-                              refresh();
-                          },
-                    onFailure: onFailure
-                        ? onFailure
-                        : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
-                }
-            );
+            update({ id, data });
         },
         [resource, basePath, update, notify, successMessage]
     );

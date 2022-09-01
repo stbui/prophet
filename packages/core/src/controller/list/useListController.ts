@@ -7,9 +7,9 @@
 import { isValidElement, useMemo, useEffect } from 'react';
 import { useListParams } from './useListParams';
 import { useGetList } from '../../dataProvider';
-import useVersion from '../useVersion';
-import { useNotify } from '../../sideEffect';
+import { useNotify } from '../../notification';
 import { useResourceContext } from '../../core';
+import { SortPayload } from '../../types';
 
 export interface ListProps {
     resource: string;
@@ -40,10 +40,9 @@ export interface ListControllerProps {
     showFilter: (filterName: string, defaultValue: any) => void;
     setPage: (page: number) => void;
     setPerPage: (page: number) => void;
-    setSort: (sort: string) => void;
+    setSort: (sort: SortPayload) => void;
     loading: any;
     loaded: any;
-    version: number;
 }
 
 /**
@@ -72,14 +71,15 @@ export const useListController = (props: ListProps): ListControllerProps => {
         sort = { field: 'id', order: 'ASC' },
         perPage = 10,
         debounce = 500,
+        queryOptions = {},
     } = props;
     const resource = useResourceContext(props);
+    const { meta, ...otherQueryOptions } = queryOptions;
 
     if (filter && isValidElement(filter)) {
         throw new Error('<List filter={{}}>...</List>');
     }
 
-    const version = useVersion();
     const notify = useNotify();
 
     const [query, queryMethod] = useListParams({
@@ -87,27 +87,21 @@ export const useListController = (props: ListProps): ListControllerProps => {
         filterDefaultValues,
         sort,
         perPage,
-        debounceTime: debounce,
+        debounce,
     });
 
     const { data, ids, total, loading, loaded } = useGetList(
         resource,
         {
-            page: query.page,
-            perPage: query.perPage,
+            pagination: {
+                page: query.page,
+                perPage: query.perPage,
+            },
+            sort: { field: query.sort, order: query.order },
+            filter: { ...query.filter, ...filter },
+            meta,
         },
-        { ...query.filter, ...filter },
-        { field: query.sort, order: query.order },
-        {
-            version,
-            onFailure: error =>
-                notify(
-                    typeof error === 'string'
-                        ? error
-                        : error.message || 'prophet.notification.http_error',
-                    'error'
-                ),
-        }
+        { ...otherQueryOptions }
     );
 
     useEffect(() => {
@@ -147,6 +141,5 @@ export const useListController = (props: ListProps): ListControllerProps => {
         setSort: queryMethod.setSort,
         loading,
         loaded,
-        version,
     };
 };

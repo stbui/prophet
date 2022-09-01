@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDataProvider, useRedirect, GET_ONE } from '@stbui/prophet-core';
+import { useDataProvider, useRedirect } from '@stbui/prophet-core';
 import { Button, ButtonProps } from 'antd';
 
 export interface CopyButtonProps extends ButtonProps {
@@ -20,18 +20,7 @@ const CopyWithCreateButton: FC<CopyButtonProps> = ({
     const redirect = useRedirect();
     const dataProvider = useDataProvider();
 
-    const update = () =>
-        dataProvider(GET_ONE, resource, { id }, {}).then(({ data }) => {
-            const source = encodeURIComponent(JSON.stringify(data));
-
-            redirect(
-                (basePath, id, data) => {
-                    return `${basePath}/create?source=${source}`;
-                },
-                basePath,
-                false
-            );
-        });
+    const update = () => {};
 
     return (
         <Button type={type} size={size} onClick={() => update()} {...rest}>

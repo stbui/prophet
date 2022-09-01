@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getResources } from '@stbui/prophet-core';
 import { Menu } from 'antd';
 import { Link } from '../Link';
 
 export const CustomMenu = props => {
     const { hasDashboard, location } = props;
-    const resources = useSelector(state => getResources(state));
+    const resources: any = [];
 
     return (
         <Menu

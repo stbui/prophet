@@ -6,7 +6,7 @@
 
 import { useContext } from 'react';
 
-import DataProviderContext from './DataProviderContext';
+import { DataProviderContext } from './DataProviderContext';
 
 export type UseDataProviderValue = (
     type: string,
@@ -54,7 +54,7 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
  *             { user.id }
  *         </React.Fragment>
  */
-export const useDataProvider = () => {
+export const useDataProvider = (): any => {
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
     // dataProvider(type, resource, payload)

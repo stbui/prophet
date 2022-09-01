@@ -4,19 +4,11 @@
  * https://github.com/stbui
  */
 
-import React, {
-    Children,
-    cloneElement,
-    createElement,
-    FunctionComponent,
-    ComponentType,
-    useState,
-    useEffect,
-    ReactNode,
-} from 'react';
+import React, { Children, ComponentType } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { WithPermissions } from '../auth';
 import { useCreatePath } from '../routing';
+import { useConfigureAdminRouterFromChildren } from './useConfigureAdminRouterFromChildren';
 
 export interface CoreRouterProps {
     children?: any;
@@ -24,7 +16,7 @@ export interface CoreRouterProps {
     dashboard?: ComponentType;
     menu?: ComponentType;
     brand?: ComponentType;
-    catchAll: ComponentType;
+    catchAll: any;
     layout: any;
     customRoutes: any[];
 }
@@ -43,6 +35,13 @@ export const CoreRouter = ({
 }: CoreRouterProps) => {
     const createPath = useCreatePath();
 
+    const {
+        customRoutesWithLayout,
+        customRoutesWithoutLayout,
+        status,
+        resources,
+    } = useConfigureAdminRouterFromChildren(children);
+
     return (
         <Routes>
             <Route
@@ -50,6 +49,7 @@ export const CoreRouter = ({
                 element={
                     <Layout dashboard={dashboard} menu={menu} title={title}>
                         <Routes>
+                            {customRoutesWithLayout}
                             {Children.map(resources, resource => (
                                 <Route
                                     key={resource.props.name}

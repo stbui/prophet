@@ -1,16 +1,10 @@
 import React, {
     Children,
     useCallback,
-    cloneElement,
     isValidElement,
     FunctionComponent,
 } from 'react';
-import {
-    useRouteMatch,
-    useLocation,
-    useHistory,
-    Route,
-} from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Route } from 'react-router-dom';
 import { Tabs, TabsProps, TabPaneProps } from 'antd';
 
 interface Props extends TabsProps {
@@ -63,12 +57,12 @@ const ShowTabbedView: FunctionComponent<Props> = ({
     tabPane,
     ...other
 }) => {
-    const match = useRouteMatch();
+    const match = useParams();
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const url = match ? match.url : location.pathname;
 
-    const onTabChange = useCallback(path => history.push(path), [history]);
+    const onTabChange = useCallback(path => navigate(path), [history]);
 
     if (!children) {
         return <div>缺失子组件 &lt;Tab&gt;</div>;
@@ -86,24 +80,14 @@ const ShowTabbedView: FunctionComponent<Props> = ({
 
     return (
         <Tabs defaultActiveKey={tabValue} onChange={onTabChange} {...other}>
-            {childrenArray.map((tab: any, index) => (
+            {childrenArray.map((Tab: any, index) => (
                 <Tabs.TabPane
-                    key={getTabFullPath(tab, index, url)}
-                    tab={tab.props.label}
-                    forceRender={tab.props.forceRender}
+                    key={getTabFullPath(Tab, index, url)}
+                    tab={Tab.props.label}
+                    forceRender={Tab.props.forceRender}
                     {...tabPane}
                 >
-                    <Route exact path={getTabFullPath(tab, index, url)}>
-                        {props =>
-                            isValidElement(tab)
-                                ? cloneElement(tab, {
-                                      basePath,
-                                      resource,
-                                      record,
-                                  } as any)
-                                : null
-                        }
-                    </Route>
+                    1
                 </Tabs.TabPane>
             ))}
         </Tabs>

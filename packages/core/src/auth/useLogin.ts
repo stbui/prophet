@@ -5,7 +5,8 @@
  */
 
 import { useCallback } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
 
 type Login = (params: any, pathName?: string) => Promise<any>;
@@ -28,7 +29,7 @@ type Login = (params: any, pathName?: string) => Promise<any>;
  */
 const useLogin = (): Login => {
     const authProvider = useAuthProvider();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     // @ts-ignore
     const nextPathName = location.state && location.state.nextPathname;
@@ -39,15 +40,14 @@ const useLogin = (): Login => {
                 const redirectUrl = pathName
                     ? pathName
                     : nextPathName || defaultAuthParams.afterLoginUrl;
-                history.push(redirectUrl);
-
+                navigate(redirectUrl);
                 return res;
             }),
         [authProvider, history, nextPathName]
     );
 
     const loginWithoutProvider = useCallback(() => {
-        history.push(defaultAuthParams.afterLoginUrl);
+        navigate(defaultAuthParams.afterLoginUrl);
         return Promise.resolve();
     }, [history]);
 

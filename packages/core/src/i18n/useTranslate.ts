@@ -19,7 +19,7 @@ import { Translate } from '../types';
  *   return <div>{translate('settings')}</div>;
  * };
  */
-const useTranslate = (): Translate => {
+export const useTranslate = (): Translate => {
     const { i18nProvider, locale } = useContext(TranslationProviderContext);
 
     const translate = useCallback(
@@ -29,5 +29,3 @@ const useTranslate = (): Translate => {
 
     return i18nProvider ? translate : (key: string) => key;
 };
-
-export default useTranslate;

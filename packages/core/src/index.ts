@@ -13,3 +13,4 @@ export * from './loading';
 export * from './types';
 export * from './notification';
 export * from './store';
+export * from './routing';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, useNotify, useRefresh } from '@stbui/prophet-core';
+import { useNotify, useRefresh } from '@stbui/prophet-core';
 
 import { Button, Popconfirm, ButtonProps, PopconfirmProps } from 'antd';
 
@@ -17,34 +17,7 @@ export const EnabledButton: React.FC<EnableButtonProps> = props => {
     const refresh = useRefresh();
     const notify = useNotify();
 
-    const [update] = useMutation(
-        {
-            type: 'updateStatus',
-            resource,
-            payload: { id },
-        },
-        {}
-    );
-
-    const onClick = () =>
-        update(
-            // @ts-ignore
-            { data: record },
-            {
-                onSuccess: () => {
-                    notify('更新成功', 'success');
-                    refresh();
-                },
-                onFailure: error =>
-                    notify(
-                        typeof error === 'string'
-                            ? error
-                            : error.message ||
-                                  'prophet.notification.http_error',
-                        'error'
-                    ),
-            }
-        );
+    const onClick = () => {};
 
     return (
         <Popconfirm

@@ -20,7 +20,7 @@ export interface CoreUIProps {
     children?: any;
 }
 
-const CoreUI: FunctionComponent<CoreUIProps> = ({
+export const CoreUI: FunctionComponent<CoreUIProps> = ({
     children,
     title = 'Stbui',
     dashboard,
@@ -56,5 +56,3 @@ const CoreUI: FunctionComponent<CoreUIProps> = ({
         />
     </Routes>
 );
-
-export default CoreUI;

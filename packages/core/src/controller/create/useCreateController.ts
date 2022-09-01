@@ -8,10 +8,10 @@ import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
 import { useCreate } from '../../dataProvider';
-import { useNotify, useRedirect, useRefresh } from '../../sideEffect';
-import useVersion from '../useVersion';
 import { useResourceContext } from '../../core';
-
+import { useNotify } from '../../notification';
+import { useRedirect } from '../../routing';
+import { useRefresh } from '../../loading';
 export interface CreateControllerProps {
     resource: string;
     basePath?: string;
@@ -21,7 +21,6 @@ export interface CreateControllerProps {
     saving: boolean;
     record?: object;
     redirect: any;
-    version: number;
 }
 export interface CreateProps {
     resource?: string;
@@ -89,7 +88,6 @@ export const useCreateController = (
     const location = useLocation();
     const notify = useNotify();
     const redirect = useRedirect();
-    const version = useVersion();
     const refresh = useRefresh();
 
     const recordToUse = getRecord(location, record);
@@ -101,28 +99,7 @@ export const useCreateController = (
             data: any,
             { onSuccess, onFailure, redirectTo = 'list' }: any = {}
         ) => {
-            create(
-                { data },
-                {
-                    onSuccess: onSuccess
-                        ? onSuccess
-                        : () => {
-                              notify(successMessage || '创建成功', 'success');
-                              redirect(redirectTo, basePath, data.id);
-                              refresh();
-                          },
-                    onFailure: onFailure
-                        ? onFailure
-                        : error =>
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'prophet.notification.http_error',
-                                  'error'
-                              ),
-                }
-            );
+            create({ data });
         },
         [resource, basePath, create, notify, redirect, successMessage]
     );
@@ -134,7 +111,6 @@ export const useCreateController = (
         loaded: true,
         save,
         saving,
-        version,
         record: recordToUse,
         redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };

@@ -7,7 +7,7 @@
 import { useCallback } from 'react';
 import useAuthProvider from './useAuthProvider';
 import useLogout from './useLogout';
-import { useNotify } from '../sideEffect';
+import { useNotify } from '../notification';
 
 type LogoutIfAccessDenied = (
     error?: any,
@@ -62,10 +62,9 @@ const useLogoutIfAccessDenied = (): LogoutIfAccessDenied => {
                             (e && e.message === false) ||
                             (error && error.message === false);
                         !shouldSkipNotify &&
-                            notify(
-                                'prophet.notification.logged_out',
-                                'warning'
-                            );
+                            notify('prophet.notification.logged_out', {
+                                type: 'warning',
+                            });
                         return true;
                     })
                     .finally(() => {
