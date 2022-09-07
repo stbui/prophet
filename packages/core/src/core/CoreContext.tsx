@@ -17,14 +17,17 @@ import { StoreContextProvider, memoryStore, Store } from '../store';
 import { NotificationContextProvider } from '../notification';
 import { AuthProvider, I18nProvider } from '../types';
 import { ResourceDefinitionContextProvider } from './ResourceDefinitionContext';
+import { Router } from '../routing';
+import { AuthProviderContext } from '../auth';
 
 interface CoreContextProps {
-    authProvider?: AuthProvider;
+    authProvider: AuthProvider;
     dataProvider: DataProvider;
     i18nProvider?: I18nProvider;
     children?: ReactNode;
     store: Store;
     queryClient?: QueryClient;
+    basename?: string;
 }
 
 export const CoreContext = ({
@@ -34,6 +37,7 @@ export const CoreContext = ({
     i18nProvider,
     store,
     queryClient,
+    basename,
 }: CoreContextProps) => {
     const finalQueryClient = useMemo(
         () => queryClient || new QueryClient(),
@@ -44,11 +48,13 @@ export const CoreContext = ({
         <DataProviderContext.Provider value={dataProvider}>
             <StoreContextProvider value={store}>
                 <QueryClientProvider client={finalQueryClient}>
-                    <NotificationContextProvider>
-                        <ResourceDefinitionContextProvider>
-                            {children}
-                        </ResourceDefinitionContextProvider>
-                    </NotificationContextProvider>
+                    <Router basename={basename}>
+                        <NotificationContextProvider>
+                            <ResourceDefinitionContextProvider>
+                                {children}
+                            </ResourceDefinitionContextProvider>
+                        </NotificationContextProvider>
+                    </Router>
                 </QueryClientProvider>
             </StoreContextProvider>
         </DataProviderContext.Provider>

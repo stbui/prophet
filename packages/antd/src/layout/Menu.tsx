@@ -3,14 +3,14 @@ import { Menu } from 'antd';
 import { Link } from '../Link';
 
 export const CustomMenu = props => {
-    const { hasDashboard, location } = props;
+    const { hasDashboard,  } = props;
     const resources: any = [];
 
     return (
         <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={[location.pathname]}
+            defaultSelectedKeys={[]}
         >
             {hasDashboard && (
                 <Menu.Item>

@@ -20,13 +20,13 @@
         "react-dom": "^16.9.0 || ^17.0.0 || ^18.0.0",
         "react-router": "^6.1.0",
         "react-router-dom": "^6.1.0",
-        "antd": "^4.22.7"
+        "antd": "^4.23.0"
     },
     "dependencies": {
         "@stbui/prophet-core": "^3.0.1"
     },
     "devDependencies": {
-        "antd": "^4.22.7",
+        "antd": "^4.23.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router": "^6.1.0",

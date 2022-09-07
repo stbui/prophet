@@ -8,16 +8,15 @@ import { useState, useEffect } from 'react';
 import useGetPermissions from './useGetPermissions';
 
 interface Permissions {
-    loading: boolean;
-    loaded: boolean;
-    [key: string]: any;
+    isLoading: boolean;
+    permissions?: any;
+    error?: Error;
 }
 
 interface State {
-    loading: boolean;
-    loaded: boolean;
+    isLoading: boolean;
     permissions?: any;
-    error?: any;
+    error?: Error;
 }
 
 /**
@@ -29,8 +28,8 @@ interface State {
  * import { usePermissions } from '@stbui/prophet-core';
  *
  * const MyApp = () => {
- *    const { loaded, permissions } = usePermissions();
- *    if (loaded && permissions === 'editor') {
+ *    const { isLoading, permissions } = usePermissions();
+ *    if (isLoading && permissions === 'editor') {
  *        return <div>eidtor</div>;
  *    } else {
  *        return <div>show</div>;
@@ -39,20 +38,18 @@ interface State {
  */
 const usePermissions = (params = {}): Permissions => {
     const [state, setState] = useState<State>({
-        loading: true,
-        loaded: false,
+        isLoading: true,
     });
     const getPermissions = useGetPermissions();
 
     useEffect(() => {
         getPermissions(params)
             .then(permissions => {
-                setState({ loading: false, loaded: true, permissions });
+                setState({ isLoading: false, permissions });
             })
             .catch(error => {
                 setState({
-                    loading: false,
-                    loaded: true,
+                    isLoading: false,
                     error,
                 });
             });

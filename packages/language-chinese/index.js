@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     prophet: {
         action: {
             delete: '删除',
@@ -95,7 +95,7 @@ module.exports = {
             http_error: '系统异常',
             data_provider_error: 'dataProvider错误. 请检查console的详细信息.',
             canceled: '取消动作',
-            logged_out: "当前会话已结束，请重新登陆"
+            logged_out: '当前会话已结束，请重新登陆',
         },
         validation: {
             required: '必填',

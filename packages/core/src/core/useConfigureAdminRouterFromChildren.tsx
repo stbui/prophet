@@ -80,6 +80,7 @@ const useRoutesAndResourcesFromChildren = (
             const functionChild = getSingleChildFunction(children);
             const newRoutesAndResources =
                 getRoutesAndResourceFromNodes(children);
+                console.log(12, newRoutesAndResources);
             setRoutesAndResources(newRoutesAndResources);
             setStatus(
                 !!functionChild
@@ -88,7 +89,7 @@ const useRoutesAndResourcesFromChildren = (
                     ? 'ready'
                     : 'empty'
             );
-
+           
             if (functionChild) {
                 resolveChildFunction(functionChild);
             }
@@ -261,6 +262,8 @@ const getRoutesAndResourceFromNodes = (
             resources.push(element as ReactElement<any>);
         }
     });
+
+    console.log(3,children)
 
     return {
         customRoutesWithLayout,
