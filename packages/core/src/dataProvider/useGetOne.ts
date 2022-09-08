@@ -10,13 +10,8 @@ import { useDataProvider } from './useDataProvider';
  * useGetOne
  *
  * @param {string} resource
- * @param {string} id
- * @param {Object} options
- * @param {string} options.action
- * @param {Function} options.onSuccess
- * @param {Function} options.onFailure
  *
- * @returns { data, error, loading, loaded }
+ * @returns { data, error }
  *
  * @example
  *

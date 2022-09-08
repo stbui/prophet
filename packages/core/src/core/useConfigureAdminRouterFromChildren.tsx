@@ -80,7 +80,7 @@ const useRoutesAndResourcesFromChildren = (
             const functionChild = getSingleChildFunction(children);
             const newRoutesAndResources =
                 getRoutesAndResourceFromNodes(children);
-                console.log(12, newRoutesAndResources);
+               
             setRoutesAndResources(newRoutesAndResources);
             setStatus(
                 !!functionChild
@@ -248,7 +248,7 @@ const getRoutesAndResourceFromNodes = (
             resources.push(...customRoutesFromFragment.resources);
         }
 
-        if ((element.type as any).raName === 'CustomRoutes') {
+        if ((element.type as any).prophetName === 'CustomRoutes') {
             const customRoutesElement = element as ReactElement<any>;
 
             if (customRoutesElement.props.noLayout) {
@@ -258,12 +258,10 @@ const getRoutesAndResourceFromNodes = (
             } else {
                 customRoutesWithLayout.push(customRoutesElement.props.children);
             }
-        } else if ((element.type as any).raName === 'Resource') {
+        } else if ((element.type as any).prophetName === 'Resource') {
             resources.push(element as ReactElement<any>);
         }
     });
-
-    console.log(3,children)
 
     return {
         customRoutesWithLayout,

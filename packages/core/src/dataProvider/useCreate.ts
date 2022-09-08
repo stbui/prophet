@@ -56,7 +56,7 @@ interface CreateParams<T = any> {
  * };
  */
 
- export const useCreate = (
+export const useCreate = (
     resource: string,
     params: Partial<CreateParams> = {},
     options: {
@@ -118,4 +118,3 @@ interface CreateParams<T = any> {
 
     return [create, mutation];
 };
-

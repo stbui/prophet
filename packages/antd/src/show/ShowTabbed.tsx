@@ -94,6 +94,4 @@ const ShowTabbedView: FunctionComponent<Props> = ({
     );
 };
 
-const ShowTabbed = props => <ShowTabbedView {...props} />;
-
-export default ShowTabbed;
+export const ShowTabbed = props => <ShowTabbedView {...props} />;

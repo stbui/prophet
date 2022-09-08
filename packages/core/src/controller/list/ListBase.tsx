@@ -6,7 +6,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { useListController } from './useListController';
+import { useListController, ListControllerProps } from './useListController';
 import { ListContextProvider } from './ListContextProvider';
 
 /**

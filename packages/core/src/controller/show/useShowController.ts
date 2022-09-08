@@ -4,23 +4,25 @@
  * https://github.com/stbui/prophet
  */
 
+import { useParams } from 'react-router-dom';
 import { useGetOne } from '../../dataProvider';
 import { useResourceContext } from '../../core';
 import { useNotify } from '../../notification';
 import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
 export interface ShowProps {
-    resource: string;
-    basePath: string;
+    resource?: string;
+    queryOptions?: any;
     id: string | number;
 }
 
 export interface ShowControllerProps {
     resource: string;
-    basePath: string;
     record: any;
-    loading: boolean;
-    loaded: boolean;
+    error: any;
+    isLoading: any;
+    isFetching: any;
+    refetch: any;
 }
 
 /**
@@ -38,17 +40,45 @@ export interface ShowControllerProps {
  * }
  */
 export const useShowController = (props: ShowProps): ShowControllerProps => {
-    const { basePath, id } = props;
+    const { id: propsId, queryOptions = {} } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
+    const redirect = useRedirect();
+    const refresh = useRefresh();
 
-    const { data: record, loading, loaded } = useGetOne(resource, id);
+    const { id: routeId } = useParams<'id'>();
+    // @ts-ignore
+    const id = propsId != null ? propsId : decodeURIComponent(routeId);
+    const { meta, ...otherQueryOptions } = queryOptions;
+
+    const {
+        data: record,
+        error,
+        isLoading,
+        isFetching,
+        refetch,
+    } = useGetOne(
+        resource,
+        { id, meta },
+        {
+            onError: () => {
+                notify('ra.notification.item_doesnt_exist', {
+                    type: 'warning',
+                });
+                redirect('list', resource);
+                refresh();
+            },
+            retry: false,
+            ...otherQueryOptions,
+        }
+    );
 
     return {
-        resource,
-        basePath,
+        error,
+        isLoading,
+        isFetching,
         record,
-        loading,
-        loaded,
+        refetch,
+        resource,
     };
 };

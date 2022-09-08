@@ -1,9 +1,6 @@
-import React, { cloneElement } from 'react';
-import { Spin } from 'antd';
+import React from 'react';
 
 interface CreateViewProps {
-    resource: string;
-    basePath: string;
     loading?: any;
     actions?: any;
     record?: object;
@@ -16,14 +13,4 @@ export const CreateView = ({
     record = {},
     actions,
     ...reset
-}: CreateViewProps) => (
-    <Spin spinning={loading}>
-        {actions && cloneElement(actions, { ...reset })}
-        {cloneElement(children, {
-            record,
-            ...reset,
-        })}
-    </Spin>
-);
-
-export default CreateView;
+}: CreateViewProps) => children;

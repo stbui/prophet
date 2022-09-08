@@ -8,6 +8,17 @@ import { useCallback } from 'react';
 
 import { useNotificationContext } from './useNotificationContext';
 
+export interface NotificationOptions {
+    // 延迟
+    autoHideDuration?: number;
+    // translate
+    messageArgs?: any;
+    // 多行
+    multiLine?: boolean;
+    // 回撤
+    undoable?: boolean;
+}
+
 /**
  *
  * @example
@@ -25,10 +36,8 @@ export const useNotify = () => {
             message: string,
             options: NotificationOptions & { type?: any } = {}
         ) => {
-            const {
-                type: messageType = 'info',
-                ...notificationOptions
-            } = options;
+            const { type: messageType = 'info', ...notificationOptions } =
+                options;
             addNotification({
                 message,
                 type: messageType,

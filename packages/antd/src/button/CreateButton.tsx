@@ -1,24 +1,20 @@
 import React, { FC } from 'react';
-import { useRedirect } from '@stbui/prophet-core';
+import { useResourceContext, useCreatePath } from '@stbui/prophet-core';
 import { Button, ButtonProps } from 'antd';
 
 export interface CreateButtonProps extends ButtonProps {
-    basePath?: string;
     label?: string;
 }
 
-const CreateButton: FC<CreateButtonProps> = ({
-    basePath,
-    label,
-    type,
-    ...rest
-}) => {
-    const redirect = useRedirect();
+const CreateButton: FC<CreateButtonProps> = props => {
+    const { label, type, ...rest } = props;
+    const resource = useResourceContext(props);
+    const createPath = useCreatePath();
 
     return (
         <Button
             type={type}
-            onClick={() => redirect('create', basePath)}
+            onClick={() => createPath({ resource, type: 'create' })}
             {...rest}
         >
             {label}

@@ -12,9 +12,7 @@ import { useResourceContext } from '../../core';
 import { SortPayload } from '../../types';
 
 export interface ListProps {
-    resource: string;
-    basePath: string;
-    hasCreate?: boolean;
+    resource?: string;
     filterDefaultValues?: object;
     sort?: any;
     perPage?: number;
@@ -24,15 +22,15 @@ export interface ListProps {
 }
 
 export interface ListControllerProps {
-    resource: string;
-    basePath: string;
     data: any;
-    ids: any;
-    currentSort: any;
+    sort: any;
+    refetch: any;
+    isFetching: any;
+    isLoading: any;
+    error: any;
     total: number;
-    hasCreate: any;
     page: number;
-    perPage: number;
+    perPage?: number;
     filterValues: any;
     displayedFilters: any;
     setFilters: (filters: any, displayedFilters: any) => void;
@@ -41,8 +39,6 @@ export interface ListControllerProps {
     setPage: (page: number) => void;
     setPerPage: (page: number) => void;
     setSort: (sort: SortPayload) => void;
-    loading: any;
-    loaded: any;
 }
 
 /**
@@ -64,8 +60,6 @@ export interface ListControllerProps {
  */
 export const useListController = (props: ListProps): ListControllerProps => {
     const {
-        basePath,
-        hasCreate,
         filterDefaultValues,
         filter,
         sort = { field: 'id', order: 'ASC' },
@@ -90,7 +84,7 @@ export const useListController = (props: ListProps): ListControllerProps => {
         debounce,
     });
 
-    const { data, ids, total, loading, loaded } = useGetList(
+    const { data, total, isLoading, isFetching, refetch, error } = useGetList(
         resource,
         {
             pagination: {
@@ -101,17 +95,28 @@ export const useListController = (props: ListProps): ListControllerProps => {
             filter: { ...query.filter, ...filter },
             meta,
         },
-        { ...otherQueryOptions }
+        {
+            keepPreviousData: true,
+            retry: false,
+            onError: error =>
+                notify(error?.message || 'ra.notification.http_error', {
+                    type: 'warning',
+                    messageArgs: {
+                        _: error?.message,
+                    },
+                }),
+            ...otherQueryOptions,
+        }
     );
 
     useEffect(() => {
         if (
             query.page <= 0 ||
-            (!loading && query.page > 1 && (ids || []).length === 0)
+            (!isFetching && query.page > 1 && data.length === 0)
         ) {
             queryMethod.setPage(1);
         }
-    }, [loading, query.page, ids, queryMethod]);
+    }, [isFetching, query.page, data, queryMethod]);
 
     const currentSort = useMemo(
         () => ({
@@ -122,13 +127,13 @@ export const useListController = (props: ListProps): ListControllerProps => {
     );
 
     return {
-        resource,
-        basePath,
         data,
-        ids: ids || [],
-        currentSort,
+        sort: currentSort,
         total: total != undefined ? total : 0,
-        hasCreate,
+        refetch,
+        isFetching,
+        isLoading,
+        error,
         page: query.page,
         perPage: query.perPage,
         filterValues: query.filterValues,
@@ -139,7 +144,5 @@ export const useListController = (props: ListProps): ListControllerProps => {
         setPage: queryMethod.setPage,
         setPerPage: queryMethod.setPerPage,
         setSort: queryMethod.setSort,
-        loading,
-        loaded,
     };
 };

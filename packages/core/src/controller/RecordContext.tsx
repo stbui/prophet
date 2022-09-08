@@ -13,10 +13,10 @@ export const RecordContext = createContext(undefined);
  *
  * const { record }  = useRecordContext()
  */
-export const useRecordContext = () => {
+export const useRecordContext = props => {
     const context = useContext(RecordContext);
 
-    return context;
+    return (props && props.record) || context;
 };
 
 /**

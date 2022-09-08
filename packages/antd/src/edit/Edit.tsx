@@ -1,19 +1,35 @@
 import React from 'react';
-import { useEditController, CreateContextProvider } from '@stbui/prophet-core';
+import { EditBase } from '@stbui/prophet-core';
 import { EditView } from './EditView';
 interface EditProps {
     resource: string;
-    basePath: string;
     id: string | number;
     [key: string]: any;
 }
 
-export const Edit = (props: EditProps) => {
-    const controllerProps = useEditController(props);
+export const Edit = ({
+    resource,
+    id,
+    mutationMode,
+    mutationOptions,
+    queryOptions,
+    redirect,
+    transform,
+    disableAuthentication,
+    ...rest
+}: EditProps) => {
     return (
-        <CreateContextProvider value={controllerProps}>
-            <EditView {...props} {...controllerProps} />
-        </CreateContextProvider>
+        <EditBase
+            resource={resource}
+            id={id}
+            mutationMode={mutationMode}
+            mutationOptions={mutationOptions}
+            queryOptions={queryOptions}
+            redirect={redirect}
+            transform={transform}
+            disableAuthentication={disableAuthentication}
+        >
+            <EditView {...rest} />
+        </EditBase>
     );
 };
-export default Edit;

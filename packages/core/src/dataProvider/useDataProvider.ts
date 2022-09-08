@@ -57,17 +57,6 @@ const defaultDataProvider = (type: string, resource: string, payload: any) =>
 export const useDataProvider = (): any => {
     const dataProvider = useContext(DataProviderContext) || defaultDataProvider;
 
-    // dataProvider(type, resource, payload)
-    //     .then(response => {
-    //         onSuccess && onSuccess(response);
-    //         return response;
-    //     })
-    //     .catch(error => {
-    //         onFailure && onFailure(error);
-
-    //         throw error;
-    //     });
-
     return dataProvider;
 };
 

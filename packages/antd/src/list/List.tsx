@@ -1,20 +1,20 @@
 import React, { ReactElement } from 'react';
-import { useListController, ListContextProvider } from '@stbui/prophet-core';
+import { ListBase } from '@stbui/prophet-core';
 import ListView from './ListView';
 
 interface ListProps {
-    resource: string;
-    basePath: string;
+    resource?: string;
     perPage?: number;
     filter?: object;
+    sort?: any;
 }
 
 export const List = (props: ListProps): ReactElement => {
-    const controllerProps = useListController(props);
+    const { resource, perPage, sort, ...reset } = props;
     return (
-        <ListContextProvider value={controllerProps}>
-            <ListView {...props} {...controllerProps} />
-        </ListContextProvider>
+        <ListBase resource={resource} perPage={perPage} sort={sort}>
+            <ListView {...reset} />
+        </ListBase>
     );
 };
 
@@ -22,5 +22,3 @@ List.defaultProps = {
     filter: {},
     perPage: 10,
 };
-
-export default List;

@@ -1,27 +1,25 @@
 import React, { FC } from 'react';
-import { useRedirect } from '@stbui/prophet-core';
+import { useResourceContext, useCreatePath } from '@stbui/prophet-core';
 import { Button, ButtonProps } from 'antd';
 
 export interface EditButtonProps extends ButtonProps {
-    basePath: string;
     label?: string;
 }
 
-const EditButton: FC<EditButtonProps> = ({
-    basePath,
-    label,
-    id,
-    size,
-    type,
-    ...rest
-}) => {
-    const redirect = useRedirect();
+const EditButton: FC<EditButtonProps> = props => {
+    const { label, id, size, type, ...rest } = props;
+    const resource = useResourceContext(props);
+    const createPath = useCreatePath();
+    const record = useRecordContext(props);
+    if (!record) return null;
 
     return (
         <Button
             type={type}
             size={size}
-            onClick={() => redirect('edit', basePath, id)}
+            onClick={() =>
+                createPath({ resource, type: 'edit', id: record.id })
+            }
             {...rest}
         >
             {label}

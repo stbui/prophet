@@ -4,7 +4,6 @@ import { CreateButton } from '../button';
 import { Form, Input, Button } from 'antd';
 
 interface Props {
-    basePath?: string;
     hasCreate?: boolean;
     filterValues?: any;
     setFilters?: any;
@@ -12,7 +11,6 @@ interface Props {
 }
 
 export const ListActions: FunctionComponent<Props> = ({
-    basePath,
     hasCreate,
     filterValues,
     setFilters,
@@ -50,7 +48,7 @@ export const ListActions: FunctionComponent<Props> = ({
                 </Form.Item>
             </Form>
             <span style={{ flex: 'auto' }} />
-            {hasCreate ? <CreateButton basePath={basePath} /> : null}
+            {hasCreate ? <CreateButton /> : null}
         </div>
     );
 };

@@ -17,10 +17,13 @@ import { Pagination, Sort } from '../types';
 export interface UseGetListValue {
     data?: any;
     total?: number;
-    error?: any;
-    loading?: boolean;
-    loaded?: boolean;
-    ids?: any;
+}
+
+export interface GetListParams {
+    pagination?: Pagination;
+    sort?: Sort;
+    filter?: any;
+    meta?: any;
 }
 
 /**
@@ -30,9 +33,8 @@ export interface UseGetListValue {
  * @param {Object} params.pagination
  * @param {Object} params.filter
  * @param {Object} params.sort
- * @param {string} options.action
  * @param {Function} options.onSuccess
- * @param {Function} options.onFailure
+ * @param {Function} options.onError
  *
  * @returns { data, ids, total, loading, loaded, error }
  *
@@ -56,9 +58,9 @@ export interface UseGetListValue {
  */
 export const useGetList = (
     resource: string,
-    params: any = {},
-    options?: object
-) => {
+    params: Partial<GetListParams> = {},
+    options?: UseQueryOptions
+): UseQueryResult => {
     const {
         pagination = { page: 1, perPage: 25 },
         sort = { field: 'id', order: 'DESC' },
@@ -71,7 +73,7 @@ export const useGetList = (
 
     const result = useQuery(
         [resource, 'getList', { pagination, sort, filter, meta }],
-        () => {
+        () =>
             dataProvider
                 .getList(resource, {
                     pagination,
@@ -83,21 +85,24 @@ export const useGetList = (
                     data,
                     total,
                     pageInfo,
-                }));
-        },
+                })),
         {
-            onSuccess: ({ data }) => {
+            ...options,
+            onSuccess: value => {
+                const { data } = value;
                 data.forEach(record => {
                     queryClient.setQueryData(
                         [resource, 'getOne', { id: String(record.id), meta }],
                         oldRecord => oldRecord ?? record
                     );
                 });
+
+                if (options?.onSuccess) {
+                    options.onSuccess(value);
+                }
             },
-            ...options,
         }
     );
-
     return result.data
         ? {
               ...result,

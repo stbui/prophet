@@ -1,6 +1,5 @@
-import React, { cloneElement, Children, Fragment, ReactElement } from 'react';
+import React, { Fragment } from 'react';
 import { useListContext } from '@stbui/prophet-core';
-import { Spin } from 'antd';
 import ListActions from './ListActions';
 
 interface ListViewProps {
@@ -16,15 +15,7 @@ const ListView = (props: ListViewProps) => {
     const listContext = useListContext();
     const { loading } = listContext;
 
-    return (
-        <Fragment>
-            <Spin spinning={!loading}>
-                {actions && cloneElement(actions, { ...rest })}
-                {children && cloneElement(Children.only(children), { ...rest })}
-            </Spin>
-            {drawerView}
-        </Fragment>
-    );
+    return <Fragment>{children}</Fragment>;
 };
 
 ListView.defaultProps = {

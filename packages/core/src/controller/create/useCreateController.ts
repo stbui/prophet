@@ -13,23 +13,20 @@ import { useNotify } from '../../notification';
 import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
 export interface CreateControllerProps {
-    resource: string;
-    basePath?: string;
+    resource?: string;
     loading: boolean;
     loaded: boolean;
     save: (data: any, option: any) => void;
     saving: boolean;
     record?: object;
-    redirect: any;
 }
 export interface CreateProps {
     resource?: string;
-    basePath?: string;
     hasCreate?: boolean;
     hasEdit?: boolean;
     hasShow?: boolean;
     record?: object;
-    successMessage?: string;
+    mutationOptions?: any;
 }
 
 /**
@@ -83,35 +80,37 @@ export const getRecord = ({ state, search }, record: any = {}) => {
 export const useCreateController = (
     props: CreateProps
 ): CreateControllerProps => {
-    const { basePath, hasEdit, hasShow, record = {}, successMessage } = props;
+    const { record = {}, mutationOptions = {} } = props;
     const resource = useResourceContext(props);
     const location = useLocation();
     const notify = useNotify();
     const redirect = useRedirect();
     const refresh = useRefresh();
 
+    const { onSuccess, onError, meta, ...otherMutationOptions } =
+        mutationOptions;
+
     const recordToUse = getRecord(location, record);
 
-    const [create, { loading: saving }] = useCreate(resource);
+    const [create, { isLoading: saving }] = useCreate(
+        resource,
+        undefined,
+        otherMutationOptions
+    );
 
     const save = useCallback(
-        (
-            data: any,
-            { onSuccess, onFailure, redirectTo = 'list' }: any = {}
-        ) => {
+        (data: any, { onSuccess, onError }: any = {}) => {
             create({ data });
         },
-        [resource, basePath, create, notify, redirect, successMessage]
+        [resource, create, notify, redirect]
     );
 
     return {
         resource,
-        basePath,
         loading: false,
         loaded: true,
         save,
         saving,
         record: recordToUse,
-        redirect: getDefaultRedirectRoute(hasEdit, hasShow),
     };
 };

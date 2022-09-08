@@ -26,11 +26,9 @@ const defaultAuthParams = { route: 'dashboard' };
 export const CoreRouter = ({
     children,
     dashboard,
-    customRoutes = [],
     catchAll: CatchAll,
     layout: Layout,
     menu,
-    brand,
     title,
 }: CoreRouterProps) => {
     const createPath = useCreatePath();
@@ -44,6 +42,7 @@ export const CoreRouter = ({
 
     return (
         <Routes>
+            {customRoutesWithoutLayout}
             <Route
                 path="/*"
                 element={
