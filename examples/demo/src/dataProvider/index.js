@@ -3,14 +3,7 @@
 
 // export default dataProvider;
 
-import {
-    GET_LIST,
-    GET_ONE,
-    CREATE,
-    UPDATE,
-    DELETE,
-    fetchUtils,
-} from '@stbui/prophet';
+import { fetchJson } from '@stbui/prophet';
 
 const list = {
     data: Array.from(Array(200).keys()).map(id => {
@@ -27,33 +20,24 @@ const list = {
     total: 200,
 };
 
-const dataProvider = (apiUrl = './api', httpClient = fetchUtils.fetchJson) => {
-    return (type, resource, params) => {
-        switch (type) {
-            case GET_LIST:
-                return Promise.resolve(list);
-            case GET_ONE:
-                return Promise.resolve({
-                    data: {
-                        id: 1,
-                        name: '电脑',
-                        categories: '未分类',
-                        price: Math.floor(Math.random() * 100),
-                        store_count: Math.floor(Math.random() * 1000 + 100),
-                        is_on_sale: 1,
-                        create_time: new Date().toLocaleDateString(),
-                    },
-                });
-            case CREATE:
-                return Promise.resolve({ data: { ...params.data, id: 99 } });
-            case UPDATE:
-                return Promise.resolve(list);
-            case DELETE:
-                return Promise.resolve(list);
-            default:
-                throw new Error(`不支持action类型 ${type}`);
-        }
-    };
-};
+const dataProvider = (apiUrl = './api', httpClient = fetchJson) => ({
+    getList: () => Promise.resolve(list),
+    getOne: () =>
+        Promise.resolve({
+            data: {
+                id: 1,
+                name: '电脑',
+                categories: '未分类',
+                price: Math.floor(Math.random() * 100),
+                store_count: Math.floor(Math.random() * 1000 + 100),
+                is_on_sale: 1,
+                create_time: new Date().toLocaleDateString(),
+            },
+        }),
+    create: (resource, params) =>
+        Promise.resolve({ data: { ...params.data, id: 99 } }),
+    update: () => Promise.resolve(list),
+    delete: () => Promise.resolve(list),
+});
 
 export default dataProvider('http://localhost:996');

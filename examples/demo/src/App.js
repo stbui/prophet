@@ -12,8 +12,6 @@ import users from './setting/users';
 import goodsCategory from './goods/category';
 import goodsList from './goods/list';
 
-import { createBrowserHistory } from 'history';
-
 import './App.scss';
 
 export default () => (
@@ -21,7 +19,6 @@ export default () => (
         dataProvider={dataProvider}
         authProvider={authProvider}
         i18nProvider={i18nProvider}
-        history={createBrowserHistory()}
         customRoutes={routes}
         dashboard={Dashboard}
         menu={Menu}
