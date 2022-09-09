@@ -4,7 +4,8 @@
  * https://github.com/stbui/prophet
  */
 
-import { createContext, useContext } from 'react';
+import { useMemo, createContext, useContext } from 'react';
+import defaults from 'lodash/defaults';
 
 /**
  *
@@ -40,19 +41,25 @@ import { createContext, useContext } from 'react';
  * }
  */
 export const ListContext = createContext({
-    basePath: null,
-    currentSort: null,
+    sort: null,
     data: null,
+    defaultTitle: null,
     displayedFilters: null,
+    exporter: null,
     filterValues: null,
-    hasCreate: null,
+    hasNextPage: null,
+    hasPreviousPage: null,
     hideFilter: null,
-    ids: null,
-    loaded: null,
-    loading: null,
+    isFetching: null,
+    isLoading: null,
+    onSelect: null,
+    onToggleItem: null,
+    onUnselectItems: null,
     page: null,
     perPage: null,
+    refetch: null,
     resource: null,
+    selectedIds: undefined,
     setFilters: null,
     setPage: null,
     setPerPage: null,
@@ -61,7 +68,67 @@ export const ListContext = createContext({
     total: null,
 });
 
+const extractListContextProps = ({
+    sort,
+    data,
+    defaultTitle,
+    displayedFilters,
+    exporter,
+    filterValues,
+    hasCreate,
+    hideFilter,
+    isFetching,
+    isLoading,
+    onSelect,
+    onToggleItem,
+    onUnselectItems,
+    page,
+    perPage,
+    refetch,
+    resource,
+    selectedIds,
+    setFilters,
+    setPage,
+    setPerPage,
+    setSort,
+    showFilter,
+    total,
+}) => ({
+    sort,
+    data,
+    defaultTitle,
+    displayedFilters,
+    exporter,
+    filterValues,
+    hasCreate,
+    hideFilter,
+    isFetching,
+    isLoading,
+    onSelect,
+    onToggleItem,
+    onUnselectItems,
+    page,
+    perPage,
+    refetch,
+    resource,
+    selectedIds,
+    setFilters,
+    setPage,
+    setPerPage,
+    setSort,
+    showFilter,
+    total,
+});
+
 export const useListContext = (props?) => {
     const context = useContext(ListContext);
-    return context;
+    return useMemo(
+        () =>
+            defaults(
+                {},
+                props != null ? extractListContextProps(props) : {},
+                context
+            ),
+        [context, props]
+    );
 };

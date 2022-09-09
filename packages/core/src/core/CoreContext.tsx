@@ -21,7 +21,7 @@ import { Router } from '../routing';
 import { AuthProviderContext } from '../auth';
 
 interface CoreContextProps {
-    authProvider: AuthProvider;
+    authProvider?: AuthProvider;
     dataProvider: DataProvider;
     i18nProvider?: I18nProvider;
     children?: ReactNode;

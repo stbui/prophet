@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { ResourceDefinitions } from './ResourceDefinitionContext';
 import { useResourceDefinitionContext } from './useResourceDefinitionContext';
 

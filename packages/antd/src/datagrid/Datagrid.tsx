@@ -1,4 +1,5 @@
 import React, { Children, FunctionComponent } from 'react';
+import { useListContext } from '@stbui/prophet-core';
 import { Table } from 'antd';
 
 interface Props {
@@ -26,11 +27,9 @@ interface Props {
 export const Datagrid: FunctionComponent<Props> = props => {
     const {
         children = [],
-        data,
         ids,
         page,
         perPage,
-        total,
         setPage,
         setPerPage,
         showSizeChanger,
@@ -39,6 +38,8 @@ export const Datagrid: FunctionComponent<Props> = props => {
         noData,
         allowLocalPage,
     } = props;
+
+    const { sort, data, isLoading, total } = useListContext(props);
 
     const handlePageChange = (current, pageSize) => setPage(current);
 
@@ -78,17 +79,12 @@ export const Datagrid: FunctionComponent<Props> = props => {
         ...pg,
     };
 
-    const newData = Array.isArray(data) ? data : ids && ids.map(d => data[d]);
-
-    if (noData && (!newData || !newData.length)) {
-        return noData;
-    }
-
     return (
         <Table
+            loading={isLoading}
             rowKey="id"
             columns={columns}
-            dataSource={newData}
+            dataSource={data}
             pagination={pagination}
             {...props}
         ></Table>

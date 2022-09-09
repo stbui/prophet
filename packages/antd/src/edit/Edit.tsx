@@ -2,9 +2,15 @@ import React from 'react';
 import { EditBase } from '@stbui/prophet-core';
 import { EditView } from './EditView';
 interface EditProps {
-    resource: string;
-    id: string | number;
-    [key: string]: any;
+    resource?: string;
+    id?: string | number;
+    mutationMode?: any;
+    mutationOptions?: any;
+    queryOptions?: any;
+    redirect?: any;
+    transform?: any;
+    disableAuthentication?: any;
+    children?: any;
 }
 
 export const Edit = ({

@@ -6,7 +6,7 @@ export interface CreateButtonProps extends ButtonProps {
     label?: string;
 }
 
-const CreateButton: FC<CreateButtonProps> = props => {
+export const CreateButton: FC<CreateButtonProps> = props => {
     const { label, type, ...rest } = props;
     const resource = useResourceContext(props);
     const createPath = useCreatePath();
@@ -26,5 +26,3 @@ CreateButton.defaultProps = {
     label: '添加',
     type: 'primary',
 };
-
-export default CreateButton;

@@ -4,6 +4,12 @@ import { History } from 'history';
 
 import { BasenameContextProvider } from './BasenameContextProvider';
 
+export interface RouterProps {
+    history?: History;
+    basename?: string;
+    children: React.ReactNode;
+}
+
 export const Router = ({ basename = '', children }: RouterProps) => {
     const isInRouter = useInRouterContext();
 
@@ -13,9 +19,3 @@ export const Router = ({ basename = '', children }: RouterProps) => {
         </BasenameContextProvider>
     );
 };
-
-export interface RouterProps {
-    history?: History;
-    basename?: string;
-    children: React.ReactNode;
-}

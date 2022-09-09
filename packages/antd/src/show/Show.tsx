@@ -3,13 +3,13 @@ import { ShowBase } from '@stbui/prophet-core';
 
 interface Props {
     children?: any;
-    actions?: any;
-    title?: string;
+    id?: any;
+    resource?: any;
+    queryOptions?: any;
+    disableAuthentication?: any;
 }
 
-export const ShowView = ({ children, actions, ...rest }: Props) => (
-    <div>{children}</div>
-);
+export const ShowView = ({ children, ...rest }: Props) => <div>{children}</div>;
 
 export const Show = ({
     id,

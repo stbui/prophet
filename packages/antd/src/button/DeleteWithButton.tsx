@@ -41,5 +41,3 @@ DeleteWithButtonView.defaultProps = {
 export const DeleteWithButton = props => (
     <DeleteWithButtonView {...props} {...useDeleteController(props)} />
 );
-
-export default DeleteWithButton;

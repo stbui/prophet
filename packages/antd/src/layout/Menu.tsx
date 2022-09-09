@@ -1,32 +1,27 @@
 import React from 'react';
+import { useResourceDefinitions } from '@stbui/prophet-core';
 import { Menu } from 'antd';
-import { Link } from '../Link';
 
 export const CustomMenu = props => {
-    const { hasDashboard,  } = props;
-    const resources: any = [];
+    const { hasDashboard } = props;
+    const resources = useResourceDefinitions();
+
+    const items = Object.keys(resources).map(resource => {
+        return {
+            label: resources[resource].name,
+            key: resources[resource].name,
+        };
+    });
+
+    console.log(hasDashboard, resources);
 
     return (
         <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={[]}
-        >
-            {hasDashboard && (
-                <Menu.Item>
-                    <Link to="/">dashboard</Link>
-                </Menu.Item>
-            )}
-            {resources.map(resource => {
-                return (
-                    <Menu.Item key={`/${resource.name}`}>
-                        <Link to={`/${resource.name}`}>
-                            {resource.label ? resource.label : resource.name}
-                        </Link>
-                    </Menu.Item>
-                );
-            })}
-        </Menu>
+            items={items}
+        ></Menu>
     );
 };
 

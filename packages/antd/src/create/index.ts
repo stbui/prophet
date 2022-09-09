@@ -1,4 +1,2 @@
-import { Create } from './Create';
-import { CreateView } from './CreateView';
-
-export { Create, CreateView };
+export * from './Create';
+export * from './CreateView';

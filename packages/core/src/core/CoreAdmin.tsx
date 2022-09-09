@@ -16,7 +16,6 @@ export interface CoreAdminProps {
     login?: ComponentType;
     layout: ComponentType;
     catchAll?: any;
-    initialState?: object;
     authProvider?: AuthProvider;
     dataProvider: any;
     i18nProvider?: I18nProvider;
@@ -37,6 +36,4 @@ export const CoreAdmin = ({
     authProvider,
     dataProvider,
     i18nProvider,
-}) => {
-    return 2;
-};
+}) => 2;

@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
-import { useResourceContext, useCreatePath } from '@stbui/prophet-core';
+import {
+    useResourceContext,
+    useCreatePath,
+    useRecordContext,
+} from '@stbui/prophet-core';
 import { Button, ButtonProps } from 'antd';
 
 export interface EditButtonProps extends ButtonProps {
     label?: string;
 }
 
-const EditButton: FC<EditButtonProps> = props => {
+export const EditButton: FC<EditButtonProps> = props => {
     const { label, id, size, type, ...rest } = props;
     const resource = useResourceContext(props);
     const createPath = useCreatePath();
@@ -32,5 +36,3 @@ EditButton.defaultProps = {
     size: 'small',
     type: 'link',
 };
-
-export default EditButton;

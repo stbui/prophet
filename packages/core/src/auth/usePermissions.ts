@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import useGetPermissions from './useGetPermissions';
+import { useGetPermissions } from './useGetPermissions';
 
 interface Permissions {
     isLoading: boolean;
@@ -36,7 +36,7 @@ interface State {
  *    }
  * };
  */
-const usePermissions = (params = {}): Permissions => {
+export const usePermissions = (params = {}): Permissions => {
     const [state, setState] = useState<State>({
         isLoading: true,
     });
@@ -57,5 +57,3 @@ const usePermissions = (params = {}): Permissions => {
 
     return state;
 };
-
-export default usePermissions;

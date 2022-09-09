@@ -5,11 +5,16 @@
  */
 
 import { useEffect } from 'react';
-import useCheckAuth from './useCheckAuth';
+import { useCheckAuth } from './useCheckAuth';
+
+export type UseAuthenticatedOptions<ParamsType> = {
+    enabled?: boolean;
+    params?: ParamsType;
+};
 
 /**
  *
- * @param params
+ * @param options
  *
  * @example
  *
@@ -20,11 +25,15 @@ import useCheckAuth from './useCheckAuth';
  *   return <div>ok</div>
  * }
  */
-const useAuthenticated = (params: any = {}) => {
+export const useAuthenticated = <ParamsType = any>(
+    options: UseAuthenticatedOptions<ParamsType> = {}
+) => {
+    const { enabled = true, params = {} } = options;
+
     const checkAuth = useCheckAuth();
     useEffect(() => {
-        checkAuth(params).catch(() => {});
-    }, [checkAuth, params]);
+        if (enabled) {
+            checkAuth(params).catch(() => {});
+        }
+    }, [checkAuth, enabled, params]);
 };
-
-export default useAuthenticated;

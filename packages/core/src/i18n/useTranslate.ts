@@ -4,8 +4,8 @@
  * https://github.com/stbui/prophet
  */
 
-import { useContext, useCallback } from 'react';
-import TranslationProviderContext from './TranslationProviderContext';
+import { useCallback } from 'react';
+import { useI18nProvider } from './useI18nProvider';
 import { Translate } from '../types';
 
 /**
@@ -20,12 +20,12 @@ import { Translate } from '../types';
  * };
  */
 export const useTranslate = (): Translate => {
-    const { i18nProvider, locale } = useContext(TranslationProviderContext);
+    const i18nProvider = useI18nProvider();
 
     const translate = useCallback(
-        (key: string, options?) => i18nProvider.translate(key, options),
-        [i18nProvider, locale]
+        (key: string, options?: any) =>
+            i18nProvider.translate(key, options) as string,
+        [i18nProvider]
     );
-
-    return i18nProvider ? translate : (key: string) => key;
+    return i18nProvider ? translate : key => key;
 };

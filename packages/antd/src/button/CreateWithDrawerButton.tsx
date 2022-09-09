@@ -11,7 +11,7 @@ export interface CreateDrawerButtonProps {
     allowRefresh?: boolean;
 }
 
-const CreateWithDrawerButton: FC<CreateDrawerButtonProps> = props => {
+export const CreateWithDrawerButton: FC<CreateDrawerButtonProps> = props => {
     const { children, drawer, allowRefresh } = props;
     const { label, type, button } = props;
 
@@ -44,5 +44,3 @@ CreateWithDrawerButton.defaultProps = {
     label: '添加',
     type: 'primary',
 };
-
-export default CreateWithDrawerButton;

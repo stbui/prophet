@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React from 'react';
 import { createContext, useCallback, useState, useMemo } from 'react';
 import isEqual from 'lodash/isEqual';

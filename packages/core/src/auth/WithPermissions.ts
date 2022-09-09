@@ -4,21 +4,20 @@
  * https://github.com/stbui/prophet
  */
 
-import { createElement, FunctionComponent } from 'react';
-import useAuthenticated from './useAuthenticated';
-import usePermissions from './usePermissions';
+import { createElement } from 'react';
+import { useAuthenticated } from './useAuthenticated';
+import { usePermissions } from './usePermissions';
 
 export interface WithPermissionsProps {
     authParams?: object;
     component?: any;
-    children?: any;
     [key: string]: any;
 }
 /**
  *
  * @example
  *
- * import { WithPermissions } from 'prophet-core';
+ * import { WithPermissions } from '@stuib/prophet-core';
  *
  * const View = ({ permissions }) => {
  *  return <div>{permissions === 'admin' ? <p>admin</p> : null}</div>
@@ -27,20 +26,17 @@ export interface WithPermissionsProps {
  *      return <WithPermissions authParams={{ name: 'stbui' }} component={<View permissions={permissions} />}></WithPermissions>
  * }
  */
-const WithPermissions: FunctionComponent<WithPermissionsProps> = ({
+export const WithPermissions = ({
     authParams,
     component,
-    children,
-    ...props
-}) => {
+    ...rest
+}: WithPermissionsProps) => {
     useAuthenticated(authParams);
     const { permissions } = usePermissions(authParams);
 
     if (component) {
-        return createElement(component, { permissions, ...props });
+        return createElement(component, { permissions, ...rest });
     }
 
-    return children({ permissions, ...props });
+    return null;
 };
-
-export default WithPermissions;

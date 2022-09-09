@@ -10,7 +10,7 @@ export interface EditDrawerButtonProps extends ButtonProps {
     allowRefresh?: boolean;
 }
 
-const EditWithDrawerButton: FC<EditDrawerButtonProps> = props => {
+export const EditWithDrawerButton: FC<EditDrawerButtonProps> = props => {
     const { children, label, type, size, drawer, button, allowRefresh } = props;
     const [visible, setVisible] = useState(false);
 
@@ -41,5 +41,3 @@ EditWithDrawerButton.defaultProps = {
     type: 'link',
     size: 'small',
 };
-
-export default EditWithDrawerButton;

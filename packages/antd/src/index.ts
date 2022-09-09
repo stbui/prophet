@@ -1,6 +1,5 @@
 export * from './Link';
 export * from './layout';
-export * from './datagrid';
 export * from './list';
 export * from './create';
 export * from './edit';

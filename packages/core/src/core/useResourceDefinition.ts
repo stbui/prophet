@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useMemo } from 'react';
 import defaults from 'lodash/defaults';
 

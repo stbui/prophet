@@ -15,7 +15,7 @@ export interface DeleteButtonConfirmProps {
     button?: ButtonProps;
 }
 
-const DeleteWithConfirmButton: FC<DeleteButtonConfirmProps> = ({
+export const DeleteWithConfirmButton: FC<DeleteButtonConfirmProps> = ({
     label,
     remove,
     record,
@@ -53,5 +53,3 @@ DeleteWithConfirmButton.defaultProps = {
 const DeleteWithButton = props => (
     <DeleteWithConfirmButton {...props} {...useDeleteController(props)} />
 );
-
-export default DeleteWithButton;

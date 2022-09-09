@@ -5,11 +5,10 @@
  */
 
 import { useState, useEffect } from 'react';
-import useCheckAuth from './useCheckAuth';
+import { useCheckAuth } from './useCheckAuth';
 
 interface AuthState {
-    loading: boolean;
-    loaded: boolean;
+    isLoading: boolean;
     authenticated?: boolean;
 }
 
@@ -23,36 +22,32 @@ interface AuthState {
  *
  *
  * const MyApp = () => {
- *     const { loading, authenticated } = useAuthState();
- *     if (loading) {
- *         return <Loading />;
+ *     const { isLoading, authenticated } = useAuthState();
+ *     if (isLoading) {
+ *         return <div>{isLoading}</div>;
  *     }
  *     if (authenticated) {
  *        return <div>authenticated</div>;
  *     }
- *     return <div></div>;
+ *     return <div>ok</div>;
  * };
  */
-const useAuthState = (params = {}): AuthState => {
+export const useAuthState = (
+    params: any = {},
+    logoutOnFailure: boolean = false
+): AuthState => {
     const [state, setState] = useState({
-        loading: true,
-        loaded: false,
+        isLoading: true,
         authenticated: true,
     });
 
     const checkAuth = useCheckAuth();
 
     useEffect(() => {
-        checkAuth(params, false)
-            .then(() =>
-                setState({ loading: false, loaded: true, authenticated: true })
-            )
-            .catch(() =>
-                setState({ loading: false, loaded: true, authenticated: false })
-            );
-    }, [checkAuth, JSON.stringify(params), setState]);
+        checkAuth(params, logoutOnFailure)
+            .then(() => setState({ isLoading: false, authenticated: true }))
+            .catch(() => setState({ isLoading: false, authenticated: false }));
+    }, [checkAuth, JSON.stringify(params), logoutOnFailure, setState]);
 
     return state;
 };
-
-export default useAuthState;

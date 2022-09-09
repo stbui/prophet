@@ -4,11 +4,13 @@
  * https://github.com/stbui/prophet
  */
 
-import { useCallback } from 'react';
-import { useLocation, useNavigate, Path } from 'react-router-dom';
+import { useCallback, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
+import { useAuthProvider, defaultAuthParams } from './useAuthProvider';
+import { useResetStore } from '../store';
+import { useBasename } from '../routing';
 
 type Logout = (
     params?: any,
@@ -28,60 +30,78 @@ type Logout = (
  *      return <button onclick={onClick}>Logout</buton>
  * }
  */
-const useLogout = (): Logout => {
+export const useLogout = (): Logout => {
     const authProvider = useAuthProvider();
     const queryClient = useQueryClient();
+    const resetStore = useResetStore();
     const navigate = useNavigate();
     const location = useLocation();
+    const basename = useBasename();
+    const navigateRef = useRef(navigate);
+    const locationRef = useRef(location);
+    const loginUrl = `${basename}/${defaultAuthParams.loginUrl}`;
 
     const logout = useCallback(
         (
             params: any = {},
-            redirectTo = defaultAuthParams.loginUrl,
+            redirectTo = loginUrl,
             redirectToCurrentLocationAfterLogin = true
         ) =>
             authProvider.logout(params).then(redirectToFromProvider => {
+                if (redirectToFromProvider === false) {
+                    resetStore();
+                    queryClient.clear();
+                    return;
+                }
+
                 const redirectToParts = (
                     redirectToFromProvider || redirectTo
                 ).split('?');
                 const newLocation: any = {
                     pathname: redirectToParts[0],
                 };
+                let newLocationOptions = {};
 
                 if (
                     redirectToCurrentLocationAfterLogin &&
-                    location &&
-                    location.pathname
+                    locationRef.current &&
+                    locationRef.current.pathname
                 ) {
-                    newLocation.state = {
-                        nextPathname: location.pathname,
+                    newLocationOptions = {
+                        state: {
+                            nextPathname: locationRef.current.pathname,
+                            nextSearch: locationRef.current.search,
+                        },
                     };
                 }
 
                 if (redirectToParts[1]) {
                     newLocation.search = redirectToParts[1];
                 }
-                navigate(newLocation);
+                navigateRef.current(newLocation, newLocationOptions);
+                resetStore();
+                queryClient.clear();
+
                 return redirectToFromProvider;
             }),
-        [authProvider, history]
+        [authProvider, resetStore, loginUrl, queryClient]
     );
 
     const logoutWithoutProvider = useCallback(() => {
-        // navigate({
-        //     pathname: defaultAuthParams.loginUrl,
-        //     {
-        //         state: {
-        //             nextPathname: location && location.pathname,
-        //         },
-        //     }
-        // });
-
-        // clear store
+        navigate(
+            {
+                pathname: loginUrl,
+            },
+            {
+                state: {
+                    nextPathname: location && location.pathname,
+                },
+            }
+        );
+        resetStore();
+        queryClient.clear();
         return Promise.resolve();
-    }, [navigate]);
+    }, [resetStore, location, navigate, loginUrl, queryClient]);
 
     return authProvider ? logout : logoutWithoutProvider;
 };
-
-export default useLogout;

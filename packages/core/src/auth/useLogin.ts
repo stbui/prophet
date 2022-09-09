@@ -7,7 +7,9 @@
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
+import { useAuthProvider, defaultAuthParams } from './useAuthProvider';
+import { useBasename } from '../routing';
+import { useNotificationContext } from '../notification';
 
 type Login = (params: any, pathName?: string) => Promise<any>;
 
@@ -27,31 +29,50 @@ type Login = (params: any, pathName?: string) => Promise<any>;
  *      return <button onclick={onClick}>login</buton>
  * }
  */
-const useLogin = (): Login => {
+export const useLogin = (): Login => {
     const authProvider = useAuthProvider();
     const navigate = useNavigate();
     const location = useLocation();
-    // @ts-ignore
-    const nextPathName = location.state && location.state.nextPathname;
+    const basename = useBasename();
+
+    const { resetNotifications } = useNotificationContext();
+    const locationState = location.state as any;
+    const nextPathName = locationState && locationState.nextPathname;
+    const nextSearch = locationState && locationState.nextSearch;
+    const afterLoginUrl = `${basename}/${defaultAuthParams.afterLoginUrl}`;
 
     const login = useCallback(
         (params: any = {}, pathName) =>
-            authProvider.login(params).then(res => {
-                const redirectUrl = pathName
-                    ? pathName
-                    : nextPathName || defaultAuthParams.afterLoginUrl;
-                navigate(redirectUrl);
-                return res;
+            authProvider.login(params).then(ret => {
+                resetNotifications();
+
+                if (ret && ret.hasOwnProperty('redirectTo')) {
+                    if (ret) {
+                        navigate(ret.redirectTo);
+                    }
+                } else {
+                    const redirectUrl = pathName
+                        ? pathName
+                        : nextPathName + nextSearch || afterLoginUrl;
+                    navigate(redirectUrl);
+                }
+                return ret;
             }),
-        [authProvider, history, nextPathName]
+        [
+            authProvider,
+            navigate,
+            nextPathName,
+            nextSearch,
+            resetNotifications,
+            afterLoginUrl,
+        ]
     );
 
     const loginWithoutProvider = useCallback(() => {
-        navigate(defaultAuthParams.afterLoginUrl);
+        resetNotifications();
+        navigate(afterLoginUrl);
         return Promise.resolve();
-    }, [history]);
+    }, [navigate, resetNotifications, afterLoginUrl]);
 
     return authProvider ? login : loginWithoutProvider;
 };
-
-export default useLogin;

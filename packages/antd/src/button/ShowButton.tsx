@@ -36,5 +36,3 @@ ShowButton.defaultProps = {
     size: 'small',
     type: 'link',
 };
-
-export default ShowButton;

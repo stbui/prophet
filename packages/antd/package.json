@@ -23,9 +23,11 @@
         "antd": "^4.23.0"
     },
     "dependencies": {
-        "@stbui/prophet-core": "^3.0.1"
+        "@stbui/prophet-core": "^3.0.1",
+        "styled-components": "^5.3.5"
     },
     "devDependencies": {
+        "@types/styled-components": "^5.1.26",
         "antd": "^4.23.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",

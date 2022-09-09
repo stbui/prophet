@@ -5,9 +5,10 @@
  */
 
 import { useCallback } from 'react';
-import useAuthProvider, { defaultAuthParams } from './useAuthProvider';
-import useLogout from './useLogout';
+import { useAuthProvider, defaultAuthParams } from './useAuthProvider';
+import { useLogout } from './useLogout';
 import { useNotify } from '../notification';
+import { useBasename } from '../routing';
 
 type CheckAuth = (
     params?: any,
@@ -42,16 +43,18 @@ type CheckAuth = (
  *    return authenticated ? <div>ok</div> : <div>fail</div>;
  * };
  */
-const useCheckAuth = (): CheckAuth => {
+export const useCheckAuth = (): CheckAuth => {
     const authProvider = useAuthProvider();
     const logout = useLogout();
     const notify = useNotify();
+    const basename = useBasename();
+    const loginUrl = `${basename}/${defaultAuthParams.loginUrl}`;
 
     const checkAuth = useCallback(
         (
             params: any = {},
             logoutOnFailure = true,
-            redirectTo = defaultAuthParams.loginUrl,
+            redirectTo = loginUrl,
             disableNotification = false
         ) =>
             authProvider.checkAuth(params).catch(error => {
@@ -75,12 +78,10 @@ const useCheckAuth = (): CheckAuth => {
 
                 throw error;
             }),
-        [authProvider, logout, notify]
+        [authProvider, logout, notify, loginUrl]
     );
 
     const checkAuthWithoutAuthProvider = () => Promise.resolve();
 
     return authProvider ? checkAuth : checkAuthWithoutAuthProvider;
 };
-
-export default useCheckAuth;

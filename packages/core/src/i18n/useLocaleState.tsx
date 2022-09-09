@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import { useMemo } from 'react';
 import { useI18nProvider } from './useI18nProvider';
 import { useStore } from '../store/useStore';

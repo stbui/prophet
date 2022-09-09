@@ -5,7 +5,7 @@
  */
 
 import { useCallback } from 'react';
-import useAuthProvider from './useAuthProvider';
+import { useAuthProvider } from './useAuthProvider';
 
 type GetPermissions = (params?: any) => Promise<any>;
 
@@ -33,7 +33,7 @@ type GetPermissions = (params?: any) => Promise<any>;
  *     );
  * }
  */
-const useGetPermissions = (): GetPermissions => {
+export const useGetPermissions = (): GetPermissions => {
     const authProvider = useAuthProvider();
 
     const getPermissions = useCallback(
@@ -43,5 +43,3 @@ const useGetPermissions = (): GetPermissions => {
 
     return authProvider ? getPermissions : () => Promise.resolve([]);
 };
-
-export default useGetPermissions;

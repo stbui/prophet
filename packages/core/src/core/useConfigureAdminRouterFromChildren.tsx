@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React from 'react';
 import {
     Children,
@@ -80,7 +86,7 @@ const useRoutesAndResourcesFromChildren = (
             const functionChild = getSingleChildFunction(children);
             const newRoutesAndResources =
                 getRoutesAndResourceFromNodes(children);
-               
+
             setRoutesAndResources(newRoutesAndResources);
             setStatus(
                 !!functionChild
@@ -89,7 +95,7 @@ const useRoutesAndResourcesFromChildren = (
                     ? 'ready'
                     : 'empty'
             );
-           
+
             if (functionChild) {
                 resolveChildFunction(functionChild);
             }

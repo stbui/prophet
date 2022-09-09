@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNotify, useRefresh } from '@stbui/prophet-core';
-
 import { Button, Popconfirm, ButtonProps, PopconfirmProps } from 'antd';
 
 export interface EnableButtonProps extends ButtonProps {
@@ -35,5 +34,3 @@ export const EnabledButton: React.FC<EnableButtonProps> = props => {
 EnabledButton.defaultProps = {
     type: 'link',
 };
-
-export default EnabledButton;

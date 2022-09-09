@@ -5,12 +5,11 @@
  */
 
 import { useEffect, useState } from 'react';
-import useAuthProvider from './useAuthProvider';
+import { useAuthProvider } from './useAuthProvider';
 import { UserIdentity } from '../types';
 
 interface State {
-    loading: boolean;
-    loaded: boolean;
+    isLoading: boolean;
     identity?: UserIdentity;
     error?: any;
 }
@@ -38,8 +37,7 @@ const defaultIdentity: UserIdentity = { id: '', fullName: undefined };
  */
 const useGetIdentity = () => {
     const [state, setState] = useState<State>({
-        loading: true,
-        loaded: false,
+        isLoading: true,
     });
 
     const authProvider = useAuthProvider();
@@ -51,14 +49,12 @@ const useGetIdentity = () => {
                     // @ts-ignore
                     const identity = await authProvider.getIdentity();
                     setState({
-                        loading: false,
-                        loaded: true,
+                        isLoading: false,
                         identity: identity || defaultIdentity,
                     });
                 } catch (error) {
                     setState({
-                        loading: false,
-                        loaded: true,
+                        isLoading: false,
                         error,
                     });
                 }
@@ -67,8 +63,7 @@ const useGetIdentity = () => {
             callAuthProvider();
         } else {
             setState({
-                loading: false,
-                loaded: true,
+                isLoading: false,
                 identity: defaultIdentity,
             });
         }
@@ -76,5 +71,3 @@ const useGetIdentity = () => {
 
     return state;
 };
-
-export default useGetIdentity;

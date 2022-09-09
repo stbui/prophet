@@ -12,23 +12,22 @@ import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
 
 export interface EditProps {
-    resource: string;
-    basePath: string;
-    id: string | number;
-    successMessage?: string;
+    resource?: string;
+    id?: string | number;
     queryOptions?: any;
     mutationOptions?: any;
+    mutationMode?: string;
 }
 
 export interface EditControllerProps {
-    resource: string;
-    basePath: string;
-    record: any;
-    id: string | number;
-    loading: boolean;
-    loaded: boolean;
-    saving: boolean;
     save: (data: any, option: any) => void;
+    isFetching: any;
+    isLoading: any;
+    record: any;
+    refetch: any;
+    error: any;
+    resource: any;
+    saving: any;
 }
 
 /**
@@ -47,11 +46,10 @@ export interface EditControllerProps {
  */
 export const useEditController = (props: EditProps): EditControllerProps => {
     const {
-        basePath,
         id,
-        successMessage,
         queryOptions = {},
         mutationOptions = {},
+        mutationMode = 'undoable',
     } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
@@ -68,29 +66,41 @@ export const useEditController = (props: EditProps): EditControllerProps => {
 
     const {
         data: record,
-        loading,
-        loaded,
-    } = useGetOne(resource, { id, meta: queryMeta }, { ...otherQueryOptions });
-
-    const [update, { isLoading: saving }] = useUpdate(
+        error,
+        isLoading,
+        isFetching,
+        refetch,
+    } = useGetOne(
         resource,
-        { id, previousData: record },
-        { ...otherMutationOptions }
+        { id, meta: queryMeta },
+        {
+            refetchOnReconnect: false,
+            refetchOnWindowFocus: false,
+            retry: false,
+            ...otherQueryOptions,
+        }
     );
+
+    const recordCached = { id, previousData: record };
+
+    const [update, { isLoading: saving }] = useUpdate(resource, recordCached, {
+        ...otherMutationOptions,
+        mutationMode,
+    });
 
     const save = useCallback(
         (data: any, { onSuccess, onFailure }: any = {}) => {},
-        [resource, basePath, update, notify, redirect]
+        [resource, update, notify, redirect]
     );
 
     return {
         resource,
-        basePath,
         record,
-        id,
-        loading,
-        loaded,
         saving,
         save,
+        isFetching,
+        isLoading,
+        refetch,
+        error,
     };
 };

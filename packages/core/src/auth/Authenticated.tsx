@@ -4,13 +4,13 @@
  * https://github.com/stbui/prophet
  */
 
-import { cloneElement, FunctionComponent, ReactElement } from 'react';
-import useAuthenticated from './useAuthenticated';
+import { ReactNode } from 'react';
+import { useAuthState } from './useAuthState';
 
 export interface AuthenticatedProps {
-    children: ReactElement<any>;
+    children: ReactNode;
     authParams?: object;
-    location?: object;
+    requireAuth?: boolean;
 }
 
 /**
@@ -26,15 +26,14 @@ export interface AuthenticatedProps {
  * const View = () => <div></div>;
  * const MyApp = () => <Authenticated authParams={{ name: 'stbui' }}><View /></Authenticated>
  */
-const Authenticated: FunctionComponent<AuthenticatedProps> = ({
-    children,
-    authParams,
-    location,
-    ...rest
-}) => {
-    useAuthenticated(authParams);
+export const Authenticated = (props: AuthenticatedProps) => {
+    const { authParams, children, requireAuth = false } = props;
 
-    return cloneElement(children, rest);
+    const { isLoading, authenticated } = useAuthState(authParams, true);
+
+    if ((requireAuth && isLoading) || !authenticated) {
+        return null;
+    }
+
+    return children;
 };
-
-export default Authenticated;

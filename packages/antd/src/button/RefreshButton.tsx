@@ -6,7 +6,7 @@ export interface RefreshButtonProps extends ButtonProps {
     label?: string;
 }
 
-const RefreshButton: FC<RefreshButtonProps> = ({
+export const RefreshButton: FC<RefreshButtonProps> = ({
     label,
     type,
     onClick,
@@ -30,5 +30,3 @@ RefreshButton.defaultProps = {
     label: '刷新',
     type: 'primary',
 };
-
-export default RefreshButton;

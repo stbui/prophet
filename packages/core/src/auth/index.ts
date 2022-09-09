@@ -4,32 +4,16 @@
  * https://github.com/stbui/prophet
  */
 
-import AuthProviderContext from './AuthProviderContext';
-import useAuthProvider from './useAuthProvider';
-import useLogin from './useLogin';
-import useLogout from './useLogout';
-import useCheckAuth from './useCheckAuth';
-import useAuthenticated from './useAuthenticated';
-import useGetPermissions from './useGetPermissions';
-import usePermissions from './usePermissions';
-import useAuthState from './useAuthState';
-import Authenticated from './Authenticated';
-import WithPermissions from './WithPermissions';
-import useGetIdentity from './useGetIdentity';
-import useLogoutIfAccessDenied from './useLogoutIfAccessDenied';
-
-export {
-    AuthProviderContext,
-    useAuthProvider,
-    useLogin,
-    useLogout,
-    useCheckAuth,
-    useAuthenticated,
-    useGetPermissions,
-    Authenticated,
-    WithPermissions,
-    usePermissions,
-    useAuthState,
-    useGetIdentity,
-    useLogoutIfAccessDenied,
-};
+export * from './AuthProviderContext';
+export * from './useAuthProvider';
+export * from './useLogin';
+export * from './useLogout';
+export * from './useCheckAuth';
+export * from './useAuthenticated';
+export * from './useGetPermissions';
+export * from './usePermissions';
+export * from './useAuthState';
+export * from './Authenticated';
+export * from './WithPermissions';
+export * from './useGetIdentity';
+export * from './useLogoutIfAccessDenied';

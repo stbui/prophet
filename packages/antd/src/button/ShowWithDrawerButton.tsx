@@ -8,7 +8,7 @@ export interface ShowDrawerButtonProps {
     button?: ButtonProps;
 }
 
-const ShowWithDrawerButton: FC<ShowDrawerButtonProps> = ({
+export const ShowWithDrawerButton: FC<ShowDrawerButtonProps> = ({
     children,
     label,
     drawer,
@@ -37,5 +37,3 @@ const ShowWithDrawerButton: FC<ShowDrawerButtonProps> = ({
 ShowWithDrawerButton.defaultProps = {
     label: '查看',
 };
-
-export default ShowWithDrawerButton;

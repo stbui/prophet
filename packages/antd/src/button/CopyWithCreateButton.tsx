@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDataProvider, useRedirect } from '@stbui/prophet-core';
+import { useDataProvider, useCreatePath } from '@stbui/prophet-core';
 import { Button, ButtonProps } from 'antd';
 
 export interface CopyButtonProps extends ButtonProps {
@@ -8,7 +8,7 @@ export interface CopyButtonProps extends ButtonProps {
     label?: string;
 }
 
-const CopyWithCreateButton: FC<CopyButtonProps> = ({
+export const CopyWithCreateButton: FC<CopyButtonProps> = ({
     basePath,
     resource,
     id,
@@ -17,7 +17,7 @@ const CopyWithCreateButton: FC<CopyButtonProps> = ({
     size,
     ...rest
 }) => {
-    const redirect = useRedirect();
+    const createPath = useCreatePath();
     const dataProvider = useDataProvider();
 
     const update = () => {};
@@ -34,5 +34,3 @@ CopyWithCreateButton.defaultProps = {
     type: 'link',
     size: 'small',
 };
-
-export default CopyWithCreateButton;

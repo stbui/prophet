@@ -54,5 +54,3 @@ EditWithPopoverButton.defaultProps = {
     type: 'link',
     size: 'small',
 };
-
-export default EditWithPopoverButton;

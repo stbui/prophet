@@ -3,8 +3,14 @@ import { CreateBase } from '@stbui/prophet-core';
 import { CreateView } from './CreateView';
 
 interface CreateProps {
-    resource: string;
-    [key: string]: any;
+    resource?: string;
+    record?: any;
+    redirect?: any;
+    transform?: any;
+    mutationOptions?: any;
+    disableAuthentication?: any;
+    hasEdit?: any;
+    hasShow?: any;
 }
 
 export const Create = ({
@@ -33,5 +39,3 @@ export const Create = ({
         </CreateBase>
     );
 };
-
-export default Create;
