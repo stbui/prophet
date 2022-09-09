@@ -6,10 +6,10 @@ export default ({ redirectTo }) => {
     const logout = useLogout();
     const translate = useTranslate();
 
-    const onClick = useCallback(() => logout(null, redirectTo, false), [
-        redirectTo,
-        logout,
-    ]);
+    const onClick = useCallback(
+        () => logout(null, redirectTo, false),
+        [redirectTo, logout]
+    );
 
     return (
         <Menu.Item onClick={onClick}>

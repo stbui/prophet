@@ -15,7 +15,7 @@ import { useStoreContext } from './useStoreContext';
  *         <MyStoreDependentComponent />
  *     </StoreSetter>
  *
- * @example 
+ * @example
  *
  * const [, setDensity] = useStore('list.density');
  *
