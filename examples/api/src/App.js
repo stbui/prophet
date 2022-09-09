@@ -6,7 +6,6 @@ import i18nProvider from './i18n';
 import Dashboard from './dashboard';
 import Menu from './Menu/Menu';
 import Brand from './Menu/Brand';
-import { createBrowserHistory } from 'history';
 
 import users from './pages/setting/users';
 import gatewayConfig from './pages/gateway/config';
@@ -22,7 +21,6 @@ export default () => (
         dataProvider={dataProvider('/api')}
         authProvider={authProvider}
         i18nProvider={i18nProvider}
-        history={createBrowserHistory()}
         dashboard={Dashboard}
         brand={Brand}
         menu={Menu}
