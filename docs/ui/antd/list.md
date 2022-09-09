@@ -14,7 +14,7 @@ order: 2
 import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
-    <List {...props}>
+    <List>
         <Datagrid>
             <Column>id</Column>
             <Column>title</Column>
@@ -29,7 +29,7 @@ export default props => (
 import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
-    <List page={2} perPage={20} {...props}>
+    <List page={2} perPage={20}>
         <Datagrid>
             <Column>id</Column>
             <Column>title</Column>
@@ -44,7 +44,7 @@ export default props => (
 import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
-    <List sort={{ field: 'id', order: 'ASC' }} {...props}>
+    <List sort={{ field: 'id', order: 'ASC' }}>
         <Datagrid>
             <Column>id</Column>
             <Column>title</Column>
@@ -59,7 +59,7 @@ export default props => (
 import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
-    <List filter={{ name: 'stbui' }} {...props}>
+    <List filter={{ name: 'stbui' }}>
         <Datagrid>
             <Column>id</Column>
             <Column>title</Column>

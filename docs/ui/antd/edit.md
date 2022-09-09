@@ -9,43 +9,13 @@ order: 4
 ## 示例
 
 ```js
-import { Edit } from '@stbui/prophet-antd';
+import { Edit, useRecordContext, useSaveContext } from '@stbui/prophet';
 
 const EditView = props => {
-    const { record, save } = props;
-    const onSubmit = params => save(params);
+    const record = useRecordContext();
+    const saveContext = useSaveContext();
 
-    return (
-        <div>
-            <div>{record.username}</div>
-            <button onClick={onSubmit}>提交</button>
-        </div>
-    );
-};
-
-export default props => (
-    <Edit title="编辑" {...props}>
-        <EditView />
-    </Edit>
-);
-```
-
-## 示例
-
-```js
-import { Edit } from '@stbui/prophet-antd';
-
-const EditView = props => {
-    const { record, save } = props;
-    const onSubmit = params =>
-        save(params, {
-            onSuccess: ({ data }) => {
-                console.log(data);
-            },
-            onFailure: error => {
-                console.log(error);
-            },
-        });
+    const onSubmit = values => saveContext.save(values);
 
     return (
         <div>
@@ -64,9 +34,8 @@ export default props => (
 
 ## API
 
-| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                         |
-| :------- | :----- | :----- | :----------- | :--------------------------- |
-| resource | string | -      | 否           | 用于映射到对于接口 path      |
-| basePath | string | -      | 否           | 用于页面路由拼接，路由跳转等 |
-| title    | string |        |              |                              |
-| id       | number | 是     | 否           |                              |
+| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                    |
+| :------- | :----- | :----- | :----------- | :---------------------- |
+| resource | string | -      | 否           | 用于映射到对于接口 path |
+| title    | string |        |              |                         |
+| id       | number | 是     | 否           |                         |

@@ -8,7 +8,7 @@ ant table 组件
 import { List, Datagrid, Column } from '@stbui/prophet-antd';
 
 export default props => (
-    <List {...props}>
+    <List>
         <Datagrid>
             <Column>title</Column>
         </Datagrid>
@@ -31,7 +31,7 @@ export default props => (
 import { List, Datagrid, Column, EditButton } from '@stbui/prophet-antd';
 
 export default props => (
-    <List {...props}>
+    <List>
         <Datagrid>
             <Column>title</Column>
             <Column
@@ -66,7 +66,7 @@ export default props => (
 import { List, Datagrid, Column, ShowButton } from '@stbui/prophet-antd';
 
 export default props => (
-    <List {...props}>
+    <List>
         <Datagrid>
             <Column>title</Column>
             <Column
@@ -101,7 +101,7 @@ export default props => (
 import { List, Datagrid, Column, DeleteButton } from '@stbui/prophet-antd';
 
 export default props => (
-    <List {...props}>
+    <List>
         <Datagrid>
             <Column>title</Column>
             <Column

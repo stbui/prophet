@@ -9,19 +9,19 @@ order: 3
 ## 示例
 
 ```js
-import { Create } from '@stbui/prophet-antd';
+import { Create, useSaveContext } from '@stbui/prophet';
 
 const CreateView = props => {
-    const { save } = props;
+    const saveContext = useSaveContext();
 
-    // params 需求提交的数据
-    const onSubmit = params =>
-        save(params, {
+    // values 需求提交的数据
+    const onSubmit = values =>
+        saveContext.save(values, {
             onSuccess: ({ data }) => {
                 // 请求成功，返回的数据
                 console.log(data);
             },
-            onFailure: error => {
+            onError: error => {
                 // 请求失败，返回的数据
                 console.log(error);
             },
@@ -33,7 +33,7 @@ const CreateView = props => {
 };
 
 export default props => (
-    <Create title="创建" {...props}>
+    <Create>
         <CreateView />
     </Create>
 );
@@ -41,8 +41,6 @@ export default props => (
 
 ## API
 
-| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                         |
-| :------- | :----- | :----- | :----------- | :--------------------------- |
-| resource | string | -      | 否           | 用于映射到对于接口 path      |
-| basePath | string | -      | 否           | 用于页面路由拼接，路由跳转等 |
-| title    | string |        |              | 标题                         |
+| 属性     | 类型   | 默认值 | 可选值／参数 | 说明                    |
+| :------- | :----- | :----- | :----------- | :---------------------- |
+| resource | string | -      | 否           | 用于映射到对于接口 path |

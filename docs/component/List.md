@@ -22,21 +22,21 @@ ListController -> useListController -> useGetList -> useQueryWithStore -> useDat
 import { ListController } from '@stbui/prophet-core';
 
 export default props => {
-    <ListController {...props}>...</ListController>;
+    <ListController>...</ListController>;
 };
 ```
 
 ##### API
 
-| 属性                | 类型   | 默认值                        | 可选值／参数 | 说明                         |
-| :------------------ | :----- | :---------------------------- | :----------- | :--------------------------- |
-| resource            | string | -                             | 否           | 用于映射到对于接口 path      |
-| basePath            | string | -                             | 否           | 用于页面路由拼接，路由跳转等 |
-| page                | number | 1                             | 是           |                              |
-| perPage             | number | 10                            | 是           |                              |
-| sort                | object | { field: 'id', order: 'ASC' } | 是           |                              |
-| filter              | object |                               | 是           |                              |
-| filterDefaultValues | object |                               | 是           |                              |
+| 属性                | 类型   | 默认值                        | 可选值／参数 | 说明                    |
+| :------------------ | :----- | :---------------------------- | :----------- | :---------------------- |
+| resource            | string | -                             | 是           | 用于映射到对于接口 path |
+| page                | number | 1                             | 是           |                         |
+| perPage             | number | 10                            | 是           |                         |
+| sort                | object | { field: 'id', order: 'ASC' } | 是           |                         |
+| filter              | object |                               | 是           |                         |
+| filterDefaultValues | object |                               | 是           |                         |
+| queryOptions        | object | {}                            | 是           | 附加参数                |
 
 ## useListController
 
