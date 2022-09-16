@@ -4,7 +4,7 @@
  * https://github.com/stbui
  */
 
-import React, { ComponentType, isValidElement } from 'react';
+import React, { ComponentType, isValidElement, ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { ResourceContextProvider } from './ResourceContextProvider';
@@ -15,6 +15,7 @@ export interface ResourceProps {
     create?: ComponentType;
     edit?: ComponentType;
     show?: ComponentType;
+    children?: ReactNode;
 }
 
 export const Resource = (props: ResourceProps) => {
@@ -48,6 +49,7 @@ export const Resource = (props: ResourceProps) => {
                         element={isValidElement(List) ? List : <List />}
                     />
                 )}
+                {props.children}
             </Routes>
         </ResourceContextProvider>
     );

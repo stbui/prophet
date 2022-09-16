@@ -32,8 +32,6 @@ export default () => (
 
 可以参考@stbui/prophet-data-json-server 包的实现方式，对 respone 数据进行处理
 
-### 现有项目使用了 redux，能否集成？
-
 ### 定义的路由如何扩展
 
 参考 [packages/core/src/core/Resource.tsx](https://github.com/stbui/prophet/blob/master/packages/core/src/core/Resource.tsx)，添加新的路由

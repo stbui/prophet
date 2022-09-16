@@ -15,16 +15,16 @@ features:
       desc: 提炼后台应用的典型页面和场景，具备完备的组件和布局
     - icon: https://gw.alipayobjects.com/zos/bmw-prod/b8570f4d-c1b1-45eb-a1da-abff53159967/kj9t990h_w144_h144.png
       title: 拓展
-      desc: 提供一致的 React Hook，提供更强大的组件拓展与封装能力
+      desc: 提供一致的 API，提供更强大的组件拓展与封装能力
     - icon: https://gw.alipayobjects.com/zos/bmw-prod/b3e102cd-5dad-4046-a02a-be33241d1cc7/kj9t8oji_w144_h144.png
       title: UI
-      desc: 默认集成 antd 组件布局，同时也灵活支持第三方 UI 组件集成
+      desc: 默认集成 antd 组件布局，快速搭建一套系统
     - icon: https://gw.alipayobjects.com/zos/bmw-prod/3863e74a-7870-4874-b1e1-00a8cdf47684/kj9t7ww3_w144_h144.png
       title: 规范
       desc: 引入 dataProvider 来处理各种数据规范
     - icon: https://gw.alipayobjects.com/zos/bmw-prod/f093e060-726e-471c-a53e-e988ed3f560c/kj9t9sk7_w144_h144.png
       title: 灵活
-      desc: 模块化管理，提供更加灵活的扩展机制。
+      desc: 各个模块化管理，提供更加灵活的扩展机制。
 ---
 
 ## 谁在使用

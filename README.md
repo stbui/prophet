@@ -13,8 +13,8 @@ Prophet 可以快速帮你构建后台管理的中后台前端应用框架，能
 
 -   提炼 CRUD 容器组件，UI 与逻辑分离，快速开始前端开发
 -   提炼后台应用的典型页面和场景，具备完备的组件和布局
--   提供一致的 react hook，提供更强大的组件拓展与封装能力
--   默认集成 antd 组件布局，同时也灵活支持第三方 UI 组件集成
+-   提供一致的 API，提供更强大的组件拓展与封装能力
+-   默认集成 antd 组件布局，快速搭建一套系统
 -   引入 dataProvider 来处理各 种数据规范
 -   模块化管理，提供更加灵活的扩展机制。
 
@@ -43,10 +43,10 @@ const App = () => {
         <Prophet dataProvider={dataJsonServer('http://127.0.0.1:3001')}>
             <Resource
                 name="users"
-                list={props => <div>list</div>}
-                edit={props => <div>edit</div>}
-                create={props => <div>create</div>}
-                show={props => <div>show</div>}
+                list={() => <div>list</div>}
+                edit={() => <div>edit</div>}
+                create={() => <div>create</div>}
+                show={() => <div>show</div>}
             />
         </Prophet>
     );
@@ -54,6 +54,8 @@ const App = () => {
 
 export default App;
 ```
+
+基本的页面和数据处理搭建完成
 
 ## Packages
 
