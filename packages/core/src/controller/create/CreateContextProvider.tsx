@@ -11,8 +11,6 @@ import { SaveContextProvider } from '../SaveContext';
 
 /**
  *
- * @param param0
- *
  * @example
  *
  * import { CreateContextProvider, useCreateController } from '@stbui/prophet-core';

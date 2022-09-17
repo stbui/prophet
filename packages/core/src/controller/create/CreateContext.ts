@@ -4,7 +4,18 @@
  * https://github.com/stbui/prophet
  */
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
+import defaults from 'lodash/defaults';
+
+export interface CreateControllerResult {
+    isFetching: boolean;
+    isLoading: boolean;
+    save: any;
+    saving: boolean;
+    record?: any;
+    redirect: any;
+    resource: string;
+}
 
 /**
  *
@@ -22,19 +33,45 @@ import { createContext, useContext } from 'react';
  * };
  */
 export const CreateContext = createContext({
-    basePath: null,
     resource: null,
     record: null,
-    loaded: null,
-    loading: null,
     redirect: null,
     save: null,
     saving: null,
-    successMessage: null,
-    version: null,
+    isFetching: null,
+    isLoading: null,
 });
 
-export const useCreateContext = () => {
+const extractCreateContextProps = ({
+    record,
+    isFetching,
+    isLoading,
+    redirect,
+    resource,
+    save,
+    saving,
+}: any) => ({
+    record,
+    isFetching,
+    isLoading,
+    redirect,
+    resource,
+    save,
+    saving,
+});
+
+export const useCreateContext = (
+    props?: CreateControllerResult
+): CreateControllerResult => {
     const context = useContext(CreateContext);
-    return context;
+
+    return useMemo(
+        () =>
+            defaults(
+                {},
+                props != null ? extractCreateContextProps(props) : {},
+                context
+            ),
+        [context, props]
+    );
 };

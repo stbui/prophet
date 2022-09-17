@@ -8,25 +8,27 @@ import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { parse } from 'query-string';
 import { useCreate } from '../../dataProvider';
-import { useResourceContext } from '../../core';
+import { useResourceContext, useResourceDefinition } from '../../core';
 import { useNotify } from '../../notification';
 import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
-export interface CreateControllerProps {
+interface CreateController {
     resource?: string;
-    loading: boolean;
-    loaded: boolean;
     save: (data: any, option: any) => void;
     saving: boolean;
     record?: object;
+    redirect?: any;
+    isFetching?: boolean;
+    isLoading?: boolean;
 }
-export interface CreateProps {
-    resource?: string;
-    hasCreate?: boolean;
-    hasEdit?: boolean;
-    hasShow?: boolean;
-    record?: object;
+interface CreateProps {
+    disableAuthentication?: any;
+    record?: any;
+    redirect?: any;
+    transform?: any;
     mutationOptions?: any;
+    hasEdit?: any;
+    hasShow?: any;
 }
 
 /**
@@ -55,7 +57,7 @@ export const getDefaultRedirectRoute = (
     return 'list';
 };
 
-export const getRecord = ({ state, search }, record: any = {}) => {
+export const getRecordFromLocation = ({ state, search }, record: any = {}) => {
     if (state && state.record) {
         return state.record;
     }
@@ -77,20 +79,28 @@ export const getRecord = ({ state, search }, record: any = {}) => {
     return record;
 };
 
-export const useCreateController = (
-    props: CreateProps
-): CreateControllerProps => {
-    const { record = {}, mutationOptions = {} } = props;
+export const useCreateController = (props: CreateProps): CreateController => {
+    const {
+        disableAuthentication,
+        record,
+        redirect: redirectTo,
+        transform,
+        mutationOptions = {},
+    } = props;
+
     const resource = useResourceContext(props);
+    const { hasEdit, hasShow } = useResourceDefinition(props);
+    const finalRedirectTo =
+        redirectTo || getDefaultRedirectRoute(hasShow, hasEdit);
+
     const location = useLocation();
     const notify = useNotify();
     const redirect = useRedirect();
-    const refresh = useRefresh();
 
     const { onSuccess, onError, meta, ...otherMutationOptions } =
         mutationOptions;
 
-    const recordToUse = getRecord(location, record);
+    const recordToUse = getRecordFromLocation(location, record);
 
     const [create, { isLoading: saving }] = useCreate(
         resource,
@@ -99,18 +109,81 @@ export const useCreateController = (
     );
 
     const save = useCallback(
-        (data: any, { onSuccess, onError }: any = {}) => {
-            create({ data });
+        (
+            data: any,
+            {
+                onSuccess: onSuccessFromSave,
+                onError: onErrorFromSave,
+                transform: transformFromSave,
+            }: any = {}
+        ) => {
+            create(
+                resource,
+                { data, meta },
+                {
+                    onSuccess: (data, variables, context) => {
+                        if (onSuccessFromSave) {
+                            return onSuccessFromSave(data, variables, context);
+                        }
+                        if (onSuccess) {
+                            return onSuccess(data, variables, context);
+                        }
+
+                        notify('prophet.notification.created', {
+                            type: 'info',
+                            messageArgs: { smart_count: 1 },
+                        });
+                        redirect(finalRedirectTo, resource, data.id, data);
+                    },
+                    onError: (error: Error) => {
+                        if (onErrorFromSave) {
+                            return onErrorFromSave(error);
+                        }
+                        if (onError) {
+                            return onError(error);
+                        }
+
+                        notify(
+                            typeof error === 'string'
+                                ? error
+                                : error.message ||
+                                      'prophet.notification.http_error',
+                            {
+                                type: 'warning',
+                                messageArgs: {
+                                    _:
+                                        typeof error === 'string'
+                                            ? error
+                                            : error && error.message
+                                            ? error.message
+                                            : undefined,
+                                },
+                            }
+                        );
+                    },
+                }
+            );
         },
-        [resource, create, notify, redirect]
+        [
+            create,
+            finalRedirectTo,
+            meta,
+            notify,
+            onError,
+            onSuccess,
+            redirect,
+            resource,
+            transform,
+        ]
     );
 
     return {
         resource,
-        loading: false,
-        loaded: true,
         save,
         saving,
+        isFetching: false,
+        isLoading: false,
         record: recordToUse,
+        redirect: finalRedirectTo,
     };
 };
