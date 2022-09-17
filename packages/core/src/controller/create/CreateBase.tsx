@@ -6,16 +6,11 @@
 
 import React, { ReactNode } from 'react';
 import { CreateContextProvider } from './CreateContextProvider';
-import { useCreateController } from './useCreateController';
+import {
+    useCreateController,
+    CreateControllerProps,
+} from './useCreateController';
 
-export interface CreateControllerProps {
-    record?: any;
-    redirect?: any;
-    resource?: string;
-    mutationOptions?: any;
-    transform?: any;
-    children: ReactNode;
-}
 /**
  *
  * @param param0
@@ -24,7 +19,10 @@ export interface CreateControllerProps {
  *
  * const App = (props) => <CreateBase {...props}>create</CreateBase>
  */
-export const CreateBase = ({ children, ...props }: CreateControllerProps) => (
+export const CreateBase = ({
+    children,
+    ...props
+}: CreateControllerProps & { children: ReactNode }) => (
     <CreateContextProvider value={useCreateController(props)}>
         {children}
     </CreateContextProvider>

@@ -38,7 +38,6 @@ export const useDeleteController = (props: DeleteProps) => {
     const { basePath, id, record, successMessage } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
-    const refresh = useRefresh();
 
     const [update, { loading: deleting }] = useDelete(resource, id, record);
 

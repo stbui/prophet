@@ -33,12 +33,6 @@ export interface ResourceDefinition {
 }
 
 /**
- * Redux
- */
-
-export interface ReduxState {}
-
-/**
  * i18nProvider
  */
 

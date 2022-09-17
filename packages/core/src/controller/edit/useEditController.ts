@@ -12,11 +12,14 @@ import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
 
 export interface EditProps {
+    disableAuthentication?: boolean;
     resource?: string;
     id?: string | number;
     queryOptions?: any;
     mutationOptions?: any;
     mutationMode?: string;
+    redirect?: any;
+    transform?: any;
 }
 
 export interface EditControllerProps {
@@ -28,6 +31,7 @@ export interface EditControllerProps {
     error: any;
     resource: any;
     saving: any;
+    redirect: any;
 }
 
 /**
@@ -50,6 +54,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         queryOptions = {},
         mutationOptions = {},
         mutationMode = 'undoable',
+        redirect: redirectTo = 'list',
     } = props;
     const resource = useResourceContext(props);
     const notify = useNotify();
@@ -74,6 +79,13 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         resource,
         { id, meta: queryMeta },
         {
+            onError: () => {
+                notify('propht.notification.item_doesnt_exist', {
+                    type: 'warning',
+                });
+                redirect('list', resource);
+                refresh();
+            },
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
             retry: false,
@@ -89,8 +101,73 @@ export const useEditController = (props: EditProps): EditControllerProps => {
     });
 
     const save = useCallback(
-        (data: any, { onSuccess, onFailure }: any = {}) => {},
-        [resource, update, notify, redirect]
+        (
+            data: any,
+            {
+                onSuccess: onSuccessFromSave,
+                onError: onErrorFromSave,
+                transform: transformFromSave,
+            }: any = {}
+        ) => {
+            update(
+                resource,
+                { id, data, meta: mutationMeta },
+                {
+                    onSuccess: async (data, variables, context) => {
+                        if (onSuccessFromSave) {
+                            return onSuccessFromSave(data, variables, context);
+                        }
+
+                        if (onSuccess) {
+                            return onSuccess(data, variables, context);
+                        }
+
+                        notify('propht.notification.updated', {
+                            type: 'info',
+                            messageArgs: { smart_count: 1 },
+                            undoable: mutationMode === 'undoable',
+                        });
+                        redirect(redirectTo, resource, data.id, data);
+                    },
+                    onError: onErrorFromSave
+                        ? onErrorFromSave
+                        : onError
+                        ? onError
+                        : (error: Error | string) => {
+                              notify(
+                                  typeof error === 'string'
+                                      ? error
+                                      : error.message ||
+                                            'propht.notification.http_error',
+                                  {
+                                      type: 'warning',
+                                      messageArgs: {
+                                          _:
+                                              typeof error === 'string'
+                                                  ? error
+                                                  : error && error.message
+                                                  ? error.message
+                                                  : undefined,
+                                      },
+                                  }
+                              );
+                          },
+                }
+            );
+        },
+        [
+            id,
+            mutationMeta,
+            mutationMode,
+            notify,
+            onError,
+            onSuccess,
+            redirect,
+            redirectTo,
+            resource,
+            update,
+            recordCached.previousData,
+        ]
     );
 
     return {
@@ -102,5 +179,6 @@ export const useEditController = (props: EditProps): EditControllerProps => {
         isLoading,
         refetch,
         error,
+        redirect: 'list',
     };
 };

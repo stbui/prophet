@@ -17,7 +17,7 @@ import { ListContextProvider } from './ListContextProvider';
  *
  * const App = (props) => <ListBase {...props}>list</ListBase>
  */
-export const ListBase = ({ children, ...props }) => (
+export const ListBase = ({ children, ...props }: ListControllerProps) => (
     <ListContextProvider value={useListController(props)}>
         {children}
     </ListContextProvider>

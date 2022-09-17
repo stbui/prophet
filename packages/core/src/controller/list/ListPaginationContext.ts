@@ -22,12 +22,14 @@ import { createContext, useContext } from 'react';
  * }
  */
 export const ListPaginationContext = createContext({
-    loading: null,
+    isLoading: null,
     page: null,
     perPage: null,
     setPage: null,
     setPerPage: null,
-    total: null,
+    hasPreviousPage: null,
+    hasNextPage: null,
+    total: undefined,
     resource: null,
 });
 

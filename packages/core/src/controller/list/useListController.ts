@@ -11,29 +11,37 @@ import { useNotify } from '../../notification';
 import { useResourceContext } from '../../core';
 import { SortPayload } from '../../types';
 
-export interface ListProps {
+export interface ListControllerProps {
     resource?: string;
-    filterDefaultValues?: object;
-    sort?: any;
+    sort?: SortPayload;
     perPage?: number;
     filter?: object;
+    filterDefaultValues?: object;
     debounce?: number;
-    [key: string]: any;
+    disableAuthentication?: boolean;
+    disableSyncWithLocation?: boolean;
+    queryOptions?: any;
 }
 
-export interface ListControllerProps {
-    data: any;
-    sort: any;
+export interface ListControllerResult {
+    resource: string;
+    data: any[];
+    sort: SortPayload;
     refetch: any;
-    isFetching: any;
-    isLoading: any;
+    isFetching: boolean;
+    isLoading: boolean;
     error: any;
     total: number;
     page: number;
     perPage?: number;
+    filter?: any;
     filterValues: any;
     displayedFilters: any;
-    setFilters: (filters: any, displayedFilters: any) => void;
+    setFilters: (
+        filters: any,
+        displayedFilters: any,
+        debounce?: boolean
+    ) => void;
     hideFilter: (filterName: string) => void;
     showFilter: (filterName: string, defaultValue: any) => void;
     setPage: (page: number) => void;
@@ -58,7 +66,9 @@ export interface ListControllerProps {
  * }
  *
  */
-export const useListController = (props: ListProps): ListControllerProps => {
+export const useListController = (
+    props: ListControllerProps = {}
+): ListControllerResult => {
     const {
         filterDefaultValues,
         filter,
@@ -66,6 +76,7 @@ export const useListController = (props: ListProps): ListControllerProps => {
         perPage = 10,
         debounce = 500,
         queryOptions = {},
+        disableAuthentication,
     } = props;
     const resource = useResourceContext(props);
     const { meta, ...otherQueryOptions } = queryOptions;
@@ -84,30 +95,31 @@ export const useListController = (props: ListProps): ListControllerProps => {
         debounce,
     });
 
-    const { data, total, isLoading, isFetching, refetch, error } = useGetList(
-        resource,
-        {
-            pagination: {
-                page: query.page,
-                perPage: query.perPage,
+    const { data, pageInfo, total, error, isLoading, isFetching, refetch } =
+        useGetList(
+            resource,
+            {
+                pagination: {
+                    page: query.page,
+                    perPage: query.perPage,
+                },
+                sort: { field: query.sort, order: query.order },
+                filter: { ...query.filter, ...filter },
+                meta,
             },
-            sort: { field: query.sort, order: query.order },
-            filter: { ...query.filter, ...filter },
-            meta,
-        },
-        {
-            keepPreviousData: true,
-            retry: false,
-            onError: error =>
-                notify(error?.message || 'ra.notification.http_error', {
-                    type: 'warning',
-                    messageArgs: {
-                        _: error?.message,
-                    },
-                }),
-            ...otherQueryOptions,
-        }
-    );
+            {
+                keepPreviousData: true,
+                retry: false,
+                onError: error =>
+                    notify(error?.message || 'ra.notification.http_error', {
+                        type: 'warning',
+                        messageArgs: {
+                            _: error?.message,
+                        },
+                    }),
+                ...otherQueryOptions,
+            }
+        );
 
     useEffect(() => {
         if (
@@ -116,7 +128,7 @@ export const useListController = (props: ListProps): ListControllerProps => {
         ) {
             queryMethod.setPage(1);
         }
-    }, [isFetching, query.page, data, queryMethod]);
+    }, [isFetching, query.page, data, queryMethod, total]);
 
     const currentSort = useMemo(
         () => ({
@@ -127,17 +139,19 @@ export const useListController = (props: ListProps): ListControllerProps => {
     );
 
     return {
+        resource,
         data,
         sort: currentSort,
         total: total != undefined ? total : 0,
+        displayedFilters: query.displayedFilters,
         refetch,
         isFetching,
         isLoading,
         error,
         page: query.page,
         perPage: query.perPage,
+        filter,
         filterValues: query.filterValues,
-        displayedFilters: query.displayedFilters,
         setFilters: queryMethod.setFilters,
         hideFilter: queryMethod.hideFilter,
         showFilter: queryMethod.showFilter,

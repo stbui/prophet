@@ -4,10 +4,9 @@
  * https://github.com/stbui/prophet
  */
 
-// @ts-nocheck
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { EditContextProvider } from './EditContextProvider';
-import { useEditController } from './useEditController';
+import { useEditController, EditControllerProps } from './useEditController';
 
 /**
  *
@@ -17,7 +16,10 @@ import { useEditController } from './useEditController';
  *
  * const App = (props) => <EditBase {...props}>edit</EditBase>
  */
-export const EditBase = ({ children, ...props }) => (
+export const EditBase = ({
+    children,
+    ...props
+}: EditControllerProps & { children: ReactNode }) => (
     <EditContextProvider value={useEditController(props)}>
         {children}
     </EditContextProvider>

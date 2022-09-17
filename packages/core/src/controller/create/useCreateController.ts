@@ -21,7 +21,8 @@ interface CreateController {
     isFetching?: boolean;
     isLoading?: boolean;
 }
-interface CreateProps {
+export interface CreateControllerProps {
+    resource?: string;
     disableAuthentication?: any;
     record?: any;
     redirect?: any;
@@ -79,7 +80,9 @@ export const getRecordFromLocation = ({ state, search }, record: any = {}) => {
     return record;
 };
 
-export const useCreateController = (props: CreateProps): CreateController => {
+export const useCreateController = (
+    props: CreateControllerProps
+): CreateController => {
     const {
         disableAuthentication,
         record,

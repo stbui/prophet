@@ -4,7 +4,8 @@
  * https://github.com/stbui/prophet
  */
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
+import defaults from 'lodash/defaults';
 
 /**
  *
@@ -22,16 +23,38 @@ import { createContext, useContext } from 'react';
  * };
  */
 export const EditContext = createContext({
-    basePath: null,
     resource: null,
     record: null,
-    loaded: null,
-    loading: null,
     redirect: null,
     save: null,
     saving: null,
-    successMessage: null,
-    version: null,
+    isFetching: null,
+    isLoading: null,
+    mutationMode: null,
+    refetch: null,
+});
+
+const extractEditContextProps = ({
+    data,
+    record,
+    defaultTitle,
+    isFetching,
+    isLoading,
+    mutationMode,
+    redirect,
+    resource,
+    save,
+    saving,
+}: any) => ({
+    record: record || data,
+    defaultTitle,
+    isFetching,
+    isLoading,
+    mutationMode,
+    redirect,
+    resource,
+    save,
+    saving,
 });
 
 /**
@@ -40,7 +63,15 @@ export const EditContext = createContext({
  *
  * const { record, save saving } = useEditContext()
  */
-export const useEditContext = () => {
+export const useEditContext = (props?) => {
     const context = useContext(EditContext);
-    return context;
+    return useMemo(
+        () =>
+            defaults(
+                {},
+                props != null ? extractEditContextProps(props) : {},
+                context
+            ),
+        [context, props]
+    );
 };

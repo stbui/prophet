@@ -11,8 +11,6 @@ import { SaveContextProvider } from '../SaveContext';
 
 /**
  *
- * @param param0
- *
  * @example
  *
  * import { EditContextProvider, useEditController } from '@stbui/prophet-core';
@@ -27,7 +25,7 @@ import { SaveContextProvider } from '../SaveContext';
 export const EditContextProvider = ({ value, children }) => (
     <EditContext.Provider value={value}>
         <SaveContextProvider value={value}>
-            <RecordContextProvider value={value}>
+            <RecordContextProvider value={value && value.record}>
                 {children}
             </RecordContextProvider>
         </SaveContextProvider>

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Stbui All Rights Reserved.
+ * https://github.com/stbui/prophet
+ */
+
 import React from 'react';
 import { useInRouterContext, BrowserRouter } from 'react-router-dom';
 import { History } from 'history';

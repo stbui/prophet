@@ -4,15 +4,9 @@
  * https://github.com/stbui/prophet
  */
 
-import { useEditController, EditProps } from './useEditController';
-
-interface Props extends EditProps {
-    children: (params) => JSX.Element;
-}
+import { useEditController, EditControllerProps } from './useEditController';
 
 /**
- *
- * @param param0
  *
  * @example
  *
@@ -26,7 +20,10 @@ interface Props extends EditProps {
  *    </EditController>
  * );
  */
-export const EditController = ({ children, ...props }: Props) => {
+export const EditController = ({
+    children,
+    ...props
+}: EditControllerProps & { children: (params) => JSX.Element }) => {
     const controllerProps = useEditController(props);
 
     return children(controllerProps);

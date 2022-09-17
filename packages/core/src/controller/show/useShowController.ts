@@ -11,6 +11,7 @@ import { useNotify } from '../../notification';
 import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
 export interface ShowProps {
+    disableAuthentication?: boolean;
     resource?: string;
     queryOptions?: any;
     id: string | number;
@@ -18,10 +19,10 @@ export interface ShowProps {
 
 export interface ShowControllerProps {
     resource: string;
-    record: any;
+    record?: any;
     error: any;
-    isLoading: any;
-    isFetching: any;
+    isFetching: boolean;
+    isLoading: boolean;
     refetch: any;
 }
 
@@ -62,7 +63,7 @@ export const useShowController = (props: ShowProps): ShowControllerProps => {
         { id, meta },
         {
             onError: () => {
-                notify('ra.notification.item_doesnt_exist', {
+                notify('prophet.notification.item_doesnt_exist', {
                     type: 'warning',
                 });
                 redirect('list', resource);

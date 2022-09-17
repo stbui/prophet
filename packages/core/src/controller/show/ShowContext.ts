@@ -7,12 +7,12 @@
 import { createContext, useContext } from 'react';
 
 export const ShowContext = createContext({
-    basePath: null,
-    resource: null,
     record: null,
-    loaded: null,
-    loading: null,
-    version: null,
+    defaultTitle: null,
+    isFetching: null,
+    isLoading: null,
+    refetch: null,
+    resource: null,
 });
 
 export const useShowContext = () => {

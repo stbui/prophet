@@ -22,7 +22,7 @@ import { createContext, useContext } from 'react';
  * }
  */
 export const ListSortContext = createContext({
-    currenntSort: null,
+    sort: null,
     setSort: null,
     resource: null,
 });
