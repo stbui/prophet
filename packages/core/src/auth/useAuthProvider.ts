@@ -5,7 +5,7 @@
  */
 
 import { useContext } from 'react';
-import { AuthProviderContext } from './AuthProviderContext';
+import { AuthContext } from './AuthContext';
 import { AuthProvider } from '../types';
 
 export const defaultAuthParams = {
@@ -14,4 +14,4 @@ export const defaultAuthParams = {
 };
 
 export const useAuthProvider = (): AuthProvider =>
-    useContext(AuthProviderContext);
+    useContext(AuthContext);

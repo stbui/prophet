@@ -18,4 +18,4 @@ const defaultProvider: AuthProvider = {
     getIdentity: () => Promise.resolve(defaultIdentity),
 };
 
-export const AuthProviderContext = createContext<AuthProvider>(defaultProvider);
+export const AuthContext = createContext<AuthProvider>(defaultProvider);

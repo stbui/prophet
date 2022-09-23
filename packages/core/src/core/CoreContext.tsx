@@ -18,14 +18,15 @@ import { NotificationContextProvider } from '../notification';
 import { AuthProvider, I18nProvider } from '../types';
 import { ResourceDefinitionContextProvider } from './ResourceDefinitionContext';
 import { Router } from '../routing';
-import { AuthProviderContext } from '../auth';
+import { I18nContextProvider } from '../i18n';
+import { AuthContext } from '../auth';
 
 interface CoreContextProps {
-    authProvider?: AuthProvider;
+    authProvider: AuthProvider;
     dataProvider: DataProvider;
-    i18nProvider?: I18nProvider;
-    children?: ReactNode;
+    i18nProvider: I18nProvider;
     store: Store;
+    children: ReactNode;
     queryClient?: QueryClient;
     basename?: string;
 }
@@ -49,11 +50,13 @@ export const CoreContext = ({
             <StoreContextProvider value={store}>
                 <QueryClientProvider client={finalQueryClient}>
                     <Router basename={basename}>
-                        <NotificationContextProvider>
-                            <ResourceDefinitionContextProvider>
-                                {children}
-                            </ResourceDefinitionContextProvider>
-                        </NotificationContextProvider>
+                        <I18nContextProvider value={i18nProvider}>
+                            <NotificationContextProvider>
+                                <ResourceDefinitionContextProvider>
+                                    {children}
+                                </ResourceDefinitionContextProvider>
+                            </NotificationContextProvider>
+                        </I18nContextProvider>
                     </Router>
                 </QueryClientProvider>
             </StoreContextProvider>

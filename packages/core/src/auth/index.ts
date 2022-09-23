@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-export * from './AuthProviderContext';
+export * from './AuthContext';
 export * from './useAuthProvider';
 export * from './useLogin';
 export * from './useLogout';

@@ -5,21 +5,21 @@ interface EditViewProps {
     actions?: any;
     resource?: string;
     basePath?: string;
-    loading?: boolean;
+    isLoading?: boolean;
     record?: object;
     [key: string]: any;
 }
 
 export const EditView = ({
     children,
-    loading,
+    isLoading,
     actions,
     record,
     ...reset
 }: EditViewProps) => (
-    <Spin spinning={loading}>
+    <Spin spinning={isLoading}>
         {actions && cloneElement(actions, { ...reset })}
-        {!loading && record
+        {!isLoading && record
             ? cloneElement(children, {
                   record,
                   ...reset,
