@@ -5,6 +5,7 @@
  */
 
 import { useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { useUpdate, useGetOne } from '../../dataProvider';
 import { useResourceContext } from '../../core';
 import { useNotify } from '../../notification';
@@ -50,7 +51,7 @@ export interface EditControllerProps {
  */
 export const useEditController = (props: EditProps): EditControllerProps => {
     const {
-        id,
+        id: propsId,
         queryOptions = {},
         mutationOptions = {},
         mutationMode = 'undoable',
@@ -61,6 +62,9 @@ export const useEditController = (props: EditProps): EditControllerProps => {
     const redirect = useRedirect();
     const refresh = useRefresh();
 
+    const { id: routeId } = useParams<'id'>();
+    // @ts-ignore
+    const id = propsId != null ? propsId : decodeURIComponent(routeId);
     const { meta: queryMeta, ...otherQueryOptions } = queryOptions;
     const {
         onSuccess,
