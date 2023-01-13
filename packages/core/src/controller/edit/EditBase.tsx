@@ -7,6 +7,7 @@
 import React, { ReactNode } from 'react';
 import { EditContextProvider } from './EditContextProvider';
 import { useEditController, EditProps } from './useEditController';
+import { ResourceContextProvider } from '../../core';
 
 /**
  *
@@ -20,7 +21,9 @@ export const EditBase = ({
     children,
     ...props
 }: EditProps & { children: ReactNode }) => (
-    <EditContextProvider value={useEditController(props)}>
-        {children}
-    </EditContextProvider>
+    <ResourceContextProvider value={props.resource}>
+        <EditContextProvider value={useEditController(props)}>
+            {children}
+        </EditContextProvider>
+    </ResourceContextProvider>
 );

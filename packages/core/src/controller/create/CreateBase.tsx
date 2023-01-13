@@ -10,6 +10,7 @@ import {
     useCreateController,
     CreateControllerProps,
 } from './useCreateController';
+import { ResourceContextProvider } from '../../core';
 
 /**
  *
@@ -23,7 +24,9 @@ export const CreateBase = ({
     children,
     ...props
 }: CreateControllerProps & { children: ReactNode }) => (
-    <CreateContextProvider value={useCreateController(props)}>
-        {children}
-    </CreateContextProvider>
+    <ResourceContextProvider value={props.resource}>
+        <CreateContextProvider value={useCreateController(props)}>
+            {children}
+        </CreateContextProvider>
+    </ResourceContextProvider>
 );
