@@ -10,7 +10,7 @@ import {
     UseMutationResult,
     useQueryClient,
     MutateOptions,
-} from 'react-query';
+} from '@tanstack/react-query';
 import { useDataProvider } from './useDataProvider';
 
 export type UseCreateValue = [
@@ -68,33 +68,33 @@ export const useCreate = (
     const queryClient = useQueryClient();
     const paramsRef = useRef<Partial<CreateParams>>(params);
 
-    const mutation = useMutation(
-        ({
+    const mutation = useMutation<any, any, any>({
+        mutationFn: ({
             resource: callTimeResource = resource,
             data: callTimeData = paramsRef.current.data,
             meta: callTimeMeta = paramsRef.current.meta,
-        } = {}) => {
+        } = {}) =>
             dataProvider
                 .create(callTimeResource, {
                     data: callTimeData,
                     meta: callTimeMeta,
                 })
-                .then(({ data }) => data);
+                .then(({ data }) => data),
+        ...options,
+        onSuccess: (data, variables, context) => {
+            const { resource: callTimeResource = resource } = variables;
+            queryClient.setQueryData(
+                [callTimeResource, 'getOne', { id: String(data.id) }],
+                data
+            );
+            queryClient.invalidateQueries({
+                queryKey: [callTimeResource, 'getList'],
+            });
+            if (options.onSuccess) {
+                options.onSuccess(data, variables, context);
+            }
         },
-        {
-            ...options,
-            onSuccess: (data, variables, context) => {
-                const { resource: callTimeResource = resource } = variables;
-                queryClient.setQueryData(
-                    [callTimeResource, 'getOne', { id: String(data.id) }],
-                    data
-                );
-                if (options.onSuccess) {
-                    options.onSuccess(data, variables, context);
-                }
-            },
-        }
-    );
+    });
 
     const create = (
         callTimeResource: string = resource,

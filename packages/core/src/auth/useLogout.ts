@@ -6,7 +6,7 @@
 
 import { useCallback, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { useAuthProvider, defaultAuthParams } from './useAuthProvider';
 import { useResetStore } from '../store';

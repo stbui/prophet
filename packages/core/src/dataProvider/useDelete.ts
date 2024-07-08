@@ -11,7 +11,7 @@ import {
     UseMutationResult,
     MutateOptions,
     QueryKey,
-} from 'react-query';
+} from '@tanstack/react-query';
 
 import { useDataProvider } from './useDataProvider';
 

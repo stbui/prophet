@@ -5,7 +5,7 @@
  */
 
 import { useRef, useState, useEffect } from 'react';
-import { notifyManager, useQueryClient } from 'react-query';
+import { notifyManager, useQueryClient } from '@tanstack/react-query';
 
 export const useLoading = (): boolean => {
     const client = useQueryClient();
