@@ -65,3 +65,11 @@ export interface UserIdentity {
     avatar?: string;
     [key: string]: any;
 }
+
+
+export type Identifier = string | number;
+
+export interface ProRecord<IdentifierType extends Identifier = Identifier>
+    extends Record<string, any> {
+    id: IdentifierType;
+}

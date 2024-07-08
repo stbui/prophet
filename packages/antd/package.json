@@ -16,23 +16,18 @@
         "watch": "rimraf ./lib && tsc --watch"
     },
     "peerDependencies": {
-        "react": "^16.9.0 || ^17.0.0 || ^18.0.0",
-        "react-dom": "^16.9.0 || ^17.0.0 || ^18.0.0",
-        "react-router": "^6.1.0",
-        "react-router-dom": "^6.1.0",
-        "antd": "^4.23.0"
+        "antd": "^5.19.1"
     },
     "dependencies": {
         "@stbui/prophet-core": "^3.0.1",
-        "styled-components": "^5.3.5"
+        "styled-components": "^6.1.11"
     },
     "devDependencies": {
-        "@types/styled-components": "^5.1.26",
-        "antd": "^4.23.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-router": "^6.1.0",
-        "react-router-dom": "^6.1.0"
+        "antd": "^5.19.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router": "^6.24.1",
+        "react-router-dom": "^6.24.1"
     },
     "publishConfig": {
         "access": "public"
