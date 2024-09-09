@@ -3,7 +3,7 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui/prophet
  */
-import {useMemo, useEffect} from 'react'
+import { useMemo, useEffect } from 'react';
 import {
     useQuery,
     UseQueryOptions,
@@ -35,8 +35,6 @@ export interface GetListResult<RecordType extends ProRecord = any> {
     };
 }
 
-
-
 export type UseGetListOptions<RecordType extends ProRecord = any> = Omit<
     UseQueryOptions<GetListResult<RecordType>, Error>,
     'queryKey' | 'queryFn'
@@ -45,15 +43,14 @@ export type UseGetListOptions<RecordType extends ProRecord = any> = Omit<
     onError?: (error: Error) => void;
 };
 
-export type UseGetListHookValue<
-    RecordType extends ProRecord = any
-> = UseQueryResult<RecordType[], Error> & {
-    total?: number;
-    pageInfo?: {
-        hasNextPage?: boolean;
-        hasPreviousPage?: boolean;
+export type UseGetListHookValue<RecordType extends ProRecord = any> =
+    UseQueryResult<RecordType[], Error> & {
+        total?: number;
+        pageInfo?: {
+            hasNextPage?: boolean;
+            hasPreviousPage?: boolean;
+        };
     };
-};
 
 /**
  * useGetList
@@ -89,7 +86,7 @@ export const useGetList = <RecordType extends ProRecord = any>(
     resource: string,
     params: Partial<GetListParams> = {},
     options: UseGetListOptions<RecordType> = {}
-): UseGetListHookValue<RecordType> => {
+): any => {
     const {
         pagination = { page: 1, perPage: 25 },
         sort = { field: 'id', order: 'DESC' },
@@ -101,7 +98,7 @@ export const useGetList = <RecordType extends ProRecord = any>(
     const queryClient = useQueryClient();
     const { onError, onSuccess, ...queryOptions } = options;
 
-   const result = useQuery<
+    const result = useQuery<
         GetListResult<RecordType>,
         Error,
         GetListResult<RecordType>

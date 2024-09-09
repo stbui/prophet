@@ -12,6 +12,7 @@ import { useResourceContext, useResourceDefinition } from '../../core';
 import { useNotify } from '../../notification';
 import { useRedirect } from '../../routing';
 import { useRefresh } from '../../loading';
+
 interface CreateController {
     resource?: string;
     save: (data: any, option: any) => void;
@@ -105,7 +106,7 @@ export const useCreateController = (
 
     const recordToUse = getRecordFromLocation(location, record);
 
-    const [create, { isLoading: saving }] = useCreate(
+    const [create, { isPending: saving }] = useCreate(
         resource,
         undefined,
         otherMutationOptions
@@ -158,8 +159,8 @@ export const useCreateController = (
                                         typeof error === 'string'
                                             ? error
                                             : error && error.message
-                                            ? error.message
-                                            : undefined,
+                                              ? error.message
+                                              : undefined,
                                 },
                             }
                         );

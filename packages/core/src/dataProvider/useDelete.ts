@@ -23,7 +23,7 @@ export type UseDeleteValue = [
         error?: any;
         loading?: boolean;
         loaded?: boolean;
-    }
+    },
 ];
 
 /**
@@ -60,7 +60,7 @@ export const useDelete = (
     resource: string,
     params: any = {},
     options: object = {}
-) => {
+): any => {
     const dataProvider = useDataProvider();
     const queryClient = useQueryClient();
 
@@ -68,7 +68,7 @@ export const useDelete = (
 
     const paramsRef = useRef<any>(params);
 
-    const mutation = useMutation(() => {});
+    const mutation = useMutation({});
 
     const mutate = (
         callTimeResource: string = resource,

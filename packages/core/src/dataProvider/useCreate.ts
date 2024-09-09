@@ -3,7 +3,7 @@
  * Copyright Stbui All Rights Reserved.
  * https://github.com/stbui/prophet
  */
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import {
     useMutation,
     UseMutationOptions,
@@ -13,15 +13,9 @@ import {
 } from '@tanstack/react-query';
 import { useDataProvider } from './useDataProvider';
 
-export type UseCreateValue = [
-    (query?: Partial<any>, params?: any, options?: Partial<any>) => void,
-    {
-        data?: any;
-        total?: number;
-        error?: any;
-        loading: boolean;
-        loaded: boolean;
-    }
+export type UseCreateResult = [
+    (query?: any, params?: any, options?: any) => void,
+    { isPending: boolean },
 ];
 
 interface CreateParams<T = any> {
@@ -39,12 +33,17 @@ interface CreateParams<T = any> {
  * @param {Function} options.onFailure
  *
  * @returns [create, { data, error, loading, loaded }]
+ * 
+ * initial: [create, { isPending: false }]
+ * start:   [create, { isPending: true }]
+ * success: [create, { data: [data from response], isPending: false, isSuccess: true }]
+ * error:   [create, { error: [error from response], isPending: false, isError: true }]
  *
  * @example
  * import { useCreate } from '@stbui/prophet-core';
  *
  * const UserProfile = ({ record }) => {
- *    const [create, { isLoading, error }] = useCreate('users', {
+ *    const [create, { isPending, error }] = useCreate('users', {
  *        data: 'stbui',
  *    });
  *
@@ -63,7 +62,7 @@ export const useCreate = (
         onSuccess?: any;
         [key: string]: any;
     } = {}
-) => {
+): UseCreateResult => {
     const dataProvider = useDataProvider();
     const queryClient = useQueryClient();
     const paramsRef = useRef<Partial<CreateParams>>(params);
@@ -110,11 +109,19 @@ export const useCreate = (
             );
         }
 
-        mutation.mutate(
+        return mutation.mutate(
             { resource: callTimeResource, ...callTimeParams },
             reactCreateOptions
         );
     };
 
-    return [create, mutation];
+    const mutationResult = useMemo(
+        () => ({
+            isLoading: mutation.isPending,
+            ...mutation,
+        }),
+        [mutation]
+    );
+
+    return [create, mutationResult];
 };

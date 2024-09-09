@@ -4,7 +4,7 @@
  * https://github.com/stbui/prophet
  */
 
-export * from './DataProviderContext';
+export * from './dataProviderContext';
 export * from './defaultDataProvider';
 export * from './useDataProvider';
 export * from './useCreate';

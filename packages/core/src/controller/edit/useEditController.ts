@@ -99,7 +99,7 @@ export const useEditController = (props: EditProps): EditControllerProps => {
 
     const recordCached = { id, previousData: record };
 
-    const [update, { isLoading: saving }] = useUpdate(resource, recordCached, {
+    const [update, { isPending: saving }] = useUpdate(resource, recordCached, {
         ...otherMutationOptions,
         mutationMode,
     });
@@ -136,26 +136,26 @@ export const useEditController = (props: EditProps): EditControllerProps => {
                     onError: onErrorFromSave
                         ? onErrorFromSave
                         : onError
-                        ? onError
-                        : (error: Error | string) => {
-                              notify(
-                                  typeof error === 'string'
-                                      ? error
-                                      : error.message ||
-                                            'propht.notification.http_error',
-                                  {
-                                      type: 'warning',
-                                      messageArgs: {
-                                          _:
-                                              typeof error === 'string'
-                                                  ? error
-                                                  : error && error.message
-                                                  ? error.message
-                                                  : undefined,
-                                      },
-                                  }
-                              );
-                          },
+                          ? onError
+                          : (error: Error | string) => {
+                                notify(
+                                    typeof error === 'string'
+                                        ? error
+                                        : error.message ||
+                                              'propht.notification.http_error',
+                                    {
+                                        type: 'warning',
+                                        messageArgs: {
+                                            _:
+                                                typeof error === 'string'
+                                                    ? error
+                                                    : error && error.message
+                                                      ? error.message
+                                                      : undefined,
+                                        },
+                                    }
+                                );
+                            },
                 }
             );
         },

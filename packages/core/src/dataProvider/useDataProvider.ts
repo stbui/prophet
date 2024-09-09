@@ -6,7 +6,7 @@
 
 import { useContext } from 'react';
 
-import { DataProviderContext } from './DataProviderContext';
+import { DataProviderContext } from './dataProviderContext';
 
 export type UseDataProviderValue = (
     type: string,

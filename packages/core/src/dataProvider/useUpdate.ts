@@ -62,7 +62,7 @@ import { useDataProvider } from './useDataProvider';
  */
 export const useUpdate = <
     RecordType extends unknown = any,
-    MutationError = unknown
+    MutationError = unknown,
 >(
     resource?: string,
     params: Partial<any> = {},
@@ -103,23 +103,9 @@ export const useUpdate = <
             { updatedAt }
         );
         queryClient.setQueriesData(
-            [resource, 'getList'],
+            { queryKey: [resource, 'getList'] },
             (res: GetListResult) =>
                 res && res.data ? { ...res, data: updateColl(res.data) } : res,
-            { updatedAt }
-        );
-        queryClient.setQueriesData(
-            [resource, 'getMany'],
-            (coll: RecordType[]) =>
-                coll && coll.length > 0 ? updateColl(coll) : coll,
-            { updatedAt }
-        );
-        queryClient.setQueriesData(
-            [resource, 'getManyReference'],
-            (res: GetListResult) =>
-                res && res.data
-                    ? { data: updateColl(res.data), total: res.total }
-                    : res,
             { updatedAt }
         );
     };
@@ -128,112 +114,76 @@ export const useUpdate = <
         RecordType,
         MutationError,
         Partial<UseUpdateMutateParams<RecordType>>
-    >(
-        ({
+    >({
+        mutationFn: ({
             resource: callTimeResource = resource,
             id: callTimeId = paramsRef.current.id,
             data: callTimeData = paramsRef.current.data,
             meta: callTimeMeta = paramsRef.current.meta,
             previousData: callTimePreviousData = paramsRef.current.previousData,
-        } = {}) =>
-            dataProvider
+        } = {}) => {
+            return dataProvider
                 .update(callTimeResource, {
                     id: callTimeId,
                     data: callTimeData,
                     previousData: callTimePreviousData,
                     meta: callTimeMeta,
                 })
-                .then(({ data }) => data),
-        {
-            ...reactMutationOptions,
-            onMutate: async (
-                variables: Partial<UseUpdateMutateParams<RecordType>>
-            ) => {
-                if (reactMutationOptions.onMutate) {
-                    const userContext =
-                        (await reactMutationOptions.onMutate(variables)) || {};
-                    return {
-                        snapshot: snapshot.current,
-                        // @ts-ignore
-                        ...userContext,
-                    };
-                } else {
-                    return { snapshot: snapshot.current };
-                }
-            },
-            onError: (
-                error: MutationError,
-                variables: Partial<UseUpdateMutateParams<RecordType>> = {},
-                context: { snapshot: Snapshot }
-            ) => {
-                if (
-                    mode.current === 'optimistic' ||
-                    mode.current === 'undoable'
-                ) {
-                    context.snapshot.forEach(([key, value]) => {
-                        queryClient.setQueryData(key, value);
-                    });
-                }
+                .then(({ data }) => data);
+        },
+        ...reactMutationOptions,
+        onMutate: async (
+            variables: Partial<UseUpdateMutateParams<RecordType>>
+        ) => {
+            if (reactMutationOptions.onMutate) {
+                const userContext =
+                    (await reactMutationOptions.onMutate(variables)) || {};
+                return {
+                    snapshot: snapshot.current,
+                    // @ts-ignore
+                    ...userContext,
+                };
+            } else {
+                return { snapshot: snapshot.current };
+            }
+        },
+        onError: (error, variables = {}, context) => {
+            if (reactMutationOptions.onError) {
+                return reactMutationOptions.onError(error, variables, context);
+            }
+        },
+        onSuccess: (
+            data: RecordType,
+            variables: Partial<UseUpdateMutateParams<RecordType>> = {},
+            context: unknown
+        ) => {
+            if (mode.current === 'pessimistic') {
+                const {
+                    resource: callTimeResource = resource,
+                    id: callTimeId = id,
+                } = variables;
+                updateCache({
+                    resource: callTimeResource,
+                    id: callTimeId,
+                    data,
+                });
 
-                if (reactMutationOptions.onError) {
-                    return reactMutationOptions.onError(
-                        error,
-                        variables,
-                        context
-                    );
+                if (reactMutationOptions.onSuccess) {
+                    reactMutationOptions.onSuccess(data, variables, context);
                 }
-            },
-            onSuccess: (
-                data: RecordType,
-                variables: Partial<UseUpdateMutateParams<RecordType>> = {},
-                context: unknown
-            ) => {
-                if (mode.current === 'pessimistic') {
-                    const {
-                        resource: callTimeResource = resource,
-                        id: callTimeId = id,
-                    } = variables;
-                    updateCache({
-                        resource: callTimeResource,
-                        id: callTimeId,
-                        data,
-                    });
-
-                    if (reactMutationOptions.onSuccess) {
-                        reactMutationOptions.onSuccess(
-                            data,
-                            variables,
-                            context
-                        );
-                    }
-                }
-            },
-            onSettled: (
-                data: RecordType,
-                error: MutationError,
-                variables: Partial<UseUpdateMutateParams<RecordType>> = {},
-                context: { snapshot: Snapshot }
-            ) => {
-                if (
-                    mode.current === 'optimistic' ||
-                    mode.current === 'undoable'
-                ) {
-                    context.snapshot.forEach(([key]) => {
-                        queryClient.invalidateQueries(key);
-                    });
-                }
-
-                if (reactMutationOptions.onSettled) {
-                    return reactMutationOptions.onSettled(
-                        data,
-                        error,
-                        variables,
-                        context
-                    );
-                }
-            },
-        }
-    );
+            }
+        },
+        onSettled: (data, error, variables = {}, context) => {
+            if (reactMutationOptions.onSettled) {
+                return reactMutationOptions.onSettled(
+                    data,
+                    error,
+                    variables,
+                    context
+                );
+            }
+        },
+    });
 
     const update = async (
         // @ts-ignore
@@ -298,12 +248,15 @@ export const useUpdate = <
         ];
 
         snapshot.current = queryKeys.reduce(
-            (prev, curr) => prev.concat(queryClient.getQueriesData(curr)),
+            (prev, queryKey) =>
+                prev.concat(queryClient.getQueriesData({ queryKey })),
             [] as Snapshot
         );
 
         await Promise.all(
-            snapshot.current.map(([key]) => queryClient.cancelQueries(key))
+            snapshot.current.map(([queryKey]) =>
+                queryClient.cancelQueries({ queryKey })
+            )
         );
 
         updateCache({
@@ -311,36 +264,6 @@ export const useUpdate = <
             id: callTimeId,
             data: callTimeData,
         });
-
-        if (onSuccess) {
-            setTimeout(
-                () =>
-                    onSuccess(
-                        { ...previousRecord, ...callTimeData },
-                        { resource: callTimeResource, ...callTimeParams },
-                        { snapshot: snapshot.current }
-                    ),
-                0
-            );
-        }
-        if (reactMutationOptions.onSuccess) {
-            setTimeout(
-                () =>
-                    reactMutationOptions.onSuccess(
-                        { ...previousRecord, ...callTimeData },
-                        { resource: callTimeResource, ...callTimeParams },
-                        { snapshot: snapshot.current }
-                    ),
-                0
-            );
-        }
-
-        if (mode.current === 'optimistic') {
-            return mutation.mutate(
-                { resource: callTimeResource, ...callTimeParams },
-                { onSettled, onError }
-            );
-        }
     };
 
     return [update, mutation];
@@ -358,7 +281,7 @@ export interface UseUpdateMutateParams<RecordType extends unknown = any> {
 
 export type UseUpdateOptions<
     RecordType extends unknown = any,
-    MutationError = unknown
+    MutationError = unknown,
 > = UseMutationOptions<
     RecordType,
     MutationError,
@@ -368,22 +291,13 @@ export type UseUpdateOptions<
 export type UseUpdateResult<
     RecordType extends any = any,
     TReturnPromise extends boolean = boolean,
-    MutationError = unknown
+    MutationError = unknown,
 > = [
-    (
-        resource?: string,
-        params?: any,
-        options?: MutateOptions<
-            RecordType,
-            MutationError,
-            Partial<UseUpdateMutateParams<RecordType>>,
-            unknown
-        > & { mutationMode?: any; returnPromise?: TReturnPromise }
-    ) => Promise<TReturnPromise extends true ? RecordType : void>,
+    up: any,
     UseMutationResult<
         RecordType,
         MutationError,
         Partial<any & { resource?: string }>,
         unknown
-    >
+    >,
 ];
